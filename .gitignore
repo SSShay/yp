@@ -1,0 +1,5 @@
+/Application/Runtime/
+*.local
+/.idea/
+Thumbs.db
+/Uploads/
