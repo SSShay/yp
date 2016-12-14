@@ -1,0 +1,44 @@
+<link href="__CSS__/login.css" rel="stylesheet">
+
+<div class="container form-signin" ondragstart="return false">
+    <div class="form-signin-heading text-center">
+        <h1 class="sign-title">微家校官网后台管理系统</h1>
+        <img src="__IMG__/login-logo.png" alt="微家校"/>
+    </div>
+    <div class="login-wrap">
+        <input type="text" class="form-control" id="loginuser" placeholder="管理员账号" autofocus>
+        <input type="password" class="form-control" id="password" placeholder="密码">
+
+        <div class="input-group verify">
+            <input type="text" class="form-control" id="verify" placeholder="验证码">
+            <div class="input-group-addon text-center"><img src="{:U('Index/verify')}"></div>
+        </div>
+
+        <button class="btn btn-login btn-block">登录</button>
+        <!--<label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+            <span class="pull-right">
+                <a href=""> Forgot Password?</a>
+            </span>
+        </label>-->
+    </div>
+
+</div>
+
+<script>
+    $(function() {
+        $(".btn-login").submit('', function () {
+            return $.check([
+                {'target': '#loginuser', 'name': '管理员账号', 'rules': $.rules.empty},
+                {'target': '#password', 'name': '密码', 'rules': $.rules.empty},
+                {'target': '#verify', 'name': '验证码', 'rules': $.rules.empty},
+            ])
+        }, function (res) {
+            if (res.success)location.href = res.success;
+        })
+
+        $(".verify .input-group-addon").click(function() {
+            $("img", $(this)).attr('src', "{:U('Index/verify')}");
+        })
+    })
+</script>

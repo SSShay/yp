@@ -1,0 +1,191 @@
+<style>
+    .navbar-main,.navbar-path.alpha{
+        background: none;
+    }
+    .navbar-path.alpha hr{
+        position: relative;
+        bottom: 0;
+        margin: 0 5px;
+    }
+    .fp-section{
+        color: #fff;
+    }
+    #fp-nav ul li a span, .fp-slidesNav ul li a span{
+        border-color: #fff;
+    }
+
+    .container-leave{
+        padding: 0 50px;
+    }
+    .container-leave .col-xs-12{
+        border: 8px solid #fff;
+        padding: 20px;
+    }
+    .container-leave .container-fluid{
+        background: #fff;
+        background: rgba(255,255,255,.62);
+    }
+    .container-leave .form-horizontal{
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .container-leave h2,.container-leave .btn{
+        margin-top: 30px;
+        margin-bottom: 50px;
+        color: #da1a84;
+    }
+    .container-leave p{
+        font-weight: bold;
+        color: #da1a84;
+        margin-bottom: 40px;
+    }
+    .container-leave .form-group{
+        margin-bottom: 10%;
+    }
+    .container-leave .input-group-addon{
+        background: none;
+        border-color: #85818d;
+        color: #1b3766;
+        font-weight: bold;
+        vertical-align: top;
+        padding-top: 12px;
+    }
+    .container-leave .form-control{
+        background: none;
+        border-color: #85818d;
+        height: auto;
+        padding: 9px 12px;
+        border-left: 0;
+    }
+    .form-control:focus {
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .container-leave .btn{
+        background: #e83c73;
+        border-radius: 10px;
+        display: inline-block;
+        color: #fff;
+        padding: 12px 50px;
+        cursor: pointer;
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    #msg{
+        resize: none;
+    }
+
+    .container-leave .glyphicon-remove{
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        background: #e83c73;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+        .container-leave {
+            padding: 0 5px;
+        }
+        .container-leave .col-xs-12 {
+            border: 3px solid #fff;
+            padding: 10px;
+        }
+        .container-leave h2,.container-leave .btn{
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .container-leave .btn{
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .container-leave p {
+            font-size: 9px;
+            font-weight: 100;
+        }
+        .container-leave .glyphicon-remove{
+            right: -6px;
+            top: -6px;
+        }
+    }
+
+    @media screen and (max-width: 435px) {
+        .container-leave .form-horizontal {
+            margin: 0 10px;
+        }
+
+        .container-leave .form-group{
+            margin-bottom: 10px;
+        }
+    }
+    @media screen and (max-width: 320px) {
+        .container-leave .form-group{
+            margin-bottom: 5px;
+        }
+    }
+
+
+</style>
+<div class="fp-section bg-cover img-delay" data-bg="__IMG__/leave_msg/bg.jpg">
+    <div class="container container-leave">
+        <div class="col-xs-12">
+            <i class="glyphicon glyphicon-remove"></i>
+            <div class="container-fluid">
+                <h2>微家校火热招商中</h2>
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">姓名：</div>
+                            <input id="name" class="form-control" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">电话：</div>
+                            <input id="mobile" class="form-control" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">留言：</div>
+                            <textarea id="msg" class="form-control" rows="5" placeholder="留言"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <p>请正确填写您的信息，我们将会在第一时间联系您并将您想要了解的详细资料发送给您！</p>
+            </div>
+        </div>
+
+        <div class="col-sm-12 text-center"><h2 class="btn">立即加盟</h2></div>
+    </div>
+</div>
+<script>
+    $(".navbar-path").addClass('alpha deep')
+    $('#fullpage').fullpage({
+        sectionsColor: ['#a59e7e']
+    });
+    $(function() {
+
+        $(".container-leave .glyphicon-remove").click(function(){
+            history.go(-1);
+        })
+        $(".container-leave .btn").submit("", function () {
+            $("#name,#mobile,#msg").data('placement', is_xs() ? 'bottom' : 'right');
+            return $.check([
+                {'target': '#name', 'rules': $.rules.empty},
+                {'target': '#mobile', 'rules': [$.rules.empty, $.rules.mobile]},
+                {'target': '#msg', 'rules': $.rules.length(null, 200)},
+            ])
+        }, function (res) {
+            if (res.success) {
+                $("#name,#mobile,#msg").val('');
+                $.info('留言成功！');
+            }
+        })
+    })
+</script>

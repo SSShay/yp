@@ -1,0 +1,121 @@
+<style>
+    .navbar-main{
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background:none;
+        border:none;
+    }
+    .navbar-main .navbar-nav>li>a{
+        color: #fff;
+    }
+    .contact_us{
+        width: 100%;
+        height: 558px;
+    }
+
+    .title{
+        text-align: center;
+        color: #000;
+        position: relative;
+        margin-top: 100px;
+        margin-bottom: 30px;
+    }
+    .title h2{
+        padding: 0 50px;
+        display: inline-block;
+        margin: 0;
+        background: #fff;
+    }
+    .title hr{
+        position: absolute;
+        width: 50%;
+        left: 25%;
+        top: 50%;
+        margin: 0;
+        z-index: -1;
+        border-color: #6c6c6c;
+    }
+
+    #map-box{
+        height: 558px;
+    }
+    .contact_route{
+        font-size: 15px;
+        color: #666;
+        margin-bottom: 100px;
+    }
+
+    @media screen and (max-width: 1440px){
+        .contact_us{
+            height: 475px;
+        }
+    }
+    @media screen and (max-width: 1170px){
+        .contact_us{
+            height: 405px;
+        }
+    }
+    @media screen and (max-width: 970px){
+        .contact_us{
+            height: 335px;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .navbar.navbar-main{
+            position: relative;
+        }
+        .contact_us{
+            height: 265px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .contact_us{
+            height: 165px;
+        }
+        .title hr{
+            width: 80%;
+            left: 10%;
+        }
+    }
+
+</style>
+<div class="bg-cover contact_us img-delay" data-bg="__IMG__/contact_us/bg.jpg"></div>
+<div>
+    <div class="container title"><h2>地图</h2><hr></div>
+    <div class="container">
+        <volist name="contacts" id="v">
+            <p>{$v.key}：{$v.value}</p>
+        </volist>
+        <br>
+    </div>
+    <div id="map-box"></div>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=uhuBYtcht4FlnLMx62BnHCjd"></script>
+    <script>
+        $(function(){
+            var map, marker;
+
+            function init_map(pos) {
+                map = new BMap.Map("map-box",{minZoom:19,maxZoom:19});    // 创建Map实例
+                var icon = new BMap.Icon("__IMG__/contact_us/map.png", new BMap.Size(86, 136));
+                marker = new BMap.Marker(pos, {icon: icon});  // 创建标注
+                marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                map.addOverlay(marker);              // 将标注添加到地图中
+                map.centerAndZoom(pos, 19);
+            }
+
+            init_map(new BMap.Point(120.229496, 30.214499));
+        })
+    </script>
+</div>
+<div class="container">
+    <div class="title"><h2>路线</h2><hr></div>
+
+    <div class="contact_route">
+        <p>1、飞机：到杭州萧山机场。机场大巴坐滨江线到天恒大厦（通和路）下。再打车到公司，打车费用15元左右。或者直接打车到公司，大概80元左右。</p>
+        <p>2、火车：到杭州火车东站下车，直接转地铁1号线（往湘湖方向），在"江陵路"站下，B出口出站，打车到公司需11元。或直接从火车东站打车到公司，费用55元左右。</p>
+        <p>3、汽车：到客运中心后，直接转地铁1号线（往湘湖方向），在"江陵路"站下，B出口出站，打车到公司需11元。</p>
+        <p>4、自驾：直接导航到杭州市滨江区阡陌路智慧e谷大楼，或导航到滨江区阡陌路海康威视（智慧e谷对面）。</p>
+    </div>
+</div>

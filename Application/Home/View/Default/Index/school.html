@@ -1,0 +1,221 @@
+<style>
+    .banner{
+        background-color: #d5d7d4;
+    }
+
+    .banner .container{
+        height: 100%;
+        padding-top: 5%;
+    }
+    .banner img{
+        height: 80%;
+    }
+    .banner .txt-block{
+        color: #fff;
+        display: inline-block;
+        margin-left: 5%;
+    }
+    .banner .txt-block h2{
+        line-height: 1.6;
+    }
+    .banner .btn-box{
+        position: absolute;
+    }
+    .banner .btn-box .btn1{
+        background-color: #0098d8;
+        background: url("data:image/gif;base64,R0lGODlhAQABAIAAAACY2AAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==");
+    }
+    .banner .btn-box .btn2{
+        background-color: #c0dbe6;
+        background: url("data:image/gif;base64,R0lGODlhAQABAIAAAMDb5gAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==");
+        margin-left: 20px;
+    }
+    .banner .btn,.banner .btn:hover,.banner .btn:focus,.banner .btn:active{
+        color: #fff;
+    }
+
+    .container-1 .col-sm-4{
+        padding: 100px 20px;
+    }
+    .container-1 img{
+        min-width: 180px;
+        max-width: 240px;
+        width: 60%;
+        pointer-events: none;
+    }
+    .container-1 .h4{
+        line-height: 1.6;
+    }
+
+    .container-2{
+        padding: 30px 0 60px;
+        background-color: #ecf0f1;
+    }
+    .container-2 h3{
+        margin-bottom: 20px;
+    }
+    .container-2 .col-sm-4{
+        padding: 30px 20px;
+    }
+    .container-2 img{
+        width: 100%;
+        max-width: 300px;
+        pointer-events: none;
+        box-shadow: 3px 5px 10px #aaa;
+    }
+
+    .container-3{
+        padding-top: 45px;
+    }
+    .container-3 h3{
+        margin-bottom: 20px;
+    }
+    .container-3 .col-sm-4{
+        padding: 45px;
+    }
+    .container-3 img{
+        width: 100%;
+        pointer-events: none;
+    }
+
+    @media screen and (min-width: 640px) {
+        .banner .btn{
+            font-size: 18px;
+            padding: 5px 25px;
+        }
+    }
+    @media screen and (max-width: 640px) {
+        .banner .container{
+            padding-top: 10%;
+        }
+        .banner img{
+            height: 60%;
+        }
+        .banner .btn{
+            font-size: 12px;
+        }
+        .container-1 .col-sm-4{
+            padding-left: 45px;
+            padding-right: 45px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .container-1 .col-sm-4{
+            padding: 50px 45px;
+        }
+        .container-3  .col-sm-4{
+            padding: 20px;
+        }
+        .container-3 h4{
+            font-size: 14px;
+        }
+    }
+
+</style>
+<div class="banner text-center img-delay bg-cover" data-bg="__IMG__/index/school/bg.jpg">
+    <div class="container">
+        <img src="__IMG__/index/school/phone.png">
+        <div class="txt-block">
+            <h2>
+                解决校园安全问题<br>
+                解决家校沟通障碍问题
+            </h2>
+            <div class="btn-box">
+                <a href="#" class="btn btn1">免费申请</a>
+                <a href="{:U('Index/leave_msg')}" class="btn btn2">了解更多</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container text-center container-1">
+    <div class="row">
+        <div class="col-sm-4"><img src="__IMG__/index/school/1_1.png"><h3>公益</h3>
+            <p>远磐科技“微家校”项目落地过程，<br>
+                无论是硬件还是软件，远磐科技及区域代理商不向学校及家长收取一分钱费用，
+                <span class="h4 txt-green">采用全公益、免费赠送的模式。</span>
+            </p>
+        </div>
+        <div class="col-sm-4"><img src="__IMG__/index/school/1_2.png"><h3>校园安全</h3>
+            <p>微家校利用计算机信息技术、<br>
+                移动互联网技术和物联网技术，硬件与软件结合具备<br>
+            <span class="h4 txt-yellow">一键拨号、实时定位、轨迹回放、sos紧急求助</span>
+                等功能，家长用手机随时随地地掌握孩子状态信息，监护孩子安全真正做到校园安全实时方位。
+            </p>
+        </div>
+        <div class="col-sm-4"><img src="__IMG__/index/school/1_3.png"><h3>家校互动</h3>
+            <p>学校通过微家校向家长输送<br>
+                <span class="h4 txt-blue">学生考勤、作业、成绩、表现、公告</span>
+                等信息，家长及时掌握孩子最新状况，使得家长与学校能够在这个平台实现良好的互动交流。
+            </p>
+        </div>
+    </div>
+</div>
+<div class="text-center container-2">
+    <div class="container">
+        <h3>荣誉资质</h3>
+        <div class="row">
+            <div class="col-sm-4"><img src="__IMG__/index/school/2_1.jpg"></div>
+            <div class="col-sm-4"><img src="__IMG__/index/school/2_2.jpg"></div>
+            <div class="col-sm-4"><img src="__IMG__/index/school/2_3.jpg"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center container-3">
+    <h3>实施方案</h3>
+    <div class="row">
+        <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_1.png"><h4>贵州剑河三小</h4></div>
+        <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_2.png"><h4>苏州外国语学校</h4></div>
+        <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_3.png"><h4>凯里市第七中学</h4></div>
+        <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_4.png"><h4>常青藤实验中学</h4></div>
+        <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_5.png"><h4>黄平湖里中学</h4></div>
+        <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_6.png"><h4>杭州滨虹小学</h4></div>
+    </div>
+</div>
+
+<div class="container-leave-msg">
+    <div class="container">
+        <h4>
+            学生健康成长，是每一位教育工作者共同的愿望！<br>
+            为了学生的安全，留下您的联系方式，<br>
+            我们期待与您共同为学生学习成长与教育安全保驾护航！
+        </h4>
+        <div class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">姓名：</div>
+                    <input id="name" class="form-control" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon">电话：</div>
+                    <input id="mobile" class="form-control" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
+                </div>
+                <div class="input-group">
+                    <textarea id="msg" class="form-control" rows="5" placeholder="留言"></textarea>
+                </div>
+            </div>
+        </div>
+        <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并承诺为您保密！</h6>
+        <button class="btn" type="button">提交留言</button>
+    </div>
+</div>
+<script>
+    $(".navbar-path").addClass('absolute deep');
+    $(function() {
+        $(".container-leave-msg .btn").submit("{:U('Index/leave_msg')}", function () {
+            $("#name,#mobile,#msg").data('placement', is_xs() ? 'bottom' : 'right');
+            return $.check([
+                {'target': '#name', 'rules': $.rules.empty},
+                {'target': '#mobile', 'rules': [$.rules.empty, $.rules.mobile]},
+                {'target': '#msg', 'rules': $.rules.length(null, 200)},
+            ])
+        }, function (res) {
+            if (res.success) {
+                $("#name,#mobile,#msg").val('');
+                $.info('留言成功！');
+            }
+        })
+    })
+
+</script>

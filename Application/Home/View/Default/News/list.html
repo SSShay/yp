@@ -1,0 +1,112 @@
+<style>
+    .news-list{
+        margin-bottom: 50px;
+    }
+    .news-list>h4{
+        font-family: "黑体", sans-serif;;
+        border-bottom: 1px solid #aaa;
+        display: inline-block;
+    }
+    .news-list .news-list-body{
+        margin-top: 20px;
+        min-height: 300px;
+        /*display: none;*/
+    }
+    .news-list .media{
+        position: relative;
+    }
+    .news-list .media-left{
+        max-height: 80px;
+    }
+    .news-list .media-left img{
+        width: 140px;
+        background: #168EE1;
+    }
+    .news-list .media-heading{
+        font-size: 18px;
+        color: #404040;
+    }
+    .news-list .media-body p{
+        max-height: 3em;
+        color: #787878;
+        overflow: hidden;
+        position: relative;
+        margin-top: 1em;
+        font-size: 13px;
+    }
+    .news-list .media-body p:after{
+        content: "...";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        padding: 0 4px;
+    }
+    .news-list .media-body .time {
+        position: absolute;
+        right: 0;
+    }
+</style>
+<!--<div class="carousel slide" id="carousel-news">
+    <ol class="carousel-indicators">
+        <volist name="banner" id="v">
+            <li data-slide-to="{$key}" data-target="#carousel-index"></li>
+        </volist>
+    </ol>
+    <div class="carousel-inner">
+        <volist name="banner" id="v">
+            <div class="item">
+                <img alt="{$v.imgalt}" src="{$v.imgurl}" />
+                <div class="carousel-caption">
+                    <notempty name="v.title"><h4>{$v.title}</h4></notempty>
+                    <notempty name="v.content"><p>{$v.content}</p></notempty>
+                </div>
+            </div>
+        </volist>
+    </div>
+    <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>-->
+<div class="container news-list">
+    <h4>{$typestr}</h4>
+    <div class="news-list-body"></div>
+    <nav id="page"></nav>
+</div>
+<script src="__JS__/jquery.page-number.js"></script>
+<script>
+    $(function() {
+        var page_num = $("#page").PageNumber(0,
+                function (page, pcount) {
+                    return (page.parents('.page-box').width() / (20 + Math.ceil(Math.log10(pcount)) * 12) - 4) >> 0;
+                }, function (p) {
+                    if (p == undefined) p = page_num.index;
+                    else if (isNaN(p)) return;
+                    $("#article-list").addClass('loading');
+                    $.get("{:U('News/article_list')}", {p: p, type: '{$type}'}, function (res) {
+                        if (!res.list) return;
+                        $(".news-list-body").html('');
+                        $.each(res.list, function (i, v) {
+                            var link = "{:U('News/article')}/id/" + v.id;
+                            var media = $([
+                                '<div class="media">',
+                                '<a class="media-left" href="' + link + '">',
+                                '<img src="' + (v.thumb || '__IMG__/others/news.jpg') + '" alt="">',
+                                '</a>',
+                                '<div class="media-body">',
+                                '<a class="media-heading" href="' + link + '">' + v.title + '</a>',
+                                '<p>' + v.brief + '</p>',
+                                '<span class="time">' + v.ctime + '</span>',
+                                '</div>',
+                                '</div>',
+                            ].join(''));
+                            $(".news-list-body").append(media);
+                            $(".news-list-body").append('<hr>');
+                        });
+                        //$(".news-list-body").slideDown();
+                        page_num.refresh(p, res.count);
+                        $(".top").click();
+                    }, 'json')
+                })
+        page_num.loadindex();
+    })
+</script>

@@ -1,0 +1,23 @@
+<notempty name="breadcrumb">
+    <nav class="navbar navbar-path">
+        <div class="container">
+            <ul class="breadcrumb underline">
+                <volist name="breadcrumb" id="v">
+                    <notempty name="v.url">
+                        <li><a href="{$v.url}">{$v.name}</a></li>
+                        <else/>
+                        <li class="active">{$v.name}</li>
+                    </notempty>
+                </volist>
+                <volist name="childnav" id="v">
+                    <notempty name="v.url">
+                        <li class="link"><a href="{$v.url}">{$v.name}</a></li>
+                        <else/>
+                        <li class="link active"><a href="#">Disabled link</a></li>
+                    </notempty>
+                </volist>
+            </ul>
+            <hr>
+        </div>
+    </nav>
+</notempty>

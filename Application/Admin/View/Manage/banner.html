@@ -1,0 +1,248 @@
+<style>
+    .img-thumb-list{
+        padding-bottom: 5px;
+        position: relative;
+    }
+    .img-thumb-list>div{
+        padding: 15px;
+    }
+    .img-thumb-list .img-thumb{
+        border: 2px solid #ddd;
+    }
+    .img-thumb-list img{
+        width: 100%;
+        cursor: pointer;
+    }
+    .img-thumb-list .active{
+        border: 2px solid #2A323F;
+    }
+    .img-thumb-list .place{
+        border: 2px dashed #2A323F;
+    }
+    .img-thumb-list .place img{
+        visibility: hidden;
+    }
+    .img-thumb-list .draging{
+        position: absolute;
+        border-color: #2A323F;
+        z-index: 1;
+        padding: 0;
+    }
+
+    #img-preview{
+        width: 100%;
+        cursor: pointer;
+    }
+</style>
+
+<div class="col-lg-8">
+    <div class="panel img-preview-panel">
+        <header class="panel-heading">
+            <span>轮播图预览</span>
+            <span class="tools pull-right"><a href="#" class="fa fa-chevron-up"></a></span>
+        </header>
+        <div class="panel-body" style="display: none">
+            <img id="img-preview" src="">
+            <input id="fileToUpload" class="hidden" type="file" name="img">
+        </div>
+        <div class="panel-footer">点击预览图<code>添加\更换</code>图片，建议尺寸：<code>1920*800</code>、建议大小：小于<code>500K</code>、建议格式：<code>*.jpg</code></div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="panel">
+        <header class="panel-heading">
+            轮播图设置
+            <span class="tools pull-right"><a href="javascript:;" class="fa fa-chevron-down"></a></span>
+        </header>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">图片：</label>
+                <div class="col-sm-10">
+                    <input id="imgurl" type="text" class="form-control" data-name="图片地址" readonly placeholder="点击预览区域上传图片">
+                </div>
+            </div>
+            <button id="create-btn" class="btn btn-primary hidden">添加轮播图</button>
+            <button id="del-btn" class="btn btn-primary hidden">删除轮播图</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel">
+        <header class="panel-heading">
+            轮播图列表
+            <span class="tools pull-right">
+                <a id="add-btn" href="javascript:;" class="fa fa-plus"></a>
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+            </span>
+        </header>
+        <div class="panel-body">
+            <div class="row img-thumb-list"></div>
+        </div>
+        <div class="panel-footer">点击右上角<code> + </code>按钮，再点击预览图添加预览图</div>
+    </div>
+</div>
+
+<div class="col-lg-12 hidden" id="change-submit">
+    <div class="panel">
+        <div class="panel-body text-center">
+            <p class="text-warning">由于你修改了轮播图的排序，所以关闭页面之前请点击按钮“<a class="text-danger">保存并发布</a>”</p>
+            <button type="button" class="btn btn-info save-mod">保存并发布</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="alert alert-info alert-block fade in" id="msg">
+        <p>拖动图片可以改变排序</p>
+    </div>
+</div>
+<script src="__JS__/xplugs/jquery.box-drag.js"></script>
+<script src="__PLUGIN__/ajaxfileupload.js"></script>
+<script>
+    $(function() {
+        var select;
+
+        function setimg(imgurl) {
+            $("#imgurl").val(imgurl);
+            $("#img-preview").attr('src', imgurl);
+        }
+
+        var sort;
+
+        function getnextsort() {
+            sort = boxdarg.get_next_sort();
+            return sort;
+        }
+
+        var boxdarg = new BoxDarg({
+            'data': JSON.parse('{$banner}' || '[]'),
+            'box_click': function (obj) {
+                select = obj;
+                var imgurl = obj.children('img').attr('src');
+                setimg(imgurl);
+                $(".img-preview-panel .fa-chevron-up").click()
+                $("#del-btn").removeClass('hidden')
+                //$("#create-btn").addClass('hidden')
+            },
+            'sort_change': function () {
+                if ($("#change-submit").hasClass('hidden')) {
+                    $("#change-submit").removeClass('hidden');
+                    scrollbottom()
+                }
+                $("#msg").addClass('hidden').removeClass('alert-info');
+            },
+            'create_box': function (v) {
+                return $([
+                    '<div class="col-xs-6 col-sm-4 col-md-3">',
+                    '<div class="img-thumb" data-id="' + v.id + '">',
+                    '<img src="' + v.imgurl + '">',
+                    '</div>',
+                    '</div>',
+                ].join(''));
+            },
+            'check_diff': function (i,obj, v) {
+                if (v.id == obj.data('id')) {
+                    var diff = {};
+                    var imgurl = obj.children('img').attr('src');
+                    if (v.imgurl != imgurl)diff.imgurl = imgurl;
+                    var sort = i + 1;
+                    if (v.sort != sort)diff.sort = sort;
+                    return diff;
+                }
+            }
+        })
+
+        $("#add-btn").click(function () {
+            select = null;
+            $("#del-btn").addClass('hidden')
+            /*$("#create-btn").removeClass('hidden')*/
+            $("#imgurl").val('');
+            $('.img-thumb.active').removeClass('active');
+            $("#img-preview").attr('src', "__IMG__/banner_add.png");
+            $(".img-preview-panel .fa-chevron-up").click()
+        })
+
+        if(boxdarg.get_count() < 1) $("#add-btn").click();
+
+        $("#create-btn").click(function () {
+
+        })
+
+        $("#del-btn").submit("{:U('Manage/banner_del')}", function () {
+            if (select) return {id: select.data('id')}
+            else $.error('未选择轮播图！')
+        }, function (res) {
+            if (res.success) boxdarg.box_remove();
+        })
+
+        $("#img-preview").click(function () {
+            $("#fileToUpload").click()
+        })
+
+        $("#fileToUpload").change(function() {
+            var data = {};
+            if(select) data.id = select.data('id');
+            else data.sort = getnextsort();
+            $.ajaxFileUpload({
+                url: "{:U('Manage/banner_upload')}", //用于文件上传的服务器端请求地址
+                fileElement: '#fileToUpload', //文件上传域
+                data: data,
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (data, status)  //服务器成功响应处理函数
+                {
+                    if (data.img) {
+                        setimg(data.img);
+                        if (data.id) {
+                            boxdarg.box_create({id: data.id, imgurl: data.img, sort: sort});
+                        } else {
+                            select.children('img').attr('src', data.img);
+                        }
+                    } else {
+                        if (!data.error) data.error = '未知错误';
+                        $.error(data.error);
+                    }
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    $.error(e);
+                }
+            });
+        })
+
+        var scroll_d = 10;
+        function scrollbottom(start) {
+            var top = $(window).scrollTop();
+            var h = $("body").height() - $(window).height();
+            if (top < h) {
+                if (start) $(window).scrollTop(top + scroll_d);
+                else scroll_d = Math.ceil((h - top) / 15);
+                animate(scrollbottom)
+            }
+        }
+
+        window.onbeforeunload = function() {
+            if(!$("#change-submit").hasClass('hidden')) {
+                return "由于你修改了轮播图的排序，所以关闭页面之前请点击按钮“保存并发布”";
+            }
+        }
+
+        $(".save-mod").submit("{:U('Manage/banner_mod')}", function () {
+            return {'change':boxdarg.get_change()};
+        }, function (res,data) {
+            if(res.error) return;
+            if (!res.fail) {
+                $("#msg").removeClass('hidden alert-danger').addClass('alert-success')
+                        .children('p').html("保存并发布成功，快去<a target='_blank' href='{:U('Home/Index/index')}' class='alert-link'>商城首页</a>查看吧");
+                $("#change-submit").addClass('hidden');
+                boxdarg.save_change(data.change);
+            } else {
+                $("#msg").removeClass('hidden alert-success').addClass('alert-danger')
+                        .children('p').text('有 ' + res.fail + '/' + res.count
+                        + ' 项轮播图排序保存失败，建议先去官网首页查看现状在确定需不需要再次尝试提交。');
+            }
+        })
+    })
+
+</script>

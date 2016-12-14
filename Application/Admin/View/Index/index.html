@@ -1,0 +1,124 @@
+<style>
+    #analysis_type{
+        margin-bottom: 10px;
+    }
+    #analysis_type button{
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+    #analysis_type button.action{
+        color: #fff;
+        background-color: #424f63;
+        border-color: #424f63;
+        text-decoration: none;
+        z-index: 2;
+    }
+</style>
+<div style="color: #1F1F1F">
+    <h3>欢迎，{$user.name}</h3><br>
+    <p>上次登录IP：{$user.ip}</p>
+    <p>上次登录时间：{:date('Y-m-d H:i:s',$user['utime'])}</p>
+</div>
+
+<section class="panel">
+    <header class="panel-heading">
+        流量统计
+        <div class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+        </div>
+    </header>
+    <div class="panel-body">
+        <div class="text-right">
+            <span class="btn-group" id="analysis_type">
+            <button type="button" class="btn btn-default action" data-s="3600" data-limit="24">今日</button>
+            <button type="button" class="btn btn-default" data-s="86400" data-limit="30">近30天</button>
+            <button type="button" class="btn btn-default" data-s="2592000" data-limit="12">近1年</button>
+        </span>
+        </div>
+        <div id="visitors-chart">
+            <div id="visitors-container" style="width: 100%;height:300px; text-align: center; margin:0 auto;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery Flot Chart-->
+<script src="__PLUGIN__/flot-chart/jquery.flot.min.js"></script>
+<script src="__PLUGIN__/flot-chart/jquery.flot.tooltip.min.js"></script>
+<script src="__PLUGIN__/flot-chart/jquery.flot.resize.min.js"></script>
+<script src="__PLUGIN__/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="__PLUGIN__/flot-chart/jquery.flot.selection.min.js"></script>
+<script src="__PLUGIN__/flot-chart/jquery.flot.stack.min.js"></script>
+<script src="__PLUGIN__/flot-chart/jquery.flot.time.min.js"></script>
+<script>
+    $(function() {
+        var plotOpts = {
+            series: {
+                lines: {
+                    show: true,
+                    fill: true
+                },
+                points: {
+                    show: true,
+                    lineWidth: 2,
+                    fill: true,
+                    fillColor: "#ffffff",
+                    symbol: "circle",
+                    radius: 5
+                },
+                shadowSize: 0
+            },
+            grid: {
+                hoverable: true,
+                clickable: true,
+                tickColor: "#f9f9f9",
+                borderWidth: 1,
+                borderColor: "#eeeeee"
+            },
+            colors: ["#65CEA7", "#424F63"],
+            tooltip: true,
+            tooltipOpts: {
+                defaultTheme: false
+            },
+            xaxis: {
+                mode: "time"
+            },
+            yaxis: {
+                min: 0,
+                minTickSize: 1
+            }
+        };
+        var plot = $.plot($("#visitors-chart #visitors-container"),
+                [{
+                    data: [],
+                    label: "页面点击量",
+                    lines: {fill: true},
+                }, {
+                    data: [],
+                    label: "独立访客数",
+                    lines: {fill: true},
+                }], plotOpts);
+
+        $("#analysis_type button").click(function () {
+            var $t = $(this);
+            var s = $t.data('s');
+            var limit = $t.data('limit');
+            $.getJSON("{:U('Analysis/get_analytic')}", {
+                'span': s,
+                'limit': limit
+            }, function (res) {
+                $.plot($("#visitors-chart #visitors-container"),
+                        [{
+                            data: res.PV,
+                            label: "页面点击量",
+                            lines: {fill: true},
+                        }, {
+                            data: res.UV,
+                            label: "独立访客数",
+                            lines: {fill: true},
+                        }], plotOpts);
+                $t.addClass('action').siblings().removeClass('action');
+            })
+        }).eq(0).click()
+    })
+</script>

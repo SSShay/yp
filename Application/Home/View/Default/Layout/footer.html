@@ -1,0 +1,66 @@
+<footer id="footer">
+    <div class="container">
+        <div class="row footer-top">
+            <div class="col-md-4 site-map text-center">
+                <div class="col-xs-6 yuanpan">
+                    <img src="__IMG__/logo/panyard.png">
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                </div>
+                <div class="col-xs-6 weijiaxiao">
+                    <img src="__IMG__/logo/wjx.png">
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                    <a href="#">二级标题</a>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="col-md-4">
+                <div class="contact-way text-center">
+                    <div class="kefu-qq">
+                        <img src="__IMG__/icon/qq.png">
+                        <h6>客服QQ</h6>
+                    </div>
+                    <div class="line text-left">客服：800190360&nbsp;&nbsp;<div class="qq-chat">QQ交谈</div></div>
+                    <div class="line text-left">电话：021-51137398</div>
+                </div>
+            </div>
+            <div class="hr second"></div>
+            <div class="col-md-4 qr-code text-center">
+                <div class="col-xs-6">
+                    <div>微信公众号</div>
+                    <img src="__IMG__/common/qrcode_wx.png">
+                </div>
+                <div class="col-xs-6">
+                    <div>今日头条号</div>
+                    <img src="__IMG__/common/qrcode_jrtt.png">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row friendly-link underline text-center">
+            <volist name="links" id="v">
+                <a target="_blank" href="{$v.value}">{$v.key}</a>
+            </volist>
+        </div>
+    </div>
+    <div class="footer-bottom text-center" style="display: block">
+        <empty name="foot_txt">
+            Copyright &copy; 2006-{:date('Y')} &nbsp;&nbsp; 杭州远磐互联科技有限公司&nbsp;&nbsp;微家校&nbsp;&nbsp;版权所有&nbsp;&nbsp;浙IC备14011429号-1
+            <else/>
+            {$foot_txt}
+        </empty>
+    </div>
+</footer>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__JS__/bootstrap.min.js"></script>
+</body>
+</html>

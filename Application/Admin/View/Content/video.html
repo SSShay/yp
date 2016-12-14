@@ -1,0 +1,453 @@
+<!--引入CSS-->
+<link rel="stylesheet" type="text/css" href="__PLUGIN__/webuploader/css/webuploader.css">
+<link href="__PLUGIN__/willesplay/jquery.willesplay.css"  rel="stylesheet" />
+<link href="__CSS__/view/content/video.css"  rel="stylesheet" />
+<style>
+    .img-thumb-list{
+        padding-bottom: 5px;
+        position: relative;
+    }
+    .img-thumb-list>div{
+        padding: 15px;
+    }
+    .img-thumb-list .img-thumb{
+        border: 2px solid #ddd;
+    }
+    .img-thumb-list img{
+        width: 100%;
+        cursor: pointer;
+    }
+    .img-thumb-list .active{
+        border: 2px solid #2A323F;
+    }
+    .img-thumb-list .place{
+        border: 2px dashed #2A323F;
+    }
+    .img-thumb-list .place img{
+        visibility: hidden;
+    }
+    .img-thumb-list .draging{
+        position: absolute;
+        border-color: #2A323F;
+        z-index: 1;
+        padding: 0;
+    }
+
+    .fa-upload>.webuploader-pick{
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: none;
+    }
+
+    #upload-info{
+        display: none;
+        position: absolute;
+        z-index: 99;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0,0,0,.62);
+        padding-top: 15%;
+        text-align: center;
+    }
+    #upload-info .row{
+        color: #fff;
+    }
+    #upload-info .file-name{
+        margin: 0 20px;
+    }
+    #upload-info .progress-val{
+        font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    }
+</style>
+
+<div class="col-lg-8">
+    <div class="panel img-preview-panel">
+        <header class="panel-heading">
+            <span>视频预览</span>
+            <span class="tools pull-right">
+                <a href="#" class="fa fa-upload"></a>
+                <a href="#" class="fa fa-chevron-up"></a>
+            </span>
+        </header>
+        <div class="panel-body" style="position: relative">
+            <div id="willesPlay"></div>
+            <div id="upload-info" class="container">
+                <div class="row text-center"><span class="file-name"></span><span class="progress-val">0%</span></div>
+                <div class="progress progress-striped active">
+                    <div class="progress-bar" role="progressbar" style="width: 0"></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">点击上传按钮<code>添加\更换</code>视频，建议大小：小于<code>100M</code>、建议格式：<code>*.mp4\*.flv\*.swf</code></div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="panel">
+        <header class="panel-heading">
+            视频设置
+            <span class="tools pull-right"><a href="javascript:;" class="fa fa-chevron-down"></a></span>
+        </header>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">视频：</label>
+                <div class="col-sm-10">
+                    <input id="url" type="text" class="form-control" data-name="图片地址" readonly placeholder="点击上传按钮上传视频" data-placement="top">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">预览图：</label>
+                <div class="col-sm-10">
+                    <img id="thumb" class="img-upload" data-url="{:U('Content/video_thumb_upload')}"/>
+                    <p class="help-block">点击预览框<code>添加/更换</code>视频预览图，建议格式：<code>*.jpg</code>、建议尺寸：<code>720*480</code>、建议大小：小于<code>256K</code></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题：</label>
+                <div class="col-sm-10">
+                    <input id="name" type="text" class="form-control" data-name="视频标题" placeholder="请输入视频标题..." data-placement="top">
+                </div>
+            </div>
+            <button id="add-btn" class="btn btn-primary hidden">添加视频</button>
+            <button id="del-btn" class="btn btn-primary hidden">删除视频</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel">
+        <header class="panel-heading">
+            视频列表
+            <span class="tools pull-right">
+                <a id="create-btn" href="javascript:;" class="fa fa-plus"></a>
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+            </span>
+        </header>
+        <div class="panel-body">
+            <div class="row img-thumb-list"></div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 hidden" id="change-submit">
+    <div class="panel">
+        <div class="panel-body text-center">
+            <p class="text-warning">由于你修改了视频的属性，所以关闭页面之前请点击按钮“<a class="text-danger">保存并发布</a>”</p>
+            <button type="button" class="btn btn-info save-mod">保存并发布</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="alert alert-info alert-block fade in" id="msg">
+        <p>拖动视频缩略图图可以改变排序</p>
+    </div>
+</div>
+<!--引入JS-->
+<!--百度云盘文件上传插件-->
+<script type="text/javascript" src="__PLUGIN__/webuploader/js/webuploader.min.js"></script>
+<!--视频播放插件-->
+<script src="__PLUGIN__/willesplay/jquery.willesplay.min.js"></script>
+<!--盒子拖动插件-->
+<script src="__JS__/xplugs/jquery.box-drag.js"></script>
+<!--单个文件上传插件-->
+<script src="__PLUGIN__/ajaxfileupload.js"></script>
+<script>
+    $(function() {
+
+        var change_sub = $("#change-submit");
+        var video = $("#willesPlay").video();
+        var select,sort;
+        var info = $('#upload-info');
+        var uploadlist = {};
+
+        function setval(url,thumb,name) {
+            $("#url").val(url);
+            $("#thumb").attr('src', thumb || ' ');
+            $("#name").val(name);
+            $("#willesPlay .playContent").css('background-image', 'url(' + thumb + ')');
+            video.paused(url || ' ', name || ' ', select)
+        }
+
+        function getnextsort() {
+            sort = boxdarg.get_next_sort();
+            return sort;
+        }
+
+        var boxdarg = new BoxDarg({
+            'data': JSON.parse('{$video}' || '[]'),
+            'box_click': function (obj) {
+                select = obj;
+                var thumb = obj.children('img').attr('src');
+                setval(obj.data('url'), thumb, obj.data('name'))
+                $("#del-btn").removeClass('hidden');
+                $("#add-btn").addClass('hidden');
+                var videoid = select.data('id');
+                var file = uploadlist[videoid];
+                if(file){
+                    setproval(file.val,file.name)
+                }else{
+                    info.css('display', 'none');
+                }
+            },
+            'sort_change': change,
+            'create_box': function (v) {
+                return $([
+                    '<div class="col-xs-6 col-sm-4 col-md-3">',
+                    '<div class="img-thumb" data-id="' + v.id + '" data-name="' + v.name + '" data-url="' + v.url + '">',
+                    '<img src="' + v.thumb + '">',
+                    '</div>',
+                    '</div>',
+                ].join(''));
+            },
+            'check_diff': function (i,obj, v) {
+                if (v.id == obj.data('id')) {
+                    var diff = {};
+                    check(obj.children('img').attr('src'), 'thumb')
+                    check(obj.data('url'), 'url')
+                    check(obj.data('name'), 'name')
+                    check(i + 1, 'sort')
+
+                    function check(vv, key) {
+                        if (v[key] != vv) diff[key] = vv;
+                    }
+
+                    return diff;
+                }
+            }
+        })
+
+        function change(){
+            if (change_sub.hasClass('hidden')) {
+                change_sub.removeClass('hidden');
+                scrollbottom()
+            }
+            $("#msg").addClass('hidden').removeClass('alert-info');
+        }
+
+        $("#name").change(function(){
+            if(select){
+                select.data('name',$(this).val());
+                change();
+            }else{
+                $("#create-btn").data('name',$(this).val());
+            }
+        })
+
+        var thumb = $("#thumb").ajaxFileUpload(function () {
+            var src = thumb.attr('src');
+            if (src) return {'img': src};
+        }, function (data, status) {
+            if (data.img) {
+                thumb.attr('src', data.img);
+                if(select){
+                    select.data('thumb',data.img)
+                    change();
+                }else{
+                    $("#create-btn").data('thumb',data.img)
+                }
+            } else {
+                if (!data.error) data.error = '未知错误';
+                $.error(data.error);
+            }
+        })
+
+        $("#create-btn").click(function () {
+            select = null;
+            var $t = $(this);
+            setval($t.data('url'), $t.data('thumb'), $t.data('name'))
+            $("#del-btn").addClass('hidden')
+            $("#add-btn").removeClass('hidden')
+            $('.img-thumb.active').removeClass('active');
+        })
+        $("#add-btn").submit("{:U('Content/video_add')}", function () {
+           var data = $.check([
+                {'target': '#url', 'rules': $.rules.empty},
+                {'target': '#name', 'rules': [$.rules.empty, $.rules.length(null, 25)]},
+            ])
+            if (data) {
+                data.thumb = $("#thumb").attr('src');
+                data.sort = getnextsort();
+            }
+            return data;
+        }, function (res,data) {
+            if (res.id) {
+                data.id = res.id;
+                boxdarg.box_create(data);
+                $("#create-btn").data('url', '').data('thumb', '').data('name', '')
+            }
+        })
+
+        $("#del-btn").submit("{:U('Content/video_del')}", function () {
+            if (select) return {id: select.data('id')}
+            else $.error('未选择视频！')
+        }, function (res) {
+            if (res.success) boxdarg.box_remove();
+        })
+
+        var scroll_d = 10;
+        function scrollbottom(start) {
+            var top = $(window).scrollTop();
+            var h = $("body").height() - $(window).height();
+            if (top < h) {
+                if (start) $(window).scrollTop(top + scroll_d);
+                else scroll_d = Math.ceil((h - top) / 15);
+                animate(scrollbottom)
+            }
+        }
+
+        window.onbeforeunload = function() {
+            if(!change_sub.hasClass('hidden')) {
+                return "由于你修改了视频的排序，所以关闭页面之前请点击按钮“保存并发布”";
+            }
+        }
+
+        $(".save-mod").submit("{:U('Content/video_mod')}", function () {
+            return {'change':boxdarg.get_change()};
+        }, function (res,data) {
+            if (res.error) return;
+            if (!res.fail) {
+                $("#msg").removeClass('hidden alert-danger').addClass('alert-success')
+                        .children('p').html("保存并发布成功，快去<a target='_blank' href='{:U('Home/Index/video')}' class='alert-link'>宣传视频页面</a>查看吧");
+                change_sub.addClass('hidden');
+                boxdarg.save_change(data.change);
+            } else {
+                $("#msg").removeClass('hidden alert-success').addClass('alert-danger')
+                        .children('p').text('有 ' + res.fail + '/' + res.count
+                        + ' 项视频排序保存失败，建议先去官网首页查看现状在确定需不需要再次尝试提交。');
+            }
+        })
+
+
+        //视频上传支持
+        /**************************************************************************************************************/
+        function setproval(v,name) {
+            $(".progress-val", info).text(v || '等待中...');
+            $(".progress-bar", info).css('width', v);
+            if (name)  {
+                $(".file-name", info).text(name);
+                info.css('display', 'block');
+            }
+        }
+
+        //初始化，实际上可直接访问Webuploader.upLoader
+        var uploader = WebUploader.create({
+            auto: true,// 选完文件后，是否自动上传。
+            resize: false,// 不压缩image
+            swf: '__PLUGIN__/webuploader/js/Uploader.swf',// swf文件路径
+            duplicate: true,
+            server: "{:U('Content/video_upload')}",// 发送给后台代码进行处理，保存到服务器上
+            pick: '.fa-upload',// 选择文件的按钮。可选。
+            prepareNextFile:true,
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        });
+
+        // uploader添加事件，当文件被加入队列后触发
+        uploader.on('fileQueued', function (file) {
+            var videoid = select ? select.data('id') : 0;
+            var _file = uploadlist[videoid];
+            if (_file) {
+                uploader.removeFile(_file.id);
+            }
+            uploadlist[videoid] = {'id': file.id, 'val': 0, 'name': file.name, obj: select || $("#create-btn")}
+            setproval(0, file.name)
+        });
+
+        // 文件上传过程中触发，携带上传进度，file表示上传的文件，percentage表示上传的进度
+        uploader.on('uploadProgress', function (file, percentage) {
+            var videoid = select ? select.data('id') : 0;
+            var _file = uploadlist[videoid];
+            if(_file){
+                var val = (percentage * 100).toFixed(2) + '%';
+                if(_file.id == file.id){
+                    setproval(val)
+                    uploadlist[videoid].val = val;
+                }else{
+                    $.each(uploadlist,function(i,v){
+                        if(v.id == file.id){
+                            uploadlist[i].val = val;
+                            return false;
+                        }
+                    })
+                }
+            }
+        });
+
+        //uploader触发事件，当上传成功事调用这个事件
+        uploader.on('uploadSuccess', function (file,res) {
+            var videoid = select ? select.data('id') : 0;
+            $.each(uploadlist, function (i, v) {
+                if (v.id == file.id) {
+                    if (videoid == i) {
+                        info.css('display', 'none');
+                        if (res.video) {
+                            $("#url").val(res.video);
+                            video.paused(res.video, '', v.obj);
+                        } else {
+                            $.error('视频：『' + file.name + '』上传失败，' + (res.error || '未知错误！'));
+                        }
+                    }
+                    v.obj.data('url', res.video);
+                    delete uploadlist[i];
+                    if (!v.obj.is('#create-btn')) {
+                        change_sub.removeClass('hidden')
+                    }
+                    return false;
+                }
+            })
+        });
+
+        //uploader触发事件，当上传失败时触发该事件
+        uploader.on('uploadError', function (file) {
+            var videoid = select ? select.data('id') : 0;
+            $.each(uploadlist,function(i,v){
+                if(v.id == file.id){
+                    if(videoid == i){
+                        info.css('display','none');
+                    }
+                    delete uploadlist[i];
+                    return false;
+                }
+            })
+            $.error('视频：『' + file.name + '』上传失败');
+        });
+
+        //该事件表示不管上传成功还是失败都会触发该事件
+        /*uploader.on('uploadComplete', function (file) {
+            console.log('uploadComplete')
+        });*/
+
+        //这是一个特殊事件，所有的触发都会响应到，type的作用是记录当前是什么事件在触发，并给state赋值
+        uploader.on('all', function (type) {
+            /*if (type === 'startUpload') {
+             state = 'uploading';
+             } else if (type === 'stopUpload') {
+             state = 'paused';
+             } else if (type === 'uploadFinished') {
+             state = 'done';
+             }
+
+             //根据state判断弹出文本
+             if (state === 'uploading') {
+             $btn.text('暂停上传');
+             } else {
+             $btn.text('开始上传');
+             }*/
+        });
+
+        //当按钮被点击时触发，根据状态开始上传或是暂停
+        /*$btn.on('click', function () {
+         if (state === 'uploading') {
+         uploader.stop();
+         } else {
+         uploader.upload();
+         }
+         });*/
+
+    })
+</script>

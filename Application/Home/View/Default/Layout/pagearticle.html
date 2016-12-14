@@ -1,0 +1,28 @@
+<include file="Default/Layout/header" />
+</head>
+
+<body>
+
+<include file="Default/Layout/navbar" />
+
+<nav class="nav-right">
+    <ul>
+        <li><span>建议<br>意见</span></li>
+        <li><span>联系<br>客服</span></li>
+        <li class="top" style="opacity:0"><img src="__IMG__/others/top.png"></li>
+    </ul>
+</nav>
+
+<div id="body">
+    <include file="Default/Layout/breadcrumb" />
+    <div class="container">
+        <h2 class="article-title">{$article.title}</h2>
+        <span class="article-time">{$article.time}</span>
+        <hr>
+        <div class="article-body">
+            {__CONTENT__}
+        </div>
+    </div>
+</div>
+
+<include file="Default/Layout/footer" />

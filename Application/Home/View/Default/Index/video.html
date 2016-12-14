@@ -1,0 +1,85 @@
+﻿<link href="__CSS__/jquery.willesplay.css"  rel="stylesheet" />
+<link href="__CSS__/style.video.css"  rel="stylesheet" />
+<div class="container">
+    <div class="col-md-12">
+        <div id="willesPlay"></div>
+    </div>
+</div>
+<div class="img-preview-box">
+    <div class="glyphicon glyphicon-chevron-left text-primary disabled"></div>
+    <div class="img-list-box">
+        <div class="img-list">
+            <volist name="video" id="v">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6"><img data-title="{$v.name}" data-url="{$v.url}" src="{$v.thumb}"></div>
+            </volist>
+        </div>
+    </div>
+    <div class="glyphicon glyphicon-chevron-right text-primary"></div>
+</div>
+
+<script src="__JS__/jquery.willesplay.min.js"></script>
+<script>
+    $(function() {
+        $("#body").addClass('bg-cover img-delay').data('bg',"__IMG__/video/bg.jpg");
+
+        var video = $("#willesPlay").video();
+        var row_box = $(".img-preview-box .img-list-box")
+        var row = $(".img-preview-box .img-list");
+        var list = row.children();
+        var n = list.length, index = 0, rn = getrn();
+
+        function scroll(i, refresh) {
+            if (n <= rn) return;
+            if (i < 0) i = 0;
+            else if (i > n - rn)i = n - rn;
+            if (refresh || i != index) {
+                if (refresh) {
+                    if (i == 0) lbtn.addClass('disabled')
+                    else lbtn.removeClass('disabled')
+                    if (i == n - rn) rbtn.addClass('disabled')
+                    else rbtn.removeClass('disabled')
+                } else {
+                    if (i == 0) lbtn.addClass('disabled')
+                    else if (i == n - rn) rbtn.addClass('disabled')
+                    if (index == 0) lbtn.removeClass('disabled')
+                    else if (index == n - rn) rbtn.removeClass('disabled')
+                }
+                row.animate({'left': -100 / rn * i + '%'})
+                index = i;
+            }
+        }
+
+        function getrn() {
+            var item = list.eq(0);
+            return Math.round(row_box.width() / (item.width() + parseInt(item.css('padding-left')) * 2));
+        }
+
+        list.each(function () {
+            $(this).children('img').click(function () {
+                var title = $(this).data('title')
+                var url = $(this).data('url')
+                video.play(url, title, $(this));
+            })
+        })
+
+        var lbtn = $(".img-preview-box .glyphicon-chevron-left").click(function () {
+            scroll(index - 1)
+        })
+
+        var rbtn = $(".img-preview-box .glyphicon-chevron-right").click(function () {
+            scroll(index + 1)
+        })
+
+        $(window).resize(function () {
+            var _rn = getrn();
+            if (rn != _rn) {
+                rn = _rn;
+                scroll(index, true);
+            }
+        })
+
+        if (n <= rn) rbtn.addClass('disabled');
+
+        list.eq(0).children('img').click()
+    })
+</script>

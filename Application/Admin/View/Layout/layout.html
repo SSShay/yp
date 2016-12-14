@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <link rel="icon" href="__IMG__/logo_icon.png" type="image/png">
+
+    <title><notempty name="pageName">{$pageName}<else/>微家校官网后台管理系统</notempty></title>
+
+    <script src="__JS__/jquery-1.10.2.min.js"></script>
+
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/bootstrap-reset.css" rel="stylesheet">
+    <link href="__FONT__/font-awesome.min.css" rel="stylesheet">
+    <link href="__CSS__/style.css" rel="stylesheet">
+    <link href="__CSS__/style-responsive.css" rel="stylesheet">
+    <script>
+        //页面常量
+        YP = {
+            controlid: '{$controlid}',
+            actionid: '{$actionid}',
+        };
+    </script>
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="__IMG__/login-logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="__IMG__/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="__IMG__/admin.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#"><notempty name="admin_info.name">{$admin_info['name']}<else/>{$admin_info['loginuser']}</notempty></a></h4>
+                        <!--<span>"Hello There..."</span>-->
+                    </div>
+                </div>
+
+                <!--<h5 class="left-nav-title">Account Information</h5>-->
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <!--<li><a href="#"><i class="fa fa-user"></i> <span>个人中心</span></a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> <span>设置</span></a></li>-->
+                    <li><a href="{:U('Index/logout')}"><i class="fa fa-sign-out"></i> <span>退出</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+
+                <li class="control index">
+                    <a href="{:U('Index/index')}">
+                        <i class="fa fa-home"></i>
+                        <span> 首页</span>
+                    </a>
+                </li>
+
+                <volist name="permissions" id="c">
+                    <notempty name="c.list">
+                        <li class="menu-list control{$c.id}">
+                            <a href="">
+                                <notempty name="c.icon"><i class="fa {$c.icon}"></i></notempty>
+                                <span> {$c.name}</span>
+                            </a>
+                            <ul class="sub-menu-list">
+                                <volist name="c.list" id="a">
+                                    <li class="action{$a.id}">
+                                        <a href="{:U($c['control'].'/'.$a['action'])}">
+                                            <notempty name="a.icon"><i class="fa {$a.icon}"></i></notempty>
+                                            {$a.name}
+                                        </a>
+                                    </li>
+                                </volist>
+                            </ul>
+                        </li>
+                    </notempty>
+                </volist>
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+            <!--toggle button start-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
+
+            <!--search start-->
+            <!--<form class="searchform" action="index.html" method="post">
+                <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+            </form>-->
+            <!--search end-->
+
+            <!--notification menu start -->
+            <div class="menu-right">
+                <ul class="notification-menu">
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <img src="__IMG__/admin.png" alt="" />
+                            <notempty name="admin_info.name">{$admin_info['name']}<else/>{$admin_info['loginuser']}</notempty>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="{:U('Index/logout')}"><i class="fa fa-sign-out"></i> 退出</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!--notification menu end -->
+
+        </div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <!--<div class="page-heading">
+            Page Tittle goes here
+        </div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            {__CONTENT__}
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2016 &copy; panyard 杭州远磐互联科技有限公司
+        </footer>
+        <!--footer section end-->
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/jquery.nicescroll.js"></script>
+
+
+<!--common scripts for all pages-->
+<script src="__JS__/custom.js"></script>
+<script src="__JS__/index.js"></script>
+</body>
+</html>

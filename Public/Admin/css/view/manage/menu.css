@@ -1,0 +1,50 @@
+.nav-editor{
+    background: #424f63;
+}
+.nav-editor .navbar-nav>li>a,.nav-editor .nav-stacked a{
+    color: #fff;
+}
+.nav-editor .navbar-nav>li>a{
+    margin-left: 1px;
+    cursor: pointer;
+}
+.nav-editor .navbar-nav>li>a:hover,.nav-editor .navbar-nav>li.nav-active>a,.nav-editor .navbar-nav>li>a:focus{
+    color: #65CEA7;
+    background-color: #353f4f;
+}
+
+.nav-editor .nav-stacked{
+    display: none;
+    position: absolute;
+    z-index: 9;
+    background: #353f4f;
+    min-width: 100%;
+    white-space:nowrap;
+}
+
+.nav-editor .navbar-nav>li.nav-active .nav-stacked{
+    display: block;
+    cursor: pointer;
+}
+
+.nav-editor .nav-stacked a:hover,.nav-editor .nav-stacked li.active>a,.nav-editor .nav-stacked a:focus,.nav-editor .drag-item>a{
+    color: #65CEA7;
+    background-color: #2a323f;
+}
+.nav-editor .add-btn,.nav-editor .add-btn>a{
+    text-align: center;
+}
+
+.nav-editor .drag-item{
+    position: absolute;
+    z-index: 1000;
+}
+
+.nav-editor .pos-item>a,.nav-editor .pos-item .nav-stacked{
+    background: #2a323f !important;
+    color: #2a323f !important;
+    border: 1px dashed #65CEA7 !important;
+}
+.nav-editor .pos-item .nav-stacked a{
+    color: #2a323f !important;
+}

@@ -1,0 +1,346 @@
+<style>
+    .img-thumb-list{
+        padding-bottom: 5px;
+        position: relative;
+    }
+    .img-thumb-list>div{
+        padding: 15px;
+    }
+    .img-thumb-list .img-thumb{
+        border: 2px solid #ddd;
+    }
+    .img-thumb-list img{
+        width: 100%;
+        cursor: pointer;
+    }
+    .img-thumb-list .active{
+        border: 2px solid #2A323F;
+    }
+    .img-thumb-list .place{
+        border: 2px dashed #2A323F;
+    }
+    .img-thumb-list .place img{
+        visibility: hidden;
+    }
+    .img-thumb-list .draging{
+        position: absolute;
+        border-color: #2A323F;
+        z-index: 1;
+        padding: 0;
+    }
+    .img-thumb-list .fa-trash-o{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        padding: 5px;
+        background: #374152;
+        color: #fff;
+        cursor: pointer;
+    }
+    .img-thumb-list .fa-trash-o:hover{
+        background: #d9534f;
+    }
+    .img-thumb-list .place~.fa-trash-o{
+        display: none;
+    }
+
+    #img-preview{
+        width: 100%;
+        cursor: pointer;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading custom-tab dark-tab">
+        <ul class="nav nav-tabs">
+            <li>
+                <a href="{:U('Mall/product')}">商品列表</a>
+            </li>
+            <li class="active">
+                <a>商品添加</a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="container-fluid">
+                    <div class="row form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称：</label>
+                            <div class="col-sm-6">
+                                <input id="name" type="text" class="form-control" data-name="商品名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">缩略图：</label>
+                            <div class="col-sm-10">
+                                <img id="thumb" class="img-upload" data-url="{:U('Mall/product_thumb_upload')}"/>
+                                <p class="help-block">点击预览框<code>添加/更换</code>缩略图，建议格式：<code>*.jpg</code>、建议尺寸：<code>300*300</code>、建议大小：小于<code>100K</code></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">基本价格：</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input id="price" type="text" class="form-control" data-name="基本价格">
+                                    <div class="input-group-addon">元</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品简介：</label>
+                            <div class="col-sm-8">
+                                <textarea id="brief" class="form-control" data-name="商品简介"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品详情：</label>
+                            <div class="col-sm-8">
+                                <textarea id="details" style="width: 100%;height: 300px" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10 btn-box">
+                        <button id="back-btn" type="button" class="btn btn-primary">返回</button>
+                        <button id="next-btn" type="button" class="btn btn-primary">下一步</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="img-preview-pane">
+                <div class="col-lg-4">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            <span>预览图预览</span>
+                        </header>
+                        <div class="panel-body">
+                            <img id="img-preview" src="__IMG__/banner_add.png">
+                            <input id="fileToUpload" class="hidden" type="file" name="img">
+                        </div>
+                        <div class="panel-footer">点击预览图<code>添加\更换</code>图片，建议尺寸：<code>1920*800</code>、建议大小：小于<code>256K</code>、建议格式：<code>*.jpg</code></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            预览图列表
+                            <span class="tools pull-right">
+                                <a id="create-btn" href="javascript:;" class="fa fa-plus"></a>
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="row img-thumb-list"></div>
+                        </div>
+                        <div class="panel-footer">点击右上角<code> + </code>按钮，再点击预览图添加预览图。拖动图片可以改变排序。</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <hr>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10 btn-box">
+                        <button id="back-btn2" type="button" class="btn btn-primary">下次再添加预览图</button>
+                        <button id="save-btn" type="button" class="btn btn-primary">保存预览图</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="__PLUGIN__/kindeditor/kindeditor-min.js"></script>
+<script src="__PLUGIN__/kindeditor/lang/zh_CN.js"></script>
+<script src="__JS__/xplugs/jquery.box-drag.js"></script>
+<!--单个文件上传插件-->
+<script src="__PLUGIN__/ajaxfileupload.js"></script>
+<script>
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#details', {
+            resizeType: 1,
+            uploadJson : "{:U('Mall/product_details_upload')}",
+            allowPreviewEmoticons: false,
+            allowImageUpload: true,
+            items: [
+                'source', '|', 'removeformat', 'undo', 'redo', '|', 'quickformat', 'preview', 'fullscreen', '/',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|',
+                'formatblock', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough', '|',
+                'image', 'multiimage', 'hr', 'link', 'unlink'
+            ]
+        });
+    });
+
+    $(function() {
+
+        var id;
+        var thumb = $("#thumb").ajaxFileUpload(function () {
+            var src = thumb.attr('src');
+            if (src) return {'img': src};
+        }, function (data, status) {
+            if (data.img) {
+                thumb.attr('src', data.img);
+            } else {
+                if (!data.error) data.error = '未知错误';
+                $.error(data.error);
+            }
+        });
+
+        $("#back-btn").click(back)
+
+        $("#next-btn").submit('', function () {
+            var data = $.check([
+                {'target': '#name', 'rules': $.rules.empty},
+                {'target': '#price', 'rules': [$.rules.empty, $.rules.number(0, 99999, 2)]},
+                {'target': '#brief', 'rules': []}
+            ]);
+
+            if (data) {
+                data.thumb = thumb.attr('src');
+                data.details = editor.html();
+                return data;
+            }
+        }, function (res) {
+            if (res.success) {
+                $("#img-preview-pane").addClass('active').siblings().removeClass('active');
+                id = res.success;
+            }
+        })
+
+        function back() {
+            location.href = "{:U('Mall/product')}";
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        function setimg(imgurl,thumb) {
+            $("#img-preview").attr('src', imgurl);
+            thumb && $("#imgurl").val(thumb);
+        }
+
+        var sort, select;
+
+        var boxdarg = new BoxDarg({
+            'data': [],
+            'box_click': function (obj) {
+                select = obj;
+                var imgurl = obj.data('imgurl');
+                setimg(imgurl);
+                $("#del-btn").removeClass('hidden')
+                $("#add-btn").addClass('hidden')
+            },
+            'create_box': function (v) {
+                var obj = $([
+                    '<div class="col-xs-6 col-sm-4 col-md-3">',
+                    '<div class="img-thumb" data-imgurl="' + v.imgurl + '" data-id="' + v.id + '">',
+                    '<img src="' + v.thumb + '">',
+                    '</div>',
+                    '<i class="fa fa-trash-o ban-move"></i>',
+                    '</div>',
+                ].join(''));
+                $(".fa-trash-o", obj).click(function () {
+                    $.post("{:U('Mall/product_img_del')}",{'pid':id,'id': v.id},function(res){
+                        if(res){
+                            if(res.success){
+                                boxdarg.box_remove($(".img-thumb", obj))
+                                if(boxdarg.get_count() < 1){
+                                    $("#img-preview").attr('src','__IMG__/banner_add.png')
+                                }
+                            }
+                        }
+                    },'JSON')
+
+                })
+                return obj;
+            },
+            'check_diff': function (i, obj, v) {
+                if (v.id == obj.data('id')) {
+                    var diff = {};
+                    var thumb = obj.children('img').attr('src');
+                    if (v.thumb != thumb)diff.thumb = thumb;
+
+                    var imgurl = obj.data('imgurl');
+                    if (v.imgurl != imgurl)diff.imgurl = imgurl;
+
+                    var sort = i + 1;
+                    if (v.sort != sort)diff.sort = sort;
+                    return diff;
+                }
+            }
+        })
+
+        function getnextsort() {
+            sort = boxdarg.get_next_sort();
+            return sort;
+        }
+
+        $("#create-btn").click(function () {
+            select = null;
+            $("#fileToUpload").click();
+        })
+
+        $("#del-btn").submit("{:U('Mall/product_img_del')}", function () {
+            if (select) return {id: select.data('id')}
+            else $.error('未选择商品预览图！')
+        }, function (res) {
+            if (res.success) boxdarg.box_remove();
+        })
+
+        $("#img-preview").click(function () {
+            $("#fileToUpload").click()
+        })
+
+        $("#fileToUpload").change(function () {
+            var data = {};
+            if (id) {
+                data.pid = id;
+                if (select)data.id = select.data('id');
+                else data.sort = getnextsort();
+                $.ajaxFileUpload({
+                    url: "{:U('Mall/product_img_upload')}", //用于文件上传的服务器端请求地址
+                    fileElement: '#fileToUpload', //文件上传域
+                    data: data,
+                    dataType: 'json', //返回值类型 一般设置为json
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                        if (data.img) {
+                            setimg(data.thumb, data.img);
+                            if (data.id) {
+                                boxdarg.box_create({id: data.id, thumb: data.thumb, imgurl: data.img, sort: sort});
+                            } else {
+                                select.data('imgurl', data.img).children('img').attr('src', data.thumb);
+                            }
+                        } else {
+                            if (!data.error) data.error = '未知错误';
+                            $.error(data.error);
+                        }
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+                        $.error(e);
+                    }
+                });
+            } else {
+                $.error("未选择商品，请刷新页面重试！");
+            }
+        })
+
+        $("#save-btn").submit("{:U('Mall/product_img_mod')}", function () {
+            return {'change':boxdarg.get_change()};
+        }, function (res,data) {
+            if (res.error) return;
+            if (!res.fail) {
+                $.error("保存成功！");
+                boxdarg.save_change(data.change);
+                back();
+            } else {
+                $.error("保存失败！");
+            }
+        })
+
+        $("#back-btn2").click(back)
+
+    })
+</script>

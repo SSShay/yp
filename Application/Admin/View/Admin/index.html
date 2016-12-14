@@ -1,0 +1,230 @@
+﻿<style>
+    table label{
+        font-weight: inherit;
+        display: block;
+        margin-bottom: 0;
+    }
+    table tr{
+        cursor: default;
+    }
+    table #checkall{
+        width: 6em;
+    }
+    table #col-loginuser{
+        width: 6em;
+    }
+    table #col-name{
+        width: 6em;
+    }
+    table #col-ip{
+        width: 8em;
+        text-align: center;
+    }
+    table #col-utime,table #col-ctime{
+        width: 10em;
+    }
+    table .time{
+        font-size: 13px;
+    }
+    table #col-action{
+        width: 20em;
+    }
+    table a{
+        cursor: pointer;
+        font-size: 13px;
+        margin-right: 20px;
+    }
+    table a:hover{
+        color: #65CEA7;
+    }
+    table a.del:hover{
+        color: #d9534f;
+    }
+    #msg_info{
+        margin-top: 50px;
+    }
+    #del-btn{
+        margin-left: 20px;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading custom-tab dark-tab">
+        <ul class="nav nav-tabs">
+            <li id="tab1">
+                <a href="#admin-list"  data-toggle="tab">管理员列表</a>
+            </li>
+            <li id="tab2" class="hidden">
+                <a href="#info-set"  data-toggle="tab">修改属性</a>
+            </li>
+            <li id="tab3" class="hidden">
+                <a href="#permission-set"  data-toggle="tab">修改权限</a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+
+            <div class="tab-pane" id="admin-list">
+                <table class="table table-hover general-table">
+                    <thead>
+                    <tr>
+                        <th id="checkall"><label><input type="checkbox"> 编号</label></th>
+                        <th id="col-loginuser">登录账号</th>
+                        <th id="col-name">姓名</th>
+                        <th id="col-ip">最后登录IP</th>
+                        <th id="col-utime">最后操作时间</th>
+                        <th id="col-action">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <div class="button-box col-sm-4">
+                    <button id="del-all-btn" type="button" class="btn btn-danger hidden">删除选中</button>
+                </div>
+                <div class="col-sm-8 page-box">
+                    <div class="dataTables_paginate paging_bootstrap pagination"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="info-set">
+                <div class="container-fluid">
+                    <div class="row" id="msg_info">
+                        <!--<dl class="dl-horizontal">
+                            <dt>编号：</dt>
+                            <dd id="id"></dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>登录账号：</dt>
+                            <dd id="loginuser"></dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>姓名：</dt>
+                            <dd id="name"></dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>最后登录IP：</dt>
+                            <dd id="ctime"></dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>最后操作时间：</dt>
+                            <dd id="utime"></dd>
+                        </dl>-->
+                    </div>
+                    <hr>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button id="back-btn" type="button" class="btn btn-primary">返回</button>
+                        <button id="del-btn" type="button" class="btn btn-danger">删除</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="permission-set">
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<script src="__JS__/xplugs/jquery.page-number.js"></script>
+<script>
+    $(function() {
+        /*var u = location.href;
+        var index = u.substr(u.indexOf('#') + 1) >> 0;
+        if (!index) */
+        $('#tab1 a').tab('show');
+
+        var page_num = $(".dataTables_paginate").PageNumber('{$page_index}',
+                function (page, pcount) {
+                    return (page.parents('.page-box').width() / (20 + Math.ceil(Math.log10(pcount)) * 12) - 4) >> 0;
+                }, function (p) {
+                    if (p == undefined) p = page_num.index;
+                    else if (isNaN(p)) return;
+                    $("#article-list").addClass('loading');
+                    $.get("{:U('Admin/admin_list')}", {p: p}, function (res) {
+                        $("#article-list").removeClass('loading')
+                        if (!res.list) {
+                            $("#article-list").addClass('loadfail');
+                            return;
+                        }
+                        $("#tbody").text('');
+                        $.each(res.list, function (i, v) {
+                            var tr = $([
+                                '<tr>',
+                                '<td><input type="checkbox"> ' + v.id + '</td>',
+                                '<td>' + v.loginuser + '</td>',
+                                '<td>' + v.name + '</td>',
+                                '<td>' + v.ip + '</td>',
+                                '<td>' + v.utime + '</td>',
+                                //'<td><a class="get-info">查看属性</a><a class="get_permiss">查看权限</a><a class="del">删除</a></td>',
+                                '</tr>'
+                            ].join(''));
+                            var input = $("input", tr);
+                            tr.click(function (e) {
+                                var target = $(e.target);
+                                if (target.is('input') || target.is('a'))return;
+                                input.prop('checked', !input.is(':checked'));
+                            })
+
+                            $(".get-info", tr).click(function () {
+
+                            })
+
+                            $(".get_permiss", tr).click(function () {
+
+                            })
+                            /*var setread = $(".setread", tr).click(function () {
+                                if (v.status == 0) {
+                                    $.post("{:U('Thing/leave_msg_setread')}", {id: v.id}, function (res) {
+                                        if (res.success) page_num.loadpage()
+                                        else $.warn(res.error || "标记失败，未知错误！");
+                                    }, 'json');
+                                }
+                            })*/
+                            /*$(".del", tr).click(function () {
+                                delmsg(v.name, v.id)
+                            })*/
+                            $("#tbody").append(tr);
+                        });
+                        page_num.refresh(p, res.count);
+                    }, 'json')
+                });
+
+        page_num.loadindex();
+
+        /*function delmsg(name,id,success) {
+            if (confirm('你确定要删除 ' + name + ' 的留言？')) {
+                $.post("{:U('Thing/leave_msg_del')}", {id: id}, function (res) {
+                    if (res.success) {
+                        page_num.loadpage()
+                        success && success();
+                    }
+                    else $.error(res.error || "删除失败，未知错误！");
+                }, 'json');
+            }
+        }
+
+        $("#del-btn").click(function() {
+            delmsg($("#name").text(), index,function(){
+                $("#back-btn").click();
+            });
+        })
+
+        $("#tab1").click(function () {
+            location.href = '#';
+            if (page_num.index == null) page_num.loadindex();
+            $("#tab2").addClass('hidden');
+            index = null;
+        })
+
+        $("#back-btn").click(function(){
+            $('#tab1 a').tab('show');
+            $("#tab1").click();
+        })*/
+
+        $('#checkall').click(function () {
+            var check = $('input', $(this)).is(':checked')
+            $("#tbody input").prop('checked', check);
+        })
+    })
+</script>

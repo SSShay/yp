@@ -1,0 +1,146 @@
+@charset "utf-8";
+/*-------------------------------
+            RESET BASE
+-------------------------------*/
+body {
+    /*background: #fff;*/
+    font-family: 'Open Sans', "Microsoft Yahei", sans-serif;
+    line-height: 20px;
+    overflow-x: hidden;
+    font-size: 14px;
+    color: #434343;
+}
+
+input, select, textarea {
+    font-family: 'Open Sans', "Microsoft Yahei", sans-serif;
+    color: #767676;
+}
+a:focus, a:active, a:hover{
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: #168EE1;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Open Sans', "Microsoft Yahei", sans-serif;
+}
+.mtop10 {
+    margin-top: 10px;
+}
+
+hr {
+    border-color: #ddd;
+}
+
+a.btn{
+    color: #343434;
+}
+
+
+
+/*-------------------------------
+            RESET STYLE
+-------------------------------*/
+.carousel-control {
+    background: none !important;
+}
+
+.carousel-indicators li{
+    width: 12px;
+    height: 12px;
+    margin: 1px 5px;
+}
+.carousel-indicators .active{
+    width: 14px;
+    height: 14px;
+    margin: 0 5px;
+}
+
+.breadcrumb{
+    background: transparent;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.breadcrumb>li+li:before{
+    content: '〉';
+    font-family: "宋体", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
+.breadcrumb>.link{
+    float: right;
+    margin: 0 20px;
+}
+.breadcrumb>.link>a{
+    color: #777;
+}
+.breadcrumb>.link.active>a{
+    color: #168EE1;
+}
+.breadcrumb>.link>a:after{
+    margin-top: 8px;
+    z-index: 1;
+}
+.breadcrumb>li+.link:before{
+    content: '';
+}
+
+.pagination>li{
+    cursor: pointer;
+}
+.pagination>li.disabled>a{
+    cursor: default !important;
+}
+
+
+.media{
+    display: block;
+
+}
+a.media,a.media:hover,a.media:focus,a.active{
+    color: #333;
+}
+
+
+/*-------------------------------
+            SELF GRID
+-------------------------------*/
+
+.col-xs-2_4 {
+    width: 20%;
+}
+.col-xs-2_4 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: left;
+}
+
+@media (min-width: 1200px){
+    .col-lg-2_4 {
+        width: 20%;
+    }
+}
+
+@media (min-width: 992px)
+{
+    .col-md-2_4 {
+        width: 20%;
+    }
+}
+
+@media (min-width: 768px){
+    .navbar-main .navbar-nav>li>a{
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+    .navbar-main .navbar-header{
+        padding-top: 6px;
+    }
+    .col-sm-2_4 {
+        width: 20%;
+    }
+}
+

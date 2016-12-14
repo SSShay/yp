@@ -1,0 +1,92 @@
+<div class="fp-section section1">
+    <div class="container">
+        <div class="col-xs-12">
+            <h1>安心星</h1>
+            <h3>智能儿童定位学生证</h3>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/axx/1.png">
+        </div>
+        <div class="col-xs-12 underline">
+            <div class="v-txt underline bottom">
+                <p>安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证</p>
+                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fp-section section2">
+    <div class="container">
+        <div class="col-xs-12">
+            <h1>安心星</h1>
+            <h3>智能儿童定位学生证</h3>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/axx/2.png">
+        </div>
+        <div class="col-xs-12">
+            <div class="v-txt underline bottom">
+                <p>安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证</p>
+                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fp-section section3">
+    <div class="container">
+        <div class="col-xs-12">
+            <h1>安心星</h1>
+            <h3>智能儿童定位学生证</h3>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/axx/3.png">
+        </div>
+        <div class="col-xs-12">
+            <div class="v-txt underline bottom">
+                <p>安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证</p>
+                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#fullpage').fullpage({
+        sectionsColor: ['#fff', '#fff', '#fff', '#000'],
+        'navigation': true,
+        afterLoad: function(anchorLink, index){
+            switch (index){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    deep()
+                    break;
+            }
+        },
+        onLeave: function(index, direction){
+            switch (index){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    undeep()
+                    break;
+            }
+        }
+    });
+
+    function deep(){
+        $("#fp-nav").addClass('deep')
+    }
+
+    function undeep(){
+        $("#fp-nav").removeClass('deep')
+    }
+</script>

@@ -1,0 +1,84 @@
+<style>
+    .test{
+        height: 100px;
+        background: #000;
+    }
+    .container .title{
+        padding-top: 30px;
+        padding-left: 25px;
+        font-weight: bold;
+    }
+    .product_item{
+        padding: 10px 10px 40px;
+        cursor: pointer;
+    }
+    .product_item img{
+        width: 100%;
+    }
+    .product_item h4{
+        text-align: center;
+    }
+    .product_item h5{
+        text-align: center;
+        color: #e54848;
+        font-weight: bold;
+    }
+
+    @media screen and (max-width: 768px) {
+        .product_item{
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    }
+</style>
+<div class="carousel slide" id="carousel-index" data-interval="2500">
+    <ol class="carousel-indicators">
+        <volist name="banner" id="v">
+            <li data-slide-to="{$key}" data-target="#carousel-index"></li>
+        </volist>
+    </ol>
+    <div class="carousel-inner">
+        <volist name="banner" id="v">
+            <div class="item">
+                <img alt="{$v.imgalt}" src="{$v.imgurl}"/>
+                <div class="carousel-caption">
+                    <notempty name="v.title"><h4>{$v.title}</h4></notempty>
+                    <notempty name="v.content"><p>{$v.content}</p></notempty>
+                </div>
+            </div>
+        </volist>
+    </div>
+    <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+
+<div class="container-all">
+    <div class="container">
+        <div class="row">
+            <h3 class="title">商品</h3>
+            <volist name="product_list" id="v">
+                <div class="col-lg-2_4 col-md-3 col-sm-4 col-xs-6">
+                    <div class="product_item">
+                        <empty name="v.thumb">
+                            <img src="__IMG__/mall/product_img.gif">
+                            <else />
+                            <img src="{$v.thumb}" />
+                        </empty>
+                        <h4>{$v.name}</h4>
+                        <h5>￥{$v.price}</h5>
+                    </div>
+                </div>
+            </volist>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
+        $("#carousel-index .carousel-inner .item").eq(0).addClass('active');
+
+        $('#carousel-index').carousel()
+    })
+</script>

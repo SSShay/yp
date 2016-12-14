@@ -1,0 +1,100 @@
+<div class="fp-section section1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 half-h">
+                <img src="__IMG__/product/wjx/1.png">
+            </div>
+            <div class="col-sm-6 h-txt right underline">
+                <h3>班级通讯录</h3>
+                <p>班级通讯录班级通讯录班级通讯录班级通讯录班级通讯录</p>
+
+                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fp-section section2">
+    <div class="container">
+        <div class="col-xs-12 underline">
+            <div class="v-txt">
+                <h3>班级活动</h3>
+                <p>班级活动班级活动班级活动班级活动班级活动班级活动班级活动班级活动班级活动班级活动班级活动班级活动</p>
+            </div>
+            <a class="session-jump offset-l" href="{:U('Index/leave_msg')}">进一步了解</a>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/wjx/2.png">
+        </div>
+    </div>
+</div>
+<div class="fp-section section3">
+    <div class="container">
+        <div class="col-xs-12 underline">
+            <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/wjx/3.png">
+        </div>
+        <div class="col-xs-12">
+            <div class="v-txt bottom">
+                <h3>实时追踪</h3>
+                <p>实时追踪实时追踪实时追踪实时追踪实时追踪实时追踪实时追踪实时追踪实时追踪实时追踪实时追踪</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fp-section section4 deep">
+    <div class="container">
+        <div class="col-xs-12 underline">
+            <div class="v-txt">
+                <h3>家庭作业</h3>
+                <p>家庭作业家庭作业家庭作业家庭作业家庭作业家庭作业家庭作业</p>
+            </div>
+            <a class="session-jump offset-l" href="{:U('Index/leave_msg')}">进一步了解</a>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/wjx/4.jpg">
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#fullpage').fullpage({
+        sectionsColor: ['#fff', '#fff', '#fff', '#000'],
+        'navigation': true,
+        afterLoad: function(anchorLink, index){
+            switch (index){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    deep()
+                    break;
+            }
+        },
+        onLeave: function(index, direction){
+            switch (index){
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    undeep()
+                    break;
+            }
+        }
+    });
+
+    function deep(){
+        $("#fp-nav").addClass('deep')
+    }
+
+    function undeep(){
+        $("#fp-nav").removeClass('deep')
+    }
+</script>

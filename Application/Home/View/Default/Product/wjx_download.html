@@ -1,0 +1,80 @@
+<!--<div class="container container-product">
+    <div class="row">
+        <div class="col-xs-6">
+            <img src="__IMG__/product/wjx/1.png">
+        </div>
+        <div class="col-xs-6"></div>
+    </div>
+</div>-->
+<style>
+    .fp-section{
+        color: #fff;
+    }
+    #fp-nav ul li a span, .fp-slidesNav ul li a span{
+        border-color: #fff;
+    }
+    .h-txt{
+        padding-top: 0;
+        margin-left: -80%;
+        display: block;
+    }
+    @media screen and (max-width: 768px){
+        .h-txt{
+            padding-top: 30px;
+            margin: auto;
+        }
+    }
+</style>
+<div class="fp-section bg-cover img-delay" data-bg="__IMG__/product/wjx/download/bg1.jpg">
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="v-txt bottom">
+                <h3>微家校iOS端下载</h3>
+                <p>微家校iOS端下载微家校iOS端下载微家校iOS端下载微家校iOS端下载</p>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <img src="__IMG__/product/wjx/download/_1.png">
+        </div>
+    </div>
+</div>
+<div class="fp-section bg-cover img-delay trigger-show" data-bg="__IMG__/product/wjx/download/bg2.jpg">
+    <div class="container">
+        <div class="col-sm-8">
+            <img src="__IMG__/product/wjx/download/_2.png">
+        </div>
+        <div class="col-sm-4">
+            <div class="h-txt">
+                <h3>微家校Andriod端下载</h3>
+                <p>微家校Andriod端下载微家校Andriod端下载微家校Andriod端下载微家校Andriod端下载微家校Andriod端下载</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".navbar-path").addClass('alpha deep')
+    $(function(){
+        $('#fullpage').fullpage({
+            sectionsColor: ['#a49a8e', '#5c5c57'],
+            'navigation': true,
+            afterLoad: function (anchorLink, index) {
+                switch (index) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
+            },
+            onLeave: function (index, direction) {
+                switch (index) {
+                    case 1:
+                        $(".trigger-show").trigger('trigger');
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        });
+    });
+</script>

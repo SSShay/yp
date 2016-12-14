@@ -1,0 +1,204 @@
+<link href="__CSS__/view/manage/menu.css" rel="stylesheet">
+
+<div class="col-lg-4">
+    <div class="panel form_panel hidden">
+        <header class="panel-heading">
+            <span id="form_title">菜单设置</span>
+            <span class="tools pull-right"><a href="#" class="fa fa-chevron-down"></a></span>
+        </header>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称：</label>
+                <div class="col-sm-10">
+                    <input id="name" type="text" class="form-control" data-name="菜单名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">链接：</label>
+                <div class="col-sm-10">
+                    <input id="link" type="text" class="form-control" data-name="菜单链接">
+                </div>
+            </div>
+
+            <button id="menu-add" class="btn btn-primary hidden">添加菜单</button>
+            <button id="menu-del" class="btn btn-primary hidden">删除菜单</button>
+        </div>
+        <div class="panel-footer">注意：外链填写必须带<code>http://</code>，本站链接填写可以不写<code>http://[域名]/index.php</code></div>
+    </div>
+</div>
+
+<div class="col-lg-8">
+    <div class="panel">
+        <header class="panel-heading">
+            菜单列表
+            <span class="tools pull-right"><a href="#" class="fa fa-chevron-down"></a></span>
+        </header>
+        <div class="panel-body">
+            <nav class="navbar navbar-default nav-editor">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="add-btn menu"><a href="#"><i class="fa fa-plus"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 hidden" id="change-submit">
+    <div class="panel">
+        <div class="panel-body text-center">
+            <p class="text-warning">由于你修改了菜单的标题、链接或者是排序，所以关闭页面之前请点击按钮“<a class="text-danger">保存并发布</a>”</p>
+            <button type="button" class="btn btn-info save-mod">保存并发布</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="alert alert-info alert-block fade in" id="msg">
+        <p>选中菜单可以进行编辑，按下鼠标拖动菜单进行进行排序</p>
+    </div>
+</div>
+<script src="__JS__/xplugs/jquery.menu-edit.js"></script>
+<script>
+    //菜单编辑插件初始化
+    ;$(function() {
+        var menu = JSON.parse('{$menu}' || '[]');
+        var menu_edit = MenuEdit({
+            data: menu,
+            'menu_click': function (menu) {
+                form_show('（一级菜单）', menu);
+            },
+            'item_click': function (item) {
+                form_show('（二级菜单）', item);
+            },
+            'menu_add_click': function (btn) {
+                form_add('（一级菜单）', btn);
+            },
+            'item_add_click': function (btn) {
+                form_add('（二级菜单）', btn);
+            },
+            'sort_change': change
+        });
+
+        var menu_tmp,iserror,add_tmp;
+
+        $("#name").change(function () {
+            if (menu_tmp) {
+                $(this).check({
+                    rules: [$.rules.empty, $.rules.length(2, 6)],
+                    placement: 'top',
+                }, function (res) {
+                    if (res !== false) {
+                        menu_tmp.children('a').text(res);
+                        change()
+                    } else iserror = true;
+                })
+            }
+        })
+
+        $("#link").change(function () {
+            if(menu_tmp) {
+                menu_tmp.data('url', $(this).val());
+                change()
+            }
+        })
+
+        function change() {
+            iserror = false;
+            if ($("#change-submit").hasClass('hidden')) {
+                $("#change-submit").removeClass('hidden');
+            }
+            if (!$("#msg").hasClass('hidden')) {
+                $("#msg").addClass('hidden').removeClass('alert-info');
+            }
+        }
+
+        $(".save-mod").submit("{:U('Manage/menu_mod')}", function () {
+            return {'change':menu_edit.get_change()};
+        }, function (res,data) {
+            if(res.error) return;
+            if (!res.fail) {
+                $("#msg").removeClass('hidden alert-danger').addClass('alert-success')
+                        .children('p').html("保存并发布成功，快去<a target='_blank' href='{:U('Home/Index/index')}' class='alert-link'>官网首页</a>查看吧");
+                $("#change-submit").addClass('hidden')
+                menu_edit.save_change(data.change);
+            } else {
+                $("#msg").removeClass('hidden alert-success').addClass('alert-danger')
+                        .children('p').text('有 ' + res.fail + '/' + res.count
+                        + ' 项菜单信息保存失败，建议先去官网首页查看现状在确定需不需要再次尝试提交');
+            }
+        })
+
+        window.onbeforeunload = function() {
+            if(!$("#change-submit").hasClass('hidden')) {
+                return "由于你修改了菜单的标题、链接或者是排序，所以关闭页面之前请点击按钮“保存并发布”";
+            }
+        }
+
+        $("#menu-add").submit("{:U('Manage/menu_add')}", function () {
+            var data = $.check([
+                {'target': '#name', 'rules': [$.rules.empty, $.rules.length(2, 6)]},
+            ]);
+            if(data){
+                data.link = $("#link").val();
+                data.sort = add_tmp.index() + 1;
+                data.topid = add_tmp.hasClass('menu')?0:add_tmp.parent().parent().data('id');
+            }
+            return data;
+        }, function (res,data) {
+            if (res && res.id) {
+                data.id = res.id;
+                if (data.topid) menu_edit.create_item(data)
+                else menu_edit.create_menu(data)
+            }
+        })
+
+        $("#menu-del").submit("{:U('Manage/menu_del')}", function () {
+            return {'id': menu_tmp.data('id')};
+        }, function (res) {
+            if (res && res.success) {
+                menu_edit.delete_menu()
+            }
+        })
+
+        function form_show(t, obj) {
+            if(iserror) {
+                $("#name,#link").popover('destroy');
+                if (menu_tmp)menu_tmp.wrong('菜单信息验证没有通过！', 'top', 3);
+                iserror = false;
+            }
+
+            if($(".form_panel").hasClass('hidden'))$(".form_panel").removeClass('hidden');
+
+            var txt = obj.children('a').text();
+            $("#form_title").text("菜单设置：" + txt + ' ' + t);
+            $("#name").val(txt);
+            $("#link").val(obj.data('url'));
+            $("#menu-add").addClass('hidden');
+            $("#menu-del").removeClass('hidden');
+            menu_tmp = obj;
+        }
+
+        function form_add(t, btn) {
+            if(iserror) {
+                $("#name,#link").popover('destroy');
+                if (menu_tmp)menu_tmp.wrong('菜单信息验证没有通过！', 'top', 3);
+                iserror = false;
+            }
+
+            if($(".form_panel").hasClass('hidden'))$(".form_panel").removeClass('hidden');
+
+            $("#form_title").text("菜单添加 " + t);
+            $("#name").val('').focus();
+            $("#link").val('');
+            $("#menu-add").removeClass('hidden');
+            $("#menu-del").addClass('hidden');
+            setTimeout(function () {
+                $("#name").focus();
+            }, 10);
+            menu_tmp = null;
+            add_tmp = btn;
+        }
+    })
+</script>

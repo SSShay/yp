@@ -1,0 +1,506 @@
+<style>
+    .banner{
+        height: 766px;
+    }
+    .banner h1{
+        margin-top: 3.6em;
+    }
+    .banner .hr-block {
+        color: #fff;
+        width: 450px;
+        margin: 150px auto 60px;
+        text-align: center;
+        display: table;
+    }
+    .banner .hr-block h3{
+        position: relative;
+        display: table-cell;
+        margin: 0;
+        width: 200px;
+    }
+    .banner .hr-block span{
+        display: table-cell;
+        border-color: #fff;
+        vertical-align: middle;
+    }
+    .banner .hr-block span i{
+        height: 1px;
+        width: 100%;
+        background: #fff;
+        display: inline-block;
+        top: -2px;
+        position: relative;
+    }
+    .banner .col-xs-4 h3{
+        width: 5em;
+        height: 5em;
+        line-height: 5em;
+        border-radius: 50%;
+        color: #fff;
+        margin: auto;
+    }
+    .container-1 .container{
+        margin: 50px auto;
+    }
+    .container-1 h5{
+        line-height: 2;
+        font-weight: bold;
+        text-align: center;
+    }
+    .container-1 .title{
+        text-align: center;
+        font-weight: bold;
+        color: #039ebc;
+        margin-bottom: 40px;
+    }
+    .container-1 .block-table{
+        display:table;
+        margin: auto;
+    }
+    .container-1 .block-table.row1{
+        height: 183px;
+    }
+    .container-1 .block-table.row2{
+        height: 200px;
+    }
+    .container-1 .block-cell{
+        display:table-cell;
+        width:300px;
+        padding-left: 20px;
+    }
+    .container-1 .block-cell.l{
+        text-align: right;
+        padding-right: 20px;
+        padding-left: 0;
+    }
+    .container-1 .block-table.row1 .block-span{
+        width: 280px;
+    }
+    .container-1 .block-cell h4{
+        color: #0099cc;
+        font-weight: bold;
+    }
+    .container-1 .block-span{
+        display:table-cell;
+        width:400px;
+        position: relative;
+    }
+    .container-1 .block-span img{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        z-index: -1;
+    }
+    .container-1 .txt-bottom{
+        font-size: 15px;
+        width: 100%;
+        max-width: 600px;
+        margin:50px auto 0;
+    }
+    .container-2{
+        height: 800px;
+    }
+    .container-2 .container{
+        position: relative;
+    }
+    .container-2 .h1-banner{
+        color: #ddaa10;
+        margin-top: 2.5em;
+        margin-bottom: 1.5em;
+    }
+    .container-2 h3{
+        font-weight: bold;
+        color: #fff;
+    }
+    .container-3 .container{
+        padding: 30px 0 60px;
+        position: relative;
+    }
+    .container-3 .container h3{
+        margin: 40px 0;
+        text-align: center;
+        font-weight: bold;
+    }
+    .container-3 .container h4{
+        width: 8em;
+        height: 8em;
+        line-height: 8em;
+        text-align: center;
+        margin: 20px auto;
+        background-image: url("__IMG__/index/edu_bureau/3_2.png");
+        background-size: 100%;
+        font-weight: bold;
+    }
+    .container-3 .block1 h3,.container-3 .block1 h4{
+        color: #01ae15;
+    }
+    .container-3 .block2 h3{
+        color: #eee449;
+    }
+    .container-3 .block2 h4{
+        color: #d3c603;
+    }
+    .container-3 .block3 h3,.container-3 .block3 h4{
+        color: #d7097b;
+    }
+    .container-4{
+        padding-bottom: 80px;
+        border-bottom: 1px solid #ddd;
+    }
+    .container-4 h3{
+        margin: 50px 0;
+    }
+    .container-4 .box-bg,.container-4 .box-txt{
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        display: block;
+    }
+    .container-4 .box-txt{
+        position: relative;
+        text-align: center;
+    }
+    .container-4 .box-txt h3{
+        position: absolute;
+        top: 100px;
+        left: 70px;
+        font-size: 28px;
+        line-height: 40px;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: .5em;
+    }
+    .container-4 .box-txt .circle{
+        width: 8em;
+        height: 8em;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        top: 0;
+    }
+    .container-4 .box-txt .circle h4{
+        color: #007090;
+        border-bottom: 1px solid #007090;
+        padding-bottom: .1em;
+        font-weight: bold;
+        width: 2em;
+        margin: .5em auto .5em;
+        font-size: 24px;
+    }
+    .container-4 .box-txt .circle p{
+        color: #0099cc;
+        font-weight: bold;
+    }
+    .container-4 .box-txt .circle1{
+        left: 100px;
+        top: 400px;
+    }
+    .container-4 .box-txt .circle2{
+        left: 400px;
+        top: 400px;
+    }
+    .container-4 .box-txt .circle3{
+        left: 425px;
+        top: 160px;
+    }
+    .container-5{
+        padding-bottom: 80px;
+    }
+    .container-5 h3{
+        margin: 50px 0;
+    }
+    .container-5 a{
+        margin: 10px;
+        color: #999;
+    }
+
+    @media screen and (max-width: 1440px)
+    {
+        .banner {
+            height: 575px;
+        }
+        .banner .hr-block{
+            margin: 90px auto 40px;
+        }
+        .container-2{
+            height: 600px;
+        }
+    }
+    @media screen and (max-width: 1170px)
+    {
+        .banner {
+            height: 465px;
+        }
+        .banner .hr-block{
+            margin: 60px auto 30px;
+        }
+        .banner .col-xs-4 h3{
+            font-size: 20px;
+        }
+        .container-2{
+            height: 485px;
+        }
+    }
+    @media screen and (max-width: 991px)
+    {
+        .container-1 .block-span{
+            width: 550px;
+        }
+    }
+    @media screen and (max-width: 768px)
+    {
+        .banner {
+            height: 405px;
+        }
+        .banner h1{
+            margin-top: 4.2em;
+        }
+        .banner .hr-block{
+            width: 300px;
+        }
+        .banner .hr-block h3{
+            font-size: 24px;
+            width: 180px;
+        }
+        .container-1 .block-table{
+            display: block;
+            width: 100%;
+        }
+        .container-1 .block-cell{
+            display: block;
+            padding: 0 !important;
+            width: auto;
+            margin-bottom: 20px;
+        }
+        .banner .col-xs-4 h3{
+            font-size: 15px;
+        }
+        .container-1 .block-span{
+            display: none;
+        }
+        .container-1 .block-cell.l{
+            text-align: left;
+        }
+        .container-1 .block-table.row1,.container-1 .block-table.row2{
+            height: auto;
+        }
+        .container-2{
+            height: 320px;
+        }
+        .container-3 .container{
+            padding: 0;
+        }
+        .container-3 .container h3{
+            font-size: 18px;
+        }
+        .container-3 .container h4{
+            font-size: 15px;
+        }
+        .container-4 .box-bg{
+            display: none;
+        }
+        .container-4 .box-txt .circle{
+            position: relative;
+            border: 1px solid #007090;
+            top: 0;
+            left: 0;
+            margin: 8px 16px;
+            display: inline-block;
+        }
+    }
+</style>
+<div class="banner text-center img-delay bg-cover" data-bg="__IMG__/index/edu_bureau/bg.jpg">
+    <div class="container">
+        <h1 class="txt-yellow h1-banner">免费捐献教育信息化平台</h1>
+        <div class="hr-block">
+            <span><i></i></span>
+            <h3>为辖区提供</h3>
+            <span><i></i></span>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="col-xs-4">
+                <h3 class="bg-blue-h">教学管理</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="bg-yellow-h">安全管理</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="bg-red">家校互动</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-1">
+    <div class="container">
+        <h3 class="txt-yellow text-center"><strong>2015年9月</strong></h3>
+        <h5>2015年9月，“中国关心下一代工作委员会”联合“中国儿童少年基金会”发起大型公益行动，目标为全国10000所学校免费
+        捐赠“微家校”教育信息平台。<br>截至2016年6月，“微家校”已成功为全国4000余所学校、60万师生家长提供教育化平台服
+            务，日活跃率在60%以上。</h5>
+    </div>
+    <div class="container">
+        <h3 class="title">申请流程</h3>
+
+        <div class="block-table row1">
+            <div class="block-cell l">
+                <h4>申请加入</h4>
+                <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
+            </div>
+            <div class="block-span"></div>
+            <div class="block-cell">
+                <h4>对接开通</h4>
+                <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
+            </div>
+        </div>
+
+        <div class="block-table row2">
+            <div class="block-cell l">
+                <h4>全面培训</h4>
+                <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
+            </div>
+            <div class="block-span"><img src="__IMG__/index/edu_bureau/1_2.jpg"></div>
+            <div class="block-cell">
+                <h4>循序应用</h4>
+                <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
+            </div>
+        </div>
+
+        <div class="block-table">
+            <div class="block-cell">
+                <h4>常态应用</h4>
+                <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
+            </div>
+        </div>
+
+        <h5 class="txt-bottom">教育主管部门只需要申请加入，平台提供全面完善的培训服务与运营支持，帮助教育主管部门在一个月内实现辖区教育信息
+            平台的常态化应用。</h5>
+    </div>
+</div>
+
+<div class="container-2 img-delay bg-cover" data-bg="__IMG__/index/edu_bureau/2_1.jpg">
+    <div class="container">
+        <h1 class="h1-banner"><strong>用户数据安全管理服务</strong></h1>
+        <div class="col-sm-7 col-xs-10">
+            <h3 class="col-xs-6 h2-banner">HA高可用</h3>
+            <h3 class="col-xs-6 h2-banner">阿里云盾</h3>
+            <h3 class="col-xs-6 h2-banner">安骑士</h3>
+            <h3 class="col-xs-6 h2-banner">CDN服务</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container-3 img-delay bg-cover" data-bg="__IMG__/index/edu_bureau/3_1.jpg">
+    <div class="container block1">
+        <h3>——　&nbsp;&nbsp;产品服务&nbsp;&nbsp;　——</h3>
+        <div class="col-sm-3 col-xs-6"><h4>教学管理</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>学校安全</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>家校互动</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>教育资源</h4></div>
+    </div>
+    <div class="container block2">
+        <h3>——　&nbsp;&nbsp;培训服务&nbsp;&nbsp;　——</h3>
+        <div class="col-sm-3 col-xs-6"><h4>教育部门培训</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>学校骨干培训</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>安全二级培训</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>其他服务培训</h4></div>
+    </div>
+    <div class="container block3">
+        <h3>——　&nbsp;&nbsp;产品服务&nbsp;&nbsp;　——</h3>
+        <div class="col-sm-3 col-xs-6"><h4>需求反馈处理</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>推广运营支持</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>系统定制支持</h4></div>
+        <div class="col-sm-3 col-xs-6"><h4>其他运营服务</h4></div>
+    </div>
+</div>
+
+
+<div class="container-4">
+    <div class="container">
+        <h3 class="txt-blue-h text-center"><strong>实施原则</strong></h3>
+        <div class="box-txt">
+            <h3>实施<br>原则</h3>
+            <div class="circle circle1">
+                <h4>01</h4>
+                <p>免费捐建<br>原则</p>
+            </div><div class="circle circle2">
+                <h4>02</h4>
+                <p>家长自愿<br>原则</p>
+            </div><div class="circle circle3">
+                <h4>03</h4>
+                <p>循序渐进<br>原则</p>
+            </div>
+        </div>
+        <img class="box-bg" src="__IMG__/index/edu_bureau/4_1.jpg">
+    </div>
+</div>
+
+<div class="container-5">
+    <div class="container">
+        <h3 class="txt-blue-h text-center"><strong>合作单位</strong></h3>
+        <div class="row friendly-link underline text-center">
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+            <a target="_blank" href="#">合作单位</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-leave-msg">
+    <div class="container">
+        <h4>
+            “微家校”利用互联网技术、大数据应用技术，以平台为基础，立足于为教育主管部门、学校提供持续性的专业服务。<br>
+            感谢您在教育事业上的坚持，希望我们一起努力，携手共进，谢谢！<br>
+            <div class="text-right">——微家校 邱万钧</div>
+        </h4>
+        <div class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">姓名：</div>
+                    <input id="name" class="form-control" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon">电话：</div>
+                    <input id="mobile" class="form-control" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
+                </div>
+                <div class="input-group">
+                    <textarea id="msg" class="form-control" rows="5" placeholder="留言"></textarea>
+                </div>
+            </div>
+        </div>
+        <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并承诺为您保密！</h6>
+        <button class="btn" type="button">提交留言</button>
+    </div>
+</div>
+
+<script>
+    $(".navbar-main").addClass('absolute');
+    $(".navbar-path").addClass('absolute deep suspend');
+    $(function() {
+        $(".container-leave-msg .btn").submit("{:U('Index/leave_msg')}", function () {
+            $("#name,#mobile,#msg").data('placement', is_xs() ? 'bottom' : 'right');
+            return $.check([
+                {'target': '#name', 'rules': $.rules.empty},
+                {'target': '#mobile', 'rules': [$.rules.empty, $.rules.mobile]},
+                {'target': '#msg', 'rules': $.rules.length(null, 200)},
+            ])
+        }, function (res) {
+            if (res.success) {
+                $("#name,#mobile,#msg").val('');
+                $.info('留言成功！');
+            }
+        })
+    })
+</script>

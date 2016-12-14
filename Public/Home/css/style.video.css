@@ -1,0 +1,79 @@
+#body{
+    background-color: #071522;
+}
+#body:after{
+    content: " ";
+    display: block;
+    height: 1px;
+}
+
+.breadcrumb a,.breadcrumb>li.active{
+    color: #fff;
+}
+
+.img-preview-box{
+    padding: 0 60px;
+    position: relative;
+    margin: 10px 20px 30px;
+}
+.img-preview-box .glyphicon{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: .5s;
+    border: 1px solid #fff;
+}
+.img-preview-box .glyphicon.disabled{
+    background: #eaeaea;
+    color: #ccc;
+    border-color: #ccc;
+}
+.img-preview-box .glyphicon-chevron-left{
+    left: 0;
+}
+.img-preview-box .glyphicon-chevron-right{
+    right: 0;
+}
+
+.img-preview-box .glyphicon:before{
+    top: 50%;
+    margin-top: -50%;
+    display: block;
+    position: relative;
+}
+.img-preview-box>.img-list-box{
+    font-size: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.img-preview-box>.img-list-box>.img-list{
+    position: relative;
+    left: 0;
+}
+.img-preview-box>.img-list-box>.img-list>.col-lg-2{
+    float: none;
+    display: inline-block;
+}
+.img-preview-box>.img-list-box img{
+    width: 100%;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+    .img-preview-box{
+        padding: 0 40px;
+        margin: 0 10px 30px;
+    }
+    .img-preview-box>.img-list>div{
+        padding:0 5px;
+    }
+    .img-preview-box .glyphicon{
+        font-size: 20px;
+        padding: 0 2px;
+    }
+}

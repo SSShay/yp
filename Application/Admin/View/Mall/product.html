@@ -1,0 +1,165 @@
+<style>
+    table label{
+        font-weight: inherit;
+        display: block;
+        margin-bottom: 0;
+    }
+    table tr{
+        cursor: default;
+    }
+    table #checkall{
+        width: 8em;
+    }
+    table #col-thumb{
+        width: 6em;
+    }
+    table #col-name{
+        width: 20em;
+    }
+    table #col-price{
+        width: 6em;
+        text-align: center;
+    }
+    table #col-sort{
+        width: 5em;
+        text-align: center;
+    }
+    table #col-ctime,table #col-utime{
+        width: 12em;
+    }
+    table #col-display{
+        width: 10em;
+    }
+    table .time{
+        font-size: 13px;
+    }
+    table .thumb{
+        width: 50px;
+    }
+    table #col-action{
+        width: 10em;
+    }
+    table a{
+        cursor: pointer;
+        font-size: 13px;
+    }
+    table td{
+        vertical-align: middle !important;
+    }
+    table .action a{
+        margin-right: 10px;
+    }
+
+    td.editing{
+        position: relative;
+        padding: 0;
+        color: transparent;
+    }
+    td.editing .input-group{
+        position: absolute;
+        top: 3px;
+        left: 0;
+        min-width: 80px;
+    }
+
+</style>
+<section class="panel">
+    <header class="panel-heading custom-tab dark-tab">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a>商品列表</a>
+            </li>
+            <li>
+                <a href="{:U('Mall/product_add')}">商品添加</a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane active" id="product-list">
+                <table class="table table-hover general-table">
+                    <thead>
+                    <tr>
+                        <th id="checkall"><label><input type="checkbox"> 编号</label></th>
+                        <th id="col-thumb">缩略图</th>
+                        <th id="col-name" data-key="name" data-edit="text">商品名称</th>
+                        <th id="col-price">基础价格</th>
+                        <th id="col-display" data-key="display" data-edit="select" data-data='{"1":"是","0":"否"}'>是否上架</th>
+                        <th id="col-sort" data-key="sort" data-edit="text">排序</th>
+                        <th id="col-ctime">添加时间</th>
+                        <th id="col-utime">更新时间</th>
+                        <th id="col-action">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <div class="button-box col-sm-4">
+                    <button id="del-all-btn" type="button" class="btn btn-danger hidden">删除选中</button>
+                </div>
+                <div class="col-sm-8 page-box">
+                    <div class="dataTables_paginate paging_bootstrap pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="__JS__/xplugs/jquery.table-edit.js"></script>
+<script src="__JS__/xplugs/jquery.page-number.js"></script>
+<script>
+
+    $(function() {
+        var edit_table = EditTable({
+            'table': '#product-list',
+            'save_url': "{:U('Mall/product_save')}",
+            'del_url': "{:U('Mall/product_del')}"
+        })
+
+        var page_num = $(".dataTables_paginate").PageNumber('{$page_index}',
+                function (page, pcount) {
+                    return (page.parents('.page-box').width() / (20 + Math.ceil(Math.log10(pcount)) * 12) - 4) >> 0;
+                },
+                function (p) {
+                    if (p == undefined) p = page_num.index;
+                    else if (isNaN(p)) return;
+                    $("#article-list").addClass('loading');
+                    $.get("{:U('Mall/product_list')}", {p: p}, function (res) {
+                        $("#article-list").removeClass('loading')
+                        if (!res.list) {
+                            $("#article-list").addClass('loadfail');
+                            return;
+                        }
+                        $("#tbody").text('');
+                        $.each(res.list, function (i, v) {
+                            var tr = $([
+                                '<tr data-id="' + v.id + '">',
+                                '<td><input type="checkbox"> ' + v.id + '</td>',
+                                '<td><img class="thumb" src="' + v.thumb + '"></td>',
+                                '<td>' + v.name + '</td>',
+                                '<td>' + v.price + '</td>',
+                                '<td data-val="' + v.display + '">' + (v.display == 0 ? '否' : '是') + '</td>',
+                                '<td>' + v.sort + '</td>',
+                                '<td class="time">' + v.ctime + '</td>',
+                                '<td class="time">' + v.utime + '</td>',
+                                '<td class="action">',
+                                '<a class="edit-btn" href="{:U("Mall/product_mod")}/id/' + v.id + '">修改</a>',
+                                '<a class="del-btn" href="javascript:;">删除</a>',
+                                '</td>',
+                                '</tr>'
+                            ].join(''));
+                            $("#tbody").append(tr);
+                            edit_table.row_bind_event(tr);
+                        });
+                        page_num.refresh(p, res.count);
+                    }, 'json')
+                }
+        );
+
+        page_num.loadindex();
+
+        $('#checkall').click(function () {
+            var check = $('input', $(this)).is(':checked')
+            $("#tbody input").prop('checked', check);
+        })
+    })
+</script>

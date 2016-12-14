@@ -1,0 +1,244 @@
+﻿<link href="__PLUGIN__/iCheck/skins/flat/blue.css" rel="stylesheet">
+<script src="__PLUGIN__/iCheck/jquery.icheck.min.js"></script>
+<style>
+    .icheck .radio {
+        margin-bottom: 0;
+        margin-right: 20px;
+        display: inline-block;
+        cursor: pointer;
+        padding-left: 0;
+    }
+    table label{
+        font-weight: inherit;
+        display: block;
+        margin-bottom: 0;
+    }
+    table tr{
+        cursor: default;
+    }
+    table .time{
+        width: 10em;
+    }
+    table a.mod,table a.del{
+        margin-right: 15px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+    table a.mod:hover{
+        color: #65CEA7;
+    }
+    table a.del:hover{
+        color: #d9534f;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading custom-tab dark-tab">
+        <ul class="nav nav-tabs">
+            <li id="tab1">
+                <a href="#article-add"  data-toggle="tab">文章添加</a>
+            </li>
+            <li id="tab2">
+                <a href="#article-list"  data-toggle="tab">文章列表</a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane" id="article-add">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">文章类型：</label>
+                        <div class="col-sm-10 flat-blue single-row icheck" id="type">
+                            <label class="radio"><input value="0" type="radio" name="type" checked>公司新闻</label>
+                            <label class="radio"><input value="1" type="radio" name="type">行业动态</label>
+                            <label class="radio"><input value="2" type="radio" name="type">政策支持</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">预览图：</label>
+                        <div class="col-sm-10">
+                            <img id="thumb" class="img-upload" data-url="{:U('Content/article_thumb_upload')}"/>
+                            <p class="help-block">点击预览框<code>添加/更换</code>文章预览图，建议格式：<code>*.jpg</code>、建议尺寸：<code>192*120</code>、建议大小：小于<code>32K</code></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">标题：</label>
+                        <div class="col-sm-10 col-md-6 col-lg-5">
+                            <input id="title" type="text" class="form-control" data-name="新闻标题" placeholder="请输入新闻标题...">
+                        </div>
+                    </div>
+                    <!--<div class="form-group hidden">
+                        <label class="col-sm-2 control-label">简介：</label>
+                        <div class="col-sm-10">
+                            <textarea id="brief" type="text" class="form-control" data-name="简介"></textarea>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">正文：</label>
+                        <div class="col-sm-10 col-lg-8">
+                            <textarea id="content" style="width: 100%;height: 300px"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 pull-right">
+                        <button id="add-btn" type="button" class="btn btn-primary">添加文章</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="article-list">
+                <table class="table table-hover general-table">
+                    <thead>
+                    <tr>
+                        <th><label id="checkall"><input type="checkbox"> 编号</label></th>
+                        <!--<th>发布者</th>-->
+                        <th>文章类型</th>
+                        <th>预览图</th>
+                        <th>标题</th>
+                        <th class="time">发布时间</th>
+                        <th class="time">更新时间</th>
+                        <th class="time">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <div class="button-box col-sm-4">
+                    <button id="del-all-btn" type="button" class="btn btn-danger hidden">删除选中</button>
+                </div>
+                <div class="col-sm-8 page-box">
+                    <div class="dataTables_paginate paging_bootstrap pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="__PLUGIN__/kindeditor/kindeditor-min.js"></script>
+<script src="__PLUGIN__/kindeditor/lang/zh_CN.js"></script>
+<script src="__JS__/xplugs/jquery.page-number.js"></script>
+<script src="__PLUGIN__/ajaxfileupload.js"></script>
+<script>
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#content', {
+            resizeType: 1,
+            uploadJson : "{:U('Content/article_img_upload')}",
+            allowPreviewEmoticons: false,
+            allowImageUpload: true,
+            items: [
+                'source', '|', 'removeformat', 'undo', 'redo', '|', 'quickformat', 'preview', 'fullscreen', '/',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|',
+                'formatblock', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough', '|',
+                'image', 'multiimage', 'hr', 'link', 'unlink'
+            ]
+        });
+    });
+
+    $(function() {
+        $("#type .radio").iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        })
+
+        var thumb = $("#thumb").ajaxFileUpload(function () {
+            var src = thumb.attr('src');
+            if (src) return {'img': src};
+        }, function (data, status) {
+            if (data.img) {
+                thumb.attr('src', data.img);
+            } else {
+                if (!data.error) data.error = '未知错误';
+                $.error(data.error);
+            }
+        })
+
+
+        $("#add-btn").submit("{:U('Content/article_add')}", function () {
+            var data = $.check([
+                {'target': '#title', 'rules': [$.rules.empty, $.rules.length(null, 25)]},
+            ])
+            if (data) {
+                data.type = $("#type input:checked").val();
+                data.thumb = thumb.attr('src');
+                data.html = editor.html();
+                data.brief = editor.text().slice(0, 200);
+            }
+            return data;
+        }, function (res) {
+            if (res.success) {
+                $('#title').val('')
+                thumb.removeAttr('src');
+                editor.html('');
+                relist(0)
+            }
+        })
+
+        var page_num = $(".dataTables_paginate").PageNumber('{$page_index}',
+                function (page, pcount) {
+                    return (page.parents('.page-box').width() / (20 + Math.ceil(Math.log10(pcount)) * 12) - 4) >> 0;
+                }, function (p) {
+                    if (p == undefined) p = page_num.index;
+                    else if (isNaN(p)) return;
+                    $("#article-list").addClass('loading');
+                    $.get("{:U('Content/article_list')}", {p: p}, function (res) {
+                        $("#article-list").removeClass('loading')
+                        if (!res.list) {
+                            $("#article-list").addClass('loadfail');
+                            return;
+                        }
+                        $("#tbody").text('');
+                        $.each(res.list, function (i, v) {
+                            var tr = $([
+                                '<tr>',
+                                '<td><input type="checkbox"> ' + v.id + '</td>',
+                                /*'<td>'+ v.sendid +'</td>',*/
+                                '<td>' + ['公司新闻', '行业动态', '政策支持'][v.type] + '</td>',
+                                '<td>' + (v.thumb ? v.thumb : '（无）') + '</td>',
+                                '<td>' + v.title + '</td>',
+                                '<td>' + v.ctime + '</td>',
+                                '<td>' + v.utime + '</td>',
+                                '<td><a class="mod" href="{:U("Content/article_mod")}/id/' + v.id + '">修改</a><a class="del">删除</a></td>',
+                                '</tr>'
+                            ].join(''));
+                            var input = $("input", tr);
+                            tr.click(function (e) {
+                                var target = $(e.target);
+                                if (target.is('input') || target.is('a'))return;
+                                input.prop('checked', !input.is(':checked'));
+                            })
+                            $(".del", tr).click(function () {
+                                $.confirm('你确定要删除文章『' + v.title + '』？',function(){
+                                    $.post("{:U('Content/article_del')}", {id: v.id}, function (res) {
+                                        if (res.success) page_num.loadpage()
+                                        else $.error(res.error || "删除失败，未知错误！");
+                                    }, 'json');
+                                })
+                            })
+                            $("#tbody").append(tr);
+                        });
+                        page_num.refresh(p, res.count);
+                    }, 'json')
+                })
+
+        var tag = location.href.split('#');
+        if (tag.lastIndexOf('list') > -1) relist()
+        else $("#tab1 a").tab('show')
+
+        function relist(i) {
+            $("#tab2 a").tab('show')
+            if (i == null)page_num.loadindex();
+            else page_num.loadpage(i)
+        }
+
+        $("#tab1").click(function () {
+            location.href = '#add';
+        })
+        $("#tab2").click(function () {
+            location.href = '#list';
+            if (page_num.index == null) page_num.loadindex();
+        })
+
+        $('#checkall').click(function () {
+            var check = $('input', $(this)).is(':checked')
+            $("#tbody input").prop('checked', check);
+        })
+    })
+</script>

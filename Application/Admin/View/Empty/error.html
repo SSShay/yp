@@ -1,0 +1,26 @@
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="error-container" style="color: #1F1F1F">
+                <div class="well">
+                    <h2 class="grey lighter smaller">
+                        <span class="blue bigger-125"><i class="icon-sitemap"></i><empty name="title">出错了<else/>{$title}</empty></span>
+                    </h2>
+                    <hr />
+                    <h4 class="lighter smaller">{$error}</h4><br>
+                    <p>如果发现是后台程序有问题：请立刻通知程序猿！</p>
+                    <p>当前账号：{$user.loginuser}</p>
+                    <p>访问者名称：{$user.name}</p>
+                    <p>当前时间：{:date('Y-m-d H:i:s')}</p>
+                    <hr/>
+                    <div class="center">
+                        <a href="javascript:history.go(-1);" class="btn btn-primary">
+                            返回
+                        </a>
+                    </div>
+                </div>
+            </div><!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->

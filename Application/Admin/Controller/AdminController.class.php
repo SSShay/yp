@@ -1,0 +1,42 @@
+<?php
+
+namespace Admin\Controller;
+
+use Admin\Model\AdminModel;
+
+class AdminController extends BaseController
+{
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //管理员管理
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const page_key = 'admin-page-index';
+
+    public function index()
+    {
+        $this->U_check_permissions();
+        $this->display('index');
+    }
+
+    public function admin_list()
+    {
+        $this->U_check_permissions('index');
+
+        $p = I('get.p');
+        session(self::page_key, $p);
+        $msg_obj = new AdminModel();
+        $res = $msg_obj->selectList('', $p);
+        echo json_encode($res);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //权限管理
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function permissions()
+    {
+        $this->display('permissions');
+    }
+
+}

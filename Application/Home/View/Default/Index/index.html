@@ -1,0 +1,113 @@
+<link href="__CSS__/style.index.css"  rel="stylesheet" />
+<div class="carousel slide" id="carousel-index" data-interval="2500">
+    <ol class="carousel-indicators">
+        <volist name="banner" id="v">
+            <li data-slide-to="{$key}" data-target="#carousel-index"></li>
+        </volist>
+    </ol>
+    <div class="carousel-inner">
+        <volist name="banner" id="v">
+            <div class="item">
+                <img alt="{$v.imgalt}" src="{$v.imgurl}"/>
+                <div class="carousel-caption">
+                    <notempty name="v.title"><h4>{$v.title}</h4></notempty>
+                    <notempty name="v.content"><p>{$v.content}</p></notempty>
+                </div>
+            </div>
+        </volist>
+    </div>
+    <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<div class="container-fluid entry-container">
+    <div class="row">
+        <a class="col-lg-3 col-sm-6 col-xs-12 display-table" href="{:U('Index/edu_bureau')}">
+            <div class="table-cell left-cell">
+                <img src="__IMG__/index/entry/1.png">
+            </div>
+            <div class="table-cell">
+                <h3>教育局</h3><br>
+                <p>三通二平台 助力智慧教育</p>
+            </div>
+        </a>
+        <a class="col-lg-3 col-sm-6 col-xs-12 display-table" href="{:U('Index/agent')}">
+            <div class="table-cell left-cell">
+                <img src="__IMG__/index/entry/2.png">
+            </div>
+            <div class="table-cell">
+                <h3>代理商</h3><br>
+                <p>携手微家校 进军校园市场</p>
+            </div>
+        </a>
+        <a class="col-lg-3 col-sm-6 col-xs-12 display-table" href="{:U('Index/school')}">
+            <div class="table-cell left-cell">
+                <img src="__IMG__/index/entry/3.png">
+            </div>
+            <div class="table-cell">
+                <h3>学校</h3><br>
+                <p>解决校园安全问题 联通家校互动</p>
+            </div>
+        </a>
+        <a class="col-lg-3 col-sm-6 col-xs-12 display-table" href="{:U('Index/trade_union')}">
+            <div class="table-cell left-cell">
+                <img src="__IMG__/index/entry/4.png">
+            </div>
+            <div class="table-cell">
+                <h3>行业联盟</h3><br>
+                <p>校园设备供应商 与您同行</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="container-fluid info-container">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 news-preview">
+            <h3>新闻中心</h3>
+            <volist name="news" id="v">
+                <a class="media" href="{:U('News/article')}/id/{$v.id}">
+                    <div class="media-left">
+                        <empty name="v.thumb">
+                            <img src="__IMG__/others/news.jpg" alt="">
+                            <else/>
+                            <img src="{$v.thumb}" alt="">
+                        </empty>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{$v.title}</h4>
+                        <p>{$v.brief}</p>
+                    </div>
+                </a>
+            </volist>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h3>宣传视频</h3>
+            <a class="video-thumb" href="{:U('Index/video')}">
+                <div class="play-box">
+                    <img src="__IMG__/common/play_btn.png">
+                </div>
+                <img src="{$video.thumb}">
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-12 summary-box">
+            <h3>远磐概述</h3>
+            <img src="__IMG__/index/place.jpg">
+            杭州远磐互联科技有限公司是经杭州市滨江区政府批准入驻智慧E谷，围绕国家教育信息化“三通两平台”落地开发的专业
+            软 件服务商, 是国家大力扶持的智慧教育产业的领先单位， 也是国内最具影响力的教育信息化企业之一。 杭州远磐公司
+            在科技界率先实现”四化”，即运营标准化，技术领先化，经营特色化，管理科学化，并在全国推行特许经营 模式。依托
+            强大的技术核心资源，公司已开发出大量核心产品：移动互联网电子商务平台（微服宝）。 微家校协同教育软件，安心星
+            智能安全设备，微生活本地通商成平台，微服宝智能wifi路由器，移动生活O2O体验店六大产 品体系以及行业网站，SNS交
+            共赢。
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
+        $("#carousel-index .carousel-inner .item").eq(0).addClass('active');
+
+        $('#carousel-index').carousel()
+    })
+</script>
