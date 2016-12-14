@@ -1,4 +1,5 @@
 /Application/Runtime/
+/Application/Common/Conf
 *.local
 /.idea/
 Thumbs.db
