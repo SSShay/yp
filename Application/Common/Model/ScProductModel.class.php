@@ -54,7 +54,7 @@ class ScProductModel extends Model
     public function selectListByHome()
     {
         $where['display'] = 1;
-        $list = $this->field('name,thumb,price')->where($where)->order('sort')->select();
+        $list = $this->field('id,name,thumb,price')->where($where)->order('sort')->select();
 
         return $list;
     }

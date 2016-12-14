@@ -1,8 +1,4 @@
 <style>
-    .test{
-        height: 100px;
-        background: #000;
-    }
     .container .title{
         padding-top: 30px;
         padding-left: 25px;
@@ -10,18 +6,57 @@
     }
     .product_item{
         padding: 10px 10px 40px;
-        cursor: pointer;
+        display: block;
+    }
+    .product_item,.product_item:hover,.product_item:focus{
+        text-decoration: none;
+        color: #1e1e1e;
     }
     .product_item img{
         width: 100%;
     }
     .product_item h4{
         text-align: center;
+        font-weight: bold;
+        font-size: 16px;
     }
     .product_item h5{
         text-align: center;
         color: #e54848;
         font-weight: bold;
+    }
+
+    .container-top{
+        background: #f5f5f5;
+        padding: 30px 0 80px;
+    }
+    .container-top .item{
+        padding: 10px;
+    }
+    .container-top .product_item{
+        background: #fff;
+        padding: 20px;
+    }
+    .container-top .product_item.padding{
+        padding: 50px 20px;
+    }
+    .container-top .product_item.title-img img{
+        max-width: none;
+        border: 1px solid #eaeaea;
+    }
+    .container-top .product_item img{
+        max-width: 160px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    @media (max-width: 1200px)
+    {
+        .container-top .product_item img{
+            max-width: 165px;
+            margin: 0 auto;
+            display: block;
+        }
     }
 
     @media screen and (max-width: 768px) {
@@ -58,7 +93,32 @@
             <h3 class="title">商品</h3>
             <volist name="product_list" id="v">
                 <div class="col-lg-2_4 col-md-3 col-sm-4 col-xs-6">
-                    <div class="product_item">
+                    <a class="product_item" href="{:U('Mall/detail')}/id/{$v.id}">
+                        <empty name="v.thumb">
+                            <img src="__IMG__/mall/thumb.gif">
+                            <else />
+                            <img src="{$v.thumb}" />
+                        </empty>
+                        <h4>{$v.name}</h4>
+                        <h5>￥{$v.price}</h5>
+                    </a>
+                </div>
+            </volist>
+        </div>
+    </div>
+</div>
+
+<div class="container-top">
+    <div class="container">
+        <div class="row masonry-container">
+            <div class="col-lg-4 col-xs-6 item">
+                <div class="product_item title-img">
+                    <img src="__IMG__/mall/hot.jpg">
+                </div>
+            </div>
+            <volist name="product_list" id="v">
+                <div class="col-lg-4 col-xs-6 item">
+                    <a class="product_item <if condition='$i lt 5 AND $i neq 2'>padding</if>" href="{:U('Mall/detail')}/id/{$v.id}">
                         <empty name="v.thumb">
                             <img src="__IMG__/mall/product_img.gif">
                             <else />
@@ -66,19 +126,29 @@
                         </empty>
                         <h4>{$v.name}</h4>
                         <h5>￥{$v.price}</h5>
-                    </div>
+                    </a>
                 </div>
             </volist>
         </div>
     </div>
 </div>
 
+<script src="__JS__/imagesLoaded.js"></script>
+<script src="__JS__/masonry.pkgd.min.js"></script>
 
 <script>
-    $(function(){
+    $(function() {
         $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
         $("#carousel-index .carousel-inner .item").eq(0).addClass('active');
 
-        $('#carousel-index').carousel()
+        $('#carousel-index').carousel();
+
+        var $container = $('.masonry-container');
+        $container.imagesLoaded(function () {
+            $container.masonry({
+                columnWidth: '.item',
+                itemSelector: '.item'
+            });
+        });
     })
 </script>

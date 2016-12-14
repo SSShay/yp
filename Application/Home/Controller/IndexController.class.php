@@ -45,7 +45,7 @@ class IndexController extends BaseController
         $this->breadcrumb(array('name' => '宣传视频'));
 
         //设置导航栏的active标记
-        $this->indexnav = '产品介绍';
+        $this->indexnav = '宣传视频';
         $this->display('video');
     }
 
