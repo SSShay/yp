@@ -68,13 +68,69 @@ class MallController extends BaseController
             $this->product = $res;
 
             $sc_product_img_obj = new ScProductImgModel();
-            $this->img_list = $sc_product_img_obj->selectListByHome();
+            $this->img_list = $sc_product_img_obj->selectListByHome($this->id);
 
             $this->breadcrumb('商品详情');
             $this->display('detail');
         } else {
-            $this->error('<pre>No.' . $this->id . '</pre>所对应的商品不存在！');
+            $this->error('<pre>No.' . $this->id . '</pre>所对应的商品不存在或已下架！');
         }
     }
 
+    //确认订单
+    public function confirm_order()
+    {
+        $this->id = I('get.id');
+        $n = I('get.n');
+        $n = intval($n);
+        $this->n = $n;
+        $where['id'] = $this->id;
+        $where['display'] = 1;
+        $sc_product_obj = new ScProductModel();
+        $res = $sc_product_obj->findObj($where, 'name,price,thumb');
+
+        $this->breadcrumb(array(
+            array('name' => '商品详情', 'url' => U('Mall/detail', array('id' => $this->id))),
+            array('name' => '确认订单')
+        ));
+
+        if($res){
+            $this->product = $res;
+            $this->subtotal = sprintf("%.2f",$res['price'] * $n);
+            $this->paid = $this->subtotal;
+
+            $this->display('confirm_order');
+        }else{
+            $this->error('<pre>No.' . $this->id . '</pre>所对应的商品不存在或已下架！');
+        }
+    }
+
+    //确认订单
+    public function payment()
+    {
+        $this->id = I('get.id');
+        $n = I('get.n');
+        $n = intval($n);
+        $this->n = $n;
+        $where['id'] = $this->id;
+        $where['display'] = 1;
+        $sc_product_obj = new ScProductModel();
+        $res = $sc_product_obj->findObj($where, 'name,price,thumb');
+
+        $this->breadcrumb(array(
+            array('name' => '商品详情', 'url' => U('Mall/detail', array('id' => $this->id))),
+            array('name' => '确认订单', 'url' => U('Mall/confirm_order', array('id' => $this->id,'n' => $n))),
+            array('name' => '选择付款方式')
+        ));
+
+        if($res){
+            $this->product = $res;
+            $this->subtotal = sprintf("%.2f",$res['price'] * $n);
+            $this->paid = $this->subtotal;
+
+            $this->display('confirm_order');
+        }else{
+            $this->error('<pre>No.' . $this->id . '</pre>所对应的商品不存在或已下架！');
+        }
+    }
 }

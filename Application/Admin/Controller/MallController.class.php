@@ -366,7 +366,7 @@ class MallController extends BaseController
             $this->product = $res;
 
             $sc_product_img_obj = new ScProductImgModel();
-            $res = $sc_product_img_obj->selectList();
+            $res = $sc_product_img_obj->selectList($this->id);
             $this->img_list = $res ? json_encode($res) : '[]';
 
             $this->display('product_mod');

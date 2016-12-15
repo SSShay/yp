@@ -1,71 +1,4 @@
-<style>
-    .container .title{
-        padding-top: 30px;
-        padding-left: 25px;
-        font-weight: bold;
-    }
-    .product_item{
-        padding: 10px 10px 40px;
-        display: block;
-    }
-    .product_item,.product_item:hover,.product_item:focus{
-        text-decoration: none;
-        color: #1e1e1e;
-    }
-    .product_item img{
-        width: 100%;
-    }
-    .product_item h4{
-        text-align: center;
-        font-weight: bold;
-        font-size: 16px;
-    }
-    .product_item h5{
-        text-align: center;
-        color: #e54848;
-        font-weight: bold;
-    }
-
-    .container-top{
-        background: #f5f5f5;
-        padding: 30px 0 80px;
-    }
-    .container-top .item{
-        padding: 10px;
-    }
-    .container-top .product_item{
-        background: #fff;
-        padding: 20px;
-    }
-    .container-top .product_item.padding{
-        padding: 50px 20px;
-    }
-    .container-top .product_item.title-img img{
-        max-width: none;
-        border: 1px solid #eaeaea;
-    }
-    .container-top .product_item img{
-        max-width: 160px;
-        margin: 0 auto;
-        display: block;
-    }
-
-    @media (max-width: 1200px)
-    {
-        .container-top .product_item img{
-            max-width: 165px;
-            margin: 0 auto;
-            display: block;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .product_item{
-            padding: 10px 15px;
-            cursor: pointer;
-        }
-    }
-</style>
+<link href="__CSS__/style.mall.css"  rel="stylesheet" />
 <div class="carousel slide" id="carousel-index" data-interval="2500">
     <ol class="carousel-indicators">
         <volist name="banner" id="v">
@@ -87,7 +20,7 @@
     <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
 
-<div class="container-all">
+<div>
     <div class="container">
         <div class="row">
             <h3 class="title">商品</h3>
@@ -108,7 +41,7 @@
     </div>
 </div>
 
-<div class="container-top">
+<div id="c-index-top">
     <div class="container">
         <div class="row masonry-container">
             <div class="col-lg-4 col-xs-6 item">
@@ -120,7 +53,7 @@
                 <div class="col-lg-4 col-xs-6 item">
                     <a class="product_item <if condition='$i lt 5 AND $i neq 2'>padding</if>" href="{:U('Mall/detail')}/id/{$v.id}">
                         <empty name="v.thumb">
-                            <img src="__IMG__/mall/product_img.gif">
+                            <img src="__IMG__/mall/thumb.gif">
                             <else />
                             <img src="{$v.thumb}" />
                         </empty>

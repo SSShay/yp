@@ -50,6 +50,13 @@
         background: #fff;
         padding-top: 0;
     }
+    .navbar-main .navbar-nav>li>a{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-main .navbar-header{
+        padding-top: 0;
+    }
     .navbar-main .navbar-header .navbar-brand{
         width: 70px;
         overflow: hidden;

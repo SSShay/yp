@@ -37,6 +37,8 @@
     padding-right: 20px;
     color: #fff;
     transition: background .6s;
+    padding-top: 22px;
+    padding-bottom: 22px;
 }
 .navbar-main .navbar-nav>li>a:after{
     content: ' ';
@@ -53,7 +55,9 @@
     width: 100%;
     margin-left: 0;
 }
-
+.navbar-main .navbar-header{
+    padding-top: 6px;
+}
 .navbar-main .item-list{
     display: none;
     list-style: none;
@@ -373,12 +377,22 @@
 /*-------------------------------
             STYLE
 -------------------------------*/
-.display-table{
+.row-table{
+    width: 100%;
+}
+.col-fixed{
+    table-layout: fixed;
+}
+.row-table,.col-table{
     display: table;
 }
-.table-cell{
+.col-cell{
     display: table-cell;
     vertical-align: middle;
+    float: none;
+}
+.row-table.text-top .col-cell,.col-table.text-top .col-cell,.col-cell.text-top{
+    vertical-align: top;
 }
 
 /* underline */

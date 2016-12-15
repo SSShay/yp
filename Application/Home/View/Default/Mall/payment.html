@@ -1,0 +1,20 @@
+<style>
+    /*  mall-payment-page  */
+
+</style>
+<link href="__CSS__/style.mall.css"  rel="stylesheet" />
+
+<script src="__JS__/custom.mall.js"></script>
+<script>
+    $(function() {
+        var pinfo = {
+            'price': parseFloat('{$product.price}'),
+            'count': parseInt('{$n}')
+        }
+
+        $(".number-box").numberBox({'change':function(v){
+            pinfo.count = v;
+            $(".subtotal").text('￥' + (pinfo.price * pinfo.count).toFixed(2))
+        }});
+    })
+</script>

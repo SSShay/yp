@@ -29,16 +29,19 @@ class ScProductImgModel extends Model
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //查询列表
-    public function selectList()
+    public function selectList($pid)
     {
-        $list = $this->field('id,thumb,imgurl,sort')->order('sort')->select();
+        $where['product_id'] = $pid;
+        $list = $this->field('id,thumb,imgurl,sort')->where($where)->order('sort')->select();
+
 
         return $list;
     }
 
-    public function selectListByHome()
+    public function selectListByHome($pid)
     {
-        $list = $this->field('thumb,imgurl')->order('sort')->select();
+        $where['product_id'] = $pid;
+        $list = $this->field('thumb,imgurl')->where($where)->order('sort')->select();
 
         return $list;
     }

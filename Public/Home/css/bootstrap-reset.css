@@ -15,6 +15,15 @@ input, select, textarea {
     font-family: 'Open Sans', "Microsoft Yahei", sans-serif;
     color: #767676;
 }
+textarea.resize-x{
+    resize: horizontal;
+}
+textarea.resize-y{
+    resize: vertical;
+}
+textarea.no-resize{
+    resize: none;
+}
 a:focus, a:active, a:hover{
     outline: none;
     -webkit-transition: all 0.3s;
@@ -24,6 +33,10 @@ a:focus, a:active, a:hover{
 }
 h1, h2, h3, h4, h5 {
     font-family: 'Open Sans', "Microsoft Yahei", sans-serif;
+}
+input[type="radio"], input[type="checkbox"]{
+    position: relative;
+    top: 2px;
 }
 .mtop10 {
     margin-top: 10px;
@@ -35,6 +48,19 @@ hr {
 
 a.btn{
     color: #343434;
+}
+
+.btn{
+    border-radius: 2px;
+    transition:background-color .5s,border-color .4s,color .3s;
+}
+.btn-lg, .btn-group-lg>.btn{
+    padding: 10px 30px;
+}
+.btn:active, .btn.active {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 
@@ -124,23 +150,52 @@ a.media,a.media:hover,a.media:focus,a.active{
     }
 }
 
-@media (min-width: 992px)
-{
+@media (min-width: 992px) {
     .col-md-2_4 {
         width: 20%;
     }
 }
 
 @media (min-width: 768px){
-    .navbar-main .navbar-nav>li>a{
-        padding-top: 22px;
-        padding-bottom: 22px;
-    }
-    .navbar-main .navbar-header{
-        padding-top: 6px;
-    }
     .col-sm-2_4 {
         width: 20%;
     }
+}
+
+
+@media (max-width: 1200px){
+    .f-lg-18 {
+        font-size: 18px;
+    }
+    .f-lg-16 {
+        font-size: 16px;
+    }
+    .f-lg-14 {
+        font-size: 14px;
+    }
+    .f-lg-13 {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px){
+    .f-xs-16 {
+        font-size: 16px;
+    }
+    .f-xs-14 {
+        font-size: 14px;
+    }
+    .f-xs-13 {
+        font-size: 13px;
+    }
+    .f-xs-12 {
+        font-size: 12px;
+    }
+}
+
+/* number-box */
+.number-box .form-control[readonly]{
+    cursor: text;
+    background-color: #fff;
 }
 

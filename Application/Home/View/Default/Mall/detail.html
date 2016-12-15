@@ -1,112 +1,12 @@
-<style>
-    .container-info{
-        background: #f5f5f5;
-        padding: 10px 0 50px;
-    }
-    .container-info .preview{
-        width: 100%;
-    }
-    .container-info .preview img{
-        width: 100%;
-        padding-right: 15px;
-    }
-    .container-info .thumb img{
-        display: block;
-        width: 80px;
-        background: #e9f0fa;
-        padding: 8px;
-        margin: 6px;
-        cursor: pointer;
-    }
-    .container-info h6{
-        margin: 15px 0;
-        color: #616161;
-    }
-    .container-info .info{
-        background: #E0E0E0;
-        padding: 10px;
-    }
-    .container-info .info p,.container-info .form-block p{
-        margin: 5px 0;
-    }
-    .container-info .price{
-        color: #e54848;
-        font-weight: bold;
-    }
-    .container-info .info .key{
-        padding-left: 20px;
-    }
-    .container-info .form-block{
-        padding: 10px;
-    }
-    .container-info .form-block .key{
-        padding-right: 20px;
-    }
-
-
-    .number-box{
-        width: 150px;
-    }
-    .number-box .input-group-addon{
-        background: #f5f5f5;
-        border-color: #bfbfbf;
-        padding: 0 4px;
-        cursor: pointer;
-    }
-    .number-box .input-group-addon img{
-        width: 30px;
-    }
-
-
-    .container-detail{
-        padding: 50px 0;
-    }
-    .container-detail h3{
-        margin-bottom: 20px;
-    }
-    @media (max-width: 992px){
-        .container-info .thumb img{
-            width: 55px;
-            padding: 5px;
-        }
-    }
-    @media (max-width: 768px){
-        .container-info .thumb img{
-            width: 80px;
-            padding: 8px;
-        }
-    }
-    @media screen and (max-width: 480px) {
-        .container-info .preview img{
-            padding-right: 10px;
-        }
-        .container-info .thumb img{
-            width: 50px;
-            padding: 5px;
-        }
-    }
-    @media screen and (max-width: 360px) {
-        .container-info .thumb img{
-            width: 40px;
-            padding: 4px;
-            margin: 3px;
-        }
-    }
-
-
-    #count{
-        text-align: center;
-    }
-</style>
-
-<div class="container-info">
+<link href="__CSS__/style.mall.css"  rel="stylesheet" />
+<div class="container-info" id="c-detail-info">
     <div class="container">
         <div class="col-sm-6">
-            <div class="display-table">
-                <div class="table-cell preview">
+            <div class="col-table">
+                <div class="col-cell preview">
                     <img>
                 </div>
-                <div class="table-cell thumb">
+                <div class="col-cell thumb">
                     <volist name="img_list" id="v">
                         <img src="{$v.thumb}" data-img="{$v.imgurl}"/>
                     </volist>
@@ -120,68 +20,48 @@
                 <p>售价<span class="price key">￥{$product.price}</span></p>
             </div>
             <div class="form-block">
-                <p class="display-table">
+                <p class="col-table">
                     <span class="table-cell key">数量</span>
                     <span class="input-group number-box" data-max="9999" data-min="1">
-                        <span class="input-group-addon"><img src="__IMG__/mall/-.png"></span>
+                        <span class="input-group-addon min"></span>
                         <input id="count" class="form-control" type="text" value="1">
-                        <span class="input-group-addon"><img src="__IMG__/mall/+.png"></span>
+                        <span class="input-group-addon max"></span>
                     </span>
                 </p>
+                <div class="btn btn-buy btn-lg">立即购买</div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-detail">
+<div id="c-detail-detail">
     <div class="container">
         <h3>商品详情</h3>
         {$product.details}
     </div>
 </div>
-
+<script src="__JS__/custom.mall.js"></script>
 <script>
     $(function() {
-        $(".container-info .thumb img").each(function() {
-            var $t = $(this);
+        $(".container-info .thumb img").each(function (i) {
+            var $t = $(this), timer;
             var preview_img = $t.data('img');
-            $t.mouseenter(setimg)
+            $t.hover(function () {
+                timer = setTimeout(setimg, 300);
+            }, function () {
+                clearTimeout(timer);
+            })
             function setimg() {
                 $(".container-info .preview img").attr('src', preview_img)
             }
-        }).eq(0).mouseenter()
 
-        $(".number-box").each(function() {
-            var $t = $(this);
-            var input = $("input", $t).keydown(function(e){
-                var key = String.fromCharCode(e.keyCode || window.event.keyCode);
-                console.log(input.val())
-                console.log(getpos(input[0]))
-                if(isNaN(key)){
-                    e.stopPropagation();
-                    e.preventDefault();
-                    return false;
-                }
+            i == 0 && setimg();
+        })
 
-                function getpos(el) {
-                    var range, textRange, duplicate
-                    el.focus()
-                    if (el.selectionStart) return el.selectionStart
-                    else if (document.selection) { // IE
-                        range = document.selection.createRange()
-                        if (range == null) return el.value.length
-                        textRange = el.createTextRange()
-                        duplicate = textRange.duplicate()
-                        textRange.moveToBookmark(range.getBookmark())
-                        duplicate.setEndPoint('EndToStart', textRange)
-                        return duplicate.text.length
-                    }
-                }
-            });
-            var btns = $(".input-group-addon", $t);
-            btns.eq(0).click(function(){
+        $(".number-box").numberBox();
 
-            })
+        $(".btn-buy").click(function() {
+            location.href = "{:U('Mall/confirm_order')}/id/{$id}/n/" + $('#count').val();
         })
     })
 </script>

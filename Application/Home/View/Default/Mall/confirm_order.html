@@ -1,0 +1,92 @@
+<style>
+
+</style>
+<link href="__CSS__/style.mall.css"  rel="stylesheet" />
+<div class="container" id="c-confirm_order">
+    <div class="panel panel-default p-form">
+        <div class="panel-heading">收货信息</div>
+        <div class="panel-body">
+            <div class="form-group f-xs-12">
+                <div class="col-sm-6 col-table col-fixed">
+                    <div class="col-cell w-6em">收货人：</div>
+                    <div class="col-cell"><input type="text" class="form-control auto-w f-xs-12"/></div>
+                </div>
+                <div class="col-sm-6 col-table col-fixed">
+                    <div class="col-cell text-right pr-2em mobile-txt">手机号码：</div>
+                    <div class="col-cell"><input type="text" class="form-control auto-w f-xs-12"/></div>
+                </div>
+                <div class="row-table">
+                    <div class="col-cell w-6em">所在地区：</div>
+                    <div class="col-cell row region">
+                        <div class="col-xs-4 pl-0"><select class="form-control f-xs-12"><option>省</option></select></div>
+                        <div class="col-xs-4"><select class="form-control f-xs-12"><option>市</option></select></div>
+                        <div class="col-xs-4 pr-0"><select class="form-control f-xs-12"><option>区</option></select></div>
+                    </div>
+                </div>
+                <div class="row-table text-top">
+                    <div class="col-cell w-6em">详细地址：</div>
+                    <div class="col-cell">
+                        <textarea class="form-control resize-y f-xs-12" placeholder="街道、门牌号"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default p-info">
+        <div class="panel-heading">
+            <div class="col-xs-4 col-sm-4 cell">商品信息</div>
+            <div class="col-xs-3 col-sm-2 cell">单价</div>
+            <div class="col-xs-5 col-sm-3 cell">数量</div>
+            <div class="col-xs-3 hidden-xs">小计</div>
+            <div class="clear"></div>
+        </div>
+        <div class="panel-body row-table">
+            <div class="col-xs-4 col-sm-4 col-cell cell"><img class="thumb" src="{$product.thumb}"></div>
+            <div class="col-xs-3 col-sm-2 col-cell cell f-xs-12" id="price">￥{$product.price}</div>
+            <div class="col-xs-5 col-sm-3 col-cell cell">
+                <span class="input-group number-box" data-max="9999" data-min="1">
+                    <span class="input-group-addon min"></span>
+                    <input id="count" class="form-control" type="text" value="{$n}">
+                    <span class="input-group-addon max"></span>
+                </span>
+            </div>
+            <div class="col-xs-3 col-cell hidden-xs subtotal">￥{$subtotal}</div>
+        </div>
+        <div class="panel-footer p-count">
+            <div class="col-sm-6 col-md-8"></div>
+            <div class="col-sm-6 col-md-4">
+                <div class="col-table">
+                    <div class="col-cell">商品合计：</div>
+                    <div class="col-cell subtotal">￥{$subtotal}</div>
+                </div>
+                <div class="col-table">
+                    <div class="col-cell">运费：</div>
+                    <div class="col-cell">￥10.00</div>
+                </div>
+                <hr>
+                <div class="col-table">
+                    <div class="col-cell">应付总额：</div>
+                    <div class="col-cell total">￥10.00</div>
+                </div>
+                <div class="btn btn-primary btn-lg f-xs-16" id="btn-pay">去付款</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <label id="agree" class="f-xs-12"><input type="checkbox" checked/> 同意 <a href="#" target="_blank">《远磐科技平台服务协议》</a></label>
+</div>
+
+<script src="__JS__/custom.mall.js"></script>
+<script>
+    $(function() {
+        var pinfo = {
+            'price': parseFloat('{$product.price}'),
+            'count': parseInt('{$n}')
+        }
+
+        $(".number-box").numberBox({'change':function(v){
+            pinfo.count = v;
+            $(".subtotal").text('￥' + (pinfo.price * pinfo.count).toFixed(2))
+        }});
+    })
+</script>
