@@ -35,19 +35,35 @@ class AreaModel extends Model
     {
         if (!$topid) {
             $where['cityid'] = 0;
-            $list = $this->field('proviceid as id,name')->where($where)->select();
+            $where['areaid'] = 0;
+            $key = 'proviceid';
         } else if ($level == 2) {
             $where['proviceid'] = $topid;
             $where['cityid'] = array('neq', 0);
-            $list = $this->field('cityid as id,name')->where($where)->select();
+            $where['areaid'] = 0;
+            $key = 'cityid';
         } else {
             $where['cityid'] = $topid;
             $where['areaid'] = array('neq', 0);
-            $list = $this->field('areaid as id,name')->where($where)->select();
+            $key = 'areaid';
         }
-        return $list;
+        $list = $this->field($key . ',name')->where($where)->select();
+        $arr = array();
+        if(!empty($list)){
+            foreach ($list as $v) {
+                $arr[$v[$key]] = $v['name'];
+            }
+        }
+
+        return $arr;
     }
 
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // 生成地区js
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const AREA_JS_PATH = './Public/Home/js/area.js';
 
@@ -76,6 +92,26 @@ class AreaModel extends Model
         $fp = fopen($path, "w");
         if ($fp) {
             fwrite($fp, "AREA_LIST=" . $this->str2utf8(json_encode($arr)));
+            fclose($fp);
+            return true;
+        }
+        return false;
+    }
+
+    const PROVICE_JS_PATH = './Public/Home/js/area.provice.js';
+    public function saveProviceToJS($path = self::PROVICE_JS_PATH)
+    {
+        $where['cityid'] = 0;
+        $where['areaid'] = 0;
+        $res = $this->field('name,proviceid')->where($where)->select();
+        $arr = array();
+        foreach ($res as $v) {
+            $arr[$v['proviceid']] = $v['name'];
+        }
+
+        $fp = fopen($path, "w");
+        if ($fp) {
+            fwrite($fp, "PROVICE_LIST=" . $this->str2utf8(json_encode($arr)));
             fclose($fp);
             return true;
         }

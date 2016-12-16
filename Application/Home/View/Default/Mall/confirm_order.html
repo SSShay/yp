@@ -1,6 +1,3 @@
-<style>
-
-</style>
 <link href="__CSS__/style.mall.css"  rel="stylesheet" />
 <div class="container" id="c-confirm_order">
     <div class="panel panel-default p-form">
@@ -9,24 +6,24 @@
             <div class="form-group f-xs-12">
                 <div class="col-sm-6 col-table col-fixed">
                     <div class="col-cell w-6em">收货人：</div>
-                    <div class="col-cell"><input type="text" class="form-control auto-w f-xs-12"/></div>
+                    <div class="col-cell"><input id="addressee" type="text" class="form-control auto-w f-xs-12"/></div>
                 </div>
                 <div class="col-sm-6 col-table col-fixed">
                     <div class="col-cell text-right pr-2em mobile-txt">手机号码：</div>
-                    <div class="col-cell"><input type="text" class="form-control auto-w f-xs-12"/></div>
+                    <div class="col-cell"><input id="mobile" type="text" class="form-control auto-w f-xs-12"/></div>
                 </div>
                 <div class="row-table">
                     <div class="col-cell w-6em">所在地区：</div>
                     <div class="col-cell row region">
-                        <div class="col-xs-4 pl-0"><select class="form-control f-xs-12"><option>省</option></select></div>
-                        <div class="col-xs-4"><select class="form-control f-xs-12"><option>市</option></select></div>
-                        <div class="col-xs-4 pr-0"><select class="form-control f-xs-12"><option>区</option></select></div>
+                        <div class="col-xs-4 pl-0"><select class="form-control f-xs-12" id="area1"><option value="">省</option></select></div>
+                        <div class="col-xs-4"><select class="form-control f-xs-12 area2" id="area2"><option value="">市</option></select></div>
+                        <div class="col-xs-4 pr-0"><select class="form-control f-xs-12" id="area_id"><option value="">区</option></select></div>
                     </div>
                 </div>
                 <div class="row-table text-top">
                     <div class="col-cell w-6em">详细地址：</div>
                     <div class="col-cell">
-                        <textarea class="form-control resize-y f-xs-12" placeholder="街道、门牌号"></textarea>
+                        <textarea id="addr_detail" class="form-control resize-y f-xs-12" placeholder="街道、门牌号"></textarea>
                     </div>
                 </div>
             </div>
@@ -34,41 +31,59 @@
     </div>
     <div class="panel panel-default p-info">
         <div class="panel-heading">
-            <div class="col-xs-4 col-sm-4 cell">商品信息</div>
+            <div class="col-xs-4 col-sm-2 cell">商品信息</div>
             <div class="col-xs-3 col-sm-2 cell">单价</div>
             <div class="col-xs-5 col-sm-3 cell">数量</div>
-            <div class="col-xs-3 hidden-xs">小计</div>
+            <div class="col-sm-2 hidden-xs">小计</div>
+            <div class="col-sm-3 hidden-xs">操作</div>
             <div class="clear"></div>
         </div>
-        <div class="panel-body row-table">
-            <div class="col-xs-4 col-sm-4 col-cell cell"><img class="thumb" src="{$product.thumb}"></div>
-            <div class="col-xs-3 col-sm-2 col-cell cell f-xs-12" id="price">￥{$product.price}</div>
-            <div class="col-xs-5 col-sm-3 col-cell cell">
-                <span class="input-group number-box" data-max="9999" data-min="1">
-                    <span class="input-group-addon min"></span>
-                    <input id="count" class="form-control" type="text" value="{$n}">
-                    <span class="input-group-addon max"></span>
-                </span>
-            </div>
-            <div class="col-xs-3 col-cell hidden-xs subtotal">￥{$subtotal}</div>
+        <div class="panel-body">
+            <empty name="list">
+                <div class="text-center">还没有添加任何商品</div>
+                <else/>
+                <volist name="list" id="v">
+                    <div class="row-table" data-key="{$v.key}">
+                        <div class="col-xs-4 col-sm-2 col-cell cell">
+                            <empty name="v.thumb">
+                                <img class="thumb" src="__IMG__/mall/thumb.gif">
+                                <else/>
+                                <img class="thumb" src="{$v.thumb}">
+                            </empty>
+                        </div>
+                        <div class="col-xs-3 col-sm-2 col-cell cell f-xs-12 price">￥{$v.price}</div>
+                        <div class="col-xs-5 col-sm-3 col-cell cell">
+                        <span class="input-group number-box" data-max="9999" data-min="1">
+                            <span class="input-group-addon min"></span>
+                            <input class="form-control count" type="text" value="{$v.count}">
+                            <span class="input-group-addon max"></span>
+                        </span>
+                        </div>
+                        <div class="col-sm-2 col-cell hidden-xs subtotal">￥{$v.subtotal}</div>
+                        <div class="col-sm-3 col-cell hidden-xs">
+                            <a href="javascript:;" class="remove">移除</a>
+                        </div>
+                    </div>
+                </volist>
+            </empty>
         </div>
         <div class="panel-footer p-count">
             <div class="col-sm-6 col-md-8"></div>
             <div class="col-sm-6 col-md-4">
                 <div class="col-table">
                     <div class="col-cell">商品合计：</div>
-                    <div class="col-cell subtotal">￥{$subtotal}</div>
+                    <div class="col-cell" id="subtotal">￥{$subtotal}</div>
                 </div>
                 <div class="col-table">
                     <div class="col-cell">运费：</div>
-                    <div class="col-cell">￥10.00</div>
+                    <div class="col-cell" id="freight">￥{$freight}</div>
                 </div>
                 <hr>
-                <div class="col-table">
+                <div class="pull-right">
                     <div class="col-cell">应付总额：</div>
-                    <div class="col-cell total">￥10.00</div>
+                    <div class="col-cell" id="total">￥{$total}</div>
                 </div>
-                <div class="btn btn-primary btn-lg f-xs-16" id="btn-pay">去付款</div>
+                <div class="btn btn-primary btn-lg f-xs-16" id="btn-buy">去付款</div>
             </div>
             <div class="clear"></div>
         </div>
@@ -84,9 +99,107 @@
             'count': parseInt('{$n}')
         }
 
-        $(".number-box").numberBox({'change':function(v){
-            pinfo.count = v;
-            $(".subtotal").text('￥' + (pinfo.price * pinfo.count).toFixed(2))
-        }});
+        var area1 = $("#area1");
+        var area2 = $("#area2");
+        var area_id = $("#area_id");
+        $.each($.provice, function (i, v) {
+            area1.append("<option value='" + i + "'>" + v + "</option>");
+        });
+        area1.change(function () {
+            area2.html('<option value="">市</option>');
+            area_id.html('<option value="">区</option>');
+            $.getJSON("{:U('Mall/get_area')}/level/2/topid/" + area1.val(), function (json) {
+                $.each(json, function (i, v) {
+                    area2.append("<option value='" + i + "'>" + v + "</option>");
+                });
+            });
+        })
+        area2.change(function () {
+            area_id.html('<option value="">区</option>');
+            $.getJSON("{:U('Mall/get_area')}/level/3/topid/" + area2.val(), function (json) {
+                $.each(json, function (i, v) {
+                    area_id.append("<option value='" + i + "'>" + v + "</option>");
+                });
+            });
+        })
+
+        //count
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $.fn.fee = function () {
+            return parseFloat($(this).text().substr(1));
+        }
+        function fixed(v) {
+            return v.toFixed(2);
+        }
+
+        var pinfos = {};
+        $(".p-info .row-table").each(function() {
+            var $t = $(this);
+            var key = $t.data('key');
+            var pinfo = {
+                'price': $('.price', $t).fee(),
+                'count': $('.count', $t).val()
+            }
+
+            pinfos[key] = pinfo;
+
+            $(".number-box", $t).numberBox({
+                'change': function (v) {
+                    pinfos[key].count = v;
+                    $(".subtotal", $t).text('￥' + fixed(pinfos[key].price * pinfos[key].count));
+                    countAll()
+                }
+            });
+
+            $(".remove",$t).click(function() {
+                $.post("{:U('Mall/remove_in_cart')}/key/" + key, function (res) {
+                    if (res.success) {
+                        $t.remove();
+                        delete pinfos[key];
+                        if(!$(".p-info .row-table").length){
+                            $(".p-info .panel-body").html('<div class="text-center">还没有添加任何商品</div>')
+                        }
+                        countAll();
+                    }else{
+                        $.error(res.error || '从购物车移除失败！');
+                    }
+                }, 'json')
+            })
+        })
+
+        function countAll() {
+            var freight = $("#freight").fee();
+            var subtotal = 0;
+            $.each(pinfos,function (k, p) {
+                subtotal += parseFloat(p.price * p.count);
+            })
+            $("#subtotal").text('￥' + fixed(subtotal));
+            $("#total").text('￥' + fixed(subtotal + freight));
+        }
+
+        $("#btn-buy").submit("{:U('Mall/payment')}", function () {
+            var data = $.check([
+                {'target': '#addressee', 'name': '收货人', 'rules': $.rules.empty},
+                {'target': '#mobile', 'name': '手机号码', 'rules': [$.rules.empty, $.rules.mobile]},
+                {'target': '#area1', 'name': '所在省', 'rules': $.rules.empty},
+                {'target': '#area2', 'name': '所在市', 'rules': $.rules.empty},
+                {'target': '#area_id', 'name': '所在区', 'rules': $.rules.empty},
+                {'target': '#addr_detail', 'name': '详细地址', 'rules': $.rules.empty},
+            ]);
+            if (data) {
+                var list = {}, count = 0;
+                $.each(pinfos, function (k, v) {
+                    list[k] = v.count;
+                    count++;
+                })
+                if (!count) return $("#btn-pay").error('还没有添加任何商品！');
+                else data.list = list;
+            }
+            return data;
+        }, function (res) {
+            if (res.success) {
+                location.href = "{:U('Mall/payment')}/id/" + res.success;
+            }
+        })
     })
 </script>

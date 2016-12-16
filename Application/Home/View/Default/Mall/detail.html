@@ -60,8 +60,19 @@
 
         $(".number-box").numberBox();
 
-        $(".btn-buy").click(function() {
-            location.href = "{:U('Mall/confirm_order')}/id/{$id}/n/" + $('#count').val();
+        $(".btn-buy").submit("{:U('Mall/add_to_cart')}",function(){
+            var data = $.check([
+                {'target': '#count', 'name': '数量', 'rules': $.rules.number(0, 10000)},
+            ]);
+            if (data) {
+                data.id = '{$id}';
+                data.types = '';
+            }
+            return data;
+        },function(res) {
+            if (res.success) {
+                location.href = "{:U('Mall/confirm_order')}/pid/{$id}";
+            }
         })
     })
 </script>

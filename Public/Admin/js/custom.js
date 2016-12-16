@@ -99,10 +99,13 @@
                     this.error = '请输入小于 ' + max + ' 的[NAME]';
                     return false;
                 }
-                var arr = v.toString().split('.');
-                if (arr.length > 1 && arr[1].length > fixed) {
-                    this.error = '[NAME]最多保留小数点后 ' + fixed + ' 位';
-                    return false;
+                if(fixed != null){
+                    var arr = v.toString().split('.');
+                    if (arr.length > 1 && arr[1].length > fixed) {
+                        if(fixed == 0) this.error = '[NAME]应为整数';
+                        else this.error = '[NAME]最多保留小数点后 ' + fixed + ' 位';
+                        return false;
+                    }
                 }
                 return $.regexs.length(v, min, max);
             };

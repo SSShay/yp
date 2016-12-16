@@ -1,20 +1,74 @@
 <style>
     /*  mall-payment-page  */
+    #c-payment{
+
+    }
+    #c-payment h4{
+        margin-bottom: 8px;
+    }
+    #c-payment .order-id{
+        color: #999;
+        margin-bottom: 15px;
+    }
+    #c-payment .tip,#c-payment .total{
+        color: #ed1720;
+    }
+    #c-payment .panel{
+        margin-top: 15px;
+    }
+    #c-payment .btn-box{
+        visibility: hidden;
+        margin-bottom: 200px;
+    }
+    #c-payment .btn-box.show{
+        visibility: visible;
+    }
+    #c-payment #rest{
+        margin-right: 30px;
+        color: #ed1720;
+    }
 
 </style>
 <link href="__CSS__/style.mall.css"  rel="stylesheet" />
+<div class="container" id="c-payment">
+    <h4><strong>选择付款方式</strong></h4>
+    <span class="order-id">订单号：{$order.order_id}</span>
+    <span class="tip">（请记住您的订单号，退款时需要提供订单号）</span>
+    <span class="pull-right">实付：<span class="total">￥{$order.total}</span></span>
+    <div class="panel panel-default">
+        <div class="panel-heading">支付方式</div>
+        <div class="panel-body">
+            <div class="col-cell">
+
+            </div>
+            <div class="col-cell">
+
+            </div>
+        </div>
+    </div>
+    <div class="pull-right btn-box">
+        <div class="col-cell">剩余付款时间：<span id="rest"></span></div>
+        <div class="btn btn-primary btn-lg f-xs-16 col-cell" id="btn-pay">立即支付</div>
+    </div>
+</div>
+
 
 <script src="__JS__/custom.mall.js"></script>
 <script>
     $(function() {
-        var pinfo = {
-            'price': parseFloat('{$product.price}'),
-            'count': parseInt('{$n}')
+        //$("#rest")
+        var time = parseInt('{$order.rest}');
+        function timedown() {
+            if (time > 0) {
+                $("#rest").text((time / 60 >> 0) + '分 ' + (time % 60) + '秒');
+                time--;
+                setTimeout(timedown, 1000);
+            }
+            else {
+                $("#rest").text('0分 0秒');
+            }
         }
-
-        $(".number-box").numberBox({'change':function(v){
-            pinfo.count = v;
-            $(".subtotal").text('￥' + (pinfo.price * pinfo.count).toFixed(2))
-        }});
+        timedown();
+        $(".btn-box").addClass('show')
     })
 </script>

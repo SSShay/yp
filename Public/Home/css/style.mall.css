@@ -241,6 +241,12 @@
 #c-confirm_order .p-info{
     margin-bottom: 5px;
 }
+#c-confirm_order .p-info .panel-body{
+    padding: 10px 0;
+}
+#c-confirm_order .p-info .row-table{
+    margin: 10px 0;
+}
 #c-confirm_order .p-info img.thumb{
     width: 100px;
     max-width: 100%;
@@ -263,12 +269,13 @@
     clear: both;
     width: 100%;
 }
-#c-confirm_order .p-count .total{
+#c-confirm_order .p-count #total{
     color: #e21b1b;
     font-size: 18px;
     font-weight: bold;
+    padding-left: 15px;
 }
-#c-confirm_order .p-count #btn-pay{
+#c-confirm_order .p-count #btn-buy{
     float: right;
     clear: both;
     margin-top: 15px;
@@ -294,7 +301,10 @@
         padding-right: 5px;
     }
     #c-confirm_order .p-info .panel-body{
-        padding: 10px 0;
+        padding: 5px 0;
+    }
+    #c-confirm_order .p-info .row-table{
+        margin: 5px 0;
     }
     #c-confirm_order .p-count .col-table{
         font-size: 12px;

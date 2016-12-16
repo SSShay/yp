@@ -1,6 +1,9 @@
 //自定义jQuery方法
 ;(function($) {
 
+    //省级地区
+    $.provice={3:"北京",33:"上海",27:"天津",32:"重庆",12:"黑龙江",15:"吉林",18:"辽宁",22:"山东",23:"山西",24:"陕西",10:"河北",11:"河南",13:"湖北",14:"湖南",9:"海南",16:"江苏",17:"江西",6:"广东",7:"广西",30:"云南",8:"贵州",25:"四川",19:"内蒙古",20:"宁夏",5:"甘肃",21:"青海",28:"西藏",29:"新疆",1:"安徽",31:"浙江",4:"福建",26:"台湾",34:"其他国家或地区"};
+
     //number-box插件
     $.fn.numberBox = function(opts) {
         return this.each(function () {
@@ -50,7 +53,7 @@
                     function getpos(el) {
                         var pos = {};
                         el.focus();
-                        if (el.selectionStart) {
+                        if (el.selectionStart != null) {
                             pos.start = el.selectionStart;
                             pos.end = el.selectionEnd;
                         }
