@@ -199,6 +199,10 @@
         }, function (res) {
             if (res.success) {
                 location.href = "{:U('Mall/payment')}/id/" + res.success;
+            }else if(res.refresh) {
+                res.refresh === true ? location.reload() : setTimeout(function () {
+                    location.reload();
+                }, res.refresh);
             }
         })
     })

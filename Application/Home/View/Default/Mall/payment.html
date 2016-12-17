@@ -27,6 +27,32 @@
         margin-right: 30px;
         color: #ed1720;
     }
+    #c-payment .payments .payment{
+        padding: 10px 5px 10px 15px;
+        display: inline-block;
+        border: 2px solid #fff;
+        cursor: pointer;
+        margin: 0 2px;
+        position: relative;
+    }
+    #c-payment .payments .payment:after{
+        content: ' ';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border: 6px solid #fff;
+    }
+    #c-payment .payments .payment.checked{
+        border-color: #1e7abf;
+    }
+    #c-payment .payments .payment.checked:after{
+        border-color: transparent #2d93df #2d93df transparent;
+    }
+    #c-payment .payments .payment img{
+        margin-left: 5px;
+    }
 
 </style>
 <link href="__CSS__/style.mall.css"  rel="stylesheet" />
@@ -37,38 +63,57 @@
     <span class="pull-right">实付：<span class="total">￥{$order.total}</span></span>
     <div class="panel panel-default">
         <div class="panel-heading">支付方式</div>
-        <div class="panel-body">
-            <div class="col-cell">
-
-            </div>
-            <div class="col-cell">
-
+        <div class="panel-body payments">
+            <div class="payment checked">
+                <input name="payment" type="radio" value="1" checked/>
+                <img src="__IMG__/mall/icon_alipay.png" />
             </div>
         </div>
     </div>
     <div class="pull-right btn-box">
         <div class="col-cell">剩余付款时间：<span id="rest"></span></div>
-        <div class="btn btn-primary btn-lg f-xs-16 col-cell" id="btn-pay">立即支付</div>
+        <gt name="order.rest" value="0">
+            <div class="btn btn-primary btn-lg f-xs-16 col-cell" id="btn-pay">立即支付</div>
+            <else/>
+            <div class="btn btn-primary btn-lg f-xs-16 col-cell disabled">订单已过期</div>
+        </gt>
     </div>
 </div>
-
 
 <script src="__JS__/custom.mall.js"></script>
 <script>
     $(function() {
         //$("#rest")
         var time = parseInt('{$order.rest}');
+
         function timedown() {
+            time--;
             if (time > 0) {
                 $("#rest").text((time / 60 >> 0) + '分 ' + (time % 60) + '秒');
-                time--;
                 setTimeout(timedown, 1000);
             }
             else {
                 $("#rest").text('0分 0秒');
             }
         }
+
         timedown();
-        $(".btn-box").addClass('show')
+        $(".btn-box").addClass('show');
+
+        var payment = 1;
+        $("#c-payment .payment").click(function () {
+            var $t = $(this);
+            var val = $t.val();
+            if (!$t.hasClass('checked')) {
+                payment = val;
+                $t.addClass('checked').find('input').prop('checked', true);
+                $t.siblings().removeClass('checked').removeProp('checked');
+            }
+        })
+
+        $("#btn-pay").click(function () {
+            if (time < 1) $.error("订单已过期！请重新下单~");
+            else location.href = "{:U('Pay/index')}/oid/{$oid}/type/" + payment;
+        })
     })
 </script>

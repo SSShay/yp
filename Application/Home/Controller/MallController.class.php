@@ -213,9 +213,10 @@ class MallController extends BaseController
             $where['id'] = $oid;
             $order = $sc_order_obj->findObj($where, 'total,ctime');
             if ($order) {
-                $order['order_id'] = date('Ymd', $order['ctime']) . str_pad($oid, 8, '0', STR_PAD_LEFT);
+                $order['order_id'] = PayController::enpayno($oid, $order['ctime']);
                 $order['rest'] = $order['ctime'] + 3600 - NOW_TIME;
                 $this->order = $order;
+                $this->oid = $oid;
 
                 $this->display('payment');
             } else {
@@ -229,60 +230,69 @@ class MallController extends BaseController
     {
         $list = $_POST['list'];
         if (!empty($list) && is_array($list)) {
-            $flag = true;
+            $flag = true;                //是否成功的标记
             $sc_order_obj = new ScOrderModel();
             $sc_order_obj->startTrans();
             $oid = $sc_order_obj->addOrder(I('post.addressee'), I('post.mobile'), I('post.area_id'), I('post.addr_detail'));
             if ($oid) {
                 $total = self::freight;     //价格总数
-                $i = 0;         //计数
-                $describe = '';
+                $i = 0;                       //计数
+                $describe = '';               //描述
+                $cart = session('cart');     //购物车
+                $order_list = array();       //购买列表
+                $perfix = C('SESSION_PREFIX');
 
                 $sc_product_obj = new ScProductModel();
                 $sc_order_product_obj = new ScOrderProductModel();
                 foreach ($list as $k => $n) {
-                    $param = explode('.', $k);
-                    $pid = $param[0];
+                    if (isset($cart[$k])) {
+                        unset($_SESSION[$perfix]['cart'][$k]);
 
-                    $where['id'] = $pid;
-                    $where['display'] = 1;
-                    $product = $sc_product_obj->findObj($where, 'name,price');
-                    if ($product) {
-                        if ($i++ == 0) $describe = $product['name'];
+                        $param = explode('.', $k);
+                        $pid = $param[0];
 
-                        $pobj['order_id'] = $oid;
-                        $pobj['product_id'] = $pid;
-                        $pobj['describe'] = $product['name'];
-                        $pobj['price'] = $product['price'];
-                        $pobj['count'] = $n;
-                        $res = $sc_order_product_obj->addObj($pobj);
-                        if ($res) {
-                            $total += $product['price'] * $n;
+                        $where['id'] = $pid;
+                        $where['display'] = 1;
+                        $product = $sc_product_obj->findObj($where, 'name,price');
+                        if ($product) {
+                            if ($i++ == 0) $describe = $product['name'];
+
+                            $pobj['order_id'] = $oid;
+                            $pobj['product_id'] = $pid;
+                            $pobj['describe'] = $product['name'];
+                            $pobj['price'] = $product['price'];
+                            $pobj['count'] = $n;
+                            $res = $sc_order_product_obj->addObj($pobj);
+                            if ($res) {
+                                $total += $product['price'] * $n;
+                            } else {
+                                $flag = false;
+                                $re['error'] = $sc_order_obj->getError();
+                                break;
+                            }
+
+                            $order_list[$k] = $n;
                         } else {
                             $flag = false;
-                            $re['error'] = $sc_order_obj->getError();
+                            $re['error'] = '部分商品已失效！';
+                            $re['refresh'] = 1500;
                             break;
                         }
-
-                        $_SESSION[C('SESSION_PREFIX')]['cart'][$k] = $n;
-                    } else {
+                    }else{
                         $flag = false;
-                        unset($_SESSION[C('SESSION_PREFIX')]['cart'][$k]);
-                        $re['error'] = '部分商品已失效！';
-                        $re['refresh'] = true;
-                        break;
+                        $re['error'] = '部分商品已不在购物车！';
+                        $re['refresh'] = 1500;
                     }
                 }
 
-                if ($flag) {
+                if($flag) {
                     if ($i > 1) $describe .= ' 等' . $i . '件';
                     $res = $sc_order_obj->setTotal($oid, $total, $describe);
                     if ($res) {
                         $re['success'] = $oid;
-                        session('cart', null);   //清空购物车
                     } else {
-                        $flag = false;
                         $re['error'] = $sc_order_obj->getError();
+                        $flag = false;
                     }
                 }
             } else {
@@ -294,6 +304,14 @@ class MallController extends BaseController
                 $sc_order_obj->commit();
             } else {
                 $sc_order_obj->rollback();
+                //失败还原购物车
+                if(!empty($order_list)){
+                    $_cart = session('cart');
+                    foreach($order_list as $k => $n){
+                        $_cart[$k] = $n;
+                    }
+                    session('cart', $_cart);
+                }
             }
         } else {
             $re['error'] = '提交的商品列表为空！';

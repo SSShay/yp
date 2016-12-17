@@ -20,8 +20,9 @@ define('APP_DEBUG',True);
 // 定义应用目录
 define('APP_PATH','./Application/');
 
-// 微信相关配置
-//define('__API__', dirname(__FILE__).'/Application/Common/Common/');
+
+// 接口相关配置
+define('__API__', dirname(__FILE__).'/Application/Common/Common/');
 //require_once __API__.'wxapi/config.php';
 
 // 引入ThinkPHP入口文件
