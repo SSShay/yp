@@ -8,6 +8,9 @@ use Think\Model;
 class ScOrderModel extends Model
 {
 
+    //订单有效时间
+    const active_time = 3600;
+
     protected $tableName = 'sc_order';
 
     /**
@@ -34,18 +37,24 @@ class ScOrderModel extends Model
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //查询列表
-    /*public function selectList($where = array(),$page_index = 0,$page_size = 10,$order = 'ctime desc')
+    public function selectList($where = array(),$page_index = 0,$page_size = 10,$order = 'ctime desc')
     {
+        $sc_order = $this->getTableName();
+        $sc_area = M("Area")->getTableName();
+        $sc_pay = M("ScPay")->getTableName();
         $count = $this->where($where)->count();
-        $list = $this->field('id,thumb,name,price,display,sort,ctime,utime')->where($where)->order($order)
+        $list = $this->field("$sc_order.id,addressee,total,describe,$sc_order.ctime,status,
+        (SELECT P.name as name FROM $sc_area as P,$sc_area as A WHERE A.areaid = area_id AND P.proviceid = A.proviceid AND P.cityid = 0) as name")
+            ->where($where)
+            ->join("LEFT JOIN $sc_pay ON orderid = $sc_order.id")
+            ->order($order)
             ->limit($page_index * $page_size, $page_size)
             ->select();
-        if($list){
+        if ($list) {
             foreach ($list as $k => $v) {
                 $list[$k]['ctime'] = date('Y-m-d H:i', $v['ctime']);
-                $list[$k]['utime'] = date('Y-m-d H:i', $v['utime']);
             }
-        }else{
+        } else {
             $list = array();
         }
 
@@ -61,7 +70,7 @@ class ScOrderModel extends Model
         $list = $this->field('id,name,thumb,price')->where($where)->order('sort')->select();
 
         return $list;
-    }*/
+    }
 
     public function addOrder($addressee,$mobile,$area_id,$addr_detail)
     {

@@ -38,10 +38,10 @@ define('LOG_PATH','./Log/');//日志文件夹
  * @param string $title
  * @param array $str_arr
  */
-function write_log($title,$str_arr)
+function write_log($title,$str_arr,$path = LOG_PATH)
 {
     if (APP_LOG) {
-        $fp = fopen(LOG_PATH . date('Ymd'), "a");
+        $fp = fopen($path . date('Ymd'), "a");
         if ($fp) {
             $log = date("H:i:s") . '：\t' . $title;
             if (is_array($str_arr)) {

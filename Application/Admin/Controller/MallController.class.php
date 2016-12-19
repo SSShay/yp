@@ -2,6 +2,7 @@
 
 namespace Admin\Controller;
 use Common\Model\BannerModel;
+use Common\Model\ScOrderModel;
 use Common\Model\ScProductImgModel;
 use Common\Model\ScProductModel;
 
@@ -119,12 +120,12 @@ class MallController extends BaseController
     // 商品管理
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const page_key = 'product-page-index';
+    const product_page_key = 'product-page-index';
 
     public function product(){
         $this->U_check_permissions();
 
-        $this->page_index = session(self::page_key);
+        $this->page_index = session(self::product_page_key);
         if(!$this->page_index) $this->page_index = 0;
 
         $this->display('product');
@@ -136,7 +137,7 @@ class MallController extends BaseController
 
         $sc_product_obj = new ScProductModel();
         $p = I('get.p');
-        session(self::page_key, $p);
+        session(self::product_page_key, $p);
         $list = $sc_product_obj->selectList('', $p);
 
         echo json_encode($list);
@@ -397,10 +398,27 @@ class MallController extends BaseController
     // 订单管理
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    const order_page_key = 'order-page-index';
+
     public function order(){
         $this->U_check_permissions();
 
+        $this->page_index = session(self::order_page_key);
+        if(!$this->page_index) $this->page_index = 0;
+
         $this->display('order');
+    }
+
+    public function order_list()
+    {
+        $this->U_check_permissions('order');
+
+        $sc_order_obj= new ScOrderModel();
+        $p = I('get.p');
+        session(self::order_page_key, $p);
+        $list = $sc_order_obj->selectList('', $p);
+
+        echo json_encode($list);
     }
 
 

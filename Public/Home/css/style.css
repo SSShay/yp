@@ -239,7 +239,7 @@
     height: 100%;
 }
 #body{
-    min-height: calc(100vh - 495px);
+    min-height: calc(100vh - 438px);
 }
 
 

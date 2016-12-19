@@ -2,6 +2,7 @@
 
 namespace Home\Controller;
 use Common\Model\ScOrderModel;
+use Common\Model\ScPayModel;
 
 /**
  * 支付模块
@@ -59,19 +60,18 @@ class PayController extends BaseController
     /**
      * 解析订单id
      */
-    public static function depayno($payno)
+    public static function depayno($payno,$findorder = '*')
     {
-
         $order['time'] = substr($payno, 2, 8);
         $order['id'] = intval(substr($payno, 10, 8));
 
-        var_dump($order);
-    }
+        if ($findorder === false) return $order;
 
-    public function test(){
-        self::depayno('PM2016121700000001');
+        $sc_order_id = new ScOrderModel();
+        $where['id'] = $order['id'];
+        $order = $sc_order_id->findObj($where, $findorder);
+        return $order;
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //支付：支付宝
@@ -84,34 +84,123 @@ class PayController extends BaseController
     {
         $type = I('get.type');
         switch ($type) {
-            case 1:
+            case ScPayModel::PAY_ali:
                 $this->alipay();
                 break;
 
             default:
-
         }
     }
 
-
     private function alipay()
     {
-        require_once __API__ . 'alipayapi/alipay_submit.class.php';
+        $order_id = I('get.oid');
 
-        $host = 'http://' . $_SERVER["HTTP_HOST"];
-        $alipaySubmit = new \AlipaySubmit(array(
-            'notify_url' => $host . U('Pay/alipay_notify'),
-            'return_url' => $host . U('Pay/alipay_return')
-        ));
-        //$payno = self::enpayno();
+        $order_obj = new ScOrderModel();
+        $where['id'] = $order_id;
+        $order = $order_obj->findObj($where, 'total,describe,ctime');
+        if($order) {
+
+            $re['orderid'] = self::enpayno($order_id, $order['ctime']);;
+            $re['total'] = $order['total'];
+
+            $sc_pay_obj = new ScPayModel();
+            unset($where);
+            $where['orderid'] = $order_id;
+            $pay = $sc_pay_obj->findObj($where, 'pay_type,status,ctime');
+
+            if ($pay) {
+                if ($pay['status'] == ScPayModel::T_pay_success || $pay['status'] == ScPayModel::T_pay_completion) {
+                    $re['success'] = true;
+                    $re['info'] = '您已经于 ' . date('Y年m月d日 H时i分s秒', $pay['ctime']) . ' 支付过了此订单！';
+                } elseif ($pay['status'] == ScPayModel::T_paying) {
+                    $re['info'] = '此订单正在退款处理中！';
+                } elseif ($pay['status'] == ScPayModel::T_refund_success) {
+                    $re['info'] = '此订单已退款成功！';
+                } else {
+                    $re['error'] = '订单未支付！';
+                }
+            }elseif (NOW_TIME > $order['ctime'] + ScOrderModel::active_time) {
+                $re['error'] = '交易关闭！订单已过期！';
+            } else {
+
+                /*require_once __API__ . 'alipayapi/alipay_submit.class.php';
+
+                 $host = 'http://' . $_SERVER["HTTP_HOST"];
+                 $alipaySubmit = new \AlipaySubmit(array(
+                     'notify_url' => $host . U('Pay/alipay_notify'),
+                     'return_url' => $host . U('Pay/alipay_return')
+                 ));
+
+                 $payno = self::enpayno($order_id, $order['ctime']);
+                 $html_text = $alipaySubmit->go_pay($payno, $order['describe'], $order['total']);
+
+                 echo $html_text;
+                 */
+                //模拟支付
+                $this->testpay();
+
+                exit;
+            }
+
+            $this->msg = $re;
+
+            $this->breadcrumb('支付结果');
+            $this->display('result');
+
+        }else{
+            $this->error('订单不存在！');
+        }
+    }
+
+    private function testpay(){
+
         $order_id = I('get.oid');
         $order_obj = new ScOrderModel();
         $where['id'] = $order_id;
         $order = $order_obj->findObj($where, 'total,describe,ctime');
-        $payno = self::enpayno($order_id, $order['ctime']);
-        $html_text = $alipaySubmit->go_pay($payno, $order['describe'], $order['total']);
+        $out_trade_no = self::enpayno($order_id, $order['ctime']);
 
-        echo $html_text;
+        $msg['orderid'] = $out_trade_no;
+        $msg['total'] = $order['total'];
+        $msg['payment'] = '支付宝';
+        //支付宝交易号
+        $trade_no = '123456';
+        $order = $this->depayno($out_trade_no, 'id');
+        if ($order) {
+            $sc_pay_obj = new ScPayModel();
+            $where['orderid'] = $order['id'];
+            $pay = $sc_pay_obj->findObj($where, 'status');
+            if ($pay) {
+                if ($pay['status'] != ScPayModel::T_pay_success && $pay['status'] != ScPayModel::T_pay_completion) {
+                    $data['status'] = ScPayModel::T_pay_success;
+                    $res = $sc_pay_obj->setObj($where, $data);
+
+                    if (!$res){
+                        $msg['error'] = '支付状态修改失败！';
+                    }else{
+                        $msg['success'] = true;
+                    }
+                }else{
+                    $msg['success'] = true;
+                }
+            } else {
+                $res = $sc_pay_obj->addPay($order['id'], ScPayModel::PAY_ali, $trade_no);
+
+                if (!$res){
+                    $msg['error'] = '订单支付失败，如已扣款，请联系客服处理！';
+                }else{
+                    $msg['success'] = true;
+                }
+            }
+        } else{
+            $msg['error'] = '订单不存在，如已扣款，请联系客服处理！';
+        }
+
+        $this->msg = $msg;
+
+        $this->breadcrumb('支付结果');
+        $this->display('result');
     }
 
     /**
@@ -124,64 +213,48 @@ class PayController extends BaseController
         $alipayNotify = new \AlipayNotify();
         $verify_result = $alipayNotify->verifyNotify();
 
-        if($verify_result) {//验证成功
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //请在这里加上商户的业务逻辑程序代
-
-
-            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-
-            //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
-
+        if ($verify_result) {//验证成功
             //商户订单号
-
             $out_trade_no = $_POST['out_trade_no'];
-
-            //支付宝交易号
-
-            $trade_no = $_POST['trade_no'];
 
             //交易状态
             $trade_status = $_POST['trade_status'];
 
+            if ($trade_status == 'TRADE_FINISHED') {
+                $order = $this->depayno($out_trade_no, false);
+                if ($order) {
+                    $sc_pay_obj = new ScPayModel();
+                    $res = $sc_pay_obj->setCompletion($order['id']);
 
-            if($_POST['trade_status'] == 'TRADE_FINISHED') {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
-                //如果有做过处理，不执行商户的业务程序
+                    if (!$res) exit("fail");
+                }
+            } else if ($trade_status == 'TRADE_SUCCESS') {
+                //支付宝交易号
+                $trade_no = $_POST['trade_no'];
+                $order = $this->depayno($out_trade_no, 'id');
+                if ($order) {
+                    $sc_pay_obj = new ScPayModel();
+                    $where['orderid'] = $order['id'];
+                    $pay = $sc_pay_obj->findObj($where, 'status');
+                    if ($pay) {
+                        if ($pay['status'] != ScPayModel::T_pay_success && $pay['status'] != ScPayModel::T_pay_completion) {
+                            $data['status'] = ScPayModel::T_pay_success;
+                            $data['callback_time'] = NOW_TIME;
+                            $res = $sc_pay_obj->setObj($where, $data);
 
-                //注意：
-                //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+                            if (!$res) exit("fail");
+                        }
+                    } else {
+                        $res = $sc_pay_obj->addPay($order['id'], ScPayModel::PAY_ali, $trade_no, true);
 
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+                        if (!$res) exit("fail");
+                    }
+                } else exit("fail");
             }
-            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
-                //如果有做过处理，不执行商户的业务程序
 
-                //注意：
-                //付款完成后，支付宝系统发送该交易状态通知
-
-                //调试用，写文本函数记录程序运行情况是否正常
-                //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-            }
-
-            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-
-            echo "success";		//请不要修改或删除
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        }
-        else {
-            //验证失败
+            echo "success";
+        } else {
             echo "fail";
-
-            //调试用，写文本函数记录程序运行情况是否正常
-            //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
         }
     }
 
@@ -194,44 +267,56 @@ class PayController extends BaseController
 
         $alipayNotify = new \AlipayNotify();
         $verify_result = $alipayNotify->verifyReturn();
-        if($verify_result) {//验证成功
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //请在这里加上商户的业务逻辑程序代码
-
-            //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-            //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+        if ($verify_result) {//验证成功
 
             //商户订单号
-
             $out_trade_no = $_GET['out_trade_no'];
-
-            //支付宝交易号
-
-            $trade_no = $_GET['trade_no'];
+            $msg['orderid'] = $out_trade_no;
+            $msg['payment'] = '支付宝';
 
             //交易状态
             $trade_status = $_GET['trade_status'];
+            if ($trade_status == 'TRADE_FINISHED' || $trade_status == 'TRADE_SUCCESS') {
+                //支付宝交易号
+                $trade_no = $_POST['trade_no'];
+                $order = $this->depayno($out_trade_no, 'id');
+                if ($order) {
+                    $sc_pay_obj = new ScPayModel();
+                    $where['orderid'] = $order['id'];
+                    $pay = $sc_pay_obj->findObj($where, 'status');
+                    if ($pay) {
+                        if ($pay['status'] != ScPayModel::T_pay_success && $pay['status'] != ScPayModel::T_pay_completion) {
+                            $data['status'] = ScPayModel::T_pay_success;
+                            $res = $sc_pay_obj->setObj($where, $data);
 
+                            if (!$res){
+                                $msg['error'] = '支付状态修改失败！';
+                            }else{
+                                $msg['success'] = true;
+                            }
+                        }else{
+                            $msg['success'] = true;
+                        }
+                    } else {
+                        $res = $sc_pay_obj->addPay($order['id'], ScPayModel::PAY_ali, $trade_no);
 
-            if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS') {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
+                        if (!$res){
+                            $msg['error'] = '订单支付失败，如已扣款，请联系客服处理！';
+                        }else{
+                            $msg['success'] = true;
+                        }
+                    }
+                } else{
+                    $msg['error'] = '订单不存在，如已扣款，请联系客服处理！';
+                }
+            } else {
+                $msg['error'] = '订单支付失败，如已扣款，请联系客服处理！';
             }
-            else {
-                echo "trade_status=".$_GET['trade_status'];
-            }
 
-            echo "验证成功<br />";
+            $this->msg = $msg;
+            $this->breadcrumb('支付结果');
 
-            //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        }
-        else {
-            //验证失败
-            //如要调试，请看alipay_notify.php页面的verifyReturn函数
-            echo "验证失败";
+            $this->display('result');
         }
     }
 

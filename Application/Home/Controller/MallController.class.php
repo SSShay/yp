@@ -214,7 +214,7 @@ class MallController extends BaseController
             $order = $sc_order_obj->findObj($where, 'total,ctime');
             if ($order) {
                 $order['order_id'] = PayController::enpayno($oid, $order['ctime']);
-                $order['rest'] = $order['ctime'] + 3600 - NOW_TIME;
+                $order['rest'] = $order['ctime'] + ScOrderModel::active_time - NOW_TIME;
                 $this->order = $order;
                 $this->oid = $oid;
 

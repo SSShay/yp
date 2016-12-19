@@ -175,6 +175,10 @@ class AlipaySubmit
 
 		);
 
+
+		var_dump($parameter);
+		exit;
+
 		//建立请求
 		$html_text = $this->buildRequestForm($parameter, "get", "确认");
 		return $html_text;

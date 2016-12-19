@@ -1,1 +1,155 @@
-order
+<style>
+    table label{
+        font-weight: inherit;
+        display: block;
+        margin-bottom: 0;
+    }
+    table tr{
+        cursor: default;
+    }
+    table #checkall{
+        width: 8em;
+    }
+    table #col-addressee{
+        width: 6em;
+    }
+    table #col-name{
+        width: 20em;
+    }
+    table #col-price{
+        width: 6em;
+    }
+    table #col-area{
+        width: 10em;
+    }
+    table #col-ctime{
+        width: 12em;
+    }
+    table #col-paytype{
+        width: 10em;
+    }
+    table .time{
+        font-size: 13px;
+    }
+    table .thumb{
+        width: 50px;
+    }
+    table #col-action{
+        width: 10em;
+    }
+    table a{
+        cursor: pointer;
+        font-size: 13px;
+    }
+    table td{
+        vertical-align: middle !important;
+    }
+    table .action a{
+        margin-right: 10px;
+    }
+
+    td.editing{
+        position: relative;
+        padding: 0;
+        color: transparent;
+    }
+    td.editing .input-group{
+        position: absolute;
+        top: 3px;
+        left: 0;
+        min-width: 80px;
+    }
+
+</style>
+<section class="panel">
+    <header class="panel-heading custom-tab dark-tab">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a>商品列表</a>
+            </li>
+            <li>
+                <a href="{:U('Mall/product_add')}">商品添加</a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane active" id="product-list">
+                <table class="table table-hover general-table">
+                    <thead>
+                    <tr>
+                        <th id="checkall"><label><input type="checkbox"> 编号</label></th>
+                        <th id="col-addressee">收件人</th>
+                        <th id="col-name">商品名称</th>
+                        <th id="col-price">金额</th>
+                        <th id="col-area">地区</th>
+                        <th id="col-paytype">支付状态</th>
+                        <th id="col-ctime">下单时间</th>
+                        <th id="col-action">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <div class="button-box col-sm-4">
+                    <button id="del-all-btn" type="button" class="btn btn-danger hidden">删除选中</button>
+                </div>
+                <div class="col-sm-8 page-box">
+                    <div class="dataTables_paginate paging_bootstrap pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="__JS__/xplugs/jquery.page-number.js"></script>
+<script>
+
+    $(function() {
+
+        var page_num = $(".dataTables_paginate").PageNumber('{$page_index}',
+                function (page, pcount) {
+                    return (page.parents('.page-box').width() / (20 + Math.ceil(Math.log10(pcount)) * 12) - 4) >> 0;
+                },
+                function (p) {
+                    if (p == undefined) p = page_num.index;
+                    else if (isNaN(p)) return;
+                    $("#article-list").addClass('loading');
+                    $.get("{:U('Mall/order_list')}", {p: p}, function (res) {
+                        $("#article-list").removeClass('loading')
+                        if (!res.list) {
+                            $("#article-list").addClass('loadfail');
+                            return;
+                        }
+                        $("#tbody").text('');
+                        $.each(res.list, function (i, v) {
+                            var tr = $([
+                                '<tr>',
+                                '<td><input type="checkbox"> ' + v.id + '</td>',
+                                '<td>' + v.addressee + '</td>',
+                                '<td>' + v.describe + '</td>',
+                                '<td>' + v.total + '</td>',
+                                '<td class="time">' + v.name + '</td>',
+                                '<td class="time">' + v.status + '</td>',
+                                '<td class="time">' + v.ctime + '</td>',
+                                '<td class="action">',
+                                '<a class="edit-btn" href="{:U("Mall/product_mod")}/id/' + v.id + '">修改</a>',
+                                '<a class="del-btn" href="javascript:;">删除</a>',
+                                '</td>',
+                                '</tr>'
+                            ].join(''));
+                            $("#tbody").append(tr);
+
+                        });
+                        page_num.refresh(p, res.count);
+                    }, 'json')
+                }
+        );
+
+        page_num.loadindex();
+
+        $('#checkall').click(function () {
+            var check = $('input', $(this)).is(':checked')
+            $("#tbody input").prop('checked', check);
+        })
+    })
+</script>
