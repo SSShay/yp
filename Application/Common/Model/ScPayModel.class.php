@@ -73,9 +73,29 @@ class ScPayModel extends Model
         return $list;
     }*/
 
+    public function findPay($orderid,$field = 'pay_type,trade_id,status,paytime')
+    {
+        $where['order_id'] = $orderid;
+        $res = $this->field($field)->where($where)->find();
+
+        return $res;
+    }
+
+    public static function getType($pay_type)
+    {
+        switch ($pay_type) {
+            case self::PAY_ali:
+                return '支付宝';
+            case self::PAY_wx:
+                return '微信';
+            default:
+                return 'ERROR';
+        }
+    }
+
     public function addPay($orderid,$pay_type,$trade_id,$iscallback = false,$status = self::T_pay_success)
     {
-        $data['orderid'] = $orderid;
+        $data['order_id'] = $orderid;
         $data['pay_type'] = $pay_type;
         $data['trade_id'] = $trade_id;
         $data['status'] = $status;
@@ -95,7 +115,7 @@ class ScPayModel extends Model
      */
     public function setCompletion($id)
     {
-        $where['orderid'] = $id;
+        $where['order_id'] = $id;
         $where['status'] = ScPayModel::T_pay_success;
         $data['status'] = ScPayModel::T_pay_completion;
         $data['callback_time'] = time();

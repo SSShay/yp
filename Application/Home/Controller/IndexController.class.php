@@ -97,6 +97,7 @@ class IndexController extends BaseController
     public function trade_union(){
         $this->breadcrumb(array('name' => '行业联盟'));
         $this->page_nofoot('trade_union');
+        //$this->page_full('trade_union');
     }
 
 

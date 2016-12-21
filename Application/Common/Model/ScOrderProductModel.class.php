@@ -28,27 +28,15 @@ class ScOrderProductModel extends Model
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //查询列表
-    /*public function selectList($where = array(),$page_index = 0,$page_size = 10,$order = 'ctime desc')
+    public function selectByOrder($order_id,$field = 'describe,price,count',$order = '')
     {
-        $count = $this->where($where)->count();
-        $list = $this->field('id,thumb,name,price,display,sort,ctime,utime')->where($where)->order($order)
-            ->limit($page_index * $page_size, $page_size)
-            ->select();
-        if($list){
-            foreach ($list as $k => $v) {
-                $list[$k]['ctime'] = date('Y-m-d H:i', $v['ctime']);
-                $list[$k]['utime'] = date('Y-m-d H:i', $v['utime']);
-            }
-        }else{
-            $list = array();
-        }
+        $where['order_id'] = $order_id;
+        $list = $this->field($field)->where($where)->order($order)->select();
 
-        $result = array('list' => $list, 'count' => ceil($count / $page_size));
-
-        return $result;
+        return $list;
     }
 
-    //
+    /*//
     public function selectListByHome()
     {
         $where['display'] = 1;

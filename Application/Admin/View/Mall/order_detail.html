@@ -1,0 +1,146 @@
+﻿<section class="panel">
+    <header class="panel-heading custom-tab dark-tab">
+        <ul class="nav nav-tabs">
+            <li>
+                <a href="{:U('Mall/order')}">订单列表</a>
+            </li>
+            <li class="active">
+                <a>订单详情</a>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="container-fluid">
+                    <table class="table table-bordered">
+                        <tr><th class="info active" colspan="6">收货信息</th></tr>
+                        <tr>
+                            <th>收件人</th>
+                            <td>{$order.addressee}</td>
+                            <th>联系方式</th>
+                            <td>{$order.mobile}</td>
+                            <th>地址</th>
+                            <td>{$area}</td>
+                        </tr>
+                        <tr>
+                            <th>详细地址</th>
+                            <td colspan="5">{$order.addr_detail}</td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr><th class="info active" colspan="4">商品清单</th></tr>
+                        <tr>
+                            <th>序号</th>
+                            <th>商品</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                        </tr>
+                        <volist name="list" id="v">
+                            <tr>
+                                <td>{$i}</td>
+                                <td>{$v.describe}</td>
+                                <td>{$v.price}</td>
+                                <td>{$v.count}</td>
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td></td>
+                            <td>邮费</td>
+                            <td>10.00</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">合计</th>
+                            <th></th>
+                            <th colspan="2">{$order.total}</th>
+                        </tr>
+                    </table>
+
+                    <table class="table table-bordered">
+                        <tr><th class="info active" colspan="6">支付信息</th></tr>
+                        <tr>
+                            <th>支付类型</th>
+                            <td>{$pay.type}</td>
+                            <th>支付账号</th>
+                            <td>{$pay.trade_id}</td>
+                            <th>状态</th>
+                            <switch name="pay.status" >
+                                <case value="1"><td class="success">支付成功</td></case>
+                                <case value="2"><td class="warning">退款中</td></case>
+                                <case value="3"><td class="danger">退款成功</td></case>
+                                <case value="9"><td class="info">交易完成</td></case>
+                                <default /><td>未支付</td>
+                            </switch>
+                        </tr>
+                    </table>
+
+                    <notempty name="express">
+                        <table class="table table-bordered">
+                            <tr><th class="info active" colspan="4">物流情况</th></tr>
+                            <tr>
+                                <th>快递单号</th>
+                                <td>{$express.number}</td>
+                                <th>发货时间</th>
+                                <td>{$express.ctime}</td>
+                            </tr>
+                        </table>
+                        <else/>
+                        <if condition="$pay.status eq 1">
+                            <div class="form-horizontal form-group clearfix" id="express-input">
+                                <label class="col-sm-2 control-label">快递单号：</label>
+                                <div class="col-sm-6">
+                                    <input id="express_id" type="text" class="form-control" data-name="快递单号">
+                                </div>
+                                <div class="col-sm-4">
+                                    <button id="express-btn" type="button" class="btn btn-primary">发货</button>
+                                </div>
+                            </div>
+                        </if>
+                    </notempty>
+                    <hr>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10 btn-box">
+                        <button id="back-btn" type="button" class="btn btn-primary">返回</button>
+                        <eq name="pay.status" value="1">
+                            <button id="refund-btn" type="button" class="btn btn-danger">退款</button>
+                        </eq>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function() {
+        var order_id = '{$orderid}';
+
+        $("#express-btn").submit("{:U('Mall/order_express')}",function () {
+            var data = $.check([
+                {'target': '#express_id', 'rules': $.rules.empty},
+            ]);
+            if (data) {
+                data.order_id = order_id;
+            }
+
+            return data;
+        }, function (res,data) {
+            if (res.success) {
+                $("#express-input").replaceWith($([
+                    '<table class="table table-bordered">',
+                    '<tr><th class="info active" colspan="4">物流情况</th></tr>',
+                    '<tr>',
+                    '<th>快递单号</th>',
+                    '<td>', data.express_id, '</td>',
+                    '<th>发货时间</th>',
+                    '<td>', res.success, '</th>',
+                    '</tr>',
+                    '</table>'].join('')));
+            }
+        })
+
+        $("#back-btn").click(function(){
+            history.go(-1)
+        })
+    })
+</script>

@@ -1,8 +1,12 @@
 <?php
 
 namespace Admin\Controller;
+use Common\Model\AreaModel;
 use Common\Model\BannerModel;
+use Common\Model\ScExpressModel;
 use Common\Model\ScOrderModel;
+use Common\Model\ScOrderProductModel;
+use Common\Model\ScPayModel;
 use Common\Model\ScProductImgModel;
 use Common\Model\ScProductModel;
 
@@ -400,6 +404,7 @@ class MallController extends BaseController
 
     const order_page_key = 'order-page-index';
 
+    //订单列表页面
     public function order(){
         $this->U_check_permissions();
 
@@ -409,6 +414,7 @@ class MallController extends BaseController
         $this->display('order');
     }
 
+    //订单列表加载
     public function order_list()
     {
         $this->U_check_permissions('order');
@@ -419,6 +425,58 @@ class MallController extends BaseController
         $list = $sc_order_obj->selectList('', $p);
 
         echo json_encode($list);
+    }
+
+    //订单详情
+    public function order_detail()
+    {
+        $this->U_check_permissions('order');
+
+        $orderid = I('get.id');
+        $sc_order_obj = new ScOrderModel();
+        $where['id'] = $orderid;
+        $order = $sc_order_obj->findObj($where, 'addressee,mobile,area_id,addr_detail,total,describe,ctime');
+        if ($order) {
+            $this->orderid = $orderid;
+            $this->order = $order;
+
+            $area_obj = new AreaModel();
+            $area = $area_obj->findDetail($order['area_id']);
+            $this->area = implode(' ', $area);
+
+            $sc_express_obj = new ScExpressModel();
+            $express = $sc_express_obj->findExpress($orderid);
+            $this->express = $express;
+
+            $sc_pay_obj = new ScPayModel();
+            $pay = $sc_pay_obj->findPay($orderid);
+            if ($pay) $pay['type'] = ScPayModel::getType($pay['pay_type']);
+            $this->pay = $pay;
+
+            $sc_order_product_obj = new ScOrderProductModel();
+            $list = $sc_order_product_obj->selectByOrder($orderid);
+            $this->list = $list;
+
+            $this->display('order_detail');
+        }
+
+    }
+
+    //订单发货
+    public function order_express()
+    {
+
+        $order_id = I('post.order_id');
+        $number = I('post.express_id');
+        $sc_express_obj = new ScExpressModel();
+        $res = $sc_express_obj->addExpress($order_id, $number);
+        if ($res) {
+            $re['success'] = date('Y-m-d H:i:s');
+        } else {
+            $re['error'] = $sc_express_obj->getError();
+        }
+
+        echo json_encode($re);
     }
 
 

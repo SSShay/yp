@@ -58,6 +58,22 @@ class AreaModel extends Model
         return $arr;
     }
 
+    //查找所有地址
+    public function findDetail($id)
+    {
+        $res = $this->findObj(array('areaid' => $id), 'name,proviceid,cityid');
+        if($res){
+            $provice = $this->findObj(array('proviceid' => $res['proviceid'], 'cityid' => 0), 'name');
+            $detail['provice'] = $provice['name'];
+            $city = $this->findObj(array('cityid' => $res['cityid'], 'areaid' => 0), 'name');
+            $detail['city'] = $city['name'];
+            $detail['area'] = $res['name'];
+            return $detail;
+        }
+
+        return null;
+    }
+
 
 
 

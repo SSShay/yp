@@ -19,20 +19,26 @@
     table #col-price{
         width: 6em;
     }
-    table #col-area{
-        width: 10em;
+    table #col-express{
+        width: 8em;
     }
     table #col-ctime{
         width: 12em;
     }
     table #col-paytype{
-        width: 10em;
+        width: 6em;
+    }
+    table .title{
+        font-size: 13px;
     }
     table .time{
         font-size: 13px;
     }
-    table .thumb{
-        width: 50px;
+    table .price{
+        font-size: 13px;
+    }
+    table .number{
+        font-size: 13px;
     }
     table #col-action{
         width: 10em;
@@ -65,16 +71,13 @@
     <header class="panel-heading custom-tab dark-tab">
         <ul class="nav nav-tabs">
             <li class="active">
-                <a>商品列表</a>
-            </li>
-            <li>
-                <a href="{:U('Mall/product_add')}">商品添加</a>
+                <a>订单列表</a>
             </li>
         </ul>
     </header>
     <div class="panel-body">
         <div class="tab-content">
-            <div class="tab-pane active" id="product-list">
+            <div class="tab-pane active">
                 <table class="table table-hover general-table">
                     <thead>
                     <tr>
@@ -82,7 +85,7 @@
                         <th id="col-addressee">收件人</th>
                         <th id="col-name">商品名称</th>
                         <th id="col-price">金额</th>
-                        <th id="col-area">地区</th>
+                        <th id="col-express">快递单号</th>
                         <th id="col-paytype">支付状态</th>
                         <th id="col-ctime">下单时间</th>
                         <th id="col-action">操作</th>
@@ -126,17 +129,42 @@
                                 '<tr>',
                                 '<td><input type="checkbox"> ' + v.id + '</td>',
                                 '<td>' + v.addressee + '</td>',
-                                '<td>' + v.describe + '</td>',
-                                '<td>' + v.total + '</td>',
-                                '<td class="time">' + v.name + '</td>',
-                                '<td class="time">' + v.status + '</td>',
+                                '<td class="title">' + v.describe + '</td>',
+                                '<td class="price">' + v.total + '</td>',
+                                v.number ? '<td class="number text-info">' + v.number + '</td>' : '<td class="number">（未发货）</td>',
+                                (function (s) {
+                                    var c, t;
+                                    switch (s) {
+                                        case '1':
+                                            c = 'success', t = '支付成功'
+                                            break;
+                                        case '2':
+                                            c = 'warning', t = '退款中'
+                                            break;
+                                        case '3':
+                                            c = 'danger', t = '退款成功'
+                                            break;
+                                        case '9':
+                                            c = 'info', t = '交易完成'
+                                            break;
+                                        default :
+                                            c = '', t = '未支付'
+                                            break;
+                                    }
+                                    return '<td class="' + c + '">' + t + '</td>';
+                                })(v.status),
                                 '<td class="time">' + v.ctime + '</td>',
                                 '<td class="action">',
-                                '<a class="edit-btn" href="{:U("Mall/product_mod")}/id/' + v.id + '">修改</a>',
-                                '<a class="del-btn" href="javascript:;">删除</a>',
+                                '<a class="detail" href="{:U("Mall/order_detail")}/id/' + v.id + '">查看详情</a>',
                                 '</td>',
                                 '</tr>'
                             ].join(''));
+                            $(".set-express", tr).click(function () {
+
+                            })
+                            $(".detail", tr).click(function () {
+
+                            })
                             $("#tbody").append(tr);
 
                         });

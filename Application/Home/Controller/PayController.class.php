@@ -101,12 +101,12 @@ class PayController extends BaseController
         $order = $order_obj->findObj($where, 'total,describe,ctime');
         if($order) {
 
-            $re['orderid'] = self::enpayno($order_id, $order['ctime']);;
+            $re['order_id'] = self::enpayno($order_id, $order['ctime']);;
             $re['total'] = $order['total'];
 
             $sc_pay_obj = new ScPayModel();
             unset($where);
-            $where['orderid'] = $order_id;
+            $where['order_id'] = $order_id;
             $pay = $sc_pay_obj->findObj($where, 'pay_type,status,ctime');
 
             if ($pay) {
@@ -161,7 +161,7 @@ class PayController extends BaseController
         $order = $order_obj->findObj($where, 'total,describe,ctime');
         $out_trade_no = self::enpayno($order_id, $order['ctime']);
 
-        $msg['orderid'] = $out_trade_no;
+        $msg['order_id'] = $out_trade_no;
         $msg['total'] = $order['total'];
         $msg['payment'] = '支付宝';
         //支付宝交易号
@@ -169,7 +169,7 @@ class PayController extends BaseController
         $order = $this->depayno($out_trade_no, 'id');
         if ($order) {
             $sc_pay_obj = new ScPayModel();
-            $where['orderid'] = $order['id'];
+            $where['order_id'] = $order['id'];
             $pay = $sc_pay_obj->findObj($where, 'status');
             if ($pay) {
                 if ($pay['status'] != ScPayModel::T_pay_success && $pay['status'] != ScPayModel::T_pay_completion) {
@@ -234,7 +234,7 @@ class PayController extends BaseController
                 $order = $this->depayno($out_trade_no, 'id');
                 if ($order) {
                     $sc_pay_obj = new ScPayModel();
-                    $where['orderid'] = $order['id'];
+                    $where['order_id'] = $order['id'];
                     $pay = $sc_pay_obj->findObj($where, 'status');
                     if ($pay) {
                         if ($pay['status'] != ScPayModel::T_pay_success && $pay['status'] != ScPayModel::T_pay_completion) {
@@ -271,7 +271,7 @@ class PayController extends BaseController
 
             //商户订单号
             $out_trade_no = $_GET['out_trade_no'];
-            $msg['orderid'] = $out_trade_no;
+            $msg['order_id'] = $out_trade_no;
             $msg['payment'] = '支付宝';
 
             //交易状态
@@ -282,7 +282,7 @@ class PayController extends BaseController
                 $order = $this->depayno($out_trade_no, 'id');
                 if ($order) {
                     $sc_pay_obj = new ScPayModel();
-                    $where['orderid'] = $order['id'];
+                    $where['order_id'] = $order['id'];
                     $pay = $sc_pay_obj->findObj($where, 'status');
                     if ($pay) {
                         if ($pay['status'] != ScPayModel::T_pay_success && $pay['status'] != ScPayModel::T_pay_completion) {

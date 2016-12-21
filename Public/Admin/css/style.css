@@ -4563,3 +4563,6 @@ ol.comment-list {
     background: transparent !important;
     color: #797979 !important;
 }
+.clear{
+    clear: both;
+}

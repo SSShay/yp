@@ -348,6 +348,20 @@ $(function() {
         }
         else show();
     })
+
+    $(".container-leave-msg .btn").submit("{:U('Index/leave_msg')}", function () {
+        $("#name,#mobile,#msg").data('placement', is_xs() ? 'bottom' : 'right');
+        return $.check([
+            {'target': '#name', 'rules': $.rules.empty},
+            {'target': '#mobile', 'rules': [$.rules.empty, $.rules.mobile]},
+            {'target': '#msg', 'rules': $.rules.length(null, 200)},
+        ])
+    }, function (res) {
+        if (res.success) {
+            $("#name,#mobile,#msg").val('');
+            $.info('留言成功！');
+        }
+    })
 })
 
 
