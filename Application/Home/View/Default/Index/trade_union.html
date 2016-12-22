@@ -283,26 +283,31 @@
         var sb_list = [], scrolling;
         var s_top = $(window).scrollTop();
         $(".scroll-block").each(function (i, t) {
-            sb_list[i] = $(t).position().top;
+            sb_list[i] = Math.round($(t).position().top);
         })
+        console.log(sb_list)
 
         window.scrollDisable(function (e) {
             if (!is_xs() && !scrolling) {
-                var top = $(window).scrollTop();
+                var top = Math.round($(window).scrollTop());
+
                 if ((e.deltaY != 0)) {
-                    var min, max;
-                    $.each(sb_list, function (i, v) {
-                        if (v > top) {
-                            max = v;
+                    var n_top, tolerance = 10;
+                    var get_top = e.deltaY > 0 ? function (i, v) {
+                        if (v > top + tolerance) {
+                            n_top = v;
+                            return false;
+                        }
+                    } : function (i, v) {
+                        if (v > top - tolerance) {
                             var _v = sb_list[i - 1];
                             if (_v != null) {
-                                min = _v == top ? sb_list[i - 2] : _v;
+                                n_top = _v == top ? sb_list[i - 2] : _v;
                             }
                             return false;
                         }
-                    })
-
-                    var n_top = e.deltaY > 0 ? max : min;
+                    }
+                    $.each(sb_list, get_top)
                     if (n_top != null && n_top != top) {
                         scrolling = true;
                         $.scrollTo(n_top, 1000, function () {
