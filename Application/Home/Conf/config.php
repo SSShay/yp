@@ -12,6 +12,8 @@ return array(
         '__CSS__' => __ROOT__.'/Public/'.MODULE_NAME.'/css',
         '__IMG__' => __ROOT__.'/Public/'.MODULE_NAME.'/img',
         '__FONT__' => __ROOT__.'/Public/'.MODULE_NAME.'/fonts',
+
+        '__PLUGIN__'  => __ROOT__.'/Public/'.MODULE_NAME.'/plugin',
     ),
 
 

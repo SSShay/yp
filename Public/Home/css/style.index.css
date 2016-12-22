@@ -91,3 +91,19 @@
     float: left;
 }
 
+#willesPlay{
+    margin: 0 auto 50px;
+}
+#willesPlay .playHeader .videoName{
+    height: 40px;
+    line-height: 40px;
+}
+#willesPlay .playControll .timebar {
+    width: calc(100% - 98px);
+}
+#willesPlay .otherControl .glyphicon-fullscreen{
+    display: none;
+}
+#video-box{
+    height: auto !important;
+}

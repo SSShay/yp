@@ -8,15 +8,39 @@
     };
 
     var scroll_d = 10;
-    $.scroll_top = function(t){
+    $.scrollTop = function(t){
         var top = $(window).scrollTop();
         var h = $("body").height() - $(window).height();
         if (top > 0) {
             if (t) $(window).scrollTop(top - scroll_d);
             else scroll_d = Math.ceil(top / 10);
-            animate($.scroll_top)
+            animate($.scrollTop)
         }
     }
+
+    $.scrollTo = function(top,t,callback) {
+
+        t = ((t || 1000) / 100) >> 0;
+        var _top = $(window).scrollTop();
+        var sd = (top - _top) / t;
+        var flag = top > _top ? 1 : -1;
+        var timer
+
+        function to() {
+            _top += sd;
+            if ((top - _top) * flag > 0) {
+                $(window).scrollTop(_top);
+                timer = animate(to);
+            }else{
+                cancelAnimate(timer);
+                $(window).scrollTop(top);
+                callback && callback()
+            }
+        }
+
+        to();
+    }
+
 
     $.extend($, {
 
@@ -287,26 +311,28 @@ $(function() {
 
     //右侧导航栏
     var topbtn = $(".nav-right .top").click(function(){
-        $.scroll_top();
+        $.scrollTop();
     })
 
-    var istopshow = false;
-    $(window).scroll(function() {
-        var top = $(window).scrollTop();
-        if(istopshow){
-            if (top <= 200) {
-                istopshow = false;
-                topbtn.stop().animate({'opacity': 0}, function () {
-                    $(this).css('visibility', 'hidden')
-                })
+    if(topbtn.length){
+        var istopshow = false;
+        $(window).scroll(function() {
+            var top = $(window).scrollTop();
+            if(istopshow){
+                if (top <= 200) {
+                    istopshow = false;
+                    topbtn.stop().animate({'opacity': 0}, function () {
+                        $(this).css('visibility', 'hidden')
+                    })
+                }
+            }else{
+                if (top > 200) {
+                    istopshow = true;
+                    topbtn.stop().css('visibility', 'visible').animate({'opacity': 1})
+                }
             }
-        }else{
-            if (top > 200) {
-                istopshow = true;
-                topbtn.stop().css('visibility', 'visible').animate({'opacity': 1})
-            }
-        }
-    })
+        })
+    }
 
     //延迟加载插件
     $(".img-delay").each(function () {
@@ -364,7 +390,62 @@ $(function() {
     })
 })
 
+//scroll禁用 支持
+;(function () {
+    var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+    var afterScroll;
 
+    function preventDefault(e) {
+        e = e || window.event;
+        afterScroll && afterScroll(e)
+        if (e.preventDefault)
+            e.preventDefault();
+        e.returnValue = false;
+    }
+
+    function preventDefaultForScrollKeys(e) {
+        if (keys[e.keyCode]) {
+            preventDefault(e);
+            return false;
+        }
+    }
+
+    var oldonwheel, oldonmousewheel1, oldonmousewheel2, oldontouchmove, oldonkeydown, isDisabled;
+
+    window.scrollDisable = function (fn) {
+        afterScroll = fn;
+        if (window.addEventListener) // older FF
+            window.addEventListener('DOMMouseScroll', preventDefault, false);
+        oldonwheel = window.onwheel;
+        window.onwheel = preventDefault; // modern standard
+        oldonmousewheel1 = window.onmousewheel;
+        window.onmousewheel = preventDefault; // older browsers, IE
+        oldonmousewheel2 = document.onmousewheel;
+        document.onmousewheel = preventDefault; // older browsers, IE
+        oldontouchmove = window.ontouchmove;
+        window.ontouchmove = preventDefault; // mobile
+        oldonkeydown = document.onkeydown;
+        document.onkeydown = preventDefaultForScrollKeys;
+
+        isDisabled = true;
+    };
+    window.scrollEnable = function () {
+        if (!isDisabled) return;
+        if (window.removeEventListener)
+            window.removeEventListener('DOMMouseScroll', preventDefault, false);
+
+        window.onwheel = oldonwheel; // modern standard
+        window.onmousewheel = oldonmousewheel1; // older browsers, IE
+        document.onmousewheel = oldonmousewheel2; // older browsers, IE
+        window.ontouchmove = oldontouchmove; // mobile
+        document.onkeydown = oldonkeydown;
+
+        isDisabled = false;
+    };
+    window.isScrollDisabled = function () {
+        return isDisabled;
+    }
+})();
 
 //animate 支持
 ;(function() {

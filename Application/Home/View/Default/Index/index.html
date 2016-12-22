@@ -1,4 +1,6 @@
+<link href="__CSS__/style.video.css"  rel="stylesheet" />
 <link href="__CSS__/style.index.css"  rel="stylesheet" />
+<script src="__PLUGIN__/layer/layer.js"></script>
 <div class="carousel slide" id="carousel-index" data-interval="2500">
     <ol class="carousel-indicators">
         <volist name="banner" id="v">
@@ -82,7 +84,7 @@
         </div>
         <div class="col-md-4 col-sm-12">
             <h3>宣传视频</h3>
-            <a class="video-thumb" href="{:U('Index/video')}">
+            <a class="video-thumb">
                 <div class="play-box">
                     <img src="__IMG__/common/play_btn.png">
                 </div>
@@ -101,13 +103,31 @@
         </div>
     </div>
 </div>
-
-
+<div id="willesPlay" style="display: none"></div>
+<script src="__JS__/jquery.willesplay.min.js"></script>
 <script>
     $(function(){
         $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
         $("#carousel-index .carousel-inner .item").eq(0).addClass('active');
 
         $('#carousel-index').carousel()
+
+        var video = $("#willesPlay").video();
+        $(".play-box").click(function(){
+            var width = $(window).width();
+            if(width > 992) width *= 0.62;
+            else width -= 30;
+            layer.open({
+                type: 1,
+                title: null,
+                area: [width + 'px'], //宽高
+                content: $("#willesPlay"),
+                resize:false,
+            });
+            $("#willesPlay").parent().attr("id",'video-box')
+
+            video.play("{$video.url}", "{$video.name}", $(this));
+
+        })
     })
 </script>

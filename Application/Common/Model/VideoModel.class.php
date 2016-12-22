@@ -101,7 +101,7 @@ class VideoModel extends Model
     {
         $where['display'] = 1;
         //$where['display'] = 1;
-        $list = $this->field('name,thumb')->where($where)->order('sort')->find();
+        $list = $this->field('name,thumb,url')->where($where)->order('sort')->find();
         return $list;
     }
 

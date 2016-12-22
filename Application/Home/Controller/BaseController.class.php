@@ -56,6 +56,10 @@ class BaseController extends Controller
             $setting_obj = new SettingModel();
             $this->links = $setting_obj->selectFlinkByHome();
             $this->foot_txt = $setting_obj->selectVal('foot-text');
+
+            $kefu['qq'] = $setting_obj->selectVal('kefu-qq');
+            $kefu['mobile'] = $setting_obj->selectVal('kefu-mobile');
+            $this->kefu = $kefu;
         }
 
         //title、如果在打印之前设置好title则不自动创建

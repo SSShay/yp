@@ -1,6 +1,9 @@
 <style>
     .banner{
         height: 766px;
+        background-repeat: repeat;
+        background-size: auto 100%;
+        background-position: center;
     }
     .banner .h1-banner{
         margin-top: 4em;
@@ -20,6 +23,9 @@
     .container-1{
         background: #e0ebe0;
         width: 100%;
+    }
+    .container-1,.container-2{
+        height: 100vh;
     }
     .container-1 .title,.container-2 .title{
         width: auto;
@@ -47,7 +53,10 @@
         border-right: 1px solid #c4df9b;
     }
     .container-1 .container,.container-2 .container{
-        padding: 50px 15px;
+        padding: 20px 30px;
+        font-size: 20px;
+        font-weight: 100;
+        line-height: 1.6;
     }
     .container-2{
         background: #f5ebe0;
@@ -120,7 +129,7 @@
             margin-top: 5em;
         }
         .container-1 .container,.container-2 .container{
-            padding: 50px 0;
+            font-size: 12px;
         }
         .container-3 .block{
             margin: .5em 1em;
@@ -142,15 +151,18 @@
             margin-top: 5em;
         }
     }
+    .banner{
+        height: 100vh;
+    }
 </style>
-<div class="banner text-center img-delay bg-cover" data-bg="__IMG__/index/trade_union/bg.jpg">
+<div class="banner text-center img-delay scroll-block" data-bg="__IMG__/index/trade_union/bg.jpg">
     <div class="container">
         <h1 class="txt-green h1-banner">“微家校”邀您共建教育生态圈</h1>
         <h1 class="h2-banner">开放合作　拥抱共赢</h1>
     </div>
 </div>
-<table class="container-1">
-    <tr>
+<table class="container-1 scroll-block">
+    <tr style="height: 0">
         <td class="title bg-green-h"><h1 class="h2-banner">我们在路上</h1></td>
         <td class="bg img-delay bg-cover" data-bg="__IMG__/index/trade_union/1_1.jpg"></td>
     </tr>
@@ -171,8 +183,8 @@
         </td>
     </tr>
 </table>
-<table class="container-2">
-    <tr>
+<table class="container-2 scroll-block">
+    <tr style="height: 0">
         <td class="bg img-delay bg-cover" data-bg="__IMG__/index/trade_union/2_1.jpg"></td>
         <td class="title"><h1 class="h2-banner">胜利者同盟</h1></td>
     </tr>
@@ -194,7 +206,7 @@
     </tr>
 </table>
 
-<div class="container-3 img-delay bg-cover" data-bg="__IMG__/index/trade_union/3_1.jpg">
+<div class="container-3 img-delay bg-cover scroll-block" data-bg="__IMG__/index/trade_union/3_1.jpg">
     <div class="container">
         <div class="block">在线教育资源</div>
         <div class="block">在线学习测评</div>
@@ -211,7 +223,7 @@
     </div>
 </div>
 
-<div class="container-4">
+<div class="container-4 scroll-block">
     <div class="container">
         <h3 class="txt-blue-h text-center"><strong>合作单位</strong></h3>
         <div class="row friendly-link underline text-center">
@@ -265,4 +277,40 @@
 <script>
     $(".navbar-main").addClass('absolute');
     $(".navbar-path").addClass('absolute deep suspend');
+
+    $(function() {
+
+        var sb_list = [], scrolling;
+        var s_top = $(window).scrollTop();
+        $(".scroll-block").each(function (i, t) {
+            sb_list[i] = $(t).position().top;
+        })
+
+        window.scrollDisable(function (e) {
+            if (!is_xs() && !scrolling) {
+                var top = $(window).scrollTop();
+                if ((e.deltaY != 0)) {
+                    var min, max;
+                    $.each(sb_list, function (i, v) {
+                        if (v > top) {
+                            max = v;
+                            var _v = sb_list[i - 1];
+                            if (_v != null) {
+                                min = _v == top ? sb_list[i - 2] : _v;
+                            }
+                            return false;
+                        }
+                    })
+
+                    var n_top = e.deltaY > 0 ? max : min;
+                    if (n_top != null && n_top != top) {
+                        scrolling = true;
+                        $.scrollTo(n_top, 1000, function () {
+                            scrolling = false;
+                        });
+                    }
+                }
+            }
+        });
+    })
 </script>
