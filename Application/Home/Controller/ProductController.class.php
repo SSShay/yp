@@ -42,7 +42,7 @@ class ProductController extends BaseController
     {
         $this->init_wjx_nav();
         $this->breadcrumb(array('name' => '微家校'));
-        $this->page_full('weijiaxiao');
+        $this->page_nofoot('weijiaxiao');
     }
 
     public function wjx_download()

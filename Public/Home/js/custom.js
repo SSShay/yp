@@ -1,5 +1,5 @@
 ;(function(w,$){
-
+    //默认消息提醒配置
     var default_popover = {
         'container': 'body',
         'delay': {"show": 500, "hide": 0},
@@ -7,31 +7,95 @@
         'html': 'true'
     };
 
-    var scroll_d = 10;
-    $.scrollTop = function(t){
-        var top = $(window).scrollTop();
-        var h = $("body").height() - $(window).height();
-        if (top > 0) {
-            if (t) $(window).scrollTop(top - scroll_d);
-            else scroll_d = Math.ceil(top / 10);
-            animate($.scrollTop)
+    //贝塞尔曲线动画
+    $.cubic_bezier = function(p1x, p1y, p2x, p2y) {
+        var cx = 3.0 * p1x;
+        var bx = 3.0 * (p2x - p1x) - cx;
+        var ax = 1.0 - cx - bx;
+
+        var cy = 3.0 * p1y;
+        var by = 3.0 * (p2y - p1y) - cy;
+        var ay = 1.0 - cy - by;
+
+
+        function sampleCurveX(t)
+        {
+            // `ax t^3 + bx t^2 + cx t' expanded using Horner's rule.
+            return ((ax * t + bx) * t + cx) * t;
         }
+
+        function sampleCurveDerivativeX(t)
+        {
+            return (3.0 * ax * t + 2.0 * bx) * t + cx;
+        }
+
+        function solveCurveX(x, epsilon) {
+            if(epsilon == null) epsilon = 1;
+            var t0, t1, t2, x2, d2, i;
+            // First try a few iterations of Newton's method -- normally very fast.
+            for (t2 = x, i = 0; i < 8; i++) {
+                x2 = sampleCurveX(t2) - x;
+                if (Math.abs(x2) < epsilon)
+                    return t2;
+                d2 = sampleCurveDerivativeX(t2);
+                if (Math.abs(d2) < 1e-6)
+                    break;
+                t2 = t2 - x2 / d2;
+            }
+            // Fall back to the bisection method for reliability.
+            t0 = 0.0;
+            t1 = 1.0;
+            t2 = x;
+            if (t2 < t0)
+                return t0;
+            if (t2 > t1)
+                return t1;
+            while (t0 < t1) {
+                x2 = sampleCurveX(t2);
+                if (Math.abs(x2 - x) < epsilon)
+                    return t2;
+                if (x > x2)
+                    t0 = t2;
+                else
+                    t1 = t2;
+                t2 = (t1 - t0) * .5 + t0;
+            }
+            // Failure.
+            return t2;
+        }
+
+        this.solve = function (x, epsilon) {
+            var t = solveCurveX(x, epsilon);
+            return ((ay * t + by) * t + cy ) * t
+        }
+
+        return this;
     }
 
-    $.scrollTo = function(top,t,callback) {
+    $.scrollTop = function(t,callback,b_arr) {
+        $.scrollTo(0, t, callback, b_arr)
+    }
 
-        t = ((t || 1000) / 100) >> 0;
+    //页面滚动至
+    $.scrollTo = function(top,t,callback,b_arr) {
+        if (t == null) t = 1000;
         var _top = $(window).scrollTop();
-        var sd = (top - _top) / t;
-        var flag = top > _top ? 1 : -1;
-        var timer
+        var d = top - _top;
+        var timer;
+        if (!b_arr) b_arr = [0.42, 0, 0.58, 1.0];
+        var bse = $.cubic_bezier(b_arr[0], b_arr[1], b_arr[2], b_arr[3]);
+        var st = new Date().getTime(), ti, _topi = _top;
 
         function to() {
-            _top += sd;
-            if ((top - _top) * flag > 0) {
-                $(window).scrollTop(_top);
+            ti = new Date().getTime() - st;
+            if (ti < t) {
+                var topi = _top + d * bse.solve(ti / t);
+                if (Math.abs(topi - _topi) > 2) {
+                    $(window).scrollTop(topi);
+                    _topi = topi;
+                }
                 timer = animate(to);
-            }else{
+            } else {
                 cancelAnimate(timer);
                 $(window).scrollTop(top);
                 callback && callback()
@@ -39,6 +103,80 @@
         }
 
         to();
+    }
+
+    //页面块滚动
+    $.scrollBlock = function(opt) {
+        opt = $.extend({
+            tolerance: 10,       //块滚动容差
+            scrolltime: 600,     //块切换时间
+            scrollcubic: null,  //块切换动画贝塞尔曲线
+            blocklist: [],       //块的坐标集合
+            wheelchange: 200,    //块内滚动每次变化
+            wheeltime: 500,      //块内滚动每次时间
+            wheelcubic: null,   //块内滚动动画贝塞尔曲线
+        }, opt || {});
+        var sb_list, scrolling;
+
+        function reget() {
+            sb_list = opt.blocklist;
+            var i = 0;
+            $(".scroll-block").each(function () {
+                var $t = $(this);
+                i = $t.data('i') || i;
+                sb_list[i] = Math.round($t.position().top);
+                i++;
+            })
+        }
+
+        $(window).resize(reget)
+        reget()
+        window.scrollDisable(function (e) {
+            if (!scrolling) {
+                var top = Math.round($(window).scrollTop());
+                var H = $(window).height();
+                if ((e.deltaY != 0)) {
+                    var n_top, scroll;
+                    var get_top = e.deltaY > 0 ? function (i, v) {
+                        if (v > top + opt.tolerance) {
+                            n_top = v;
+                            var min = sb_list[i - 1];
+                            if (min != null) {
+                                if (H < n_top - sb_list[i - 1] && top + H < n_top) {
+                                    scroll = top + opt.wheelchange;
+                                    if (scroll + H > n_top) {
+                                        scroll = n_top - H;
+                                    }
+                                }
+                            }
+
+                            return false;
+                        }
+                    } : function (i, v) {
+                        if (v > top - opt.tolerance) {
+                            var _v = sb_list[i - 1];
+                            if (_v != null) {
+                                n_top = _v == top ? sb_list[i - 2] : _v;
+                            }
+                            return false;
+                        }
+                    }
+                    $.each(sb_list, get_top);
+
+                    if (scroll) {
+                        $.scrollTo(scroll, opt.wheeltime, function () {
+                            scrolling = false;
+                        },opt.wheelcubic);
+                    }
+                    else if (n_top != null && n_top != top) {
+                        scrolling = true;
+                        $.scrollTo(n_top, opt.scrolltime, function () {
+                            scrolling = false;
+                        },opt.scrollcubic);
+                    }
+                }
+            }
+        });
     }
 
 
@@ -233,7 +371,9 @@
         }
     })
 
-
+    window.is_xs = function() {
+        return $("button.navbar-toggle").css('display') != 'none';
+    }
 })(window,jQuery);
 
 $(function() {
@@ -242,10 +382,6 @@ $(function() {
     var nav_main = $(".navbar-main");
     var nav_btn = $("button.navbar-toggle");
     var nav_back = nav_main.children('.back');
-
-    window.is_xs = function() {
-        return nav_btn.css('display') != 'none';
-    }
 
     $(".navbar-nav>li", nav_main).each(function () {
         var $t = $(this);

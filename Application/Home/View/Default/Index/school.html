@@ -128,7 +128,7 @@
         </div>
     </div>
 </div>
-<div class="container text-center container-1">
+<div class="container text-center container-1 scroll-block" data-i="1">
     <div class="row">
         <div class="col-sm-4"><img src="__IMG__/index/school/1_1.png"><h3>公益</h3>
             <p>远磐科技“微家校”项目落地过程，<br>
@@ -151,7 +151,7 @@
         </div>
     </div>
 </div>
-<div class="text-center container-2">
+<div class="text-center container-2 scroll-block">
     <div class="container">
         <h3>荣誉资质</h3>
         <div class="row">
@@ -162,7 +162,7 @@
     </div>
 </div>
 
-<div class="container text-center container-3">
+<div class="container text-center container-3 scroll-block">
     <h3>实施方案</h3>
     <div class="row">
         <div class="col-sm-4 col-xs-6"><img src="__IMG__/index/school/3_1.png"><h4>贵州剑河三小</h4></div>
@@ -174,7 +174,7 @@
     </div>
 </div>
 
-<div class="container-leave-msg">
+<div class="container-leave-msg scroll-block">
     <div class="container">
         <h4>
             学生健康成长，是每一位教育工作者共同的愿望！<br>
@@ -202,4 +202,5 @@
 </div>
 <script>
     $(".navbar-path").addClass('absolute deep');
+    !is_xs() && $.scrollBlock({blocklist:[0]});
 </script>

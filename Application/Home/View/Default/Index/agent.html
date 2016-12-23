@@ -1,6 +1,6 @@
 <style>
     .banner{
-        height: 978px;
+        height: 950px;
     }
     .container-1{
         background: #f6f2e9;
@@ -479,8 +479,8 @@
         }
     }
 </style>
-<div class="banner text-center img-delay bg-cover" data-bg="__IMG__/index/agent/bg.jpg"></div>
-<div class="container-1">
+<div class="banner text-center img-delay bg-cover scroll-block" data-bg="__IMG__/index/agent/bg.jpg"></div>
+<div class="container-1 scroll-block">
     <div class="container">
         <div class="col-sm-4">
             <div class="left-block">
@@ -519,7 +519,7 @@
         </div>
     </div>
 </div>
-<div class="container-2">
+<div class="container-2 scroll-block">
     <div class="container">
         <h1>产品特点+/优势</h1>
         <hr class="h1-hr">
@@ -578,7 +578,7 @@
         </div>
     </div>
 </div>
-<div class="container-3">
+<div class="container-3 scroll-block">
     <div class="container">
         <div class="col-sm-6"></div>
         <h2 class="col-sm-6 txt-yellow text-center">为什么选择我们</h2>
@@ -630,7 +630,7 @@
         </div>
     </div>
 </div>
-<div class="container-4 img-delay" data-bg="__IMG__/index/agent/4_1.jpg">
+<div class="container-4 img-delay scroll-block" data-bg="__IMG__/index/agent/4_1.jpg">
     <div class="container">
         <div class="trunk"></div>
         <div class="col-xs-6">
@@ -747,7 +747,7 @@
         <h5 class="txt-purple text-center"><strong>全方位扶持共同努力开发市场 欢迎加盟</strong></h5>
     </div>
 </div>
-<div class="container-5">
+<div class="container-5 scroll-block">
     <h3 class="text-center"><strong>成功案例</strong></h3>
     <h5 class="text-center">携手微家校，进军校园市场</h5>
     <div class="container">
@@ -822,7 +822,7 @@
         <div class="col-md-4 col-sm-6"></div>
     </div>
 </div>
-<div class="container-leave-msg">
+<div class="container-leave-msg scroll-block">
     <div class="container">
         <h4>
             “微家校”利用互联网技术、大数据应用技术，以平台为基础，立足于为教育主管部门、学校提供持续性的专业服务。<br>
@@ -851,4 +851,5 @@
 <script>
     $(".navbar-main").addClass('absolute');
     $(".navbar-path").addClass('absolute deep suspend');
+    !is_xs() && $.scrollBlock();
 </script>

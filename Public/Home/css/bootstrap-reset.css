@@ -84,6 +84,7 @@ a.btn{
 }
 
 .breadcrumb{
+    padding: 8px 0;
     background: transparent;
     margin-bottom: 0;
     font-size: 14px;
@@ -160,6 +161,14 @@ a.media,a.media:hover,a.media:focus,a.active{
     .col-sm-2_4 {
         width: 20%;
     }
+    .row-sm-table,.col-sm-table{
+        display: table;
+    }
+    .col-sm-cell{
+        display: table-cell;
+        vertical-align: middle;
+        float: none;
+    }
 }
 
 
@@ -177,7 +186,6 @@ a.media,a.media:hover,a.media:focus,a.active{
         font-size: 13px;
     }
 }
-
 @media (max-width: 768px){
     .f-xs-16 {
         font-size: 16px;

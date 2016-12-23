@@ -282,3 +282,7 @@ html, body {
         padding-bottom: 20px;
     }
 }
+
+.navbar-path.alpha hr, .navbar-path.absolute hr{
+    margin: 0;
+}

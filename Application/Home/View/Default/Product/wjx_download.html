@@ -54,27 +54,25 @@
 
 <script>
     $(".navbar-path").addClass('alpha deep')
-    $(function(){
-        $('#fullpage').fullpage({
-            sectionsColor: ['#a49a8e', '#5c5c57'],
-            'navigation': true,
-            afterLoad: function (anchorLink, index) {
-                switch (index) {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                }
-            },
-            onLeave: function (index, direction) {
-                switch (index) {
-                    case 1:
-                        $(".trigger-show").trigger('trigger');
-                        break;
-                    case 2:
-                        break;
-                }
+    $('#fullpage').fullpage({
+        sectionsColor: ['#a49a8e', '#5c5c57'],
+        'navigation': true,
+        afterLoad: function (anchorLink, index) {
+            switch (index) {
+                case 1:
+                    break;
+                case 2:
+                    break;
             }
-        });
+        },
+        onLeave: function (index, direction) {
+            switch (index) {
+                case 1:
+                    $(".trigger-show").trigger('trigger');
+                    break;
+                case 2:
+                    break;
+            }
+        }
     });
 </script>

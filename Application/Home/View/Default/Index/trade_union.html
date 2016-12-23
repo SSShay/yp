@@ -30,6 +30,7 @@
     .container-1 .title,.container-2 .title{
         width: auto;
         white-space: nowrap;
+        min-width: 200px;
     }
     .container-1 .bg,.container-2 .bg{
         width: 100%;
@@ -277,45 +278,5 @@
 <script>
     $(".navbar-main").addClass('absolute');
     $(".navbar-path").addClass('absolute deep suspend');
-
-    $(function() {
-
-        var sb_list = [], scrolling;
-        var s_top = $(window).scrollTop();
-        $(".scroll-block").each(function (i, t) {
-            sb_list[i] = Math.round($(t).position().top);
-        })
-        console.log(sb_list)
-
-        window.scrollDisable(function (e) {
-            if (!is_xs() && !scrolling) {
-                var top = Math.round($(window).scrollTop());
-
-                if ((e.deltaY != 0)) {
-                    var n_top, tolerance = 10;
-                    var get_top = e.deltaY > 0 ? function (i, v) {
-                        if (v > top + tolerance) {
-                            n_top = v;
-                            return false;
-                        }
-                    } : function (i, v) {
-                        if (v > top - tolerance) {
-                            var _v = sb_list[i - 1];
-                            if (_v != null) {
-                                n_top = _v == top ? sb_list[i - 2] : _v;
-                            }
-                            return false;
-                        }
-                    }
-                    $.each(sb_list, get_top)
-                    if (n_top != null && n_top != top) {
-                        scrolling = true;
-                        $.scrollTo(n_top, 1000, function () {
-                            scrolling = false;
-                        });
-                    }
-                }
-            }
-        });
-    })
+    !is_xs() && $.scrollBlock();
 </script>
