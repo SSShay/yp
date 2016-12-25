@@ -106,6 +106,10 @@
         height: 20px;
     }
 
+    .navbar-path.alpha hr, .navbar-path.absolute hr{
+        margin: 0;
+    }
+
     .navbar-path .container{
         padding:0;
     }

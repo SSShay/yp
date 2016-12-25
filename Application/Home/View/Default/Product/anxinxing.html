@@ -1,92 +1,179 @@
-<div class="fp-section section1">
-    <div class="container">
-        <div class="col-xs-12">
-            <h1>安心星</h1>
-            <h3>智能儿童定位学生证</h3>
-        </div>
-        <div class="col-xs-12">
-            <img src="__IMG__/product/axx/1.png">
-        </div>
-        <div class="col-xs-12 underline">
-            <div class="v-txt underline bottom">
-                <p>安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证</p>
-                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="fp-section section2">
-    <div class="container">
-        <div class="col-xs-12">
-            <h1>安心星</h1>
-            <h3>智能儿童定位学生证</h3>
-        </div>
-        <div class="col-xs-12">
-            <img src="__IMG__/product/axx/2.png">
-        </div>
-        <div class="col-xs-12">
-            <div class="v-txt underline bottom">
-                <p>安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证</p>
-                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="fp-section section3">
-    <div class="container">
-        <div class="col-xs-12">
-            <h1>安心星</h1>
-            <h3>智能儿童定位学生证</h3>
-        </div>
-        <div class="col-xs-12">
-            <img src="__IMG__/product/axx/3.png">
-        </div>
-        <div class="col-xs-12">
-            <div class="v-txt underline bottom">
-                <p>安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证安心星智能儿童定位学生证</p>
-                <a class="session-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
-            </div>
-        </div>
-    </div>
-</div>
+<style>
+    .container-1{
 
-<script>
-    $('#fullpage').fullpage({
-        sectionsColor: ['#fff', '#fff', '#fff', '#000'],
-        'navigation': true,
-        afterLoad: function(anchorLink, index){
-            switch (index){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    deep()
-                    break;
-            }
-        },
-        onLeave: function(index, direction){
-            switch (index){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    undeep()
-                    break;
-            }
+    }
+    .container-1 .container{
+        position: relative;
+        padding: 150px 0 100px;
+    }
+    .container-1 h3,.container-1 h5,.container-1 h4,.container-1 p{
+        color: #fff;
+    }
+    .container-1 h3{
+        text-align: center;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+    .container-1 h5{
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto 60px;
+        line-height: 1.6;
+    }
+    .container-1 h4{
+        display: inline-block;
+        border-radius: 5px;
+        padding: 8px 10px;
+        min-width: 135px;
+        text-align: center;
+    }
+    .container-1 .bg1{
+        background-color: #26ad60;
+    }
+    .container-1 .bg2{
+        background-color: #f7b832;
+    }
+    .container-1 .bg3{
+        background-color: #ede449;
+    }
+    .container-1 .bg4{
+        background-color: #495c8a;
+    }
+    .container-1 .bg5{
+        background-color: #2bcfd4;
+    }
+    .container-1 .col-table{
+        margin: 0 auto;
+    }
+    .container-1 .row1{
+        height: 180px;
+    }
+    .container-1 .row2{
+        height: 155px;
+    }
+    .container-1 .row3{
+        margin: 60px auto 0;
+        text-align: center;
+    }
+    .container-1 .col-cell{
+        width: 300px;
+    }
+    .container-1 .center-img{
+        position: relative;
+        width: 400px;
+    }
+    .container-1 img{
+        left: 10%;
+        width: 80%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    @media screen and (max-width: 991px){
+        .container-1 .row2{
+            height: 120px;
         }
-    });
-
-    function deep(){
-        $("#fp-nav").addClass('deep')
+        .container-1 img{
+            bottom: 30px;
+        }
     }
-
-    function undeep(){
-        $("#fp-nav").removeClass('deep')
+    @media screen and (max-width: 768px){
+        .container-1 .container {
+            padding: 60px 15px 100px;
+        }
+        .container-1 .col-table{
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+        .container-1 .row1,.container-1 .row2{
+            height: auto;
+        }
+        .container-1 .col-cell{
+            text-align: left;
+            display: block;
+            width: auto;
+            margin-bottom: 20px;
+        }
+        .container-1 .center-img{
+            display: none;
+        }
+        .container-1 .row3{
+            margin: 0;
+        }
     }
+</style>
+
+<div class="container-1 img-delay bg-cover" data-bg="__IMG__/product/axx/bg.jpg">
+    <div class="container">
+
+        <h3>一个能打电话、能定位的学生证！</h3>
+        <h5>安心星是为智慧安全校园需求而设计的智能电子学生证，<br>
+            亲情双向通话，沟通无限；一键紧急求助，危险及时告知；无障碍出行通知，掌握孩子到校、离校情况；室内外精准定位，实时
+            查找孩子去向；校园一卡通消费管理，了解孩子消费习惯
+        </h5>
+        <div class="col-table row1">
+            <div class="col-cell text-right">
+                <h4 class="bg1">四重精准定位</h4>
+                <p>北斗/GPS/基站/WI-FI，四重精准定位，一键掌握孩子在哪，更好保障孩子安全</p>
+            </div>
+            <div class="col-cell center-img">
+
+            </div>
+            <div class="col-cell">
+                <h4 class="bg2">亲情通话功能</h4>
+                <p>设置3个亲情键快速拨号，实现双向通话，不管孩子在哪，一个电话就能找到</p>
+            </div>
+        </div>
+        <div class="col-table row2">
+            <div class="col-cell text-right">
+                <h4 class="bg3">紧急呼救功能</h4>
+                <p>设置1个SOS紧急呼叫键，孩子遇到危险，一键紧急求救</p>
+            </div>
+            <div class="col-cell center-img">
+                <img src="__IMG__/product/axx/1.png">
+            </div>
+            <div class="col-cell">
+                <h4 class="bg4">无障碍考勤功能</h4>
+                <p>2.4G远距离刷卡考勤，孩子走出预置安全区，即可提醒</p>
+            </div>
+        </div>
+        <div class="col-table row3">
+            <div class="col-cell">
+                <h4 class="bg5">更多功能</h4>
+                <p>一卡通、白名单通话、超长待机、防尘防雨、上课隐身、远程聆听、语音报时、语音播报短信</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-leave-msg scroll-block" data-i="1">
+    <div class="container">
+        <h4>
+            “微家校”利用互联网技术、大数据应用技术，以平台为基础，立足于为教育主管部门、学校提供持续性的专业服务。<br>
+            感谢您在教育事业上的坚持，希望我们一起努力，携手共进，谢谢！<br>
+            <div class="text-right">——微家校 邱万钧</div>
+        </h4>
+        <div class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">姓名：</div>
+                    <input id="name" class="form-control" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon">电话：</div>
+                    <input id="mobile" class="form-control" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
+                </div>
+                <div class="input-group">
+                    <textarea id="msg" class="form-control" rows="5" placeholder="留言"></textarea>
+                </div>
+            </div>
+        </div>
+        <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并承诺为您保密！</h6>
+        <button class="btn" type="button">提交留言</button>
+    </div>
+</div>
+<script>
+    $(".navbar-path").addClass('absolute deep');
+    !is_xs() && $.scrollBlock({blocklist:[0]});
 </script>

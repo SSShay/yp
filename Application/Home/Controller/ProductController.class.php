@@ -71,7 +71,7 @@ class ProductController extends BaseController
     {
         $this->init_axx_nav();
         $this->breadcrumb(array('name' => '安心星'));
-        $this->page_full('anxinxing');
+        $this->page_nofoot('anxinxing');
     }
 
     public function axx_parameter()

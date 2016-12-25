@@ -82,7 +82,7 @@
         var _top = $(window).scrollTop();
         var d = top - _top;
         var timer;
-        if (!b_arr) b_arr = [0.42, 0, 0.58, 1.0];
+        if (!b_arr) b_arr = [0.25, 0.1, 0.25, 1.0];//ease
         var bse = $.cubic_bezier(b_arr[0], b_arr[1], b_arr[2], b_arr[3]);
         var st = new Date().getTime(), ti, _topi = _top;
 
@@ -107,30 +107,18 @@
 
     //页面块滚动
     $.scrollBlock = function(opt) {
+        "use strict"
         opt = $.extend({
-            tolerance: 10,       //块滚动容差
-            scrolltime: 600,     //块切换时间
+            tolerance: 10,       //块滚动容差,防止滚动不精确造成的问题
+            scrolltime: 700,     //块切换时间
             scrollcubic: null,  //块切换动画贝塞尔曲线
             blocklist: [],       //块的坐标集合
-            wheelchange: 200,    //块内滚动每次变化
-            wheeltime: 500,      //块内滚动每次时间
+            wheelchange: 300,    //块内滚动每次变化
+            wheeltime: 450,      //块内滚动每次时间
             wheelcubic: null,   //块内滚动动画贝塞尔曲线
         }, opt || {});
         var sb_list, scrolling;
 
-        function reget() {
-            sb_list = opt.blocklist;
-            var i = 0;
-            $(".scroll-block").each(function () {
-                var $t = $(this);
-                i = $t.data('i') || i;
-                sb_list[i] = Math.round($t.position().top);
-                i++;
-            })
-        }
-
-        $(window).resize(reget)
-        reget()
         window.scrollDisable(function (e) {
             if (!scrolling) {
                 var top = Math.round($(window).scrollTop());
@@ -142,11 +130,9 @@
                             n_top = v;
                             var min = sb_list[i - 1];
                             if (min != null) {
-                                if (H < n_top - sb_list[i - 1] && top + H < n_top) {
-                                    scroll = top + opt.wheelchange;
-                                    if (scroll + H > n_top) {
-                                        scroll = n_top - H;
-                                    }
+                                if (H < n_top - sb_list[i - 1] && top + H + opt.tolerance < n_top) {
+                                    var tmp = top + opt.wheelchange;
+                                    scroll = tmp + (opt.wheelchange >> 1) + H < n_top ? tmp : n_top - H;
                                 }
                             }
 
@@ -164,19 +150,34 @@
                     $.each(sb_list, get_top);
 
                     if (scroll) {
-                        $.scrollTo(scroll, opt.wheeltime, function () {
-                            scrolling = false;
-                        },opt.wheelcubic);
+                        scrolling = true;
+                        $.scrollTo(scroll, opt.wheeltime, enable, opt.wheelcubic);
                     }
                     else if (n_top != null && n_top != top) {
                         scrolling = true;
-                        $.scrollTo(n_top, opt.scrolltime, function () {
-                            scrolling = false;
-                        },opt.scrollcubic);
+                        $.scrollTo(n_top, opt.scrolltime, enable, opt.scrollcubic);
                     }
                 }
             }
         });
+
+        function reget() {
+            sb_list = opt.blocklist;
+            var i = 0;
+            $(".scroll-block").each(function () {
+                var $t = $(this);
+                i = $t.data('i') || i;
+                sb_list[i] = Math.round($t.position().top);
+                i++;
+            })
+        }
+
+        function enable(){
+            scrolling = false;
+        }
+
+        $(window).resize(reget)
+        reget()
     }
 
 

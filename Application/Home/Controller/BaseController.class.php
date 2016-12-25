@@ -59,6 +59,7 @@ class BaseController extends Controller
 
             $kefu['qq'] = $setting_obj->selectVal('kefu-qq');
             $kefu['mobile'] = $setting_obj->selectVal('kefu-mobile');
+
             $this->kefu = $kefu;
         }
 

@@ -32,17 +32,13 @@ class SettingModel extends Model
     {
         if (is_array($keys) || strpos($keys, ',')) {
             $where['key'] = array('in', $keys);
+            $list = $this->field('key,value')->where($where)->select();
+            return $list;
         } else {
             $where['key'] = $keys;
+            $list = $this->field('key,value')->where($where)->find();
+            return $list ? $list[0]['value'] : '';
         }
-        $list = $this->field('key,value')->where($where)->select();
-        if ($list) {
-            if (count($list) == 1) {
-                return $list[0]['value'];
-            }
-            return $list;
-        }
-        return array();
     }
 
     //全局参数

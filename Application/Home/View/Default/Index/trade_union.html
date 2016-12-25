@@ -26,11 +26,12 @@
     }
     .container-1,.container-2{
         height: 100vh;
+        table-layout: fixed;
     }
     .container-1 .title,.container-2 .title{
-        width: auto;
         white-space: nowrap;
-        min-width: 200px;
+        width: 250px;
+        text-align: center;
     }
     .container-1 .bg,.container-2 .bg{
         width: 100%;
@@ -38,7 +39,7 @@
     .container-1 h1,.container-2 h1{
         color: #fff;
         margin: 0;
-        padding: 1.5em;
+        padding: 1.5em 0;
         font-weight: bold;
     }
     .container-1 .title-en,.container-2 .title-en{
@@ -53,7 +54,7 @@
     .container-1 .title,.container-1 .title-en{
         border-right: 1px solid #c4df9b;
     }
-    .container-1 .container,.container-2 .container{
+    .container-1 .content,.container-2 .content{
         padding: 20px 30px;
         font-size: 20px;
         font-weight: 100;
@@ -129,8 +130,15 @@
         .banner .h1-banner{
             margin-top: 5em;
         }
-        .container-1 .container,.container-2 .container{
+        .container-1,.container-2{
+            height: auto;
+        }
+        .container-1 .title, .container-2 .title{
+            width: 135px;
+        }
+        .container-1 .content,.container-2 .content{
             font-size: 12px;
+            padding: 10px 0;
         }
         .container-3 .block{
             margin: .5em 1em;
@@ -169,17 +177,15 @@
     </tr>
     <tr>
         <td class="title-en text-right"><h2 class="h2-banner txt-green-h"><strong>We</strong><br><small>ARE ON THE ROAD</small></h2></td>
-        <td>
-            <div class="container">
-                <div class="col-sm-8">
-                    <p>“微家校”利用互联网技术、大数据应用技术，通过软硬件结合解决校园安全管理问题，为教育部门、学校、教师、
-                        家长提供教学管理、安全管理、家校互动等教育信息化平台服务。</p><br>
-                    <p>2015年9月，“中国关心下一代工作委员会”联合“中国儿童少年基金会”发起大型公益行动，目标为全国10000所
-                        学校免费捐献“微家校”教育信息平台。</p><br>
-                    <p>截至2016年6月，“微家校”已成功为全国4000余所学校、60余万师生家长提供教育信息化平台服务，日活跃率在
-                        60%以上。</p><br>
-                    <p>“微家校”扎根于教学、安全、家校领域，以雄厚的研发、推广、运营实力赢得了用户的认可！</p>
-                </div>
+        <td class="content">
+            <div class="col-sm-8">
+                <p>“微家校”利用互联网技术、大数据应用技术，通过软硬件结合解决校园安全管理问题，为教育部门、学校、教师、
+                    家长提供教学管理、安全管理、家校互动等教育信息化平台服务。</p><br>
+                <p>2015年9月，“中国关心下一代工作委员会”联合“中国儿童少年基金会”发起大型公益行动，目标为全国10000所
+                    学校免费捐献“微家校”教育信息平台。</p><br>
+                <p>截至2016年6月，“微家校”已成功为全国4000余所学校、60余万师生家长提供教育信息化平台服务，日活跃率在
+                    60%以上。</p><br>
+                <p>“微家校”扎根于教学、安全、家校领域，以雄厚的研发、推广、运营实力赢得了用户的认可！</p>
             </div>
         </td>
     </tr>
@@ -190,17 +196,15 @@
         <td class="title"><h1 class="h2-banner">胜利者同盟</h1></td>
     </tr>
     <tr>
-        <td>
-            <div class="container">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-8">
-                    <p>“微家校”以打造全面完善的教育生态平台为目标，以实现国家关于教育信息化建设并完善“三通两平台”的
+        <td class="content">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                <p>“微家校”以打造全面完善的教育生态平台为目标，以实现国家关于教育信息化建设并完善“三通两平台”的
                     教育方针为使命，邀请您加入“胜利者同盟”。</p><br>
-                    <p>在“胜利者同盟”，我们以全面开放的心态，共享教育渠道、资源，实现合作共赢！</p><br>
-                    <p>如果您也像我们一样，执着于某一个教育垂直领域，不做到最好誓不罢休。</p><br>
-                    <p>如果您也像我们一样，坚持在中国下一代教育事业，全心贡献自己的力量。</p><br>
-                    <p>那么加入“胜利者同盟”,我们将全面开放“微家校”极具用户粘性的生态平台，与您拥抱成功！</p>
-                </div>
+                <p>在“胜利者同盟”，我们以全面开放的心态，共享教育渠道、资源，实现合作共赢！</p><br>
+                <p>如果您也像我们一样，执着于某一个教育垂直领域，不做到最好誓不罢休。</p><br>
+                <p>如果您也像我们一样，坚持在中国下一代教育事业，全心贡献自己的力量。</p><br>
+                <p>那么加入“胜利者同盟”,我们将全面开放“微家校”极具用户粘性的生态平台，与您拥抱成功！</p>
             </div>
         </td>
         <td class="title-en"><h2 class="h2-banner"><strong>The</strong><br><small>WINNER ALLIANCE</small></h2></td>
