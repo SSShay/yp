@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row footer-top">
             <div class="col-md-4 site-map text-center">
-                <div class="col-xs-6 yuanpan">
+                <!--<div class="col-xs-6 yuanpan">
                     <img src="__IMG__/common/panyard.png">
                     <a href="#">二级标题</a>
                     <a href="#">二级标题</a>
@@ -19,7 +19,20 @@
                     <a href="#">二级标题</a>
                     <a href="#">二级标题</a>
                     <a href="#">二级标题</a>
-                </div>
+                </div>-->
+                <ul class="footer-nav">
+                    <li>
+                        <label>智能终端</label>
+                        <a> 标题1</a>
+                    </li>
+                    <li>
+                        <label>智能终端</label>
+                        <a> 标题2</a>
+                        <a> 标题2</a>
+                        <a> 标题2</a>
+                    </li>
+                </ul>
+
             </div>
             <div class="hr"></div>
             <div class="col-md-4">
@@ -28,8 +41,10 @@
                         <img src="__IMG__/common/icon_qq.png">
                         <h6>客服QQ</h6>
                     </div>
-                    <div class="line text-left">客服：{$kefu['qq']}&nbsp;&nbsp;<div class="qq-chat">QQ交谈</div></div>
-                    <div class="line text-left">电话：{$kefu['mobile']}</div>
+                    <div class="line text-left">客服：{$kefu.qq}&nbsp;&nbsp;
+                        <div class="qq-chat" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid={$kefu.qq}&o=http://{$_SERVER[\'HTTP_HOST\']}__URL__/&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');">QQ交谈</div>
+                    </div>
+                    <div class="line text-left">电话：{$kefu.mobile}</div>
                 </div>
             </div>
             <div class="hr second"></div>

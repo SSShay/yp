@@ -30,12 +30,12 @@ class MenuModel extends Model
         //S：二级菜单
 
         $where['topid'] = 0;
-        $flist = $this->field('id,name,link,sort,display')->where($where)->order('sort')->select();
+        $flist = $this->field('id,name,link,sort,display,sitemap')->where($where)->order('sort')->select();
         if ($flist) {
             foreach ($flist as $k => $v) {
                 unset($where);
                 $where['topid'] = $v['id'];
-                $slist = $this->field('id,name,link,sort,display')->where($where)->order('sort')->select();
+                $slist = $this->field('id,name,link,sort,display,sitemap')->where($where)->order('sort')->select();
                 $flist[$k]['list'] = $slist;
             }
             return $flist;
@@ -43,12 +43,13 @@ class MenuModel extends Model
         return array();
     }
 
-    public function addMenu($name,$sort,$link,$topid)
+    public function addMenu($name,$sort,$link,$topid,$sitemap)
     {
         $data['name'] = $name;
         $data['sort'] = $sort;
         $data['link'] = $link;
         $data['topid'] = $topid;
+        $data['sitemap'] = $sitemap;
         $data['utime'] = time();
 
         if ($this->create($data)) {

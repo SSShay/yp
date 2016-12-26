@@ -88,7 +88,7 @@
                         }else{
                             $td.css('cursor', 'pointer').click(function () {
                                 if(!check()) return;
-                                txt = $td.data('val');
+                                txt == null && (txt = $td.data('val'));
                                 input = $(['<div class="input-group">',
                                     '<select class="form-control">', $.map(opt, function (v, k) {
                                         return '<option value="' + k + '">' + v + '</option>'
@@ -117,7 +117,6 @@
                         }
 
                         function check(){
-                            console.log(flag)
                             if (flag) {
                                 if (flag != id + '_' + d) input.wrong("请先保存当前编辑器的值！");
                                 return;

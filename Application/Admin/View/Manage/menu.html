@@ -1,4 +1,6 @@
 <link href="__CSS__/view/manage/menu.css" rel="stylesheet">
+<link href="__PLUGIN__/ios-switch/switchery.css" rel="stylesheet">
+<script src="__PLUGIN__/ios-switch/switchery.js"></script>
 
 <div class="col-lg-4">
     <div class="panel form_panel hidden">
@@ -18,6 +20,10 @@
                 <div class="col-sm-10">
                     <input id="link" type="text" class="form-control" data-name="菜单链接">
                 </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="control-label">在网站地图栏显示：</label>
+                <input type="checkbox" id="sitemap" class="js-switch-blue" checked/>
             </div>
 
             <button id="menu-add" class="btn btn-primary hidden">添加菜单</button>
@@ -61,6 +67,10 @@
 </div>
 <script src="__JS__/xplugs/jquery.menu-edit.js"></script>
 <script>
+
+    var blue = document.querySelector('.js-switch-blue');
+    $('.js-switch-blue').bootstrapS
+    var switchery = new Switchery(blue, { color: '#41b7f1' });
     //菜单编辑插件初始化
     ;$(function() {
         var menu = JSON.parse('{$menu}' || '[]');
@@ -104,6 +114,14 @@
             }
         })
 
+        $(switchery.element).change(function () {
+            if (menu_tmp) {
+                menu_tmp.data('sitemap', $(switchery.element).prop('checked') ? 1 : 0);
+                console.log($(switchery.element).prop('checked') ? 1 : 0)
+                change()
+            }
+        })
+
         function change() {
             iserror = false;
             if ($("#change-submit").hasClass('hidden')) {
@@ -140,10 +158,11 @@
             var data = $.check([
                 {'target': '#name', 'rules': [$.rules.empty, $.rules.length(2, 6)]},
             ]);
-            if(data){
+            if(data) {
                 data.link = $("#link").val();
                 data.sort = add_tmp.index() + 1;
-                data.topid = add_tmp.hasClass('menu')?0:add_tmp.parent().parent().data('id');
+                data.topid = add_tmp.hasClass('menu') ? 0 : add_tmp.parent().parent().data('id');
+                data.sitemap = $(switchery.element).prop('checked') ? 1 : 0;
             }
             return data;
         }, function (res,data) {
@@ -163,18 +182,22 @@
         })
 
         function form_show(t, obj) {
-            if(iserror) {
+            if (iserror) {
                 $("#name,#link").popover('destroy');
                 if (menu_tmp)menu_tmp.wrong('菜单信息验证没有通过！', 'top', 3);
                 iserror = false;
             }
 
-            if($(".form_panel").hasClass('hidden'))$(".form_panel").removeClass('hidden');
+            if ($(".form_panel").hasClass('hidden')) $(".form_panel").removeClass('hidden');
 
             var txt = obj.children('a').text();
             $("#form_title").text("菜单设置：" + txt + ' ' + t);
             $("#name").val(txt);
             $("#link").val(obj.data('url'));
+            console.log(obj.text() + ' - ' +obj.data('sitemap') + ' - ' + $(switchery.element).prop('checked'))
+            if (obj.data('sitemap') != $(switchery.element).prop('checked')) {
+                switchery.switcher.click()
+            }
             $("#menu-add").addClass('hidden');
             $("#menu-del").removeClass('hidden');
             menu_tmp = obj;
@@ -192,6 +215,9 @@
             $("#form_title").text("菜单添加 " + t);
             $("#name").val('').focus();
             $("#link").val('');
+            if ($(switchery.element).prop('checked') != false) {
+                switchery.switcher.click()
+            }
             $("#menu-add").removeClass('hidden');
             $("#menu-del").addClass('hidden');
             setTimeout(function () {

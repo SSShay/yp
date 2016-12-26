@@ -26,7 +26,7 @@ class ManageController extends BaseController
     {
         $this->U_check_permissions('menu');
         $menu_obj = new MenuModel();
-        $res = $menu_obj->addMenu(I('post.name'), I('post.sort'), I('post.link'), I('post.topid'));
+        $res = $menu_obj->addMenu(I('post.name'), I('post.sort'), I('post.link'), I('post.topid'), I('post.sitemap'));
         $this->clear_menu();
         echo json_encode(array('id' => $res));
     }

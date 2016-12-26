@@ -260,7 +260,24 @@
     margin: 0;
     border-top: 1px solid #b9ced9;
 }
-#footer .site-map{
+#footer .footer-nav{
+    text-align: left;
+}
+#footer .footer-nav li{
+    list-style: none;
+    float: left;
+    margin-right: 30px;
+}
+#footer .footer-nav li a{
+    display: block;
+    line-height: 30px;
+    color: #666;
+    font-size: 12px;
+}
+#footer .footer-nav li a:hover{
+    text-decoration: none;
+}
+/*#footer .site-map{
 
 }
 #footer .site-map a{
@@ -279,7 +296,7 @@
 #footer .site-map .weijiaxiao img{
     width: 70%;
     max-width: 123px;
-}
+}*/
 #footer .contact-way{
     width: 300px;
     margin: 45px auto;

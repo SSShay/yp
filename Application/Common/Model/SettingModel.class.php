@@ -36,8 +36,9 @@ class SettingModel extends Model
             return $list;
         } else {
             $where['key'] = $keys;
-            $list = $this->field('key,value')->where($where)->find();
-            return $list ? $list[0]['value'] : '';
+            $list = $this->field('value')->where($where)->find();
+
+            return $list ? $list['value'] : '';
         }
     }
 

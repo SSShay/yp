@@ -115,6 +115,8 @@
                 var diff = {};
                 var link = obj.data('url');
                 if (v.link != link)diff.link = link;
+                var sitemap = obj.data('sitemap');
+                if (v.sitemap != sitemap)diff.sitemap = sitemap;
                 var name = obj.children('a').text();
                 if (v.name != name)diff.name = name;
                 var sort = obj.index() + 1;
@@ -134,7 +136,7 @@
 
         function create_menu(f) {
             var $li = $([
-                '<li data-url="', f.link, '" data-id="', f.id, '">', '<a>', f.name, '</a>',
+                '<li data-url="', f.link, '" data-id="', f.id, '" data-sitemap="', f.sitemap, '">', '<a>', f.name, '</a>',
                 '<ul class="nav nav-pills nav-stacked">',
                 '<li class="add-btn item"><a><i class="fa fa-plus"></i></a></li>',
                 '</ul>',
@@ -156,7 +158,7 @@
 
         function create_item(e, item_add) {
             var $li = $([
-                '<li data-url="', e.link, '" data-id="', e.id, '">',
+                '<li data-url="', e.link, '" data-id="', e.id, '" data-sitemap="', e.sitemap, '">',
                 '<a>', e.name, '</a>',
                 '</li>'
             ].join(''));

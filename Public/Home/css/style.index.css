@@ -90,7 +90,9 @@
     margin:0 12px 0 0;
     float: left;
 }
-
+#body {
+    background: none;
+}
 #willesPlay{
     margin: 0 auto 50px;
 }

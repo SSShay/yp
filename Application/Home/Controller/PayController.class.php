@@ -107,12 +107,12 @@ class PayController extends BaseController
             $sc_pay_obj = new ScPayModel();
             unset($where);
             $where['order_id'] = $order_id;
-            $pay = $sc_pay_obj->findObj($where, 'pay_type,status,ctime');
+            $pay = $sc_pay_obj->findObj($where, 'pay_type,status,paytime');
 
             if ($pay) {
                 if ($pay['status'] == ScPayModel::T_pay_success || $pay['status'] == ScPayModel::T_pay_completion) {
                     $re['success'] = true;
-                    $re['info'] = '您已经于 ' . date('Y年m月d日 H时i分s秒', $pay['ctime']) . ' 支付过了此订单！';
+                    $re['info'] = '您已经于 ' . date('Y年m月d日 H时i分s秒', $pay['paytime']) . ' 支付过了此订单！';
                 } elseif ($pay['status'] == ScPayModel::T_paying) {
                     $re['info'] = '此订单正在退款处理中！';
                 } elseif ($pay['status'] == ScPayModel::T_refund_success) {
