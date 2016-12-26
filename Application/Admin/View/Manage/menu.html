@@ -23,7 +23,7 @@
             </div>
             <div class="form-group col-xs-12">
                 <label class="control-label">在网站地图栏显示：</label>
-                <input type="checkbox" id="sitemap" class="js-switch-blue" checked/>
+                <input type="checkbox" id="sitemap" class="js-switch-blue" />
             </div>
 
             <button id="menu-add" class="btn btn-primary hidden">添加菜单</button>
@@ -69,7 +69,6 @@
 <script>
 
     var blue = document.querySelector('.js-switch-blue');
-    $('.js-switch-blue').bootstrapS
     var switchery = new Switchery(blue, { color: '#41b7f1' });
     //菜单编辑插件初始化
     ;$(function() {
@@ -117,7 +116,6 @@
         $(switchery.element).change(function () {
             if (menu_tmp) {
                 menu_tmp.data('sitemap', $(switchery.element).prop('checked') ? 1 : 0);
-                console.log($(switchery.element).prop('checked') ? 1 : 0)
                 change()
             }
         })
@@ -194,9 +192,8 @@
             $("#form_title").text("菜单设置：" + txt + ' ' + t);
             $("#name").val(txt);
             $("#link").val(obj.data('url'));
-            console.log(obj.text() + ' - ' +obj.data('sitemap') + ' - ' + $(switchery.element).prop('checked'))
-            if (obj.data('sitemap') != $(switchery.element).prop('checked')) {
-                switchery.switcher.click()
+            if (obj.data('sitemap') != switchery.isChecked()) {
+                switchery.setPosition(true)
             }
             $("#menu-add").addClass('hidden');
             $("#menu-del").removeClass('hidden');
@@ -215,8 +212,8 @@
             $("#form_title").text("菜单添加 " + t);
             $("#name").val('').focus();
             $("#link").val('');
-            if ($(switchery.element).prop('checked') != false) {
-                switchery.switcher.click()
+            if (obj.data('sitemap') != switchery.isChecked()) {
+                switchery.setPosition(true)
             }
             $("#menu-add").removeClass('hidden');
             $("#menu-del").addClass('hidden');

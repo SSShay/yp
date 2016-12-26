@@ -21,16 +21,18 @@
                     <a href="#">二级标题</a>
                 </div>-->
                 <ul class="footer-nav">
-                    <li>
-                        <label>智能终端</label>
-                        <a> 标题1</a>
-                    </li>
-                    <li>
-                        <label>智能终端</label>
-                        <a> 标题2</a>
-                        <a> 标题2</a>
-                        <a> 标题2</a>
-                    </li>
+                    <volist name="menus" id="v">
+                        <eq name="v.sitemap" value="1">
+                            <li>
+                                <label><a target="_blank" href="{$v.link}"> {$v.name}</a></label>
+                                <volist name="v.list" id="vv">
+                                    <eq name="vv.sitemap" value="1">
+                                        <a target="_blank" href="{$vv.link}"> {$vv.name}</a>
+                                    </eq>
+                                </volist>
+                            </li>
+                        </eq>
+                    </volist>
                 </ul>
 
             </div>

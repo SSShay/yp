@@ -76,7 +76,7 @@ class MenuModel extends Model
 
         $where['topid'] = 0;
         //$where['display'] = 1;
-        $flist = $this->field('id,name,link')->where($where)->order('sort')->select();
+        $flist = $this->field('id,name,link,sitemap')->where($where)->order('sort')->select();
         if ($flist) {
             foreach ($flist as $k => $v) {
                 if (empty($v['link'])) {
@@ -87,7 +87,7 @@ class MenuModel extends Model
                 unset($where);
                 $where['topid'] = $v['id'];
                 //$where['display'] = 1;
-                $slist = $this->field('name,link')->where($where)->order('sort')->select();
+                $slist = $this->field('name,link,sitemap')->where($where)->order('sort')->select();
                 $flist[$k]['list'] = $slist;
             }
             return $flist;

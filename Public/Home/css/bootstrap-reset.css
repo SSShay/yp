@@ -76,11 +76,12 @@ a.btn{
     width: 12px;
     height: 12px;
     margin: 1px 5px;
+    transition: 1s;
 }
 .carousel-indicators .active{
-    width: 14px;
-    height: 14px;
-    margin: 0 5px;
+    width: 12px;
+    height: 12px;
+    margin: 1px 5px;
 }
 
 .breadcrumb{

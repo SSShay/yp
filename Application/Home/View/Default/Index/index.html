@@ -9,13 +9,13 @@
     </ol>
     <div class="carousel-inner">
         <volist name="banner" id="v">
-            <div class="item">
+            <a class="item" <notempty name="v.link">href="{$v.link}" target="_blank"</notempty>>
                 <img alt="{$v.imgalt}" src="{$v.imgurl}"/>
                 <div class="carousel-caption">
                     <notempty name="v.title"><h4>{$v.title}</h4></notempty>
                     <notempty name="v.content"><p>{$v.content}</p></notempty>
                 </div>
-            </div>
+            </a>
         </volist>
     </div>
     <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
