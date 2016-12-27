@@ -495,12 +495,11 @@
 }
 .article-body img{
     max-width: 100%;
-    margin: 15px 0;
+    max-height: 450px;
 }
 .article-body p{
     line-height: 1.9;
     color: #404040;
-    text-indent: 2em;
     font-family: "宋体", sans-serif;
 }
 

@@ -471,6 +471,10 @@ $(function() {
         })
     }
 
+    $(".nav-right .leave-msg,.nav-right .contact_us").click(function(){
+        location.href = $(this).data('url');
+    })
+
     //延迟加载插件
     $(".img-delay").each(function () {
         var $t = $(this);

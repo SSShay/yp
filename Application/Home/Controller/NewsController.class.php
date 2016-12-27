@@ -63,17 +63,20 @@ class NewsController extends BaseController
         $article['time'] = date('Y-m-d H:i', $article['ctime']);
         $t = $article['type'];
 
-        $tlist = array('CompanyNews', 'IndustryDynamics', 'PolicySupport');
-        $typestr = $tlist[$t];
-        if (!$typestr) $this->_empty('找不到文章...，文章类型错误！');
+        $tlist_en = array('CompanyNews', 'IndustryDynamics', 'PolicySupport');
+        $t_en = $tlist_en[$t];
+        if (!$t_en) $this->_empty('找不到文章...，文章类型错误！');
 
         $this->init_nav();
-        $this->breadcrumb(array('name' => '公司新闻', 'url' => U('News/index', array('type' => $t))));
+        $tlist = array('公司新闻', '行业动态', '政策支持');
+        $t_ch = $tlist[$t];
+
+        $this->breadcrumb(array('name' => $t_ch, 'url' => U('News/index', array('type' => $t))));
         $this->article = $article;
         $this->title = $article['title'];
 
         layout('Layout/pagearticle');
-        $this->display('News/' . $typestr . '/' . $id);
+        $this->display('News/' . $t_en . '/' . $id);
     }
 
     public function article_list()

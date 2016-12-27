@@ -75,7 +75,7 @@ class MenuModel extends Model
         //S：二级菜单
 
         $where['topid'] = 0;
-        //$where['display'] = 1;
+        $where['display'] = 1;
         $flist = $this->field('id,name,link,sitemap')->where($where)->order('sort')->select();
         if ($flist) {
             foreach ($flist as $k => $v) {

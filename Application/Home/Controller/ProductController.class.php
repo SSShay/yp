@@ -62,7 +62,7 @@ class ProductController extends BaseController
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function init_axx_nav(){
         $this->childnav(array(
-            array('name' => '产品参数','url' => U('Product/axx_parameter')),
+            //array('name' => '产品参数','url' => U('Product/axx_parameter')),
             array('name' => '使用注意','url' => U('Product/axx_faq')),
         ));
     }
@@ -74,12 +74,12 @@ class ProductController extends BaseController
         $this->page_nofoot('anxinxing');
     }
 
-    public function axx_parameter()
+    /*public function axx_parameter()
     {
         $this->init_axx_nav();
         $this->breadcrumb(array(array('name' => '安心星', 'url' => U('Product/anxinxing')), array('name' => '产品参数')));
         $this->page_full('axx_parameter');
-    }
+    }*/
 
     public function axx_faq(){
         $this->init_axx_nav();

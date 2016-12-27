@@ -1,133 +1,187 @@
-<link href="__CSS__/style.video.css"  rel="stylesheet" />
-<link href="__CSS__/style.index.css"  rel="stylesheet" />
-<script src="__PLUGIN__/layer/layer.js"></script>
-<div class="carousel slide" id="carousel-index" data-interval="2500">
-    <ol class="carousel-indicators">
-        <volist name="banner" id="v">
-            <li data-slide-to="{$key}" data-target="#carousel-index"></li>
-        </volist>
-    </ol>
-    <div class="carousel-inner">
-        <volist name="banner" id="v">
-            <a class="item" <notempty name="v.link">href="{$v.link}" target="_blank"</notempty>>
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title><notempty name="title">{$title}<else/>杭州远磐互联科技有限公司</notempty></title>
+    <notempty name="keywords"><meta name="Keywords" content="{$keywords}"></notempty>
+
+    <notempty name="description"><meta name="Description" content="{$description}"></notempty>
+
+    <script src="__JS__/jquery-1.10.2.min.js"></script>
+    <script src="__JS__/custom.js"></script>
+
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/bootstrap-reset.css" rel="stylesheet">
+
+    <link href="__CSS__/style.css" rel="stylesheet">
+    <link href="__CSS__/style-responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="__JS__/respond.min.js"></script>
+    <script src="__JS__/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!--<link rel="shortcut icon" href="#" type="image/png">-->
+    <link href="__CSS__/style.video.css"  rel="stylesheet" />
+    <link href="__CSS__/style.index.css"  rel="stylesheet" />
+    <script src="__PLUGIN__/layer/layer.js"></script>
+    <include file="Default/Layout/navbar" />
+    <nav class="nav-right">
+        <ul>
+            <li><span>建议<br>意见</span></li>
+            <li><span>联系<br>客服</span></li>
+            <li class="top" style="opacity:0"><img src="__IMG__/common/top.png"></li>
+        </ul>
+    </nav>
+    <div class="carousel slide" id="carousel-index" data-interval="2500">
+        <ol class="carousel-indicators">
+            <volist name="banner" id="v">
+                <li data-slide-to="{$key}" data-target="#carousel-index"></li>
+            </volist>
+        </ol>
+        <div class="carousel-inner">
+            <volist name="banner" id="v">
+                <a class="item" <notempty name="v.link">href="{$v.link}" target="_blank"</notempty>>
                 <img alt="{$v.imgalt}" src="{$v.imgurl}"/>
                 <div class="carousel-caption">
                     <notempty name="v.title"><h4>{$v.title}</h4></notempty>
                     <notempty name="v.content"><p>{$v.content}</p></notempty>
                 </div>
-            </a>
-        </volist>
-    </div>
-    <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div>
-<div class="container-fluid entry-container">
-    <div class="row">
-        <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/edu_bureau')}">
-            <div class="col-cell left-cell">
-                <img src="__IMG__/index/entry/1.png">
-            </div>
-            <div class="col-cell">
-                <h3>教育局</h3><br>
-                <p>三通二平台 助力智慧教育</p>
-            </div>
-        </a>
-        <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/agent')}">
-            <div class="col-cell left-cell">
-                <img src="__IMG__/index/entry/2.png">
-            </div>
-            <div class="col-cell">
-                <h3>代理商</h3><br>
-                <p>携手微家校 进军校园市场</p>
-            </div>
-        </a>
-        <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/school')}">
-            <div class="col-cell left-cell">
-                <img src="__IMG__/index/entry/3.png">
-            </div>
-            <div class="col-cell">
-                <h3>学校</h3><br>
-                <p>解决校园安全问题 联通家校互动</p>
-            </div>
-        </a>
-        <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/trade_union')}">
-            <div class="col-cell left-cell">
-                <img src="__IMG__/index/entry/4.png">
-            </div>
-            <div class="col-cell">
-                <h3>行业联盟</h3><br>
-                <p>校园设备供应商 与您同行</p>
-            </div>
-        </a>
-    </div>
-</div>
-
-<div class="container-fluid info-container">
-    <div class="row">
-        <div class="col-md-4 col-sm-12 news-preview">
-            <h3>新闻中心</h3>
-            <volist name="news" id="v">
-                <a class="media" href="{:U('News/article')}/id/{$v.id}">
-                    <div class="media-left">
-                        <empty name="v.thumb">
-                            <img src="__IMG__/others/news.jpg" alt="">
-                            <else/>
-                            <img src="{$v.thumb}" alt="">
-                        </empty>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">{$v.title}</h4>
-                        <p>{$v.brief}</p>
-                    </div>
                 </a>
             </volist>
         </div>
-        <div class="col-md-4 col-sm-12">
-            <h3>宣传视频</h3>
-            <a class="video-thumb">
-                <div class="play-box">
-                    <img src="__IMG__/common/play_btn.png">
+        <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+    <div class="container-fluid entry-container">
+        <div class="row">
+            <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/edu_bureau')}">
+                <div class="col-cell left-cell">
+                    <img src="__IMG__/index/entry/1.png">
                 </div>
-                <img src="{$video.thumb}">
+                <div class="col-cell">
+                    <h3>教育局</h3><br>
+                    <p>三通二平台 助力智慧教育</p>
+                </div>
+            </a>
+            <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/agent')}">
+                <div class="col-cell left-cell">
+                    <img src="__IMG__/index/entry/2.png">
+                </div>
+                <div class="col-cell">
+                    <h3>代理商</h3><br>
+                    <p>携手微家校 进军校园市场</p>
+                </div>
+            </a>
+            <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/school')}">
+                <div class="col-cell left-cell">
+                    <img src="__IMG__/index/entry/3.png">
+                </div>
+                <div class="col-cell">
+                    <h3>学校</h3><br>
+                    <p>解决校园安全问题 联通家校互动</p>
+                </div>
+            </a>
+            <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/trade_union')}">
+                <div class="col-cell left-cell">
+                    <img src="__IMG__/index/entry/4.png">
+                </div>
+                <div class="col-cell">
+                    <h3>行业联盟</h3><br>
+                    <p>校园设备供应商 与您同行</p>
+                </div>
             </a>
         </div>
-        <div class="col-md-4 col-sm-12 summary-box">
-            <h3>远磐概述</h3>
-            <img src="__IMG__/index/place.jpg">
-            杭州远磐互联科技有限公司是经杭州市滨江区政府批准入驻智慧E谷，围绕国家教育信息化“三通两平台”落地开发的专业
-            软 件服务商, 是国家大力扶持的智慧教育产业的领先单位， 也是国内最具影响力的教育信息化企业之一。 杭州远磐公司
-            在科技界率先实现”四化”，即运营标准化，技术领先化，经营特色化，管理科学化，并在全国推行特许经营 模式。依托
-            强大的技术核心资源，公司已开发出大量核心产品：移动互联网电子商务平台（微服宝）。 微家校协同教育软件，安心星
-            智能安全设备，微生活本地通商成平台，微服宝智能wifi路由器，移动生活O2O体验店六大产 品体系以及行业网站，SNS交
-            共赢。
+    </div>
+
+    <div class="container-fluid info-container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 news-preview">
+                <h3>新闻中心</h3>
+                <volist name="news" id="v">
+                    <a class="media" href="{:U('News/article')}/id/{$v.id}">
+                        <div class="media-left">
+                            <empty name="v.thumb">
+                                <img src="__IMG__/news/thumb.jpg" alt="">
+                                <else/>
+                                <img src="{$v.thumb}" alt="">
+                            </empty>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{$v.title}</h4>
+                            <p>{$v.brief}</p>
+                        </div>
+                    </a>
+                </volist>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <h3>宣传视频</h3>
+                <a class="video-thumb">
+                    <div class="play-box">
+                        <img src="__IMG__/common/play_btn.png">
+                    </div>
+                    <img src="{$video.thumb}">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-12 summary-box">
+                <h3>远磐概述</h3>
+                <img src="__IMG__/index/place.jpg">
+                杭州远磐互联科技有限公司（简称远磐科技）是经杭州市滨江区政府批准入驻智慧E谷，围绕国家教育信息化、“三通两平台”
+                落地开发的专业软件服务商，是国家大力扶持的智慧教育产业的领先单位，也是国内最具影响力的教育信息化企业之一。<br>
+                远磐科技秉承“关爱学生安全成长”为宗旨，依托强大的技术核心资源，不断完善产品体系，扩大服务范围，形成以
+                微家校APP和电子学生证为核心的“微家校”服务项目。截止2016年6月，微家校项目已覆盖全国十余个省份，签约了4000多
+                所学校，40多万人入驻微家校APP。同时与中国移动、中国联通两大通信服务商建立长期战略合作伙伴关系，让40余万家长
+                不再为孩子的出行安全担忧；让10000多名老师实现轻松管理学生；让20余万留守儿童得到来自父母的关爱。<br>
+                远磐科技致力于解决中小学教育问题，不断为广大学生家长提供最优质的服务，让家长放心，让老师安心，让学校开心！<br>
+            </div>
         </div>
     </div>
-</div>
-<div id="willesPlay" style="display: none"></div>
-<script src="__JS__/jquery.willesplay.min.js"></script>
-<script>
-    $(function(){
-        $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
-        $("#carousel-index .carousel-inner .item").eq(0).addClass('active');
+    <div id="willesPlay" style="display: none"></div>
+    <script src="__JS__/jquery.willesplay.min.js"></script>
+    <script>
+        //页面常量
+        panyard = {
+            'indexnav': '{$indexnav}'
+        }
 
-        $('#carousel-index').carousel()
+        ;(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-        var video = $("#willesPlay").video();
-        $(".play-box").click(function(){
-            var width = $(window).width();
-            if(width > 992) width *= 0.62;
-            else width -= 30;
-            layer.open({
-                type: 1,
-                title: null,
-                area: [width + 'px'], //宽高
-                content: $("#willesPlay"),
-                resize:false,
-            });
-            $("#willesPlay").parent().attr("id",'video-box')
+        ga('create', 'UA-72376317-2', 'auto');
+        ga('send', 'pageview');
 
-            video.play("{$video.url}", "{$video.name}", $(this));
 
+        $(function(){
+            $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
+            $("#carousel-index .carousel-inner .item").eq(0).addClass('active');
+
+            $('#carousel-index').carousel()
+
+            var video = $("#willesPlay").video();
+            $(".play-box").click(function(){
+                var width = $(window).width();
+                if(width > 992) width *= 0.62;
+                else width -= 30;
+                layer.open({
+                    type: 1,
+                    title: null,
+                    area: [width + 'px'], //宽高
+                    content: $("#willesPlay"),
+                    resize:false,
+                });
+                $("#willesPlay").parent().attr("id",'video-box')
+
+                video.play("{$video.url}", "{$video.name}", $(this));
+
+            })
         })
-    })
-</script>
+    </script>
+    <include file="Default/Layout/footer" />

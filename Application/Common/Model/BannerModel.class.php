@@ -53,6 +53,7 @@ class BannerModel extends Model
         $where['display'] = 1;
         //$where['display'] = 1;
         $list = $this->field('imgurl,imgalt,link,title,content')->where($where)->order('sort')->select();
+
         return $list;
     }
 

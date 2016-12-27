@@ -28,7 +28,7 @@
                 <div class="col-lg-2_4 col-md-3 col-sm-4 col-xs-6">
                     <a class="product_item" href="{:U('Mall/detail')}/id/{$v.id}">
                         <empty name="v.thumb">
-                            <img src="__IMG__/mall/thumb.gif">
+                            <img src="__IMG__/mall/thumb.jpg">
                             <else />
                             <img src="{$v.thumb}" />
                         </empty>
@@ -53,7 +53,7 @@
                 <div class="col-lg-4 col-xs-6 item">
                     <a class="product_item <if condition='$i lt 5 AND $i neq 2'>padding</if>" href="{:U('Mall/detail')}/id/{$v.id}">
                         <empty name="v.thumb">
-                            <img src="__IMG__/mall/thumb.gif">
+                            <img src="__IMG__/mall/thumb.jpg">
                             <else />
                             <img src="{$v.thumb}" />
                         </empty>
