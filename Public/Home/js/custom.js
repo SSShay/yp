@@ -109,54 +109,75 @@
     $.scrollBlock = function(opt) {
         "use strict"
         opt = $.extend({
-            tolerance: 10,       //块滚动容差,防止滚动不精确造成的问题
+            tolerance: 6,       //块滚动容差,防止滚动不精确造成的问题
             scrolltime: 700,     //块切换时间
             scrollcubic: null,  //块切换动画贝塞尔曲线
             blocklist: [],       //块的坐标集合
             wheelchange: 300,    //块内滚动每次变化
             wheeltime: 450,      //块内滚动每次时间
             wheelcubic: null,   //块内滚动动画贝塞尔曲线
+            callback: function(prev,index) {
+
+            }
         }, opt || {});
-        var sb_list, scrolling;
+        var sb_list, scrolling,prev,index,N,lasth;
 
         window.scrollDisable(function (e) {
+            var deltaY = e.deltaY || -e.wheelDelta;
             if (!scrolling) {
                 var top = Math.round($(window).scrollTop());
+                //console.log(top, 'top')
                 var H = $(window).height();
-                if ((e.deltaY != 0)) {
+                if ((deltaY != 0)) {
                     var n_top, scroll;
-                    var get_top = e.deltaY > 0 ? function (i, v) {
+                    var get_top = deltaY > 0 ? function (i, v) {
                         if (v > top + opt.tolerance) {
                             n_top = v;
-                            var min = sb_list[i - 1];
-                            if (min != null) {
+                            index = i;
+                            var _v = sb_list[i - 1];
+                            if (_v != null) {
                                 if (H < n_top - sb_list[i - 1] && top + H + opt.tolerance < n_top) {
                                     var tmp = top + opt.wheelchange;
                                     scroll = tmp + (opt.wheelchange >> 1) + H < n_top ? tmp : n_top - H;
                                 }
                             }
-
+                            return false;
+                        } else if (i == N - 1 && lasth > H) {
+                            scroll = top + opt.wheelchange;
                             return false;
                         }
                     } : function (i, v) {
                         if (v > top - opt.tolerance) {
+                            index = i - 1;
                             var _v = sb_list[i - 1];
                             if (_v != null) {
                                 n_top = _v == top ? sb_list[i - 2] : _v;
                             }
                             return false;
+                        } else if (i == N - 1 && lasth > H) {
+                            n_top = sb_list[i - 1] || v;
+                            return false;
                         }
                     }
                     $.each(sb_list, get_top);
+
+                    //console.log(n_top, 'n_top')
+                    //console.log(scroll, 'scroll')
 
                     if (scroll) {
                         scrolling = true;
                         $.scrollTo(scroll, opt.wheeltime, enable, opt.wheelcubic);
                     }
                     else if (n_top != null && n_top != top) {
+                        if (index != null) {
+                            opt.callback && opt.callback(prev, index);
+                            prev = index;
+                        }
                         scrolling = true;
                         $.scrollTo(n_top, opt.scrolltime, enable, opt.scrollcubic);
                     }
+
+                    index = null;
                 }
             }
         });
@@ -170,6 +191,9 @@
                 sb_list[i] = Math.round($t.position().top);
                 i++;
             })
+            lasth = $(".scroll-block").eq(-1).outerHeight();
+            N = sb_list.length
+            console.log(sb_list)
         }
 
         function enable(){
@@ -545,10 +569,7 @@ $(function() {
     }
 
     function preventDefaultForScrollKeys(e) {
-        if (keys[e.keyCode]) {
-            preventDefault(e);
-            return false;
-        }
+
     }
 
     var oldonwheel, oldonmousewheel1, oldonmousewheel2, oldontouchmove, oldonkeydown, isDisabled;
@@ -563,10 +584,10 @@ $(function() {
         window.onmousewheel = preventDefault; // older browsers, IE
         oldonmousewheel2 = document.onmousewheel;
         document.onmousewheel = preventDefault; // older browsers, IE
-        oldontouchmove = window.ontouchmove;
+        /*oldontouchmove = window.ontouchmove;
         window.ontouchmove = preventDefault; // mobile
         oldonkeydown = document.onkeydown;
-        document.onkeydown = preventDefaultForScrollKeys;
+        document.onkeydown = preventDefaultForScrollKeys;*/
 
         isDisabled = true;
     };
@@ -578,8 +599,8 @@ $(function() {
         window.onwheel = oldonwheel; // modern standard
         window.onmousewheel = oldonmousewheel1; // older browsers, IE
         document.onmousewheel = oldonmousewheel2; // older browsers, IE
-        window.ontouchmove = oldontouchmove; // mobile
-        document.onkeydown = oldonkeydown;
+        /*window.ontouchmove = oldontouchmove; // mobile
+        document.onkeydown = oldonkeydown;*/
 
         isDisabled = false;
     };

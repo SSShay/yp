@@ -19,7 +19,7 @@ class BaseController extends Controller
 
     protected function _initialize()
     {
-        
+
     }
 
     protected function page_full($tpl)
@@ -125,6 +125,32 @@ class BaseController extends Controller
             $browser_history_obj = new BrowsingHistoryModel();
             $browser_history_obj->addHistory($bid);
         }
+    }
+
+    const ip_null = 'unknown';
+
+    //获取访问者的ip
+    protected function get_client_ip()
+    {
+        $ip = getenv("HTTP_CLIENT_IP");
+        if (!$ip || !strcasecmp($ip, self::ip_null)) {
+            $ip = getenv("HTTP_X_FORWARDED_FOR");
+            if (!$ip || !strcasecmp($ip, self::ip_null)) {
+                $ip = getenv("REMOTE_ADDR");
+                if (!$ip || !strcasecmp($ip, self::ip_null)) {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                    if (!$ip || !strcasecmp($ip, self::ip_null)) {
+                        $ip = '';
+                    }
+                }
+            }
+        }
+        return $ip;
+    }
+
+    protected function en_submit_id()
+    {
+        $this->submit_id = md5($this->get_client_ip() . NOW_TIME);
     }
 
 }

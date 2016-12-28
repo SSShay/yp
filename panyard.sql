@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-12-26 09:34:05
+Date: 2016-12-28 17:35:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `yp_admin` (
 -- ----------------------------
 -- Records of yp_admin
 -- ----------------------------
-INSERT INTO `yp_admin` VALUES ('1', 'admin', '724428116551db4ab3fb3fa808fd2520', '超级管理员', '::1', '1480043290', '1482715017', 'MAX');
+INSERT INTO `yp_admin` VALUES ('1', 'admin', '724428116551db4ab3fb3fa808fd2520', '超级管理员', '::1', '1480043290', '1482801581', 'MAX');
 
 -- ----------------------------
 -- Table structure for yp_admin_permissions
@@ -3467,15 +3467,16 @@ CREATE TABLE `yp_article` (
   `ctime` int(11) NOT NULL COMMENT '创建时间',
   `utime` int(11) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of yp_article
 -- ----------------------------
-INSERT INTO `yp_article` VALUES ('42', '1', '0', '', '公司新闻', '正文', '1479119921', '1479119921');
-INSERT INTO `yp_article` VALUES ('43', '1', '0', '', '11111', '222222', '1480327611', '1480327611');
-INSERT INTO `yp_article` VALUES ('45', '1', '0', '', '234', '111111111', '1480486473', '1480486473');
-INSERT INTO `yp_article` VALUES ('46', '1', '0', 'Uploads/article/thumb/20161206111334_9945.png', 'cs', '123', '1480487813', '1480994045');
+INSERT INTO `yp_article` VALUES ('55', '2', '1', 'Uploads/article/thumb/20161130223555_7003.jpg', '微家校—建立校园安防平台刻不容缓', '据公安部不完全统计近年来儿童走失数据如下：一月47名儿童走失，有22名儿童与家人团圆，10人意外溺亡，2人不幸遇害，13人至今下落不明。性别比分布走失儿童男女性别比例为2：1。由于我国养老保障制度不够完善，在一些农村地区，“养儿防老”的观念根深蒂固。很多家庭为了老有所依，传宗接代，不惜一切代价买个男孩为自己将来养老做准备。因此走失男孩的数量远高于女孩。地区分布从各个省市走失情况来看，存在儿童走失现', '1480516663', '1480516821');
+INSERT INTO `yp_article` VALUES ('57', '2', '0', 'Uploads/article/thumb/20161130224615_9343.jpg', '远磐科技获评2016年浙江省成长性科技型百强企业', '近日，浙江省高新技术企业协会公布了2016浙江省成长性科技型百强企业名单，滨江区的杭州远磐互联科技有限公司(www.panyard.cn)成功获评，并摘得“最高成长性”项目前三甲。杭州远磐互联科技有限公司是一家以互联网+校园安全为主的科技创新型企业，目前已成功为300家学校，40万学生提供了校园安全保护。其主要产品微家校的研制成功为整个校园安全领域带来了革命性的突破，“微家校”一经推出便获得了社会', '1480517209', '1480517209');
+INSERT INTO `yp_article` VALUES ('58', '2', '0', 'Uploads/article/thumb/20161130225037_3157.jpg', '微家校落地情况一览—江苏篇', '“长洲苑绿柳万树”，钟灵毓秀之地，自然人杰地灵，自古以来，江苏都是一个高教大省。针对经济发达，教育质量偏高的江苏地区，远磐科技全新推出了江苏版微家校，除了保障江苏学生上学安全，还建立了一个系统完善的学习管理平台。系统功能不断增多，更加的人性化；定位方式也由LBS定位变为WIFI定位，定位更加准确；电子设备给有双倍电量，更长待机，关键时刻绝不掉链子。经过江苏地区代理商和江苏一线市场部小伙伴们的努力，', '1480517653', '1480517653');
+INSERT INTO `yp_article` VALUES ('60', '2', '0', 'Uploads/article/thumb/20161206002715_8685.jpg', '贵州黔东南微家校大型入校情况', '贵州是中国西南部的一个多民族省份，与沿海城市比，教学方式方法相对落后，校园安全也不够完善。微家校的应用，势必会为贵州建立一个安全防护平台和信息管理平台，给贵州地区的学生提供一个安全，健康的学习成长环境。\n\n\n	本周微家校市场部人员继续奋斗在贵州一线，在贵州黔东南地区多所学校开展微家校宣讲会，教师培训会，以及电子学生证进校活动。\n\n\n	&lt;img src=&quot;/Uploads/artic', '1480955726', '1480955726');
+INSERT INTO `yp_article` VALUES ('61', '2', '0', 'Uploads/article/thumb/20161207184838_4147.jpg', '微家校贵州市场一线落地情况', '整个酷暑，远磐科技市场部的小伙伴们就奔赴在贵州一线，全力准备微家校市场落地工作。在9月开学之际，贵州地区3000多所签约学校现已全部落地，一万多台微家校电子学生证已经投入使用，预计一个月内，会有五万多台电子学生证到达贵州各地学生的手上。贵州是中国西南部的一个多民族省份，与沿海城市比，教学方式方法相对落后，校园安全也不够完善。微家校的应用，势必会为贵州建立一个安全防护平台和信息管理平台，给贵州地区的', '1481107754', '1481107764');
 
 -- ----------------------------
 -- Table structure for yp_banner
@@ -3490,17 +3491,17 @@ CREATE TABLE `yp_banner` (
   `content` varchar(100) DEFAULT NULL COMMENT '显示在图片上的内容',
   `sort` tinyint(3) NOT NULL COMMENT '轮播图的排序，第几张',
   `display` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示',
-  `type` tinyint(1) DEFAULT '0' COMMENT '0：首页轮播图，1：首页轮播图，2：首页轮播图',
+  `type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0：首页轮播图，1：首页轮播图，2：首页轮播图',
   `utime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='轮播图表';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='轮播图表';
 
 -- ----------------------------
 -- Records of yp_banner
 -- ----------------------------
-INSERT INTO `yp_banner` VALUES ('5', 'Uploads/banner/5822b6e06916e.jpg', null, null, null, null, '3', '1', '0', '1478670048');
-INSERT INTO `yp_banner` VALUES ('9', 'Uploads/banner/584faa91df389.jpg', null, null, null, null, '2', '1', '2', '1481616017');
-INSERT INTO `yp_banner` VALUES ('10', 'Uploads/banner/584faa99edbce.jpg', null, null, null, null, '3', '1', '2', '1481616025');
+INSERT INTO `yp_banner` VALUES ('30', 'Uploads/banner/583ee2b8820cd.jpg', '代理商', 'http://192.168.1.150/index.php?s=/Index/agent', '', '', '1', '1', '0', '1482848365');
+INSERT INTO `yp_banner` VALUES ('31', 'Uploads/banner/583ee2f9d88a5.jpg', '微家校app', 'http://192.168.1.150/index.php?s=/Product/weijiaxiao', '', '', '2', '1', '0', '1482848651');
+INSERT INTO `yp_banner` VALUES ('32', 'Uploads/banner/583ee3021bd03.jpg', '电子学生证', 'http://192.168.1.150/index.php?s=/Product/anxinxing', '', '', '3', '1', '0', '1482848651');
 
 -- ----------------------------
 -- Table structure for yp_browser
@@ -3511,7 +3512,7 @@ CREATE TABLE `yp_browser` (
   `ip` varchar(30) DEFAULT NULL COMMENT '浏览者ip',
   `time` int(11) NOT NULL COMMENT '首次访问时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yp_browser
@@ -3546,6 +3547,18 @@ INSERT INTO `yp_browser` VALUES ('27', '::1', '1482301988');
 INSERT INTO `yp_browser` VALUES ('28', '::1', '1482371741');
 INSERT INTO `yp_browser` VALUES ('29', '::1', '1482455030');
 INSERT INTO `yp_browser` VALUES ('30', '127.0.0.1', '1482465301');
+INSERT INTO `yp_browser` VALUES ('31', '::1', '1482801602');
+INSERT INTO `yp_browser` VALUES ('32', '::1', '1482829054');
+INSERT INTO `yp_browser` VALUES ('33', '::1', '1482829362');
+INSERT INTO `yp_browser` VALUES ('34', '::1', '1482829883');
+INSERT INTO `yp_browser` VALUES ('35', '::1', '1482890284');
+INSERT INTO `yp_browser` VALUES ('36', '::1', '1482910705');
+INSERT INTO `yp_browser` VALUES ('37', '::1', '1482910854');
+INSERT INTO `yp_browser` VALUES ('38', '::1', '1482910870');
+INSERT INTO `yp_browser` VALUES ('39', '::1', '1482910978');
+INSERT INTO `yp_browser` VALUES ('40', '127.0.0.1', '1482915771');
+INSERT INTO `yp_browser` VALUES ('41', '127.0.0.1', '1482916061');
+INSERT INTO `yp_browser` VALUES ('42', '127.0.0.1', '1482917501');
 
 -- ----------------------------
 -- Table structure for yp_browsing_history
@@ -3559,7 +3572,7 @@ CREATE TABLE `yp_browsing_history` (
   `referer` varchar(255) DEFAULT NULL COMMENT 'Referer的链接',
   `time` int(11) NOT NULL COMMENT '浏览时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3066 DEFAULT CHARSET=utf8 COMMENT='网站访问记录\r\n可以用于进行用户行为分析：\r\n\r\n1.用户的来源地区、来源页面\r\n2.用户在页面的停留时间、浏览记录、倾向\r\n3.页面访问的量的统计\r\n4.用户访问流程，分析是否合理\r\n5.不同时间段的访问量情况';
+) ENGINE=InnoDB AUTO_INCREMENT=3518 DEFAULT CHARSET=utf8 COMMENT='网站访问记录\r\n可以用于进行用户行为分析：\r\n\r\n1.用户的来源地区、来源页面\r\n2.用户在页面的停留时间、浏览记录、倾向\r\n3.页面访问的量的统计\r\n4.用户访问流程，分析是否合理\r\n5.不同时间段的访问量情况';
 
 -- ----------------------------
 -- Records of yp_browsing_history
@@ -6629,6 +6642,458 @@ INSERT INTO `yp_browsing_history` VALUES ('3062', '29', 'Product/axx_faq', '/yp/
 INSERT INTO `yp_browsing_history` VALUES ('3063', '29', 'Product/axx_faq', '/yp/index.php?s=/Product/axx_faq', 'http://localhost/yp/index.php?s=/Product/axx_parameter', '1482714950');
 INSERT INTO `yp_browsing_history` VALUES ('3064', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/axx_faq', '1482714954');
 INSERT INTO `yp_browsing_history` VALUES ('3065', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/axx_faq', '1482715321');
+INSERT INTO `yp_browsing_history` VALUES ('3066', '29', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482718549');
+INSERT INTO `yp_browsing_history` VALUES ('3067', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482718573');
+INSERT INTO `yp_browsing_history` VALUES ('3068', '29', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/Index/index', '1482718580');
+INSERT INTO `yp_browsing_history` VALUES ('3069', '29', 'Product/axx_parameter', '/yp/index.php?s=/Product/axx_parameter', 'http://localhost/yp/index.php?s=/Product/anxinxing', '1482718582');
+INSERT INTO `yp_browsing_history` VALUES ('3070', '29', 'Product/axx_faq', '/yp/index.php?s=/Product/axx_faq', 'http://localhost/yp/index.php?s=/Product/axx_parameter', '1482718583');
+INSERT INTO `yp_browsing_history` VALUES ('3071', '29', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Product/axx_faq', '1482718586');
+INSERT INTO `yp_browsing_history` VALUES ('3072', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482718591');
+INSERT INTO `yp_browsing_history` VALUES ('3073', '29', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482721036');
+INSERT INTO `yp_browsing_history` VALUES ('3074', '29', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482721075');
+INSERT INTO `yp_browsing_history` VALUES ('3075', '29', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482721480');
+INSERT INTO `yp_browsing_history` VALUES ('3076', '29', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482721490');
+INSERT INTO `yp_browsing_history` VALUES ('3077', '29', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482721497');
+INSERT INTO `yp_browsing_history` VALUES ('3078', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/school', '1482721509');
+INSERT INTO `yp_browsing_history` VALUES ('3079', '29', 'Index/trade_union', '/yp/index.php?s=/Index/trade_union', 'http://localhost/yp/index.php?s=/Index/index', '1482721512');
+INSERT INTO `yp_browsing_history` VALUES ('3080', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482722767');
+INSERT INTO `yp_browsing_history` VALUES ('3081', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482722829');
+INSERT INTO `yp_browsing_history` VALUES ('3082', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482723019');
+INSERT INTO `yp_browsing_history` VALUES ('3083', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482723084');
+INSERT INTO `yp_browsing_history` VALUES ('3084', '29', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482723136');
+INSERT INTO `yp_browsing_history` VALUES ('3085', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482723798');
+INSERT INTO `yp_browsing_history` VALUES ('3086', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482724707');
+INSERT INTO `yp_browsing_history` VALUES ('3087', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482724862');
+INSERT INTO `yp_browsing_history` VALUES ('3088', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482724874');
+INSERT INTO `yp_browsing_history` VALUES ('3089', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482728777');
+INSERT INTO `yp_browsing_history` VALUES ('3090', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482730345');
+INSERT INTO `yp_browsing_history` VALUES ('3091', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482730449');
+INSERT INTO `yp_browsing_history` VALUES ('3092', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482730498');
+INSERT INTO `yp_browsing_history` VALUES ('3093', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482730565');
+INSERT INTO `yp_browsing_history` VALUES ('3094', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482730574');
+INSERT INTO `yp_browsing_history` VALUES ('3095', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482740628');
+INSERT INTO `yp_browsing_history` VALUES ('3096', '29', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/index', '1482744247');
+INSERT INTO `yp_browsing_history` VALUES ('3097', '29', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Mall/index', '1482744349');
+INSERT INTO `yp_browsing_history` VALUES ('3098', '29', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482744351');
+INSERT INTO `yp_browsing_history` VALUES ('3099', '29', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Product/wjx_download', '1482744380');
+INSERT INTO `yp_browsing_history` VALUES ('3100', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482744398');
+INSERT INTO `yp_browsing_history` VALUES ('3101', '29', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/index', '1482744427');
+INSERT INTO `yp_browsing_history` VALUES ('3102', '29', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482744467');
+INSERT INTO `yp_browsing_history` VALUES ('3103', '29', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482748553');
+INSERT INTO `yp_browsing_history` VALUES ('3104', '29', 'Mall/detail', '/yp/index.php?s=/Mall/detail/id/8', 'http://localhost/yp/index.php?s=/Mall/index', '1482748555');
+INSERT INTO `yp_browsing_history` VALUES ('3105', '29', 'Mall/confirm_order', '/yp/index.php?s=/Mall/confirm_order/pid/8', 'http://localhost/yp/index.php?s=/Mall/detail/id/8', '1482748557');
+INSERT INTO `yp_browsing_history` VALUES ('3106', '29', 'Mall/payment', '/yp/index.php?s=/Mall/payment/id/63', 'http://localhost/yp/index.php?s=/Mall/confirm_order/pid/8', '1482748571');
+INSERT INTO `yp_browsing_history` VALUES ('3107', '29', 'Pay/index', '/yp/index.php?s=/Pay/index/oid/63/type/1', 'http://localhost/yp/index.php?s=/Mall/payment/id/63', '1482748818');
+INSERT INTO `yp_browsing_history` VALUES ('3108', '29', 'Pay/index', '/yp/index.php?s=/Pay/index/oid/63/type/1', 'http://localhost/yp/index.php?s=/Mall/payment/id/63', '1482748834');
+INSERT INTO `yp_browsing_history` VALUES ('3109', '29', 'Pay/index', '/yp/index.php?s=/Pay/index/oid/63/type/1', 'http://localhost/yp/index.php?s=/Mall/payment/id/63', '1482748841');
+INSERT INTO `yp_browsing_history` VALUES ('3110', '29', 'Pay/index', '/yp/index.php?s=/Pay/index/oid/63/type/1', 'http://localhost/yp/index.php?s=/Mall/payment/id/63', '1482748874');
+INSERT INTO `yp_browsing_history` VALUES ('3111', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Pay/index/oid/63/type/1', '1482748882');
+INSERT INTO `yp_browsing_history` VALUES ('3112', '29', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482748885');
+INSERT INTO `yp_browsing_history` VALUES ('3113', '29', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/index', '1482748888');
+INSERT INTO `yp_browsing_history` VALUES ('3114', '29', 'Mall/detail', '/yp/index.php?s=/Mall/detail/id/1', 'http://localhost/yp/index.php?s=/Mall/index', '1482748892');
+INSERT INTO `yp_browsing_history` VALUES ('3115', '31', 'Index/index', '/yp/', null, '1482801602');
+INSERT INTO `yp_browsing_history` VALUES ('3116', '31', 'Index/index', '/yp/', null, '1482801642');
+INSERT INTO `yp_browsing_history` VALUES ('3117', '31', 'Index/index', '/yp/', null, '1482801748');
+INSERT INTO `yp_browsing_history` VALUES ('3118', '31', 'Product/anxinxing', '/yp/?s=/Product/anxinxing', 'http://localhost/yp/', '1482801751');
+INSERT INTO `yp_browsing_history` VALUES ('3119', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801754');
+INSERT INTO `yp_browsing_history` VALUES ('3120', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801764');
+INSERT INTO `yp_browsing_history` VALUES ('3121', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801774');
+INSERT INTO `yp_browsing_history` VALUES ('3122', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801826');
+INSERT INTO `yp_browsing_history` VALUES ('3123', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801843');
+INSERT INTO `yp_browsing_history` VALUES ('3124', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801850');
+INSERT INTO `yp_browsing_history` VALUES ('3125', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801852');
+INSERT INTO `yp_browsing_history` VALUES ('3126', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482801863');
+INSERT INTO `yp_browsing_history` VALUES ('3127', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/?s=/Product/anxinxing', '1482802737');
+INSERT INTO `yp_browsing_history` VALUES ('3128', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/index', '1482802823');
+INSERT INTO `yp_browsing_history` VALUES ('3129', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/index', '1482802883');
+INSERT INTO `yp_browsing_history` VALUES ('3130', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/index', '1482803076');
+INSERT INTO `yp_browsing_history` VALUES ('3131', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482803151');
+INSERT INTO `yp_browsing_history` VALUES ('3132', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803171');
+INSERT INTO `yp_browsing_history` VALUES ('3133', '31', 'Index/video', '/yp/index.php?s=/Index/video', 'http://localhost/yp/index.php?s=/Index/index', '1482803178');
+INSERT INTO `yp_browsing_history` VALUES ('3134', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/video', '1482803180');
+INSERT INTO `yp_browsing_history` VALUES ('3135', '31', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482803182');
+INSERT INTO `yp_browsing_history` VALUES ('3136', '31', 'News/index', '/yp/index.php?s=/News/index/type/2', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482803184');
+INSERT INTO `yp_browsing_history` VALUES ('3137', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/News/index/type/2', '1482803189');
+INSERT INTO `yp_browsing_history` VALUES ('3138', '31', 'Index/video', '/yp/index.php?s=/Index/video', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482803209');
+INSERT INTO `yp_browsing_history` VALUES ('3139', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/video', '1482803215');
+INSERT INTO `yp_browsing_history` VALUES ('3140', '31', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803217');
+INSERT INTO `yp_browsing_history` VALUES ('3141', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Product/anxinxing', '1482803284');
+INSERT INTO `yp_browsing_history` VALUES ('3142', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803285');
+INSERT INTO `yp_browsing_history` VALUES ('3143', '31', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/Product/wjx_download', '1482803289');
+INSERT INTO `yp_browsing_history` VALUES ('3144', '31', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/Product/wjx_download', '1482803343');
+INSERT INTO `yp_browsing_history` VALUES ('3145', '31', 'Product/axx_faq', '/yp/index.php?s=/Product/axx_faq', 'http://localhost/yp/index.php?s=/Product/anxinxing', '1482803381');
+INSERT INTO `yp_browsing_history` VALUES ('3146', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Product/axx_faq', '1482803392');
+INSERT INTO `yp_browsing_history` VALUES ('3147', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803394');
+INSERT INTO `yp_browsing_history` VALUES ('3148', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803722');
+INSERT INTO `yp_browsing_history` VALUES ('3149', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803773');
+INSERT INTO `yp_browsing_history` VALUES ('3150', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803778');
+INSERT INTO `yp_browsing_history` VALUES ('3151', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803819');
+INSERT INTO `yp_browsing_history` VALUES ('3152', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482803928');
+INSERT INTO `yp_browsing_history` VALUES ('3153', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482804219');
+INSERT INTO `yp_browsing_history` VALUES ('3154', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482804398');
+INSERT INTO `yp_browsing_history` VALUES ('3155', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482804772');
+INSERT INTO `yp_browsing_history` VALUES ('3156', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482804979');
+INSERT INTO `yp_browsing_history` VALUES ('3157', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805047');
+INSERT INTO `yp_browsing_history` VALUES ('3158', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805058');
+INSERT INTO `yp_browsing_history` VALUES ('3159', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805102');
+INSERT INTO `yp_browsing_history` VALUES ('3160', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805138');
+INSERT INTO `yp_browsing_history` VALUES ('3161', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805157');
+INSERT INTO `yp_browsing_history` VALUES ('3162', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805197');
+INSERT INTO `yp_browsing_history` VALUES ('3163', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805233');
+INSERT INTO `yp_browsing_history` VALUES ('3164', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805266');
+INSERT INTO `yp_browsing_history` VALUES ('3165', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805641');
+INSERT INTO `yp_browsing_history` VALUES ('3166', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805738');
+INSERT INTO `yp_browsing_history` VALUES ('3167', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805803');
+INSERT INTO `yp_browsing_history` VALUES ('3168', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805822');
+INSERT INTO `yp_browsing_history` VALUES ('3169', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482805862');
+INSERT INTO `yp_browsing_history` VALUES ('3170', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/wjx_download', '1482805867');
+INSERT INTO `yp_browsing_history` VALUES ('3171', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482806414');
+INSERT INTO `yp_browsing_history` VALUES ('3172', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482806423');
+INSERT INTO `yp_browsing_history` VALUES ('3173', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482806645');
+INSERT INTO `yp_browsing_history` VALUES ('3174', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/index', '1482806650');
+INSERT INTO `yp_browsing_history` VALUES ('3175', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807521');
+INSERT INTO `yp_browsing_history` VALUES ('3176', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807558');
+INSERT INTO `yp_browsing_history` VALUES ('3177', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807576');
+INSERT INTO `yp_browsing_history` VALUES ('3178', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807599');
+INSERT INTO `yp_browsing_history` VALUES ('3179', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807626');
+INSERT INTO `yp_browsing_history` VALUES ('3180', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807661');
+INSERT INTO `yp_browsing_history` VALUES ('3181', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482807670');
+INSERT INTO `yp_browsing_history` VALUES ('3182', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482808979');
+INSERT INTO `yp_browsing_history` VALUES ('3183', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482809128');
+INSERT INTO `yp_browsing_history` VALUES ('3184', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482809189');
+INSERT INTO `yp_browsing_history` VALUES ('3185', '31', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/Index/index', '1482809230');
+INSERT INTO `yp_browsing_history` VALUES ('3186', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/anxinxing', '1482809240');
+INSERT INTO `yp_browsing_history` VALUES ('3187', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/index', '1482809248');
+INSERT INTO `yp_browsing_history` VALUES ('3188', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482809256');
+INSERT INTO `yp_browsing_history` VALUES ('3189', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/index', '1482809273');
+INSERT INTO `yp_browsing_history` VALUES ('3190', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Mall/index', '1482809293');
+INSERT INTO `yp_browsing_history` VALUES ('3191', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482809295');
+INSERT INTO `yp_browsing_history` VALUES ('3192', '31', 'Product/wjx_download', '/yp/index.php?s=/Product/wjx_download', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482809309');
+INSERT INTO `yp_browsing_history` VALUES ('3193', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Product/wjx_download', '1482810280');
+INSERT INTO `yp_browsing_history` VALUES ('3194', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482812706');
+INSERT INTO `yp_browsing_history` VALUES ('3195', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482812710');
+INSERT INTO `yp_browsing_history` VALUES ('3196', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482812715');
+INSERT INTO `yp_browsing_history` VALUES ('3197', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812721');
+INSERT INTO `yp_browsing_history` VALUES ('3198', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812749');
+INSERT INTO `yp_browsing_history` VALUES ('3199', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812815');
+INSERT INTO `yp_browsing_history` VALUES ('3200', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812825');
+INSERT INTO `yp_browsing_history` VALUES ('3201', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812841');
+INSERT INTO `yp_browsing_history` VALUES ('3202', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812886');
+INSERT INTO `yp_browsing_history` VALUES ('3203', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812942');
+INSERT INTO `yp_browsing_history` VALUES ('3204', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812968');
+INSERT INTO `yp_browsing_history` VALUES ('3205', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812974');
+INSERT INTO `yp_browsing_history` VALUES ('3206', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482812998');
+INSERT INTO `yp_browsing_history` VALUES ('3207', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482813017');
+INSERT INTO `yp_browsing_history` VALUES ('3208', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482813341');
+INSERT INTO `yp_browsing_history` VALUES ('3209', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482813608');
+INSERT INTO `yp_browsing_history` VALUES ('3210', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482813744');
+INSERT INTO `yp_browsing_history` VALUES ('3211', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482815059');
+INSERT INTO `yp_browsing_history` VALUES ('3212', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482815079');
+INSERT INTO `yp_browsing_history` VALUES ('3213', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482815126');
+INSERT INTO `yp_browsing_history` VALUES ('3214', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482815249');
+INSERT INTO `yp_browsing_history` VALUES ('3215', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482815296');
+INSERT INTO `yp_browsing_history` VALUES ('3216', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482816800');
+INSERT INTO `yp_browsing_history` VALUES ('3217', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482816815');
+INSERT INTO `yp_browsing_history` VALUES ('3218', '31', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482816817');
+INSERT INTO `yp_browsing_history` VALUES ('3219', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/school', '1482817038');
+INSERT INTO `yp_browsing_history` VALUES ('3220', '31', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482817043');
+INSERT INTO `yp_browsing_history` VALUES ('3221', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/anxinxing', '1482817048');
+INSERT INTO `yp_browsing_history` VALUES ('3222', '31', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482817079');
+INSERT INTO `yp_browsing_history` VALUES ('3223', '31', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482817556');
+INSERT INTO `yp_browsing_history` VALUES ('3224', '31', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482817560');
+INSERT INTO `yp_browsing_history` VALUES ('3225', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482817613');
+INSERT INTO `yp_browsing_history` VALUES ('3226', '31', 'Index/video', '/yp/index.php?s=/Index/video', 'http://localhost/yp/index.php?s=/Mall/index', '1482817617');
+INSERT INTO `yp_browsing_history` VALUES ('3227', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/video', '1482817619');
+INSERT INTO `yp_browsing_history` VALUES ('3228', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482817620');
+INSERT INTO `yp_browsing_history` VALUES ('3229', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482817786');
+INSERT INTO `yp_browsing_history` VALUES ('3230', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482817791');
+INSERT INTO `yp_browsing_history` VALUES ('3231', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482818132');
+INSERT INTO `yp_browsing_history` VALUES ('3232', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482818136');
+INSERT INTO `yp_browsing_history` VALUES ('3233', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482818955');
+INSERT INTO `yp_browsing_history` VALUES ('3234', '31', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482818957');
+INSERT INTO `yp_browsing_history` VALUES ('3235', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/school', '1482818966');
+INSERT INTO `yp_browsing_history` VALUES ('3236', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482818986');
+INSERT INTO `yp_browsing_history` VALUES ('3237', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482819009');
+INSERT INTO `yp_browsing_history` VALUES ('3238', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482819056');
+INSERT INTO `yp_browsing_history` VALUES ('3239', '31', 'Index/leave_msg', '/yp/index.php?s=/Index/leave_msg', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482819057');
+INSERT INTO `yp_browsing_history` VALUES ('3240', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482819121');
+INSERT INTO `yp_browsing_history` VALUES ('3241', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482820298');
+INSERT INTO `yp_browsing_history` VALUES ('3242', '31', 'Index/leave_msg', '/yp/index.php?s=/Index/leave_msg', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482820303');
+INSERT INTO `yp_browsing_history` VALUES ('3243', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482820309');
+INSERT INTO `yp_browsing_history` VALUES ('3244', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482820802');
+INSERT INTO `yp_browsing_history` VALUES ('3245', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482820815');
+INSERT INTO `yp_browsing_history` VALUES ('3246', '31', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482820818');
+INSERT INTO `yp_browsing_history` VALUES ('3247', '31', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482822781');
+INSERT INTO `yp_browsing_history` VALUES ('3248', '31', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482823076');
+INSERT INTO `yp_browsing_history` VALUES ('3249', '31', 'Index/leave_msg', '/yp/index.php?s=/Index/leave_msg', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482823079');
+INSERT INTO `yp_browsing_history` VALUES ('3250', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482823083');
+INSERT INTO `yp_browsing_history` VALUES ('3251', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482823217');
+INSERT INTO `yp_browsing_history` VALUES ('3252', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482823318');
+INSERT INTO `yp_browsing_history` VALUES ('3253', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482823365');
+INSERT INTO `yp_browsing_history` VALUES ('3254', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482823489');
+INSERT INTO `yp_browsing_history` VALUES ('3255', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/agent', '1482823557');
+INSERT INTO `yp_browsing_history` VALUES ('3256', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/agent', '1482825136');
+INSERT INTO `yp_browsing_history` VALUES ('3257', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482825171');
+INSERT INTO `yp_browsing_history` VALUES ('3258', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/index', '1482825189');
+INSERT INTO `yp_browsing_history` VALUES ('3259', '31', 'Mall/detail', '/yp/index.php?s=/Mall/detail/id/1', 'http://localhost/yp/index.php?s=/Mall/index', '1482825199');
+INSERT INTO `yp_browsing_history` VALUES ('3260', '31', 'Index/video', '/yp/index.php?s=/Index/video', 'http://localhost/yp/index.php?s=/Mall/detail/id/1', '1482825231');
+INSERT INTO `yp_browsing_history` VALUES ('3261', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/video', '1482825233');
+INSERT INTO `yp_browsing_history` VALUES ('3262', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482825236');
+INSERT INTO `yp_browsing_history` VALUES ('3263', '31', 'News/article', '/yp/index.php?s=/News/article/id/45', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482825239');
+INSERT INTO `yp_browsing_history` VALUES ('3264', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482825244');
+INSERT INTO `yp_browsing_history` VALUES ('3265', '31', 'Index/trade_union', '/yp/index.php?s=/Index/trade_union', 'http://localhost/yp/index.php?s=/Index/index', '1482825247');
+INSERT INTO `yp_browsing_history` VALUES ('3266', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482825280');
+INSERT INTO `yp_browsing_history` VALUES ('3267', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482825289');
+INSERT INTO `yp_browsing_history` VALUES ('3268', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482825303');
+INSERT INTO `yp_browsing_history` VALUES ('3269', '31', 'Index/video', '/yp/index.php?s=/Index/video', 'http://localhost/yp/index.php?s=/Mall/index', '1482825314');
+INSERT INTO `yp_browsing_history` VALUES ('3270', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/video', '1482825318');
+INSERT INTO `yp_browsing_history` VALUES ('3271', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482825328');
+INSERT INTO `yp_browsing_history` VALUES ('3272', '31', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482825329');
+INSERT INTO `yp_browsing_history` VALUES ('3273', '31', 'News/index', '/yp/index.php?s=/News/index/type/2', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482825331');
+INSERT INTO `yp_browsing_history` VALUES ('3274', '31', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/News/index/type/2', '1482825333');
+INSERT INTO `yp_browsing_history` VALUES ('3275', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482825342');
+INSERT INTO `yp_browsing_history` VALUES ('3276', '31', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482825344');
+INSERT INTO `yp_browsing_history` VALUES ('3277', '31', 'Index/video', '/yp/index.php?s=/Index/video', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482825346');
+INSERT INTO `yp_browsing_history` VALUES ('3278', '31', 'Mall/index', '/yp/index.php?s=/Mall/index', 'http://localhost/yp/index.php?s=/Index/video', '1482825347');
+INSERT INTO `yp_browsing_history` VALUES ('3279', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Mall/index', '1482825352');
+INSERT INTO `yp_browsing_history` VALUES ('3280', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482825354');
+INSERT INTO `yp_browsing_history` VALUES ('3281', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482826001');
+INSERT INTO `yp_browsing_history` VALUES ('3282', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482826016');
+INSERT INTO `yp_browsing_history` VALUES ('3283', '31', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482827818');
+INSERT INTO `yp_browsing_history` VALUES ('3284', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482827820');
+INSERT INTO `yp_browsing_history` VALUES ('3285', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482827822');
+INSERT INTO `yp_browsing_history` VALUES ('3286', '31', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482827859');
+INSERT INTO `yp_browsing_history` VALUES ('3287', '31', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482828074');
+INSERT INTO `yp_browsing_history` VALUES ('3288', '32', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482829054');
+INSERT INTO `yp_browsing_history` VALUES ('3289', '32', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482829179');
+INSERT INTO `yp_browsing_history` VALUES ('3290', '33', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482829362');
+INSERT INTO `yp_browsing_history` VALUES ('3291', '33', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482829873');
+INSERT INTO `yp_browsing_history` VALUES ('3292', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482829883');
+INSERT INTO `yp_browsing_history` VALUES ('3293', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482830010');
+INSERT INTO `yp_browsing_history` VALUES ('3294', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482830163');
+INSERT INTO `yp_browsing_history` VALUES ('3295', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/index', '1482830248');
+INSERT INTO `yp_browsing_history` VALUES ('3296', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830288');
+INSERT INTO `yp_browsing_history` VALUES ('3297', '34', 'News/index', '/yp/index.php?s=/News/index/type/2', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482830305');
+INSERT INTO `yp_browsing_history` VALUES ('3298', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/2', '1482830335');
+INSERT INTO `yp_browsing_history` VALUES ('3299', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830336');
+INSERT INTO `yp_browsing_history` VALUES ('3300', '34', 'News/article', '/yp/index.php?s=/News/article/id/60', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830417');
+INSERT INTO `yp_browsing_history` VALUES ('3301', '34', 'News/article', '/yp/index.php?s=/News/article/id/58', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830424');
+INSERT INTO `yp_browsing_history` VALUES ('3302', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/2', '1482830465');
+INSERT INTO `yp_browsing_history` VALUES ('3303', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830466');
+INSERT INTO `yp_browsing_history` VALUES ('3304', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830474');
+INSERT INTO `yp_browsing_history` VALUES ('3305', '34', 'News/article', '/yp/index.php?s=/News/article/id/55', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482830531');
+INSERT INTO `yp_browsing_history` VALUES ('3306', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/article/id/55', '1482830535');
+INSERT INTO `yp_browsing_history` VALUES ('3307', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482830538');
+INSERT INTO `yp_browsing_history` VALUES ('3308', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830544');
+INSERT INTO `yp_browsing_history` VALUES ('3309', '34', 'News/article', '/yp/index.php?s=/News/article/id/55', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482830547');
+INSERT INTO `yp_browsing_history` VALUES ('3310', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/article/id/55', '1482830557');
+INSERT INTO `yp_browsing_history` VALUES ('3311', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/55', '1482830564');
+INSERT INTO `yp_browsing_history` VALUES ('3312', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830566');
+INSERT INTO `yp_browsing_history` VALUES ('3313', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/61', '1482830944');
+INSERT INTO `yp_browsing_history` VALUES ('3314', '34', 'News/article', '/yp/index.php?s=/News/article/id/60', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482830945');
+INSERT INTO `yp_browsing_history` VALUES ('3315', '34', 'News/article', '/yp/index.php?s=/News/article/id/60', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482831110');
+INSERT INTO `yp_browsing_history` VALUES ('3316', '34', 'News/article', '/yp/index.php?s=/News/article/id/60', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482831113');
+INSERT INTO `yp_browsing_history` VALUES ('3317', '34', 'News/article', '/yp/index.php?s=/News/article/id/60', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482832932');
+INSERT INTO `yp_browsing_history` VALUES ('3318', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/60', '1482833141');
+INSERT INTO `yp_browsing_history` VALUES ('3319', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833161');
+INSERT INTO `yp_browsing_history` VALUES ('3320', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833294');
+INSERT INTO `yp_browsing_history` VALUES ('3321', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/61', '1482833295');
+INSERT INTO `yp_browsing_history` VALUES ('3322', '34', 'News/article', '/yp/index.php?s=/News/article/id/60', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833297');
+INSERT INTO `yp_browsing_history` VALUES ('3323', '34', 'News/article', '/yp/index.php?s=/News/article/id/58', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833301');
+INSERT INTO `yp_browsing_history` VALUES ('3324', '34', 'News/article', '/yp/index.php?s=/News/article/id/58', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833480');
+INSERT INTO `yp_browsing_history` VALUES ('3325', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/58', '1482833748');
+INSERT INTO `yp_browsing_history` VALUES ('3326', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833750');
+INSERT INTO `yp_browsing_history` VALUES ('3327', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833773');
+INSERT INTO `yp_browsing_history` VALUES ('3328', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/61', '1482833793');
+INSERT INTO `yp_browsing_history` VALUES ('3329', '34', 'News/article', '/yp/index.php?s=/News/article/id/58', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833795');
+INSERT INTO `yp_browsing_history` VALUES ('3330', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/article/id/58', '1482833800');
+INSERT INTO `yp_browsing_history` VALUES ('3331', '34', 'News/article', '/yp/index.php?s=/News/article/id/57', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833803');
+INSERT INTO `yp_browsing_history` VALUES ('3332', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/article/id/57', '1482833805');
+INSERT INTO `yp_browsing_history` VALUES ('3333', '34', 'News/article', '/yp/index.php?s=/News/article/id/55', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482833807');
+INSERT INTO `yp_browsing_history` VALUES ('3334', '34', 'News/article', '/yp/index.php?s=/News/article/id/55', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482833857');
+INSERT INTO `yp_browsing_history` VALUES ('3335', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/article/id/55', '1482833863');
+INSERT INTO `yp_browsing_history` VALUES ('3336', '34', 'News/index', '/yp/index.php?s=/News/index/type/2', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482833864');
+INSERT INTO `yp_browsing_history` VALUES ('3337', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/2', '1482833865');
+INSERT INTO `yp_browsing_history` VALUES ('3338', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482833866');
+INSERT INTO `yp_browsing_history` VALUES ('3339', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482833871');
+INSERT INTO `yp_browsing_history` VALUES ('3340', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/Index/index', '1482833875');
+INSERT INTO `yp_browsing_history` VALUES ('3341', '34', 'News/article', '/yp/index.php?s=/News/article/id/55', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482833878');
+INSERT INTO `yp_browsing_history` VALUES ('3342', '34', 'News/article', '/yp/index.php?s=/News/article/id/55', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482834046');
+INSERT INTO `yp_browsing_history` VALUES ('3343', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/article/id/55', '1482834048');
+INSERT INTO `yp_browsing_history` VALUES ('3344', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482834053');
+INSERT INTO `yp_browsing_history` VALUES ('3345', '34', 'News/index', '/yp/index.php?s=/News/index/type/1', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482834056');
+INSERT INTO `yp_browsing_history` VALUES ('3346', '34', 'News/index', '/yp/index.php?s=/News/index/type/2', 'http://localhost/yp/index.php?s=/News/index/type/1', '1482834058');
+INSERT INTO `yp_browsing_history` VALUES ('3347', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/News/index/type/2', '1482834059');
+INSERT INTO `yp_browsing_history` VALUES ('3348', '34', 'News/article', '/yp/index.php?s=/News/article/id/57', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482834063');
+INSERT INTO `yp_browsing_history` VALUES ('3349', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/News/article/id/57', '1482834070');
+INSERT INTO `yp_browsing_history` VALUES ('3350', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482834086');
+INSERT INTO `yp_browsing_history` VALUES ('3351', '34', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482834088');
+INSERT INTO `yp_browsing_history` VALUES ('3352', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482836151');
+INSERT INTO `yp_browsing_history` VALUES ('3353', '34', 'Index/contact_us', '/yp/index.php?s=/Index/contact_us', 'http://localhost/yp/index.php?s=/Index/index', '1482836188');
+INSERT INTO `yp_browsing_history` VALUES ('3354', '34', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Index/contact_us', '1482836191');
+INSERT INTO `yp_browsing_history` VALUES ('3355', '34', 'News/article', '/yp/index.php?s=/News/article/id/61', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482836193');
+INSERT INTO `yp_browsing_history` VALUES ('3356', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/News/article/id/61', '1482836195');
+INSERT INTO `yp_browsing_history` VALUES ('3357', '34', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482836202');
+INSERT INTO `yp_browsing_history` VALUES ('3358', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482836488');
+INSERT INTO `yp_browsing_history` VALUES ('3359', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482837154');
+INSERT INTO `yp_browsing_history` VALUES ('3360', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482837419');
+INSERT INTO `yp_browsing_history` VALUES ('3361', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482837811');
+INSERT INTO `yp_browsing_history` VALUES ('3362', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482837837');
+INSERT INTO `yp_browsing_history` VALUES ('3363', '34', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482838430');
+INSERT INTO `yp_browsing_history` VALUES ('3364', '35', 'Index/index', '/yp/index.php?s=', null, '1482890284');
+INSERT INTO `yp_browsing_history` VALUES ('3365', '35', 'Index/index', '/yp/index.php?s=', null, '1482890433');
+INSERT INTO `yp_browsing_history` VALUES ('3366', '35', 'Index/leave_msg', '/yp/index.php?s=/Index/leave_msg', 'http://localhost/yp/index.php?s=', '1482890436');
+INSERT INTO `yp_browsing_history` VALUES ('3367', '35', 'Index/index', '/yp/index.php?s=', null, '1482890438');
+INSERT INTO `yp_browsing_history` VALUES ('3368', '35', 'Index/index', '/yp/index.php?s=', null, '1482891798');
+INSERT INTO `yp_browsing_history` VALUES ('3369', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=', '1482891800');
+INSERT INTO `yp_browsing_history` VALUES ('3370', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=', '1482891818');
+INSERT INTO `yp_browsing_history` VALUES ('3371', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=', '1482891852');
+INSERT INTO `yp_browsing_history` VALUES ('3372', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=', '1482891891');
+INSERT INTO `yp_browsing_history` VALUES ('3373', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=', '1482891901');
+INSERT INTO `yp_browsing_history` VALUES ('3374', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482891906');
+INSERT INTO `yp_browsing_history` VALUES ('3375', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482892078');
+INSERT INTO `yp_browsing_history` VALUES ('3376', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482892140');
+INSERT INTO `yp_browsing_history` VALUES ('3377', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482892256');
+INSERT INTO `yp_browsing_history` VALUES ('3378', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482892267');
+INSERT INTO `yp_browsing_history` VALUES ('3379', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482894453');
+INSERT INTO `yp_browsing_history` VALUES ('3380', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482894470');
+INSERT INTO `yp_browsing_history` VALUES ('3381', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482894823');
+INSERT INTO `yp_browsing_history` VALUES ('3382', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482894926');
+INSERT INTO `yp_browsing_history` VALUES ('3383', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895015');
+INSERT INTO `yp_browsing_history` VALUES ('3384', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895136');
+INSERT INTO `yp_browsing_history` VALUES ('3385', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895211');
+INSERT INTO `yp_browsing_history` VALUES ('3386', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895219');
+INSERT INTO `yp_browsing_history` VALUES ('3387', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895248');
+INSERT INTO `yp_browsing_history` VALUES ('3388', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895300');
+INSERT INTO `yp_browsing_history` VALUES ('3389', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895378');
+INSERT INTO `yp_browsing_history` VALUES ('3390', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895385');
+INSERT INTO `yp_browsing_history` VALUES ('3391', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895397');
+INSERT INTO `yp_browsing_history` VALUES ('3392', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895406');
+INSERT INTO `yp_browsing_history` VALUES ('3393', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895459');
+INSERT INTO `yp_browsing_history` VALUES ('3394', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895572');
+INSERT INTO `yp_browsing_history` VALUES ('3395', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482895584');
+INSERT INTO `yp_browsing_history` VALUES ('3396', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897046');
+INSERT INTO `yp_browsing_history` VALUES ('3397', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897100');
+INSERT INTO `yp_browsing_history` VALUES ('3398', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897223');
+INSERT INTO `yp_browsing_history` VALUES ('3399', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897429');
+INSERT INTO `yp_browsing_history` VALUES ('3400', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897505');
+INSERT INTO `yp_browsing_history` VALUES ('3401', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897664');
+INSERT INTO `yp_browsing_history` VALUES ('3402', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897713');
+INSERT INTO `yp_browsing_history` VALUES ('3403', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897729');
+INSERT INTO `yp_browsing_history` VALUES ('3404', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897797');
+INSERT INTO `yp_browsing_history` VALUES ('3405', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897845');
+INSERT INTO `yp_browsing_history` VALUES ('3406', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482897906');
+INSERT INTO `yp_browsing_history` VALUES ('3407', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899471');
+INSERT INTO `yp_browsing_history` VALUES ('3408', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899523');
+INSERT INTO `yp_browsing_history` VALUES ('3409', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899611');
+INSERT INTO `yp_browsing_history` VALUES ('3410', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899790');
+INSERT INTO `yp_browsing_history` VALUES ('3411', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899872');
+INSERT INTO `yp_browsing_history` VALUES ('3412', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899876');
+INSERT INTO `yp_browsing_history` VALUES ('3413', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899939');
+INSERT INTO `yp_browsing_history` VALUES ('3414', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899953');
+INSERT INTO `yp_browsing_history` VALUES ('3415', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482899990');
+INSERT INTO `yp_browsing_history` VALUES ('3416', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482900075');
+INSERT INTO `yp_browsing_history` VALUES ('3417', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482900092');
+INSERT INTO `yp_browsing_history` VALUES ('3418', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482904314');
+INSERT INTO `yp_browsing_history` VALUES ('3419', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904347');
+INSERT INTO `yp_browsing_history` VALUES ('3420', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904354');
+INSERT INTO `yp_browsing_history` VALUES ('3421', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904389');
+INSERT INTO `yp_browsing_history` VALUES ('3422', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904398');
+INSERT INTO `yp_browsing_history` VALUES ('3423', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904471');
+INSERT INTO `yp_browsing_history` VALUES ('3424', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904512');
+INSERT INTO `yp_browsing_history` VALUES ('3425', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482904530');
+INSERT INTO `yp_browsing_history` VALUES ('3426', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482905012');
+INSERT INTO `yp_browsing_history` VALUES ('3427', '35', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482905026');
+INSERT INTO `yp_browsing_history` VALUES ('3428', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482905071');
+INSERT INTO `yp_browsing_history` VALUES ('3429', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482905098');
+INSERT INTO `yp_browsing_history` VALUES ('3430', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482905137');
+INSERT INTO `yp_browsing_history` VALUES ('3431', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482905837');
+INSERT INTO `yp_browsing_history` VALUES ('3432', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482906269');
+INSERT INTO `yp_browsing_history` VALUES ('3433', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482906307');
+INSERT INTO `yp_browsing_history` VALUES ('3434', '35', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482906311');
+INSERT INTO `yp_browsing_history` VALUES ('3435', '35', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482906568');
+INSERT INTO `yp_browsing_history` VALUES ('3436', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482906576');
+INSERT INTO `yp_browsing_history` VALUES ('3437', '35', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482906581');
+INSERT INTO `yp_browsing_history` VALUES ('3438', '35', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482906637');
+INSERT INTO `yp_browsing_history` VALUES ('3439', '35', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482906655');
+INSERT INTO `yp_browsing_history` VALUES ('3440', '35', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482906674');
+INSERT INTO `yp_browsing_history` VALUES ('3441', '35', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482906686');
+INSERT INTO `yp_browsing_history` VALUES ('3442', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/school', '1482906695');
+INSERT INTO `yp_browsing_history` VALUES ('3443', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482906699');
+INSERT INTO `yp_browsing_history` VALUES ('3444', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/agent', '1482906746');
+INSERT INTO `yp_browsing_history` VALUES ('3445', '35', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482906751');
+INSERT INTO `yp_browsing_history` VALUES ('3446', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482906762');
+INSERT INTO `yp_browsing_history` VALUES ('3447', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482906840');
+INSERT INTO `yp_browsing_history` VALUES ('3448', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482906846');
+INSERT INTO `yp_browsing_history` VALUES ('3449', '35', 'News/index', '/yp/index.php?s=/News/index/type/0', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482906998');
+INSERT INTO `yp_browsing_history` VALUES ('3450', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/News/index/type/0', '1482907030');
+INSERT INTO `yp_browsing_history` VALUES ('3451', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482907123');
+INSERT INTO `yp_browsing_history` VALUES ('3452', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482907144');
+INSERT INTO `yp_browsing_history` VALUES ('3453', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482907217');
+INSERT INTO `yp_browsing_history` VALUES ('3454', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482907291');
+INSERT INTO `yp_browsing_history` VALUES ('3455', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482908102');
+INSERT INTO `yp_browsing_history` VALUES ('3456', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482908294');
+INSERT INTO `yp_browsing_history` VALUES ('3457', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482908574');
+INSERT INTO `yp_browsing_history` VALUES ('3458', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482908647');
+INSERT INTO `yp_browsing_history` VALUES ('3459', '35', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482908649');
+INSERT INTO `yp_browsing_history` VALUES ('3460', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482908665');
+INSERT INTO `yp_browsing_history` VALUES ('3461', '35', 'Index/school', '/yp/index.php?s=/Index/school', 'http://localhost/yp/index.php?s=/Index/index', '1482908668');
+INSERT INTO `yp_browsing_history` VALUES ('3462', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/school', '1482908679');
+INSERT INTO `yp_browsing_history` VALUES ('3463', '35', 'Index/trade_union', '/yp/index.php?s=/Index/trade_union', 'http://localhost/yp/index.php?s=/Index/index', '1482908682');
+INSERT INTO `yp_browsing_history` VALUES ('3464', '35', 'Index/trade_union', '/yp/index.php?s=/Index/trade_union', 'http://localhost/yp/index.php?s=/Index/index', '1482908703');
+INSERT INTO `yp_browsing_history` VALUES ('3465', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/trade_union', '1482908708');
+INSERT INTO `yp_browsing_history` VALUES ('3466', '35', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php?s=/Index/index', '1482908710');
+INSERT INTO `yp_browsing_history` VALUES ('3467', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482908893');
+INSERT INTO `yp_browsing_history` VALUES ('3468', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482908934');
+INSERT INTO `yp_browsing_history` VALUES ('3469', '35', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482909022');
+INSERT INTO `yp_browsing_history` VALUES ('3470', '35', 'Product/anxinxing', '/yp/index.php?s=/Product/anxinxing', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482909040');
+INSERT INTO `yp_browsing_history` VALUES ('3471', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/anxinxing', '1482909050');
+INSERT INTO `yp_browsing_history` VALUES ('3472', '35', 'Index/agent', '/yp/index.php?s=/Index/agent', 'http://localhost/yp/index.php?s=/Index/index', '1482909053');
+INSERT INTO `yp_browsing_history` VALUES ('3473', '35', 'Index/index', '/yp/index.php?s=/Index/index', null, '1482910683');
+INSERT INTO `yp_browsing_history` VALUES ('3474', '35', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482910687');
+INSERT INTO `yp_browsing_history` VALUES ('3475', '36', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482910705');
+INSERT INTO `yp_browsing_history` VALUES ('3476', '36', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482910707');
+INSERT INTO `yp_browsing_history` VALUES ('3477', '36', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482910709');
+INSERT INTO `yp_browsing_history` VALUES ('3478', '36', 'Index/index', '/yp/index.php?m=&c=Index&a=index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482910721');
+INSERT INTO `yp_browsing_history` VALUES ('3479', '36', 'Index/index', '/yp/index.php/Index/index', 'http://localhost/yp/index.php?m=&c=Index&a=index', '1482910737');
+INSERT INTO `yp_browsing_history` VALUES ('3480', '36', 'Index/index', '/yp/index.php/Index/index', 'http://localhost/yp/index.php?m=&c=Index&a=index', '1482910819');
+INSERT INTO `yp_browsing_history` VALUES ('3481', '36', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/index.php/Index/index', '1482910823');
+INSERT INTO `yp_browsing_history` VALUES ('3482', '36', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/edu_bureau', '1482910837');
+INSERT INTO `yp_browsing_history` VALUES ('3483', '37', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482910855');
+INSERT INTO `yp_browsing_history` VALUES ('3484', '38', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482910870');
+INSERT INTO `yp_browsing_history` VALUES ('3485', '39', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482910978');
+INSERT INTO `yp_browsing_history` VALUES ('3486', '39', 'Product/weijiaxiao', '/yp/index.php?s=/Product/weijiaxiao', 'http://localhost/yp/index.php?s=/Index/index', '1482911270');
+INSERT INTO `yp_browsing_history` VALUES ('3487', '39', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Product/weijiaxiao', '1482911282');
+INSERT INTO `yp_browsing_history` VALUES ('3488', '39', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/index.php?s=/Index/index', '1482912760');
+INSERT INTO `yp_browsing_history` VALUES ('3489', '40', 'Index/index', '/yp/', null, '1482915771');
+INSERT INTO `yp_browsing_history` VALUES ('3490', '40', 'Index/index', '/yp/', null, '1482915779');
+INSERT INTO `yp_browsing_history` VALUES ('3491', '40', 'Index/index', '/yp/index.php?s=/Index/index', 'http://localhost/yp/', '1482915786');
+INSERT INTO `yp_browsing_history` VALUES ('3492', '40', 'Index/index', '/yp/index.php?s=/Index/index', null, '1482915811');
+INSERT INTO `yp_browsing_history` VALUES ('3493', '40', 'Index/index', '/yp/index.php?s=/Index/index', null, '1482915813');
+INSERT INTO `yp_browsing_history` VALUES ('3494', '40', 'Index/index', '/yp/index.php?s=/Index/index', null, '1482915823');
+INSERT INTO `yp_browsing_history` VALUES ('3495', '40', 'Index/index', '/yp/index.php?s=/Index/index', null, '1482915825');
+INSERT INTO `yp_browsing_history` VALUES ('3496', '41', 'Index/index', '/yp/', null, '1482916061');
+INSERT INTO `yp_browsing_history` VALUES ('3497', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/', '1482916066');
+INSERT INTO `yp_browsing_history` VALUES ('3498', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/', '1482916330');
+INSERT INTO `yp_browsing_history` VALUES ('3499', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/', '1482916564');
+INSERT INTO `yp_browsing_history` VALUES ('3500', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916574');
+INSERT INTO `yp_browsing_history` VALUES ('3501', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916579');
+INSERT INTO `yp_browsing_history` VALUES ('3502', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916587');
+INSERT INTO `yp_browsing_history` VALUES ('3503', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916591');
+INSERT INTO `yp_browsing_history` VALUES ('3504', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916593');
+INSERT INTO `yp_browsing_history` VALUES ('3505', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916596');
+INSERT INTO `yp_browsing_history` VALUES ('3506', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916654');
+INSERT INTO `yp_browsing_history` VALUES ('3507', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916682');
+INSERT INTO `yp_browsing_history` VALUES ('3508', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916705');
+INSERT INTO `yp_browsing_history` VALUES ('3509', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916712');
+INSERT INTO `yp_browsing_history` VALUES ('3510', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916761');
+INSERT INTO `yp_browsing_history` VALUES ('3511', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482916871');
+INSERT INTO `yp_browsing_history` VALUES ('3512', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482917217');
+INSERT INTO `yp_browsing_history` VALUES ('3513', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482917229');
+INSERT INTO `yp_browsing_history` VALUES ('3514', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482917251');
+INSERT INTO `yp_browsing_history` VALUES ('3515', '41', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', null, '1482917253');
+INSERT INTO `yp_browsing_history` VALUES ('3516', '42', 'Index/index', '/yp/', null, '1482917501');
+INSERT INTO `yp_browsing_history` VALUES ('3517', '42', 'Index/edu_bureau', '/yp/index.php?s=/Index/edu_bureau', 'http://localhost/yp/', '1482917505');
 
 -- ----------------------------
 -- Table structure for yp_leave_msg
@@ -6703,25 +7168,26 @@ CREATE TABLE `yp_menu` (
   `topid` int(11) NOT NULL COMMENT '上一级菜单的id，若为0则是顶级菜单',
   `display` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示',
   `utime` int(11) NOT NULL COMMENT '添加时间或者更新时间',
+  `sitemap` tinyint(1) DEFAULT '0' COMMENT '是否在网站地图中',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='官网前台菜单表';
 
 -- ----------------------------
 -- Records of yp_menu
 -- ----------------------------
-INSERT INTO `yp_menu` VALUES ('1', '首页', '1', '?s=/Index/index', '0', '1', '1479349537');
-INSERT INTO `yp_menu` VALUES ('2', '产品介绍', '2', '', '0', '1', '1478656297');
-INSERT INTO `yp_menu` VALUES ('3', '微家校', '1', '?s=/Product/weijiaxiao', '2', '1', '1479349537');
-INSERT INTO `yp_menu` VALUES ('4', '安心星', '2', '?s=/Product/anxinxing', '2', '1', '1479349537');
-INSERT INTO `yp_menu` VALUES ('5', '宣传视频', '4', '?s=/Index/video', '0', '1', '1481609642');
-INSERT INTO `yp_menu` VALUES ('8', '公司简介', '1', '#', '7', '1', '0');
-INSERT INTO `yp_menu` VALUES ('9', '最新资讯', '2', '#', '7', '1', '0');
-INSERT INTO `yp_menu` VALUES ('47', '联系我们', '6', '?s=/Index/contact_us', '0', '1', '1481609642');
-INSERT INTO `yp_menu` VALUES ('48', '新闻中心', '5', '', '0', '1', '1481609642');
-INSERT INTO `yp_menu` VALUES ('49', '公司新闻', '1', '?s=/News/index/type/0', '48', '1', '1479349537');
-INSERT INTO `yp_menu` VALUES ('50', '行业动态', '2', '?s=/News/index/type/1', '48', '1', '1479349537');
-INSERT INTO `yp_menu` VALUES ('51', '政策支持', '3', '?s=/News/index/type/2', '48', '1', '1479349537');
-INSERT INTO `yp_menu` VALUES ('52', '官方商城', '3', '?s=/Mall/index', '0', '1', '1481609642');
+INSERT INTO `yp_menu` VALUES ('1', '首页', '1', '?s=/Index/index', '0', '1', '1482801771', '0');
+INSERT INTO `yp_menu` VALUES ('2', '产品介绍', '2', '', '0', '1', '1482749134', '1');
+INSERT INTO `yp_menu` VALUES ('3', '微家校', '1', '?s=/Product/weijiaxiao', '2', '1', '1482801745', '1');
+INSERT INTO `yp_menu` VALUES ('4', '电子学生证', '2', '?s=/Product/anxinxing', '2', '1', '1482801745', '1');
+INSERT INTO `yp_menu` VALUES ('5', '宣传视频', '4', '?s=/Index/video', '0', '1', '1482801833', '1');
+INSERT INTO `yp_menu` VALUES ('8', '公司简介', '1', '#', '7', '1', '0', '0');
+INSERT INTO `yp_menu` VALUES ('9', '最新资讯', '2', '#', '7', '1', '0', '0');
+INSERT INTO `yp_menu` VALUES ('47', '联系我们', '6', '?s=/Index/contact_us', '0', '1', '1482801860', '0');
+INSERT INTO `yp_menu` VALUES ('48', '新闻中心', '5', '', '0', '1', '1482801745', '1');
+INSERT INTO `yp_menu` VALUES ('49', '公司新闻', '1', '?s=/News/index/type/0', '48', '1', '1482801745', '1');
+INSERT INTO `yp_menu` VALUES ('50', '行业动态', '2', '?s=/News/index/type/1', '48', '1', '1482801745', '1');
+INSERT INTO `yp_menu` VALUES ('51', '政策支持', '3', '?s=/News/index/type/2', '48', '1', '1482801745', '1');
+INSERT INTO `yp_menu` VALUES ('52', '官方商城', '3', '?s=/Mall/index', '0', '0', '1481609642', '0');
 
 -- ----------------------------
 -- Table structure for yp_sc_express
@@ -6757,7 +7223,7 @@ CREATE TABLE `yp_sc_order` (
   `describe` varchar(100) DEFAULT NULL COMMENT '订单描述',
   `ctime` int(11) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 -- ----------------------------
 -- Records of yp_sc_order
@@ -6770,6 +7236,7 @@ INSERT INTO `yp_sc_order` VALUES ('59', '123', '18500291326', '107', '1', '55.00
 INSERT INTO `yp_sc_order` VALUES ('60', 'xpf', '18500291326', '1', '测试1', '310.00', '安心星儿童智能电子学生证', '1481966858');
 INSERT INTO `yp_sc_order` VALUES ('61', 'xpf', '18500291326', '4', '23', '310.00', '安心星儿童智能电子学生证', '1482125094');
 INSERT INTO `yp_sc_order` VALUES ('62', 'xpf', '18500291326', '107', '123', '310.00', '安心星儿童智能电子学生证', '1482130267');
+INSERT INTO `yp_sc_order` VALUES ('63', '1', '18500291326', '1', '2', '12.00', 'mc', '1482748571');
 
 -- ----------------------------
 -- Table structure for yp_sc_order_product
@@ -6783,7 +7250,7 @@ CREATE TABLE `yp_sc_order_product` (
   `price` decimal(6,2) DEFAULT NULL COMMENT '单价',
   `count` int(11) DEFAULT NULL COMMENT '数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='订单的商品列表';
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='订单的商品列表';
 
 -- ----------------------------
 -- Records of yp_sc_order_product
@@ -6796,6 +7263,7 @@ INSERT INTO `yp_sc_order_product` VALUES ('41', '59', '6', '123', '45.00', '1');
 INSERT INTO `yp_sc_order_product` VALUES ('42', '60', '1', '安心星儿童智能电子学生证', '300.00', '1');
 INSERT INTO `yp_sc_order_product` VALUES ('43', '61', '1', '安心星儿童智能电子学生证', '300.00', '1');
 INSERT INTO `yp_sc_order_product` VALUES ('44', '62', '1', '安心星儿童智能电子学生证', '300.00', '1');
+INSERT INTO `yp_sc_order_product` VALUES ('45', '63', '8', 'mc', '2.00', '1');
 
 -- ----------------------------
 -- Table structure for yp_sc_pay
@@ -6810,12 +7278,13 @@ CREATE TABLE `yp_sc_pay` (
   `paytime` int(11) DEFAULT NULL COMMENT '创建时间',
   `callback_time` int(11) DEFAULT NULL COMMENT '支付接口回调时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yp_sc_pay
 -- ----------------------------
 INSERT INTO `yp_sc_pay` VALUES ('38', '62', '1', '123456', '1', '1482130895', null);
+INSERT INTO `yp_sc_pay` VALUES ('39', '63', '1', '123456', '1', '1482748818', null);
 
 -- ----------------------------
 -- Table structure for yp_sc_product
@@ -6845,7 +7314,7 @@ INSERT INTO `yp_sc_product` VALUES ('5', '11111', '', '12.00', '', '', '1', '0',
 INSERT INTO `yp_sc_product` VALUES ('6', '123', '', '45.00', '123456', '', '1', '0', '1481540758', '1481621861');
 INSERT INTO `yp_sc_product` VALUES ('7', '名称', '', '1.00', '', '', '1', '0', '1481594829', '1481621889');
 INSERT INTO `yp_sc_product` VALUES ('8', 'mc', '', '2.00', '', '', '1', '0', '1481594874', '1481621897');
-INSERT INTO `yp_sc_product` VALUES ('9', '12323123', '', '1.00', '', '', '0', '0', '1481700200', '1481700200');
+INSERT INTO `yp_sc_product` VALUES ('9', '12323123', '', '1.00', '', '', '0', '0', '1481700200', '1482731634');
 
 -- ----------------------------
 -- Table structure for yp_sc_product_img

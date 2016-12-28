@@ -63,6 +63,7 @@ class IndexController extends BaseController
             echo json_encode($re);
         } else {
             $this->breadcrumb(array('name' => '填写信息'));
+            $this->en_submit_id();
             $this->page_full('leave_msg');
         }
     }
@@ -81,41 +82,27 @@ class IndexController extends BaseController
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function school(){
         $this->breadcrumb(array('name' => '学校'));
+        $this->en_submit_id();
         $this->page_nofoot('school');
     }
 
     public function agent(){
         $this->breadcrumb(array('name' => '代理商'));
+        $this->en_submit_id();
         $this->page_nofoot('agent');
     }
 
     public function edu_bureau(){
         $this->breadcrumb(array('name' => '教育局'));
+        $this->en_submit_id();
         $this->page_nofoot('edu_bureau');
     }
 
     public function trade_union(){
         $this->breadcrumb(array('name' => '行业联盟'));
+        $this->en_submit_id();
         $this->page_nofoot('trade_union');
         //$this->page_full('trade_union');
-    }
-
-
-    //
-    //获取访问者的ip
-    protected function get_client_ip()
-    {
-        if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
-            $ip = getenv("HTTP_CLIENT_IP");
-        else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
-            $ip = getenv("HTTP_X_FORWARDED_FOR");
-        else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
-            $ip = getenv("REMOTE_ADDR");
-        else if (isset ($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
-            $ip = $_SERVER['REMOTE_ADDR'];
-        else
-            $ip = "unknown";
-        return ($ip);
     }
 
     //根据ip获取地址

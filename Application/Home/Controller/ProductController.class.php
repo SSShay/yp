@@ -63,7 +63,7 @@ class ProductController extends BaseController
     public function init_axx_nav(){
         $this->childnav(array(
             //array('name' => '产品参数','url' => U('Product/axx_parameter')),
-            array('name' => '使用注意','url' => U('Product/axx_faq')),
+            //array('name' => '使用注意','url' => U('Product/axx_faq')),
         ));
     }
 

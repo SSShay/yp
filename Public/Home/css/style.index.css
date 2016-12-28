@@ -30,11 +30,15 @@
     border-top: none;
     /*text-align: center;*/
 }
+.entry-container>.row>.col-lg-3:hover img{
+    transform: scale(1.4);
+}
 .entry-container a,.entry-container a:hover,.entry-container a:focus{
     color: #434343;
 }
 .entry-container img{
     width: 80%;
+    transition: .5s ease;
 }
 @media screen and (min-width: 1440px) {
     .left-cell{

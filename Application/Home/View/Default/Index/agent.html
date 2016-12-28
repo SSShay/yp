@@ -28,6 +28,11 @@
         padding: 10px 20px;
         margin: 10px 0;
         text-align: center;
+        transition: 1s ease;
+        cursor: pointer;
+    }
+    .container-1 .block:hover{
+        transform: translateX(20px);
     }
     .container-1 .block h4,.container-1 .block h5{
         line-height: 1.8;
@@ -328,7 +333,7 @@
         height: 160px;
     }
     .container-5{
-        margin-bottom: 30px;
+        padding: 30px 0;
     }
     .container-5 .container{
         margin-top: 60px;
@@ -483,6 +488,7 @@
         }
     }
 </style>
+<link href="__CSS__/animate.css" rel="stylesheet">
 <div class="banner text-center img-delay bg-cover scroll-block" data-bg="__IMG__/index/agent/bg.jpg"></div>
 <div class="container-1 scroll-block">
     <div class="container">
@@ -527,7 +533,7 @@
     <div class="container">
         <h1>产品特点+/优势</h1>
         <hr class="h1-hr">
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 move_top delay-_3s">
             <h3 style="background: #4ccdf9">政策<br>保证</h3>
             <div class="block block1">
                 <p><span style="color: #4ccdf9">《国家中长期教育改革和发展规划纲要》</span>指出：信息技术对教育发展具有革
@@ -539,7 +545,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 move_top delay-_6s">
             <h3 class="bg-yellow">市场<br>潜力</h3>
             <div class="block block2">
                 <p class="pull-right">截止2016年全国共有各级各类学校专任教师1462.88万人，53万所学校，2.7亿学生。中国互联网普及率42%，网民
@@ -551,7 +557,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 move_top delay-1s">
             <h3 class="bg-purple">校园<br>需求</h3>
             <div class="block block3">
                 <p>学生安全和接送安全正面临严峻威胁，迫切需要信息化的普及来增强学校的安全防范，提升服务质量，更好的获得
@@ -563,7 +569,7 @@
 
         <div class="col-md-2"></div>
 
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 move_top delay-1_3s">
             <h3 class="bg-blue">发展<br>前景</h3>
             <div class="block block4">
                 <img src="__IMG__/index/agent/2_4.png" >
@@ -574,7 +580,7 @@
             </div>
         </div>
         <div class="col-sm-3"></div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 move_top delay-1_6s">
             <h3 class="bg-green">互联网+<br>教育</h3>
             <div class="block block5">
                 <img src="__IMG__/index/agent/2_5.png" >
@@ -838,11 +844,17 @@
             </div>
         </div>
         <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并承诺为您保密！</h6>
-        <button class="btn" type="button">提交留言</button>
+        <button id="{$submit_id}" class="btn" type="button">提交留言</button>
     </div>
 </div>
 <script>
     $(".navbar-main").addClass('absolute');
     $(".navbar-path").addClass('absolute deep suspend');
-    !is_xs() && $.scrollBlock();
+    !is_xs() && $.scrollBlock({'callback':function(p,i){
+        switch (i){
+            case 2:
+                    $(".container-2").addClass('animate')
+                break
+        }
+    }});
 </script>
