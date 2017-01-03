@@ -78,18 +78,28 @@ class MenuModel extends Model
         $where['display'] = 1;
         $flist = $this->field('id,name,link,sitemap')->where($where)->order('sort')->select();
         if ($flist) {
+            $root = 'http://' . $_SERVER['HTTP_HOST'];
             foreach ($flist as $k => $v) {
                 if (empty($v['link'])) {
                     $flist[$k]['link'] = "javascript:;";
                 } elseif (strpos($v['link'], 'http://') !== 0) {
-                    $flist[$k]['link'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . $v['link'];
+                    $flist[$k]['link'] = $root . $v['link'];
                 }
                 unset($where);
                 $where['topid'] = $v['id'];
                 //$where['display'] = 1;
                 $slist = $this->field('name,link,sitemap')->where($where)->order('sort')->select();
+                foreach ($slist as $kk => $vv) {
+                    if (empty($vv['link'])) {
+                        $slist[$kk]['link'] = "javascript:;";
+                    } elseif (strpos($vv['link'], 'http://') !== 0) {
+                        $slist[$kk]['link'] = $root . $vv['link'];
+                    }
+                }
+
                 $flist[$k]['list'] = $slist;
             }
+
             return $flist;
         }
         return array();

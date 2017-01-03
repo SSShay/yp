@@ -126,7 +126,6 @@
             var deltaY = e.deltaY || -e.wheelDelta;
             if (!scrolling) {
                 var top = Math.round($(window).scrollTop());
-                //console.log(top, 'top')
                 var H = $(window).height();
                 if ((deltaY != 0)) {
                     var n_top, scroll;
@@ -161,9 +160,6 @@
                     }
                     $.each(sb_list, get_top);
 
-                    //console.log(n_top, 'n_top')
-                    //console.log(scroll, 'scroll')
-
                     if (scroll) {
                         scrolling = true;
                         $.scrollTo(scroll, opt.wheeltime, enable, opt.wheelcubic);
@@ -193,7 +189,6 @@
             })
             lasth = $(".scroll-block").eq(-1).outerHeight();
             N = sb_list.length
-            console.log(sb_list)
         }
 
         function enable(){
@@ -540,7 +535,7 @@ $(function() {
         else show();
     })
 
-    $(".container-leave-msg .btn").submit("{:U('Index/leave_msg')}", function () {
+    $(".container-leave-msg .btn").submit(panyard.u_leave_msg, function () {
         $("#name,#mobile,#msg").data('placement', is_xs() ? 'bottom' : 'right');
         return $.check([
             {'target': '#name', 'rules': $.rules.empty},

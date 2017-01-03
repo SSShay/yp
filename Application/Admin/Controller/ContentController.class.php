@@ -55,7 +55,7 @@ class ContentController extends BaseController
             if ($images) {
                 $imginfo = $images['img'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 $oldimg = I('post.img');
                 if ($oldimg) unlink($oldimg);
                 $result['img'] = $img;
@@ -91,7 +91,7 @@ class ContentController extends BaseController
             if ($images) {
                 $imginfo = $images['imgFile'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 /*$oldimg = I('post.img');
                 if ($oldimg) unlink($oldimg);*/
                 $result['error'] = 0;
@@ -117,21 +117,23 @@ class ContentController extends BaseController
     //文章添加
     public function article_add()
     {
-        if(IS_POST){
+        if (IS_POST) {
             $this->U_check_permissions('article');
 
             $type = I('post.type');
             $article_obj = new ArticleModel();
-            $id = $article_obj->addArticle($this->U_info('id'), $type,I('post.thumb'),I('post.title'),I('post.brief'));
+            $html = $_POST['html'];
+            $brief = mb_substr(strip_tags($html), 0, 200, 'utf-8');
+            $id = $article_obj->addArticle($this->U_info('id'), $type, I('post.thumb'), I('post.alt'), I('post.title'), $brief);
             if ($id) {
-                $res = $this->save_article($type, $id, $_POST['html']);
-                if($res) $return['success'] = true;
-                else{
+                $res = $this->save_article($type, $id, $html);
+                if ($res) $return['success'] = true;
+                else {
                     $return['error'] = '文章保存失败...';
                     $return['code'] = 100;
                     $article_obj->deleteObj(array('id' => $id));
                 }
-            }else{
+            } else {
                 $return['error'] = '文章入库失败...';
                 $return['code'] = 0;
             }
@@ -146,7 +148,7 @@ class ContentController extends BaseController
 
         $id = I('get.id');
         $article_obj = new ArticleModel();
-        $article = $article_obj->findObj(array('id' => $id), 'type,thumb,title,brief');
+        $article = $article_obj->findObj(array('id' => $id), 'type,thumb,alt,title,brief');
         if (!$article) $this->error('找不到文章...');
         $this->id = $id;
         $this->article = $article;
@@ -165,6 +167,9 @@ class ContentController extends BaseController
             $article_obj = new ArticleModel();
             $mod = I('post.mod');
             if(!empty($mod)) {
+                if(isset($_POST['html'])){
+                    $mod['brief'] = mb_substr(strip_tags($_POST['html']), 0, 200, 'utf-8');
+                }
                 $res = $article_obj->setObj(array('id' => $id), $mod);
                 if ($res) {
                     $type = I('post.type');
@@ -288,7 +293,7 @@ class ContentController extends BaseController
             if ($images) {
                 $imginfo = $images['img'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 $oldimg = I('post.img');
                 if ($oldimg) unlink($oldimg);
                 $result['img'] = $img;
@@ -334,7 +339,7 @@ class ContentController extends BaseController
             //判断是否有图
             if ($file) {
                 //返回文件地址和名给JS作回调用
-                $video = 'Uploads' . $file['file']['savepath'] . $file['file']['savename'];
+                $video = '/Uploads' . $file['file']['savepath'] . $file['file']['savename'];
                 $result['video'] = $video;
             } else {
                 $result['error'] = $upload->getError();//获取失败信息

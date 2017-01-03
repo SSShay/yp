@@ -48,6 +48,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">预览图描述：</label>
+                        <div class="col-sm-10 col-md-6 col-lg-5">
+                            <input id="alt" type="text" class="form-control" value="{$article.alt}" data-name="预览图描述" data-default="{$article.alt}" placeholder="请输入预览图描述...">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">标题：</label>
                         <div class="col-sm-10 col-md-6 col-lg-5">
                             <input id="title" type="text" class="form-control" value="{$article.title}" data-name="标题" data-default="{$article.title}" placeholder="请输入新闻标题...">
@@ -115,7 +121,8 @@
 
         $("#save-btn").submit("{:U('Content/article_save')}/id/{$id}", function () {
             var mod = $.check([
-                {'target': '#title', 'name': '新闻标题', 'rules': [$.rules.empty, $.rules.length(null, 25)]},
+                {'target': '#alt', 'rules': []},
+                {'target': '#title', 'rules': [$.rules.empty, $.rules.length(null, 25)]},
             ])
             var data = {'mod': mod};
             if (mod) {
@@ -123,8 +130,7 @@
                 if (type != '{$article.type}') data.mod.type = type;
                 var thumb = $("#thumb").attr('src');
                 if (thumb != thumb_default) data.mod.thumb = thumb;
-                var brief = editor.text().slice(0, 200);
-                if (brief != '{$article.brief}') data.mod.brief = brief;
+                data.mod.brief = editor.text().slice(0, 200);
                 data.html = editor.html();
                 data.type = '{$article.type}';
                 return data;

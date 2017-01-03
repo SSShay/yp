@@ -47,26 +47,6 @@
         right: 0;
     }
 </style>
-<!--<div class="carousel slide" id="carousel-news">
-    <ol class="carousel-indicators">
-        <volist name="banner" id="v">
-            <li data-slide-to="{$key}" data-target="#carousel-index"></li>
-        </volist>
-    </ol>
-    <div class="carousel-inner">
-        <volist name="banner" id="v">
-            <div class="item">
-                <img alt="{$v.imgalt}" src="{$v.imgurl}" />
-                <div class="carousel-caption">
-                    <notempty name="v.title"><h4>{$v.title}</h4></notempty>
-                    <notempty name="v.content"><p>{$v.content}</p></notempty>
-                </div>
-            </div>
-        </volist>
-    </div>
-    <a class="left carousel-control" href="#carousel-index" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div>-->
 <div class="container news-list">
     <h4>{$typestr}</h4>
     <div class="news-list-body"></div>
@@ -90,7 +70,7 @@
                             var media = $([
                                 '<div class="media">',
                                 '<a class="media-left" href="' + link + '">',
-                                '<img src="' + (v.thumb || '__IMG__/news/thumb.jpg') + '" alt="">',
+                                '<img src="' + (v.thumb || '__IMG__/news/thumb.jpg') + '" alt="'+ v.alt +'">',
                                 '</a>',
                                 '<div class="media-body">',
                                 '<a class="media-heading" href="' + link + '">' + v.title + '</a>',

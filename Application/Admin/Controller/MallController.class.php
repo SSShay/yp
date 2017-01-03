@@ -55,7 +55,7 @@ class MallController extends BaseController
             if ($images) {
                 $imginfo = $images['img'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 $id = I('post.id');
                 $banner_obj = new BannerModel();
                 if ($id) {
@@ -190,7 +190,7 @@ class MallController extends BaseController
             if ($images) {
                 $imginfo = $images['img'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 $oldimg = I('post.img');
                 if ($oldimg) unlink($oldimg);
                 $result['img'] = $img;
@@ -226,7 +226,7 @@ class MallController extends BaseController
             if ($images) {
                 $imginfo = $images['imgFile'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 /*$oldimg = I('post.img');
                 if ($oldimg) unlink($oldimg);*/
                 $result['error'] = 0;
@@ -263,12 +263,12 @@ class MallController extends BaseController
                 if ($images) {
                     $imginfo = $images['img'];
                     //返回文件地址和名给JS作回调用
-                    $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                    $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                     try {
                         $image = new \Think\Image();
                         $image->open($img);
                         $suffix = substr(strrchr($imginfo['savename'], '.'), 1);
-                        $thumb = 'Uploads' . $imginfo['savepath'] . basename($imginfo['savename'], "." . $suffix) . '_0.' . $suffix;
+                        $thumb = '/Uploads' . $imginfo['savepath'] . basename($imginfo['savename'], "." . $suffix) . '_0.' . $suffix;
                         $image->thumb(150, 150)->save($thumb);
 
                         $id = I('post.id');

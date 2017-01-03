@@ -31,7 +31,7 @@ class ArticleModel extends Model
     public function selectList($where = array(),$page_index = 0,$page_size = 10,$order = 'ctime desc')
     {
         $count = $this->where($where)->count();
-        $list = $this->field('id,type,thumb,title,ctime,utime')->where($where)->order($order)
+        $list = $this->field('id,type,thumb,alt,title,ctime,utime')->where($where)->order($order)
             ->limit($page_index * $page_size, $page_size)
             ->select();
 
@@ -50,11 +50,12 @@ class ArticleModel extends Model
     }
 
     //添加文章
-    public function addArticle($uid,$type,$thumb,$title,$brief)
+    public function addArticle($uid,$type,$thumb,$alt,$title,$brief)
     {
         $data['sendid'] = $uid;
         $data['type'] = $type;
         $data['thumb'] = $thumb;
+        $data['alt'] = $alt;
         $data['title'] = $title;
         $data['brief'] = $brief;
         $res = $this->addObj($data);
@@ -66,7 +67,7 @@ class ArticleModel extends Model
     {
         $where = array('type' => $type);
         $count = $this->where($where)->count();
-        $list = $this->field('id,thumb,title,brief,ctime')->where($where)->order($order)
+        $list = $this->field('id,thumb,alt,title,brief,ctime')->where($where)->order($order)
             ->limit($page_index * $page_size, $page_size)
             ->select();
 
@@ -86,7 +87,7 @@ class ArticleModel extends Model
     //首页最新文章显示
     public function selectListByIndex($limit = 3,$order = 'ctime desc')
     {
-        $list = $this->field('id,thumb,title,brief,ctime')->order($order)->limit($limit)->select();
+        $list = $this->field('id,thumb,alt,title,brief,ctime')->order($order)->limit($limit)->select();
 
         if($list){
             foreach ($list as $k => $v) {

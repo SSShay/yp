@@ -101,7 +101,7 @@ class ManageController extends BaseController
             if ($images) {
                 $imginfo = $images['img'];
                 //返回文件地址和名给JS作回调用
-                $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                 $id = I('post.id');
                 $banner_obj = new BannerModel();
                 if ($id) {
