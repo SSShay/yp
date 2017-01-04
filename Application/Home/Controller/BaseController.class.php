@@ -62,6 +62,9 @@ class BaseController extends Controller
             $kefu['qq'] = $setting_obj->selectVal('kefu-qq');
             $kefu['mobile'] = $setting_obj->selectVal('kefu-mobile');
             $this->kefu = $kefu;
+        }else{
+            $setting_obj = new SettingModel();
+            $kefu['mobile'] = $setting_obj->selectVal('kefu-mobile');
         }
 
         //title、如果在打印之前设置好title则不自动创建

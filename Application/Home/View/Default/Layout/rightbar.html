@@ -1,3 +1,30 @@
+<div id="msg-board">
+    <div class="form-group">
+        <img src="__IMG__/index/agent/msg-board.png">
+        <i class="glyphicon glyphicon-remove"></i>
+        <div class="kefu_mobile">{$kefu['mobile']}</div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <div class="input-group-addon">姓名：</div>
+                    <input class="form-control name" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <div class="input-group-addon">电话：</div>
+                    <input class="form-control mobile" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <textarea class="form-control msg" rows="2" placeholder="留言"></textarea>
+                    <div class="input-group-addon"><button id="fixed_{$submit_id}" class="btn">获取资料</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <nav class="nav-right">
     <ul>
         <li class="leave-msg" data-url="{:U('Index/leave_msg')}"><span>建议<br>意见</span></li>

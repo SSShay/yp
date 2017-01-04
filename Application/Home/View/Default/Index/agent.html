@@ -5,26 +5,6 @@
 </style>
 <link href="__CSS__/style.agent.css" rel="stylesheet">
 <link href="__CSS__/animate.css" rel="stylesheet">
-<div id="msg-board">
-    <div class="form-group">
-        <img src="__IMG__/index/agent/msg-board.png">
-        <i class="glyphicon glyphicon-remove"></i>
-        <div class="input-group">
-            <div class="input-group-addon">姓名：</div>
-            <input class="form-control name" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
-        </div>
-        <div class="input-group">
-            <div class="input-group-addon">电话：</div>
-            <input class="form-control mobile" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
-        </div>
-        <div class="input-group">
-            <textarea class="form-control msg" rows="2" placeholder="留言"></textarea>
-        </div>
-        <div class="text-right">
-            <button id="fixed_{$submit_id}" class="btn" type="button">提交留言</button>
-        </div>
-    </div>
-</div>
 <div class="banner text-center img-delay bg-cover scroll-block" data-bg="__IMG__/index/agent/bg.jpg"></div>
 <div class="container-1 scroll-block">
     <div class="container">
@@ -387,53 +367,6 @@
     $(".navbar-main").addClass('absolute');
     $(".navbar-path").addClass('absolute deep suspend');
 
-    $(function(){
-        $.fixed_leave_msg = function(){
-            var ismin = false;
-
-            var t = {
-                'min':function(){
-                    $("#msg-board").css('left', '-100%');
-                    setTimeout(function () {
-                        $("#msg-board").addClass('min').css('left', 0);
-                    }, 400);
-                },
-                'max':function() {
-                    $("#msg-board").css('left', '-100%');
-                    setTimeout(function () {
-                        $("#msg-board").removeClass('min').css('left', 0)
-                    }, 400);
-                }
-            }
-
-            $("#msg-board .glyphicon").click(function(){
-                t.min();
-            })
-
-            $("#msg-board img").click(function(){
-                t.max();
-            })
-
-            return t;
-        }
-
-        var fixed_leave_msg = $.fixed_leave_msg();
-
-        $("#msg-board .btn").submit(panyard.u_leave_msg, function () {
-            $("#msg-board .name,#msg-board .mobile,#msg-board .msg").data('placement', is_xs() ? 'bottom' : 'right');
-            return $.check([
-                {'target': '.name', 'rules': $.rules.empty},
-                {'target': '.mobile', 'rules': [$.rules.empty, $.rules.mobile]},
-                {'target': '.msg', 'rules': $.rules.length(null, 200)},
-            ])
-        }, function (res) {
-            if (res.success) {
-                $("#msg-board .name,#msg-board .mobile,#msg-board .msg").val('');
-                $.info('留言成功！');
-                fixed_leave_msg.min();
-            }
-        })
-    })
     /*!is_xs() && $.scrollBlock({'callback':function(p,i){
         switch (i){
             case 2:
@@ -441,4 +374,6 @@
                 break
         }
     }});*/
+
+
 </script>

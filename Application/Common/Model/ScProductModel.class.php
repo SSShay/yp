@@ -58,4 +58,12 @@ class ScProductModel extends Model
 
         return $list;
     }
+
+    public function selectListTop($limit = 5)
+    {
+        $where['display'] = 1;
+        $list = $this->field('id,name,thumb,price')->where($where)->limit($limit)->order('sort')->select();
+
+        return $list;
+    }
 }

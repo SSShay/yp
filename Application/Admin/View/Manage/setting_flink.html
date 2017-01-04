@@ -121,7 +121,7 @@
         $("#contact-add").submit("{:U('Manage/setting_add')}", function () {
             var data = $.check([
                 {'target': '#key', 'rules': [$.rules.empty, $.rules.length(2, 15)]},
-                {'target': '#value', 'rules': [$.rules.empty, $.rules.url]},
+                {'target': '#value', 'rules': [$.rules.empty]},
             ]);
             if(data) {
                 data.sort = $("#sort").val();

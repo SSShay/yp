@@ -54,6 +54,10 @@ class MallController extends BaseController
         $product_obj = new ScProductModel();
         $product_list = $product_obj->selectListByHome();
         $this->product_list = $product_list;
+
+        $product_top = $product_obj->selectListTop();
+        $this->product_top = $product_top;
+
         $this->display('index');
     }
 

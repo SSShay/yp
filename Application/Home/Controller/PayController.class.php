@@ -124,7 +124,7 @@ class PayController extends BaseController
                 $re['error'] = '交易关闭！订单已过期！';
             } else {
 
-                /*require_once __API__ . 'alipayapi/alipay_submit.class.php';
+                require_once __API__ . 'alipayapi/alipay_submit.class.php';
 
                  $host = 'http://' . $_SERVER["HTTP_HOST"];
                  $alipaySubmit = new \AlipaySubmit(array(
@@ -136,9 +136,9 @@ class PayController extends BaseController
                  $html_text = $alipaySubmit->go_pay($payno, $order['describe'], $order['total']);
 
                  echo $html_text;
-                 */
+
                 //模拟支付
-                $this->testpay();
+                //$this->testpay();
 
                 exit;
             }

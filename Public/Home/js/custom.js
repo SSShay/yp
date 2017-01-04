@@ -7,6 +7,46 @@
         'html': 'true'
     };
 
+    $.fixed_leave_msg = function() {
+        var ismin = false;
+        var t = {
+            'min': function () {
+                if (!ismin) {
+                    $("#msg-board").css('left', '-100%');
+                    setTimeout(function () {
+                        $("#msg-board").addClass('min').css('left', 0);
+                        ismin = true;
+                    }, 400);
+                }
+            },
+            'max': function () {
+                if (ismin) {
+                    $("#msg-board").css('left', '-100%');
+                    setTimeout(function () {
+                        $("#msg-board").removeClass('min').css('left', 0)
+                        ismin = false;
+                    }, 400);
+                }
+            },
+            'ismin': function () {
+                return ismin;
+            },
+            'isclick': function () {
+                return isclick;
+            }
+        }
+        var isclick = false;
+        $("#msg-board .glyphicon").click(function () {
+            t.min();
+            isclick = true;
+        })
+        $("#msg-board img").click(function () {
+            t.max();
+        })
+
+        return t;
+    }
+
     //贝塞尔曲线动画
     $.cubic_bezier = function(p1x, p1y, p2x, p2y) {
         var cx = 3.0 * p1x;
@@ -406,7 +446,7 @@ $(function() {
     $(".navbar-nav>li", nav_main).each(function () {
         var $t = $(this);
         var list = $t.children('.item-list');
-        if($t.children('a').text() == panyard.indexnav) $t.addClass('active');
+        if ($t.children('a').text() == panyard.indexnav) $t.addClass('active');
         $t.on({
             'mouseenter': function () {
                 if (!is_xs()) {
@@ -466,22 +506,22 @@ $(function() {
     })
 
     //右侧导航栏
-    var topbtn = $(".nav-right .top").click(function(){
+    var topbtn = $(".nav-right .top").click(function () {
         $.scrollTop();
     })
 
-    if(topbtn.length){
+    if (topbtn.length) {
         var istopshow = false;
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             var top = $(window).scrollTop();
-            if(istopshow){
+            if (istopshow) {
                 if (top <= 200) {
                     istopshow = false;
                     topbtn.stop().animate({'opacity': 0}, function () {
                         $(this).css('visibility', 'hidden')
                     })
                 }
-            }else{
+            } else {
                 if (top > 200) {
                     istopshow = true;
                     topbtn.stop().css('visibility', 'visible').animate({'opacity': 1})
@@ -490,13 +530,14 @@ $(function() {
         })
     }
 
-    $(".nav-right .leave-msg,.nav-right .contact_us").click(function(){
+    $(".nav-right .leave-msg,.nav-right .contact_us").click(function () {
         location.href = $(this).data('url');
     })
 
     //延迟加载插件
     $(".img-delay").each(function () {
         var $t = $(this);
+
         function show() {
             var bg = $t.data('bg');
             var img = $t.data('img');
@@ -527,7 +568,7 @@ $(function() {
         }
 
         if ($t.is(".trigger-show")) {
-            $t.bind('trigger', function(){
+            $t.bind('trigger', function () {
                 show();
                 $t.removeClass("trigger-show")
             });
@@ -548,6 +589,39 @@ $(function() {
             $.info('留言成功！');
         }
     })
+
+    if ($("#msg-board").length) {
+        var fixed_leave_msg = $.fixed_leave_msg();
+
+        $("#msg-board .btn").submit(panyard.u_leave_msg, function () {
+            $("#msg-board .name,#msg-board .mobile,#msg-board .msg").data('placement', is_xs() ? 'bottom' : 'right');
+            return $.check([
+                {'target': '.name', 'rules': $.rules.empty},
+                {'target': '.mobile', 'rules': [$.rules.empty, $.rules.mobile]},
+                {'target': '.msg', 'rules': $.rules.length(null, 200)},
+            ])
+        }, function (res) {
+            if (res.success) {
+                $("#msg-board .name,#msg-board .mobile,#msg-board .msg").val('');
+                $.info('留言成功！');
+                fixed_leave_msg.min();
+            }
+        })
+
+        $(window).scroll(function (e) {
+            var top = $(window).scrollTop();
+            var pos = $(".container-leave-msg").position()
+            if(pos){
+                var h = $(window).height()
+                if (top > pos.top - h) {
+                    fixed_leave_msg.min()
+                } else {
+                    if (!fixed_leave_msg.isclick())fixed_leave_msg.max()
+                }
+            }
+        })
+    }
+
 })
 
 //scroll禁用 支持

@@ -263,21 +263,21 @@ class MallController extends BaseController
                 if ($images) {
                     $imginfo = $images['img'];
                     //返回文件地址和名给JS作回调用
-                    $img = '/Uploads' . $imginfo['savepath'] . $imginfo['savename'];
+                    $img = 'Uploads' . $imginfo['savepath'] . $imginfo['savename'];
                     try {
                         $image = new \Think\Image();
                         $image->open($img);
                         $suffix = substr(strrchr($imginfo['savename'], '.'), 1);
-                        $thumb = '/Uploads' . $imginfo['savepath'] . basename($imginfo['savename'], "." . $suffix) . '_0.' . $suffix;
+                        $thumb = 'Uploads' . $imginfo['savepath'] . basename($imginfo['savename'], "." . $suffix) . '_0.' . $suffix;
                         $image->thumb(150, 150)->save($thumb);
 
                         $id = I('post.id');
                         if (!$id) {
                             $sc_product_img_obj = new ScProductImgModel();
-                            $res = $sc_product_img_obj->addImg($pid, $img, $thumb, I('post.sort'));
+                            $res = $sc_product_img_obj->addImg($pid, '/' . $img, '/' . $thumb, I('post.sort'));
                             if ($res) {
-                                $result['img'] = $img;
-                                $result['thumb'] = $thumb;
+                                $result['img'] = '/' . $img;
+                                $result['thumb'] = '/' . $thumb;
                                 $result['id'] = $res;
 
                             } else {
@@ -286,8 +286,8 @@ class MallController extends BaseController
                         } else {
                             $oldimg = I('post.img');
                             if ($oldimg) unlink($oldimg);
-                            $result['img'] = $img;
-                            $result['thumb'] = $thumb;
+                            $result['img'] = '/' . $img;
+                            $result['thumb'] = '/' . $thumb;
                         }
                     } catch (\Exception $e) {
                         $result['error'] = '缩略图保存失败！';//缩略图保存失败

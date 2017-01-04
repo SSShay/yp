@@ -49,7 +49,7 @@
                     <img src="__IMG__/mall/hot.jpg">
                 </div>
             </div>
-            <volist name="product_list" id="v">
+            <volist name="product_top" id="v">
                 <div class="col-lg-4 col-xs-6 item">
                     <a class="product_item <if condition='$i lt 5 AND $i neq 2'>padding</if>" href="{:U('Mall/detail')}/id/{$v.id}">
                         <empty name="v.thumb">

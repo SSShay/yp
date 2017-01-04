@@ -72,7 +72,9 @@ class IndexController extends BaseController
     public function contact_us()
     {
         $setting_obj = new SettingModel();
+
         $this->contacts = $setting_obj->selectContactByHome();
+        $this->title = "联系我们";
         $this->display('contact_us');
     }
 
@@ -86,7 +88,8 @@ class IndexController extends BaseController
         $this->page_nofoot('school');
     }
 
-    public function agent(){
+    public function agent()
+    {
         $this->breadcrumb(array('name' => '代理商'));
         $this->en_submit_id();
         $this->page_nofoot('agent');
