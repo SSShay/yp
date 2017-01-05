@@ -204,7 +204,7 @@
         top: 160px;
     }
     .container-5{
-        padding-bottom: 80px;
+        padding: 50px 0;
     }
     .container-5 h3{
         margin: 50px 0;
@@ -297,7 +297,7 @@
             font-size: 15px;
         }
         .container-4 .box-bg{
-            display: none;
+            display: none !important;
         }
         .container-4 .box-txt .circle{
             position: relative;
@@ -309,7 +309,7 @@
         }
     }
 </style>
-<div class="banner text-center img-delay bg-cover scroll-block" data-bg="__IMG__/index/edu_bureau/bg.jpg">
+<div class="banner text-center lazy bg-cover scroll-block" data-original="__IMG__/index/edu_bureau/bg.jpg">
     <div class="container">
         <h1 class="txt-yellow h1-banner">免费部署教育信息化平台</h1>
         <div class="hr-block">
@@ -323,7 +323,7 @@
                 <h3 class="bg-blue-h">教学管理</h3>
             </div>
             <div class="col-xs-4">
-                <h3 class="bg-yellow-h">安全管理</h3>
+                <h3 class="bg-yellow-h">平安校园</h3>
             </div>
             <div class="col-xs-4">
                 <h3 class="bg-red">家校互动</h3>
@@ -358,7 +358,7 @@
                 <h4>全面培训</h4>
                 <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
             </div>
-            <div class="block-span"><img src="__IMG__/index/edu_bureau/1_2.jpg"></div>
+            <div class="block-span"><img class="lazy" data-original="__IMG__/index/edu_bureau/1_2.jpg"></div>
             <div class="block-cell">
                 <h4>循序应用</h4>
                 <p>申请加入准备的资料，等等流程申请加入准备的资料，等等流程申请加入准备的资料等等流程申请加入准备的资料</p>
@@ -372,12 +372,11 @@
             </div>
         </div>
 
-        <h5 class="txt-bottom">教育主管部门只需要申请加入，平台提供全面完善的培训服务与运营支持，帮助教育主管部门在一个月内实现辖区教育信息
-            平台的常态化应用。</h5>
+        <h5 class="txt-bottom">教育主管部门只需要申请加入，平台提供全面完善的培训服务与运营支持，帮助教育主管部门在一个月内实现辖区教育信息平台的常态化应用。</h5>
     </div>
 </div>
 
-<div class="container-2 img-delay bg-cover scroll-block" data-bg="__IMG__/index/edu_bureau/2_1.jpg">
+<div class="container-2 lazy bg-cover scroll-block" data-original="__IMG__/index/edu_bureau/2_1.jpg">
     <div class="container">
         <h1 class="h1-banner"><strong>用户数据安全管理服务</strong></h1>
         <div class="col-sm-7 col-xs-10">
@@ -389,7 +388,7 @@
     </div>
 </div>
 
-<div class="container-3 img-delay bg-cover scroll-block" data-bg="__IMG__/index/edu_bureau/3_1.jpg">
+<div class="container-3 lazy bg-cover scroll-block" data-original="__IMG__/index/edu_bureau/3_1.jpg">
     <div class="container block1">
         <h3>——　&nbsp;&nbsp;产品服务&nbsp;&nbsp;　——</h3>
         <div class="col-sm-3 col-xs-6"><h4>教学管理</h4></div>
@@ -421,7 +420,7 @@
             <h3>实施<br>原则</h3>
             <div class="circle circle1">
                 <h4>01</h4>
-                <p>免费捐建<br>原则</p>
+                <p>免费部署<br>原则</p>
             </div><div class="circle circle2">
                 <h4>02</h4>
                 <p>家长自愿<br>原则</p>
@@ -430,13 +429,12 @@
                 <p>循序渐进<br>原则</p>
             </div>
         </div>
-        <img class="box-bg" src="__IMG__/index/edu_bureau/4_1.jpg">
+        <img class="box-bg lazy" data-original="__IMG__/index/edu_bureau/4_1.jpg">
     </div>
 </div>
 
 <div class="container-5 scroll-block">
     <div class="container">
-        <h3 class="txt-blue-h text-center"><strong>合作单位</strong></h3>
         <div class="row friendly-link underline text-center">
             <a target="_blank" href="http://www.gzsedu.cn/">贵州教育厅</a>
             <a target="_blank" href="http://wzsjyj.eduzj.org/Default.aspx?userid=570">温州教育厅</a>
@@ -448,12 +446,10 @@
 </div>
 
 <div class="container-leave-msg scroll-block">
-    <div class="container">
-        <h4>
-            “微家校”利用互联网技术、大数据应用技术，以平台为基础，立足于为教育主管部门、学校提供持续性的专业服务。<br>
-            感谢您在教育事业上的坚持，希望我们一起努力，携手共进，谢谢！<br>
-            <div class="text-right">——微家校 邱万钧</div>
-        </h4>
+    <div class="container" style="padding-top: 30px;">
+        <h4 class="text-center">
+            政府规范引导，鼓励社会力量参与，为教育信息化的推进提供可持续的服务。
+        </h4><br>
         <div class="form-horizontal" role="form">
             <div class="form-group">
                 <div class="input-group">
@@ -469,7 +465,7 @@
                 </div>
             </div>
         </div>
-        <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并承诺为您保密！</h6>
+        <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并为您保密！</h6>
         <button id="{$submit_id}" class="btn" type="button">提交留言</button>
     </div>
 </div>

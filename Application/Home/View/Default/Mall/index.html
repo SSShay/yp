@@ -6,6 +6,7 @@
         </volist>
     </ol>
     <div class="carousel-inner">
+        <img style="width: 100%" src="__IMG__/common/banner.png">
         <volist name="banner" id="v">
             <div class="item">
                 <img alt="{$v.imgalt}" src="{$v.imgurl}"/>
@@ -20,38 +21,36 @@
     <a class="right carousel-control" href="#carousel-index" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
 
-<div>
-    <div class="container">
-        <div class="row">
-            <h3 class="title">商品</h3>
-            <volist name="product_list" id="v">
-                <div class="col-lg-2_4 col-md-3 col-sm-4 col-xs-6">
-                    <a class="product_item" href="{:U('Mall/detail')}/id/{$v.id}">
-                        <empty name="v.thumb">
-                            <img src="__IMG__/mall/thumb.jpg">
-                            <else />
-                            <img src="{$v.thumb}" />
-                        </empty>
-                        <h4>{$v.name}</h4>
-                        <h5>￥{$v.price}</h5>
-                    </a>
-                </div>
-            </volist>
-        </div>
+<div class="container">
+    <h3 class="title">商品</h3>
+    <div class="row list-row">
+        <volist name="product_list" id="v">
+            <div class="col-md-3 col-sm-4 col-xs-6 p-item">
+                <a class="product_item" href="{:U('Mall/detail')}/id/{$v.id}">
+                    <empty name="v.thumb">
+                        <img src="__IMG__/mall/thumb.jpg">
+                        <else />
+                        <img src="{$v.thumb}" />
+                    </empty>
+                    <h4>{$v.name}</h4>
+                    <h5>￥{$v.price}</h5>
+                </a>
+            </div>
+        </volist>
     </div>
 </div>
 
 <div id="c-index-top">
     <div class="container">
-        <div class="row masonry-container">
-            <div class="col-lg-4 col-xs-6 item">
-                <div class="product_item title-img">
+        <div class="row top-row">
+            <div class="col-lg-4 col-xs-6 p-item">
+                <div class="title-img">
                     <img src="__IMG__/mall/hot.jpg">
                 </div>
             </div>
             <volist name="product_top" id="v">
-                <div class="col-lg-4 col-xs-6 item">
-                    <a class="product_item <if condition='$i lt 5 AND $i neq 2'>padding</if>" href="{:U('Mall/detail')}/id/{$v.id}">
+                <div class="col-lg-4 col-xs-6 p-item">
+                    <a class="<if condition='$i lt 5 AND $i neq 2'>padding</if>" href="{:U('Mall/detail')}/id/{$v.id}">
                         <empty name="v.thumb">
                             <img src="__IMG__/mall/thumb.jpg">
                             <else />
@@ -76,11 +75,20 @@
 
         $('#carousel-index').carousel();
 
-        var $container = $('.masonry-container');
-        $container.imagesLoaded(function () {
-            $container.masonry({
-                columnWidth: '.item',
-                itemSelector: '.item'
+        var $list = $('.list-row');
+        $list.imagesLoaded(function () {
+            $list.masonry({
+                columnWidth: '.p-item',
+                itemSelector: '.p-item'
+            });
+        });
+
+
+        var $top = $('.top-row');
+        $top.imagesLoaded(function () {
+            $top.masonry({
+                columnWidth: '.p-item',
+                itemSelector: '.p-item'
             });
         });
     })

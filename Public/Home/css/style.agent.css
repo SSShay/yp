@@ -1,5 +1,5 @@
 .banner{
-    height: 950px;
+    height: 800px;
 }
 .container-1{
     background: #f6f2e9;
@@ -10,10 +10,10 @@
 }
 .container-1 .left-block{
     background: #fff;
+    margin-top: 60px;
 }
 .container-1 .left-block img{
     width: 100%;
-    margin-top: -30%;
     padding: 15px 15px 0;
     background: #fff;
 }
@@ -354,7 +354,7 @@
 @media screen and (max-width: 1440px)
 {
     .banner {
-        height: 700px;
+        height: 600px;
     }
 }
 @media screen and (max-width: 1200px)
@@ -375,7 +375,7 @@
 @media screen and (max-width: 1170px)
 {
     .banner {
-        height: 595px;
+        height: 487px;
     }
     .container-3 .container-row{
         height: 500px;
@@ -399,7 +399,7 @@
 @media screen and (max-width: 768px)
 {
     .banner {
-        height: 390px;
+        height: 320px;
     }
     .container-1 .left-block img{
         margin-top: -50px;

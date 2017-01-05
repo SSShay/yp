@@ -427,6 +427,9 @@ class MallController extends BaseController
         echo json_encode($list);
     }
 
+    //运费
+    const freight = 15;
+
     //订单详情
     public function order_detail()
     {
@@ -456,6 +459,8 @@ class MallController extends BaseController
             $sc_order_product_obj = new ScOrderProductModel();
             $list = $sc_order_product_obj->selectByOrder($orderid);
             $this->list = $list;
+
+            $this->freight = self::freight;
 
             $this->display('order_detail');
         }

@@ -136,8 +136,8 @@ class MallController extends BaseController
         }
     }
 
-
-    const freight = 10;
+    //运费
+    const freight = 15;
     /**
      * 确认订单
      */

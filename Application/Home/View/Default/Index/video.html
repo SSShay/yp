@@ -19,7 +19,7 @@
 <script src="__JS__/jquery.willesplay.min.js"></script>
 <script>
     $(function() {
-        $("#body").addClass('bg-cover img-delay').data('bg',"__IMG__/video/bg.jpg");
+        $("#body").addClass('bg-cover').attr('data-original',"__IMG__/video/bg.jpg").lazyload({effect: "fadeIn"});
 
         var video = $("#willesPlay").video();
         var row_box = $(".img-preview-box .img-list-box")

@@ -3,7 +3,7 @@
 -------------------------------*/
 .container .title{
     padding-top: 30px;
-    padding-left: 25px;
+    padding-left: 10px;
     font-weight: bold;
 }
 
@@ -23,23 +23,26 @@
 /*-------------------------------
             BASE
 -------------------------------*/
-.product_item{
+.p-item{
+    padding: 30px;
+}
+.p-item>a{
     padding: 10px 10px 40px;
     display: block;
 }
-.product_item,.product_item:hover,.product_item:focus{
+.p-item>a,.p-item>a:hover,.p-item>a:focus{
     text-decoration: none;
     color: #1e1e1e;
 }
-.product_item img{
+.p-item>a img{
     width: 100%;
 }
-.product_item h4{
+.p-item>a h4{
     text-align: center;
     font-weight: bold;
     font-size: 16px;
 }
-.product_item h5{
+.p-item>a h5{
     text-align: center;
     color: #e54848;
     font-weight: bold;
@@ -67,7 +70,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .product_item{
+    .p-item>a{
         padding: 5px 10px;
         cursor: pointer;
     }
@@ -91,21 +94,22 @@
     background: #f5f5f5;
     padding: 30px 0 80px;
 }
-#c-index-top .item{
+#c-index-top .p-item{
     padding: 10px;
 }
-#c-index-top .product_item{
+#c-index-top .p-item>a{
     background: #fff;
-    padding: 20px;
+    padding: 15px;
 }
-#c-index-top .product_item.padding{
+#c-index-top .p-item>a.padding{
     padding: 50px 20px;
 }
-#c-index-top .product_item.title-img img{
+#c-index-top .title-img img{
     max-width: none;
+    width: 100%;
     border: 1px solid #eaeaea;
 }
-#c-index-top .product_item img{
+#c-index-top .p-item>a img{
     max-width: 160px;
     margin: 0 auto;
     display: block;
@@ -113,7 +117,7 @@
 
 @media (max-width: 1200px)
 {
-    #c-index-top .product_item img{
+    #c-index-top .p-item>a img{
         max-width: 165px;
         margin: 0 auto;
         display: block;

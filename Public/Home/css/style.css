@@ -113,50 +113,12 @@
     color: #fff;
     background: #168EE1;
 }
-.navbar-main .navbar-nav>li.active>a:hover{
-
-}
-
-.navbar-main .input-group{
-    width: 32px;
-    margin-top: 8px;
-    left: 50px;
-    transition: .3s;
-	float:left;
-}
-.navbar-main .input-group>input{
-    display: none;
-    height: 38px;
-}
-.navbar-main .input-group>.input-group-addon{
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-.navbar-main .input-group>.input-group-addon>img{
-    height: 24px;
-}
-.navbar-main .input-group.focus{
-    width: 200px;
-}
-.navbar-main .input-group.focus>input{
-    display:block;
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-}
-.navbar-main.hover .input-group>.input-group-addon,
-.navbar-main .input-group.focus>.input-group-addon{
-    background: #168EE1;
-    border-radius: 4px;
-}
-.navbar-main .input-group.focus>.input-group-addon{
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-}
-.navbar-main .input-group>.input-group-addon:hover{
-    font-size: 0;
+.navbar-main .advice-line{
+    line-height: 50px;
+    color: #58b86b;
+    margin: 0 10px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .navbar-path.suspend{
@@ -695,7 +657,7 @@
     background: #ddd;
 }
 .container-leave-msg .form-horizontal{
-    margin-left: 15px;
+    margin:0 15px;
 }
 .container-leave-msg .form-horizontal .input-group{
     margin-bottom: 1px;

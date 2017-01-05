@@ -54,12 +54,12 @@
         }
     }
 </style>
-<div class="banner text-center img-delay bg-cover" data-bg="__IMG__/product/wjx/faq/_bg.jpg">
+<div class="banner text-center lazy bg-cover" data-original="__IMG__/product/wjx/faq/_bg.jpg">
     <div class="container">
         <h2>微家校使用小贴士</h2>
         <div class="input-group">
             <input class="form-control" type="text" placeholder="搜索...">
-            <div id="search-faq" class="input-group-addon"><img src="__IMG__/product/wjx/faq/search.png"></div>
+            <div id="search-faq" class="input-group-addon"><img class="lazy" data-original="__IMG__/product/wjx/faq/search.png"></div>
         </div>
     </div>
 </div>
@@ -70,13 +70,13 @@
             {
                 name: '微家校APP安装',
                 list: [
-                    {question: '在哪里下载微家校APP', answer: '家长或老师可以下载安桌和苹果端APP，下载地址为：'},
+                    {question: '在哪里下载微家校APP', answer: '家长或老师可以下载安桌和苹果端APP （<a target="_blank" href=\'{:U("Product/wjx_download")}\'>下载地址</a>）'},
                     {
                         question: '安装后如何绑定学生卡',
-                        answer: '当您安装好手机端软件后，可以通过手机APP客户端远程设置儿童手机，设备绑定手机IMEI和号码，SOS号码可设置三个，亲情号码可绑定二位家长手机.还可以帮孩子设置一个好友手机号'
+                        answer: '当您安装好手机端软件后，可以通过手机APP客户端远程设置儿童手机，设备绑定手机IMEI和号码，SOS号码可绑定1个，亲情号码可绑定3个'
                     },
                     {question: '如何及时获取孩子安全信息', answer: '家长们可到安心星APP--学生安全管理平台中及时获取孩子安全信息'},
-                    {question: '家长如何查看孩子是否按时上学放学', answer: '家长们可到安心星app--学生考勤中查看孩子上学及离校时间'},
+                    {question: '家长如何查看孩子是否按时上学放学', answer: '家长们可到安心星APP--学生考勤中查看孩子上学及离校时间'},
                     {question: '孩子平时作业及成绩如何了解', answer: '家长们可到微家校APP--查看作业中了解老师布置的作业，每次考试成绩可到学生成绩中查看'},
                     {question: '如何了解孩子学校和班级最新的活动', answer: '家长们可到微家校APP，校方微官网通过通知公告查看'},
                     {question: '家长想要帮助孩子提前预习次日的功课怎么办', answer: '家长们可到微家校APP--班级课程中查看次日班级课程安排'},
@@ -87,9 +87,9 @@
                 list: [
                     {
                         question: '为什么选择“微家校”产品',
-                        answer: '技术强大、盈利清晰、进入门槛高、产品刚需、前景广阔<br>强大的技术团队，微家校团队中技术占比高达百分之七十，我们的产品迭代速度远超同类产品！<br>清晰的盈利模式，既有一次性收益，更有持续收益让您躺着也能赚钱！<br>产品刚需，符合学校、学生、家长三方利益，家校安全对于中小学生业说始终是热点问题.<br>前景广阔,在获取到一定量级用户之后，微家校更可以生长出更多的服务和更多的收入，盈利成长空间大！'
+                        answer: '技术强大、盈利清晰、进入门槛高、产品刚需、前景广阔<br>强大的技术团队，微家校团队中技术占比高达百分之七十，我们的产品迭代速度远超同类产品！<br>清晰的盈利模式，既有一次性收益，更有持续收益让您躺着也能赚钱！<br>产品刚需，符合学校、学生、家长三方利益，家校安全对于中小学生来说始终是热点问题。<br>前景广阔，在获取到一定量级用户之后，微家校便可以生长出更多的服务和更多的收入，盈利成长空间大！'
                     },
-                    {question: '如何成为代理商', answer: '马上拨打电话4008-767-773<br>预约加盟<br>参观杭州总公司'},
+                    {question: '如何成为代理商', answer: '马上拨打电话{$kefu["mobile"]}，预约加盟，参观杭州总公司'},
                     {question: '成为代理商后有什么好处', answer: '代理收益，第一年收回投资成本，每年获得高额收益，弹性工作制'},
                     {
                         question: '微家校一站式服务方案有哪些',

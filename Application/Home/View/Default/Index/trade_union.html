@@ -91,8 +91,7 @@
         font-size: 20px;
     }
     .container-4{
-        background-position: left bottom;
-        margin-bottom: 50px;
+        padding: 50px 0;
     }
     .container-4 h3{
         margin: 50px 0;
@@ -164,7 +163,7 @@
         height: 100vh;
     }
 </style>
-<div class="banner text-center img-delay scroll-block" data-bg="__IMG__/index/trade_union/bg.jpg">
+<div class="banner text-center lazy scroll-block" data-original="__IMG__/index/trade_union/bg.jpg">
     <div class="container">
         <h1 class="txt-green h1-banner">“微家校”邀您共建教育生态圈</h1>
         <h1 class="h2-banner">开放合作　拥抱共赢</h1>
@@ -173,7 +172,7 @@
 <table class="container-1 scroll-block">
     <tr style="height: 0">
         <td class="title bg-green-h"><h1 class="h2-banner">我们在路上</h1></td>
-        <td class="bg img-delay bg-cover" data-bg="__IMG__/index/trade_union/1_1.jpg"></td>
+        <td class="bg lazy bg-cover" data-original="__IMG__/index/trade_union/1_1.jpg"></td>
     </tr>
     <tr>
         <td class="title-en text-right"><h2 class="h2-banner txt-green-h"><strong>We</strong><br><small>ARE ON THE ROAD</small></h2></td>
@@ -181,9 +180,7 @@
             <div class="col-sm-8">
                 <p>“微家校”利用互联网技术、大数据应用技术，通过软硬件结合解决校园安全管理问题，为教育部门、学校、教师、
                     家长提供教学管理、安全管理、家校互动等教育信息化平台服务。</p><br>
-                <p>2015年9月，“中国关心下一代工作委员会”联合“中国儿童少年基金会”发起大型公益行动，目标为全国10000所
-                    学校免费捐献“微家校”教育信息平台。</p><br>
-                <p>截至2016年6月，“微家校”已成功为全国4000余所学校、60余万师生家长提供教育信息化平台服务，日活跃率在
+                <p>截至2016年6月，“微家校”已成功为全国4000余所学校、40余万师生家长提供教育信息化平台服务，日活跃率在
                     60%以上。</p><br>
                 <p>“微家校”扎根于教学、安全、家校领域，以雄厚的研发、推广、运营实力赢得了用户的认可！</p>
             </div>
@@ -192,18 +189,17 @@
 </table>
 <table class="container-2 scroll-block">
     <tr style="height: 0">
-        <td class="bg img-delay bg-cover" data-bg="__IMG__/index/trade_union/2_1.jpg"></td>
+        <td class="bg lazy bg-cover" data-original="__IMG__/index/trade_union/2_1.jpg"></td>
         <td class="title"><h1 class="h2-banner">胜利者同盟</h1></td>
     </tr>
     <tr>
         <td class="content">
             <div class="col-sm-4"></div>
             <div class="col-sm-8">
-                <p>“微家校”以打造全面完善的教育生态平台为目标，以实现国家关于教育信息化建设并完善“三通两平台”的
-                    教育方针为使命，邀请您加入“胜利者同盟”。</p><br>
+                <p>“微家校”以打造全面完善的教育生态平台为目标，以实现国家关于教育信息化建设并完善“三通两平台”的教育方针为使命，邀请您加入“胜利者同盟”。</p><br>
                 <p>在“胜利者同盟”，我们以全面开放的心态，共享教育渠道、资源，实现合作共赢！</p><br>
-                <p>如果您也像我们一样，执着于某一个教育垂直领域，不做到最好誓不罢休。</p><br>
-                <p>如果您也像我们一样，坚持在中国下一代教育事业，全心贡献自己的力量。</p><br>
+                <p>如果您也像我们一样，执着于某一个教育垂直领域，不做到最好誓不罢休；</p><br>
+                <p>如果您也像我们一样，坚持在中国下一代教育事业，全心贡献自己的力量；</p><br>
                 <p>那么加入“胜利者同盟”,我们将全面开放“微家校”极具用户粘性的生态平台，与您拥抱成功！</p>
             </div>
         </td>
@@ -211,12 +207,12 @@
     </tr>
 </table>
 
-<div class="container-3 img-delay bg-cover scroll-block" data-bg="__IMG__/index/trade_union/3_1.jpg">
+<div class="container-3 lazy bg-cover scroll-block" data-original="__IMG__/index/trade_union/3_1.jpg">
     <div class="container">
         <div class="block">在线教育资源</div>
         <div class="block">在线学习测评</div>
         <div class="block">数字教材教辅</div>
-        <div class="block">数字研究机构</div>
+        <div class="block">教育研究机构</div>
         <div class="block">培训辅导机构</div>
         <div class="block">安全相关机构</div>
         <div class="block">校园安全设备</div>
@@ -230,7 +226,6 @@
 
 <div class="container-4 scroll-block">
     <div class="container">
-        <h3 class="txt-blue-h text-center"><strong>合作单位</strong></h3>
         <div class="row friendly-link underline text-center">
             <a target="_blank" href="http://www.10086.cn/">中国移动</a>
             <a target="_blank" href="http://www.chinaunicom.com.cn/">中国联通</a>
@@ -271,5 +266,5 @@
 <script>
     $(".navbar-main").addClass('absolute');
     $(".navbar-path").addClass('absolute deep suspend');
-    //!is_xs() && $.scrollBlock();
+    !is_xs() && $.scrollBlock();
 </script>

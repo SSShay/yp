@@ -534,47 +534,7 @@ $(function() {
         location.href = $(this).data('url');
     })
 
-    //延迟加载插件
-    $(".img-delay").each(function () {
-        var $t = $(this);
-
-        function show() {
-            var bg = $t.data('bg');
-            var img = $t.data('img');
-            if (bg) loadimg(bg, function () {
-                var back = $t.css('background');
-                var backimg = "url('" + bg + "')";
-                var imgtmp = $("<div class='imgtmp'></div>").prependTo($t);
-                if (back) imgtmp.css('background', back);
-                else if ($t.hasClass("bg-cover")) imgtmp.addClass("bg-cover");
-
-                imgtmp.css('background-image', backimg).animate({'opacity': 1}, 1000, function () {
-                    $t.css('background-image', backimg);
-                    imgtmp.remove();
-                })
-
-            });
-            if (img) loadimg(img, function () {
-                $t.css('src', img);
-            });
-            function loadimg(src, callback) {
-                var Img = new Image();
-                Img.src = src;
-                $(Img).bind('load', callback).bind('error', function () {
-                    console.log('error')
-                })
-                if (Img.complete) setTimeout(callback, 300);
-            }
-        }
-
-        if ($t.is(".trigger-show")) {
-            $t.bind('trigger', function () {
-                show();
-                $t.removeClass("trigger-show")
-            });
-        }
-        else show();
-    })
+    $(".lazy").lazyload({effect: "fadeIn"});
 
     $(".container-leave-msg .btn").submit(panyard.u_leave_msg, function () {
         $("#name,#mobile,#msg").data('placement', is_xs() ? 'bottom' : 'right');

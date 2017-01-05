@@ -10,9 +10,12 @@
 
     <title><notempty name="title">{$title}<else/>杭州远磐互联科技有限公司</notempty></title>
     <notempty name="keywords"><meta name="Keywords" content="{$keywords}"></notempty>
+
     <notempty name="description"><meta name="Description" content="{$description}"></notempty>
 
     <script src="__JS__/jquery-1.10.2.min.js"></script>
+    <eq name='is_mobile' value='true'><script src="__JS__/fastclick.js"></script></eq>
+    <script src="__JS__/jquery.lazyload.min.js"></script>
     <script src="__JS__/custom.js"></script>
 
     <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
@@ -26,6 +29,48 @@
     <script src="__JS__/html5shiv.min.js"></script>
     <![endif]-->
 
-    <!--<link rel="shortcut icon" href="#" type="image/png">-->
+    <script>
+        //页面常量
+        panyard = {
+            'indexnav': '{$indexnav}',
+            'u_leave_msg': "{:U('Index/leave_msg')}",
+            'is_mobile': "{$is_mobile}",
+        }
 
-    <include file="Default/Layout/script" />
+        ;(function(w,d){
+            var _hmt = _hmt || [];
+
+            /*百度统计js*/
+            /*<eq name='is_mobile' value='true'>*/
+            var hm = d.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6fa9ab1ca30f2c7c97a330d80906b450";
+            var s = d.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+
+            /*FastClick*/
+            $(function() {
+                FastClick.attach(document.body);
+            });
+            /*<else/>*/
+            var hm = d.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?54ed6d667a120fb761445f378386b9af";
+            var s = d.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+
+            /*</eq>*/
+
+            /*谷歌统计js*/
+            ;(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(w,d,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72376317-2', 'auto');
+            ga('send', 'pageview');
+
+            /*CNZZ统计*/
+            var cnzz_protocol = (("https:" == d.location.protocol) ? " https://" : " http://");
+            d.write(unescape("%3Cspan id='cnzz_stat_icon_1258980966'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1258980966' type='text/javascript'%3E%3C/script%3E"));
+        })(window,document)
+
+    </script>

@@ -60,7 +60,7 @@
     .navbar-main .navbar-header .navbar-brand{
         width: 70px;
         overflow: hidden;
-        margin-right: 10px;
+        margin-right: 20px;
         padding-top: 10px;
     }
     .navbar-main .navbar-header .navbar-brand img{
@@ -131,6 +131,16 @@
     .underline a:after,.underline a:hover:after{
         content: '';
         display: none;
+    }
+    #msg-board img{
+        width: 100px;
+        left: -75px;
+    }
+    #msg-board.min img{
+        left: -25px;
+    }
+    #msg-board .form-group{
+        width: 300px;
     }
 }
 

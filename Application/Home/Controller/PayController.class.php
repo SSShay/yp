@@ -123,6 +123,8 @@ class PayController extends BaseController
             }elseif (NOW_TIME > $order['ctime'] + ScOrderModel::active_time) {
                 $re['error'] = '交易关闭！订单已过期！';
             } else {
+                //原因就是所有的参数列表中不能有乱码，所以把这个页面设置下字符集即可！
+                header('Content-type:text/html;charset=utf-8');
 
                 require_once __API__ . 'alipayapi/alipay_submit.class.php';
 
@@ -220,6 +222,8 @@ class PayController extends BaseController
             //交易状态
             $trade_status = $_POST['trade_status'];
 
+            write_log('支付回调结果',$_POST);
+
             if ($trade_status == 'TRADE_FINISHED') {
                 $order = $this->depayno($out_trade_no, false);
                 if ($order) {
@@ -230,7 +234,7 @@ class PayController extends BaseController
                 }
             } else if ($trade_status == 'TRADE_SUCCESS') {
                 //支付宝交易号
-                $trade_no = $_POST['trade_no'];
+                $trade_no = $_POST['buyer_email'];
                 $order = $this->depayno($out_trade_no, 'id');
                 if ($order) {
                     $sc_pay_obj = new ScPayModel();
@@ -272,13 +276,14 @@ class PayController extends BaseController
             //商户订单号
             $out_trade_no = $_GET['out_trade_no'];
             $msg['order_id'] = $out_trade_no;
+            $msg['total'] = $_GET['total_fee'];
             $msg['payment'] = '支付宝';
 
             //交易状态
             $trade_status = $_GET['trade_status'];
             if ($trade_status == 'TRADE_FINISHED' || $trade_status == 'TRADE_SUCCESS') {
                 //支付宝交易号
-                $trade_no = $_POST['trade_no'];
+                $trade_no = $_GET['buyer_email'];
                 $order = $this->depayno($out_trade_no, 'id');
                 if ($order) {
                     $sc_pay_obj = new ScPayModel();
@@ -289,24 +294,24 @@ class PayController extends BaseController
                             $data['status'] = ScPayModel::T_pay_success;
                             $res = $sc_pay_obj->setObj($where, $data);
 
-                            if (!$res){
+                            if (!$res) {
                                 $msg['error'] = '支付状态修改失败！';
-                            }else{
+                            } else {
                                 $msg['success'] = true;
                             }
-                        }else{
+                        } else {
                             $msg['success'] = true;
                         }
                     } else {
                         $res = $sc_pay_obj->addPay($order['id'], ScPayModel::PAY_ali, $trade_no);
 
-                        if (!$res){
+                        if (!$res) {
                             $msg['error'] = '订单支付失败，如已扣款，请联系客服处理！';
-                        }else{
+                        } else {
                             $msg['success'] = true;
                         }
                     }
-                } else{
+                } else {
                     $msg['error'] = '订单不存在，如已扣款，请联系客服处理！';
                 }
             } else {
@@ -317,6 +322,13 @@ class PayController extends BaseController
             $this->breadcrumb('支付结果');
 
             $this->display('result');
+        } else {
+            if (isset($_GET['out_trade_no'])) {
+                $order = $this->depayno($_GET['out_trade_no'], false);
+                $this->redirect('Pay/index', array('oid' => $order['id'], 'type' => ScPayModel::PAY_ali));
+            }
+
+            $this->redirect('Mall/index');
         }
     }
 
