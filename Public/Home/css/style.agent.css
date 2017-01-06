@@ -399,7 +399,7 @@
 @media screen and (max-width: 768px)
 {
     .banner {
-        height: 320px;
+        height: 300px;
     }
     .container-1 .left-block img{
         margin-top: -50px;
@@ -484,5 +484,10 @@
     }
     .leaf-block .span5{
         height: 80px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .banner {
+        height: 200px;
     }
 }

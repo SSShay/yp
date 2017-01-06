@@ -54,16 +54,16 @@ class IndexController extends BaseController
     {
         if (IS_POST) {
             $leave_msg_obj = new LeavemsgModel();
-            $res = $leave_msg_obj->addMsg(I('post.name'),I('post.mobile'),I('post.msg'));
-            if($res){
+            $device_type = $this->is_mobile() ? 1 : 0;
+            $res = $leave_msg_obj->addMsg(I('post.name'), I('post.mobile'), I('post.msg'), $device_type);
+            if ($res) {
                 $re['success'] = true;
-            }else{
+            } else {
                 $re['error'] = $leave_msg_obj->getError();
             }
             echo json_encode($re);
         } else {
             $this->breadcrumb(array('name' => '填写信息'));
-            $this->en_submit_id();
             $this->page_full('leave_msg');
         }
     }
@@ -84,14 +84,12 @@ class IndexController extends BaseController
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function school(){
         $this->breadcrumb(array('name' => '学校'));
-        $this->en_submit_id();
         $this->page_nofoot('school');
     }
 
     public function agent()
     {
         $this->breadcrumb(array('name' => '代理商'));
-        $this->en_submit_id();
         if($this->is_mobile()){
             $this->redirect('Index/agent_m');
         }else{
@@ -102,19 +100,16 @@ class IndexController extends BaseController
     public function agent_m()
     {
         $this->breadcrumb(array('name' => '代理商'));
-        $this->en_submit_id();
         $this->page_nofoot('agent_m');
     }
 
     public function edu_bureau(){
         $this->breadcrumb(array('name' => '教育局'));
-        $this->en_submit_id();
         $this->page_nofoot('edu_bureau');
     }
 
     public function trade_union(){
         $this->breadcrumb(array('name' => '行业联盟'));
-        $this->en_submit_id();
         $this->page_nofoot('trade_union');
         //$this->page_full('trade_union');
     }

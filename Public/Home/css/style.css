@@ -202,6 +202,7 @@
 }
 #body{
     min-height: calc(100vh - 438px);
+    overflow-x: hidden;
 }
 
 

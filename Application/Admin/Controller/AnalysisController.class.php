@@ -3,6 +3,7 @@
 namespace Admin\Controller;
 use Common\Model\BrowserModel;
 use Common\Model\BrowsingHistoryModel;
+use Common\Model\LeavemsgModel;
 
 /**
  * 网站数据分析
@@ -32,6 +33,9 @@ class AnalysisController extends BaseController
 
         $browser_obj = new BrowserModel();
         $data['UV'] = $browser_obj->countByTime($s, $limit);
+
+        $leavemsg_obj = new LeavemsgModel();
+        $data['MV'] = $leavemsg_obj->countByTime($s, $limit);
 
         echo json_encode($data);
     }

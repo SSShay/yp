@@ -85,7 +85,7 @@ class LeavemsgModel extends Model
     }
 
     //添加留言
-    public function addMsg($name,$mobile,$msg)
+    public function addMsg($name,$mobile,$msg,$device_type = 0)
     {
         $ip = $this->get_client_ip();
         if ($ip != self::ip_null) {
@@ -108,6 +108,7 @@ class LeavemsgModel extends Model
         $data['name'] = $name;
         $data['mobile'] = $mobile;
         $data['msg'] = $msg;
+        $data['device_type'] = $device_type;
 
         if ($this->create($data)) {
             $res = $this->add();
@@ -121,7 +122,7 @@ class LeavemsgModel extends Model
     public function selectList($where = array(),$page_index = 0,$page_size = 10,$order = 'status,ctime desc')
     {
         $count = $this->where($where)->count();
-        $list = $this->field('id,name,mobile,msg,ctime,status')->where($where)->order($order)
+        $list = $this->field('id,ip,name,mobile,msg,device_type,ctime,status')->where($where)->order($order)
             ->limit($page_index * $page_size, $page_size)
             ->select();
 
@@ -156,6 +157,37 @@ class LeavemsgModel extends Model
             $res = $this->where($where)->save();
             return !!$res;
         }
+    }
+
+    /**
+     * 统计$limit个每$s秒的记录条数
+     * @param string $endtime
+     * @param int $s 默认为1个小时
+     * @param int $limit 默认为24个小时（一天）
+     * @return array
+     */
+    public function countByTime($s = 3600, $limit = 24, $endtime = '')
+    {
+        if (!$endtime) $endtime = ceil(NOW_TIME / 3600 / 24) * 3600 * 24 - 8 * 3600;
+        $where['time'] = array('gt', $endtime - $limit * $s);
+        $where['status'] = array('neq',9);
+        $res = $this->field("count(*) as n,FLOOR(ctime / $s) as t")->where($where)->group("t")->select();
+
+
+        if (!$res) $list = array();
+        else {
+            foreach ($res as $v) {
+                $list[$v['t']] = $v['n'];
+            }
+        }
+        $data = array();
+        for ($t = $endtime - $s * $limit; $t < $endtime; $t += $s) {
+            $n = $list[ceil($t / $s)];
+            if (!isset($n)) $n = 0;
+            $data[] = array($t * 1000, $n);
+        }
+
+        return $data;
     }
 
 }

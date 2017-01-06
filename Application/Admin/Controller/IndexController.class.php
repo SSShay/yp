@@ -12,6 +12,7 @@ class IndexController extends BaseController
     public function index()
     {
         $this->U_check();
+        $this->controlid = 1;
         $this->user = $this->U_info();
 
         $this->display('index');

@@ -13,7 +13,7 @@
     }
 
     // Toggle Left Menu
-    if(YP.controlid == 1 && YP.actionid == 3){
+    if(YP.controlid == 1){
         $(".control.index").addClass('active');
     }else{
         $(".menu-list.control"+YP.controlid).addClass('nav-active');

@@ -75,18 +75,22 @@
                 borderWidth: 1,
                 borderColor: "#eeeeee"
             },
-            colors: ["#65CEA7", "#424F63"],
+            colors: ["#65CEA7", "#424F63", "#F0AD4E"],
             tooltip: true,
             tooltipOpts: {
                 defaultTheme: false
             },
             xaxis: {
-                mode: "time"
+                mode: "time",
+                timezone: 'browser',
             },
+            yaxes:[{},{
+                position: "right"
+            }],
             yaxis: {
                 min: 0,
-                minTickSize: 1
-            }
+                minTickSize: 1,
+            },
         };
         var plot = $.plot($("#visitors-chart #visitors-container"),
                 [{
@@ -111,11 +115,16 @@
                         [{
                             data: res.PV,
                             label: "页面点击量",
-                            lines: {fill: true},
+                            lines: {fill: true}
                         }, {
                             data: res.UV,
                             label: "独立访客数",
+                            lines: {fill: true}
+                        }, {
+                            data: res.MV,
+                            label: "访客留言数",
                             lines: {fill: true},
+                            yaxis: 2
                         }], plotOpts);
                 $t.addClass('action').siblings().removeClass('action');
             })

@@ -79,6 +79,9 @@
     .navbar-main .navbar-nav>li.active>a {
         color: #fff;
     }
+    .navbar-path.suspend{
+        top: 50px;
+    }
     .navbar-main .item-list{
         position: relative;
         padding: 5px 0;

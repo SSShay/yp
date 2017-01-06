@@ -54,18 +54,18 @@ class BrowsingHistoryModel extends Model
      */
     public function countByTime($s = 3600, $limit = 24, $endtime = '')
     {
-        if (!$endtime) $endtime = ceil(NOW_TIME / 3600 / 24) * 3600 * 24;
+        if (!$endtime) $endtime = ceil(NOW_TIME / 3600 / 24) * 3600 * 24  - 8 * 3600;
         $where['time'] = array('gt', $endtime - $limit * $s);
-        $res = $this->field("count(*) as n,time as t")->where($where)->group("FLOOR(time / $s)")->select();
+        $res = $this->field("count(*) as n,FLOOR(time / $s) as t")->where($where)->group("t")->select();
         if (!$res) $list = array();
         else {
             foreach ($res as $v) {
-                $list[floor($v['t'] / $s)] = $v['n'];
+                $list[$v['t']] = $v['n'];
             }
         }
         $data = array();
         for ($t = $endtime - $s * $limit; $t < $endtime; $t += $s) {
-            $n = $list[floor($t / $s)];
+            $n = $list[ceil($t / $s)];
             if (!isset($n)) $n = 0;
             $data[] = array($t * 1000, $n);
         }
