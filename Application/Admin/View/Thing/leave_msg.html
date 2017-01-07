@@ -205,7 +205,7 @@
         function setinfo(v) {
             $("#name").text(v.name);
             $("#mobile").text(v.mobile);
-            $("#msg").text(v.msg);
+            $("#msg").html(v.msg.replace(/\n/g,'<br>'));
             $("#ctime").text(v.ctime);
             $("#tab2").removeClass('hidden');
             $('#tab2 a').tab('show');

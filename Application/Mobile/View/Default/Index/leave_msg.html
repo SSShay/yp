@@ -44,7 +44,7 @@
             if (tip) return;
             var msg = $.map($("input[name='msg']:checked"), function (t, i) {
                 return $(t).attr('title')
-            }).join('<br>');
+            }).join('\n');
             if (msg) {
                 var _data = data.field || {};
                 _data.msg = msg;
