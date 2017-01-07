@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta content="telephone=no" name="format-detection" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <title><notempty name="title">{$title}<else/>杭州远磐互联科技有限公司</notempty></title>
     <notempty name="keywords"><meta name="Keywords" content="{$keywords}"></notempty>
@@ -14,7 +15,10 @@
     <notempty name="description"><meta name="Description" content="{$description}"></notempty>
 
     <script src="__JS__/jquery-1.10.2.min.js"></script>
-    <eq name='is_mobile' value='true'><script src="__JS__/fastclick.js"></script></eq>
+    <script src="__PLUGIN__/layer/layer.js"></script>
+    <eq name='is_mobile' value='true'>
+        <script src="__JS__/fastclick.js"></script>
+    </eq>
     <script src="__JS__/jquery.lazyload.min.js"></script>
     <script src="__JS__/custom.js"></script>
 
@@ -33,12 +37,12 @@
         //页面常量
         panyard = {
             'indexnav': '{$indexnav}',
-            'u_leave_msg': "{:U('Index/leave_msg')}",
-            'is_mobile': "{$is_mobile}",
+            'u_leave_msg': "<eq name='is_mobile' value='true'>{:U('Mobile/Index/leave_msg')}<else/>{:U('Index/leave_msg')}</eq>",
+            'u_contact_online':'https://ikefu.baidu.com/wise/panyard',
+            'is_mobile': "{$is_mobile}" == '1',
         }
 
         ;(function(w,d){
-            var _hmt = _hmt || [];
 
             /*百度统计js*/
             /*<eq name='is_mobile' value='true'>*/
@@ -68,9 +72,6 @@
             ga('create', 'UA-72376317-2', 'auto');
             ga('send', 'pageview');
 
-            /*CNZZ统计*/
-            var cnzz_protocol = (("https:" == d.location.protocol) ? " https://" : " http://");
-            d.write(unescape("%3Cspan id='cnzz_stat_icon_1258980966'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1258980966' type='text/javascript'%3E%3C/script%3E"));
         })(window,document)
 
     </script>

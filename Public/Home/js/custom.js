@@ -260,13 +260,13 @@
             return data;
         },
         info:function(s) {
-            alert(s)
+            layer.alert(s, {icon: 1})
         },
-        warn:function(s){
-            alert(s)
+        warn:function(s) {
+            layer.alert(s, {icon: 0})
         },
         error:function(s) {
-            alert(s)
+            layer.alert(s, {icon: 2})
         },
         regexs: {
             length: function (v, min, max) {
@@ -530,8 +530,23 @@ $(function() {
         })
     }
 
-    $(".nav-right .leave-msg,.nav-right .contact_us").click(function () {
-        location.href = $(this).data('url');
+    $(".nav-right .contact_online").click(function () {
+        var opts = {
+            type: 2,
+            title: '在线客服',
+            content: panyard.u_contact_online,
+            anim: 2,
+            scrollbar: false
+        }
+        if(panyard.is_mobile){
+            opts.area = ['100%', '0'];
+            var index = layer.open(opts);
+            layer.full(index);
+        }else{
+            opts.offset = 'rb';
+            opts.area = ['320px', '480px'];
+            layer.open(opts);
+        }
     })
 
     $(".lazy").lazyload({effect: "fadeIn"});
@@ -553,25 +568,42 @@ $(function() {
     if ($("#msg-board").length) {
         var fixed_leave_msg = $.fixed_leave_msg();
 
-        $("#msg-board .btn").submit(panyard.u_leave_msg, function () {
-            $("#msg-board .name,#msg-board .mobile,#msg-board .msg").data('placement', is_xs() ? 'bottom' : 'right');
-            return $.check([
-                {'target': '.name', 'rules': $.rules.empty},
-                {'target': '.mobile', 'rules': [$.rules.empty, $.rules.mobile]},
-                {'target': '.msg', 'rules': $.rules.length(null, 200)},
-            ])
-        }, function (res) {
-            if (res.success) {
-                $("#msg-board .name,#msg-board .mobile,#msg-board .msg").val('');
-                $.info('留言成功！');
-                fixed_leave_msg.min();
-            }
-        })
+        if (panyard.is_mobile) {
+            $("#msg-board .btn").click(function () {
+                var index = layer.open({
+                    type: 2,
+                    title: '留言',
+                    content: panyard.u_leave_msg,
+                    area: ['100%', '0'],
+                    scrollbar: false,
+                    anim: 2
+                });
+                layer.full(index);
+                window.close_leave_msg_box = function () {
+                    layer.close(index)
+                }
+            })
+        } else {
+            $("#msg-board .btn").submit(panyard.u_leave_msg, function () {
+                $("#msg-board .name,#msg-board .mobile,#msg-board .msg").data('placement', is_xs() ? 'bottom' : 'right');
+                return $.check([
+                    {'target': '.name', 'rules': $.rules.empty},
+                    {'target': '.mobile', 'rules': [$.rules.empty, $.rules.mobile]},
+                    {'target': '.msg', 'rules': $.rules.length(null, 200)},
+                ])
+            }, function (res) {
+                if (res.success) {
+                    $("#msg-board .name,#msg-board .mobile,#msg-board .msg").val('');
+                    $.info('留言成功！');
+                    fixed_leave_msg.min();
+                }
+            })
+        }
 
         $(window).scroll(function (e) {
             var top = $(window).scrollTop();
             var pos = $(".container-leave-msg").position()
-            if(pos){
+            if (pos) {
                 var h = $(window).height()
                 if (top > pos.top - h) {
                     fixed_leave_msg.min()

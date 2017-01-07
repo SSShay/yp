@@ -1,0 +1,70 @@
+<style>
+    .page-leave_msg .layui-btn{
+        width: 100%;
+    }
+</style>
+<div class="layui-tab-content page-leave_msg">
+
+    <blockquote class="layui-elem-quote">
+        <a>咨询热线：{$kefu_mobile}</a>
+    </blockquote>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required  lay-verify="required" placeholder="请输入您的姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话</label>
+            <div class="layui-input-inline">
+                <input type="text" name="mobile" required lay-verify="required" placeholder="请输入您的联系方式" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">咨询内容</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="msg" title="想详细了解">
+                <input type="checkbox" name="msg" title="请给我寄资料">
+                <input type="checkbox" name="msg" title="我比较感兴趣">
+                <input type="checkbox" name="msg" title="有什么扶持">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-danger layui-btn-big" lay-submit lay-filter="leave_msg">获取资料</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.use('form', function() {
+        var tip;
+        var form = layui.form();
+        form.on('submit(leave_msg)', function (data) {
+            if (tip) return;
+            var msg = $.map($("input[name='msg']:checked"), function (t, i) {
+                return $(t).attr('title')
+            }).join('<br>');
+            if (msg) {
+                var _data = data.field || {};
+                _data.msg = msg;
+                tip = layer.msg('请稍等...', {shade: .38, time: 0});
+                $.post('', _data, function (res) {
+                    if (res.success) {
+                        layer.msg('留言成功！', {shade: .38, icon: 1},function(){
+                            parent.close_leave_msg_box()
+                        });
+                        $("input").val('')
+                    }else{
+                        layer.msg(res.error || '未知错误，请重试！', {icon: 5, anim: 6});
+                    }
+                    layer.close(tip);
+                    tip = null;
+                },'json')
+            } else {
+                layer.msg('请勾选咨询内容', {icon: 5, anim: 6});
+            }
+            return false;
+        });
+    });
+</script>

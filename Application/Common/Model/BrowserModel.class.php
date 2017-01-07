@@ -48,7 +48,7 @@ class BrowserModel extends Model
         return $ip;
     }
 
-    //添加文章
+    //添加浏览记录
     public function addBrowser()
     {
         $ip = $this->get_client_ip();

@@ -109,8 +109,8 @@
         height: 20px;
     }
 
-    .navbar-path.alpha hr, .navbar-path.absolute hr{
-        margin: 0;
+    .navbar-path hr{
+        display: none;
     }
 
     .navbar-path .container{
@@ -136,14 +136,25 @@
         display: none;
     }
     #msg-board img{
-        width: 100px;
-        left: -75px;
+        width: 80px;
+        left: -20px;
     }
     #msg-board.min img{
-        left: -25px;
+        left: -15px;
+    }
+    #msg-board .glyphicon-remove{
+        right: -10px;
     }
     #msg-board .form-group{
-        width: 300px;
+        width: auto;
+        background: none;
+        padding: 10px 0 8px;
+        text-align: center;
+    }
+    #msg-board span{
+        color: #fff;
+        font-weight: bold;
+        margin-right: 10px;
     }
 }
 

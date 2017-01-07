@@ -4,14 +4,13 @@
     <!--<link rel="shortcut icon" href="#" type="image/png">-->
     <link href="__CSS__/style.video.css"  rel="stylesheet" />
     <link href="__CSS__/style.index.css"  rel="stylesheet" />
-    <script src="__PLUGIN__/layer/layer.js"></script>
 
 </head>
 
 <body>
 
 <include file="Default/Layout/navbar" />
-<include file="Default/Layout/rightbar" />
+<include file="Default/Layout/fixedbar" />
 <div class="carousel slide" id="carousel-index" data-interval="2500">
     <ol class="carousel-indicators">
         <volist name="banner" id="v">
@@ -118,7 +117,6 @@
 </div>
 <div id="willesPlay" style="display: none"></div>
 <script src="__JS__/jquery.willesplay.min.js"></script>
-<include file="Default/Layout/script" />
 <script>
     $(function(){
         $("#carousel-index .carousel-indicators li").eq(0).addClass('active');
