@@ -12,10 +12,8 @@
                 min: $t.data('min'),
                 max: $t.data('max'),
                 change: function (v) {
-                    console.log(v);
                 },
                 error: function (errorTxt) {
-                    console.log(errorTxt);
                 }
             }, opts);
 

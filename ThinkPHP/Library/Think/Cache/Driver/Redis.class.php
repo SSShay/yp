@@ -16,30 +16,32 @@ defined('THINK_PATH') or exit();
  * Redis缓存驱动 
  * 要求安装phpredis扩展：https://github.com/nicolasff/phpredis
  */
-class Redis extends Cache {
-	 /**
-	 * 架构函数
+class Redis extends Cache
+{
+    /**
+     * 架构函数
      * @param array $options 缓存参数
      * @access public
      */
-    public function __construct($options=array()) {
-        if ( !extension_loaded('redis') ) {
-            E(L('_NOT_SUPPORT_').':redis');
+    public function __construct($options = array())
+    {
+        if (!extension_loaded('redis')) {
+            E(L('_NOT_SUPPORT_') . ':redis');
         }
-        if(empty($options)) {
-            $options = array (
-                'host'          => C('REDIS_HOST') ? C('REDIS_HOST') : '127.0.0.1',
-                'port'          => C('REDIS_PORT') ? C('REDIS_PORT') : 6379,
-                'timeout'       => C('DATA_CACHE_TIMEOUT') ? C('DATA_CACHE_TIMEOUT') : false,
-                'persistent'    => false,
+        if (empty($options)) {
+            $options = array(
+                'host' => C('REDIS_HOST') ? C('REDIS_HOST') : '127.0.0.1',
+                'port' => C('REDIS_PORT') ? C('REDIS_PORT') : 6379,
+                'timeout' => C('DATA_CACHE_TIMEOUT') ? C('DATA_CACHE_TIMEOUT') : false,
+                'persistent' => false,
             );
         }
-        $this->options =  $options;
-        $this->options['expire'] =  isset($options['expire'])?  $options['expire']  :   C('DATA_CACHE_TIME');
-        $this->options['prefix'] =  isset($options['prefix'])?  $options['prefix']  :   C('DATA_CACHE_PREFIX');        
-        $this->options['length'] =  isset($options['length'])?  $options['length']  :   0;        
+        $this->options = $options;
+        $this->options['expire'] = isset($options['expire']) ? $options['expire'] : C('DATA_CACHE_TIME');
+        $this->options['prefix'] = isset($options['prefix']) ? $options['prefix'] : C('DATA_CACHE_PREFIX');
+        $this->options['length'] = isset($options['length']) ? $options['length'] : 0;
         $func = $options['persistent'] ? 'pconnect' : 'connect';
-        $this->handler  = new \Redis;
+        $this->handler = new \Redis;
         $options['timeout'] === false ?
             $this->handler->$func($options['host'], $options['port']) :
             $this->handler->$func($options['host'], $options['port'], $options['timeout']);
@@ -51,35 +53,37 @@ class Redis extends Cache {
      * @param string $name 缓存变量名
      * @return mixed
      */
-    public function get($name) {
-        N('cache_read',1);
-        $value = $this->handler->get($this->options['prefix'].$name);
-        $jsonData  = json_decode( $value, true );
-        return ($jsonData === NULL) ? $value : $jsonData;	//检测是否为JSON数据 true 返回JSON解析数组, false返回源数据
+    public function get($name)
+    {
+        N('cache_read', 1);
+        $value = $this->handler->get($this->options['prefix'] . $name);
+        $jsonData = json_decode($value, true);
+        return ($jsonData === NULL) ? $value : $jsonData;    //检测是否为JSON数据 true 返回JSON解析数组, false返回源数据
     }
 
     /**
      * 写入缓存
      * @access public
      * @param string $name 缓存变量名
-     * @param mixed $value  存储数据
-     * @param integer $expire  有效时间（秒）
+     * @param mixed $value 存储数据
+     * @param integer $expire 有效时间（秒）
      * @return boolean
      */
-    public function set($name, $value, $expire = null) {
-        N('cache_write',1);
-        if(is_null($expire)) {
-            $expire  =  $this->options['expire'];
+    public function set($name, $value, $expire = null)
+    {
+        N('cache_write', 1);
+        if (is_null($expire)) {
+            $expire = $this->options['expire'];
         }
-        $name   =   $this->options['prefix'].$name;
+        $name = $this->options['prefix'] . $name;
         //对数组/对象数据进行缓存处理，保证数据完整性
-        $value  =  (is_object($value) || is_array($value)) ? json_encode($value) : $value;
-        if(is_int($expire) && $expire) {
+        $value = (is_object($value) || is_array($value)) ? json_encode($value) : $value;
+        if (is_int($expire) && $expire) {
             $result = $this->handler->setex($name, $expire, $value);
-        }else{
+        } else {
             $result = $this->handler->set($name, $value);
         }
-        if($result && $this->options['length']>0) {
+        if ($result && $this->options['length'] > 0) {
             // 记录缓存队列
             $this->queue($name);
         }
@@ -92,8 +96,9 @@ class Redis extends Cache {
      * @param string $name 缓存变量名
      * @return boolean
      */
-    public function rm($name) {
-        return $this->handler->delete($this->options['prefix'].$name);
+    public function rm($name)
+    {
+        return $this->handler->delete($this->options['prefix'] . $name);
     }
 
     /**
@@ -101,8 +106,49 @@ class Redis extends Cache {
      * @access public
      * @return boolean
      */
-    public function clear() {
+    public function clear()
+    {
         return $this->handler->flushDB();
     }
 
+
+
+
+    /******************************************************************************************************************/
+    // Redis 操作 hash 类型
+    /******************************************************************************************************************/
+    //分隔符
+    const separator = '.';           //键和子键的分隔符
+    const hkey_separator = ',';     //子键分隔符
+
+    /**
+     * Redis 操作 hash 类型
+     * @param string $key 格式$key.$hkey
+     * @param string $value 有值则是设置
+     * @return array|bool|int|string|void
+     *
+     * 1.设置值 _hash('a.b','v');
+     * 2.设置多个值 _hash('a',array('b'=>'B','c'=>'C'));
+     *
+     * 3.获取子键值 _hash('a.b');
+     * 4.获取多个值 _hash('a.b,c');
+     * 5.获取整个值 _hash('a');
+     */
+    public function _hash($key, $value = '')
+    {
+        if (strpos($key, self::separator)) list($key, $hkey) = explode(self::separator, $key, 2);
+        else $hkey = '';
+        $key = $this->options['prefix'] . $key;
+        if ($value === '') {
+            if (strpos($key, self::hkey_separator)) {
+                $hkey = explode(self::hkey_separator, $hkey);
+                return $this->handler->hMGet($key, $hkey);
+            }
+            return $hkey ? $this->handler->hGet($key, $hkey) : $this->handler->hGetAll($key);
+        } else if ($value === null) {
+            return $hkey ? $this->handler->hdel($key, $hkey) : $this->handler->delete($key);
+        } else {
+            return $hkey ? $this->handler->hSet($key, $hkey, $value) : $this->handler->hMset($key, $value);
+        }
+    }
 }

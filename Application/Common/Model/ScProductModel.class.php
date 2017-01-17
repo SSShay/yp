@@ -50,20 +50,37 @@ class ScProductModel extends Model
         return $result;
     }
 
-    //
+    const redis_product_list = 'product_list';
+    //产品列表
     public function selectListByHome()
     {
-        $where['display'] = 1;
-        $list = $this->field('id,name,thumb,price')->where($where)->order('sort')->select();
+        $list = S(self::redis_product_list);
+        if (!$list) {
+            $where['display'] = 1;
+            $list = $this->field('id,name,thumb,price')->where($where)->order('sort')->select();
+            S(self::redis_product_list, $list);
+        }
 
         return $list;
     }
 
+    const redis_product_top = 'product_top';
+    //人气推荐5个
     public function selectListTop($limit = 5)
     {
-        $where['display'] = 1;
-        $list = $this->field('id,name,thumb,price')->where($where)->limit($limit)->order('sort')->select();
+        $list = S(self::redis_product_top);
+        if (!$list) {
+            $where['display'] = 1;
+            $list = $this->field('id,name,thumb,price')->where($where)->limit($limit)->order('hot desc')->select();
+            S(self::redis_product_top, $list);
+        }
 
         return $list;
+    }
+
+    public static function clear_redis()
+    {
+        S(self::redis_product_list, null);
+        S(self::redis_product_top, null);
     }
 }

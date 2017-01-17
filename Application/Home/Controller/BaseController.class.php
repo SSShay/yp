@@ -5,6 +5,7 @@ use Common\Model\BrowserModel;
 use Common\Model\BrowsingHistoryModel;
 use Common\Model\MenuModel;
 use Common\Model\SettingModel;
+use Think\Cache\Driver\Redis;
 use Think\Controller;
 
 class BaseController extends Controller
@@ -127,7 +128,9 @@ class BaseController extends Controller
         $bid = $this->bid();
         if (!$bid) {
             $browser_obj = new BrowserModel();
-            $bid = $browser_obj->addBrowser();
+            $ip = $this->get_client_ip();
+            $device_type = $this->is_mobile() ? 1 : 0;
+            $bid = $browser_obj->addBrowser($ip, $device_type);
             if ($bid) $this->bid($bid);
         } else {
             $browser_history_obj = new BrowsingHistoryModel();
@@ -196,5 +199,23 @@ class BaseController extends Controller
 
         $this->ismobile = $mobile_browser > 0;
         return $this->ismobile;
+    }
+
+    private $redis;
+
+    /**
+     * 获取redis对象
+     * @param string $type
+     * @param array $opts
+     * @return Redis
+     */
+    public function redis($type = '', $opts = array())
+    {
+        if (!isset($this->redis)) {
+            $redis = new Redis();
+            $redis->connect($type, $opts);
+            $this->redis = $redis;
+        }
+        return $this->redis;
     }
 }

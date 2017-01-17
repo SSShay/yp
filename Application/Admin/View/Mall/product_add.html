@@ -162,14 +162,14 @@
     KindEditor.ready(function(K) {
         window.editor = K.create('#details', {
             resizeType: 1,
-            uploadJson : "{:U('Mall/product_details_upload')}",
+            uploadJson: "{:U('Mall/product_details_upload')}",
             allowPreviewEmoticons: false,
             allowImageUpload: true,
             items: [
                 'source', '|', 'removeformat', 'undo', 'redo', '|', 'quickformat', 'preview', 'fullscreen', '/',
                 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|',
                 'formatblock', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough', '|',
-                'image', 'multiimage', 'hr', 'link', 'unlink'
+                'image', 'multiimage', 'hr', 'table', 'link', 'unlink'
             ]
         });
     });

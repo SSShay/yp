@@ -209,15 +209,28 @@ class ManageController extends BaseController
         return $type;
     }
 
+    private function clear_redis($type){
+        switch ($type) {
+            case SettingModel::T_contact:
+                S(SettingModel::redis_contact, null);
+                break;
+            case SettingModel::T_flink:
+                S(SettingModel::redis_flink, null);
+                break;
+        }
+    }
+
     // 添加设置
     public function setting_add()
     {
-        $this->check_setting_permissions(I('post.type'));
+        $type = I('post.type');
+        $this->check_setting_permissions($type);
         $setting_obj = new SettingModel();
         $res = $setting_obj->addObj($_POST);
-        if($res){
+        if ($res) {
             $re['success'] = $res;
-        }else{
+            $this->clear_redis($type);
+        } else {
             $re['error'] = $setting_obj->getError();
         }
         echo json_encode($re);
@@ -230,10 +243,11 @@ class ManageController extends BaseController
         $setting_obj = new SettingModel();
         $where['id'] = I('post.id');
         unset($_POST['id']);
-
         $res = $setting_obj->setObj($where, $_POST);
         if($res){
             $re['success'] = $res;
+            $type = I('get.type');
+            $this->clear_redis($type);
         }else{
             $re['error'] = $setting_obj->getError();
         }
@@ -249,6 +263,8 @@ class ManageController extends BaseController
         $res = $setting_obj->deleteObj($where);
         if($res){
             $re['success'] = $res;
+            $type = I('get.type');
+            $this->clear_redis($type);
         }else{
             $re['error'] = $setting_obj->getError();
         }

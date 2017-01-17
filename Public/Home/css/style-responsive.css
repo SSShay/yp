@@ -156,6 +156,10 @@
         font-weight: bold;
         margin-right: 10px;
     }
+    .article-body img,#c-detail-detail img{
+        height: auto;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 640px) {

@@ -17,8 +17,8 @@
             <li data-slide-to="{$key}" data-target="#carousel-index"></li>
         </volist>
     </ol>
+    <img style="width: 100%" src="__IMG__/common/banner.png">
     <div class="carousel-inner">
-        <img style="width: 100%" src="__IMG__/common/banner.png">
         <volist name="banner" id="v">
             <a class="item" <notempty name="v.link">href="{$v.link}" target="_blank"</notempty>>
             <img alt="{$v.imgalt}" src="{$v.imgurl}"/>
@@ -36,7 +36,7 @@
     <div class="row">
         <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/edu_bureau')}">
             <div class="col-cell left-cell">
-                <img class="lazy" data-original="__IMG__/index/entry/1.png">
+                <img src="__IMG__/index/entry/1.png">
             </div>
             <div class="col-cell">
                 <h3>教育局</h3><br>
@@ -45,7 +45,7 @@
         </a>
         <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/agent')}">
             <div class="col-cell left-cell">
-                <img class="lazy" data-original="__IMG__/index/entry/2.png">
+                <img src="__IMG__/index/entry/2.png">
             </div>
             <div class="col-cell">
                 <h3>代理商</h3><br>
@@ -54,7 +54,7 @@
         </a>
         <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/school')}">
             <div class="col-cell left-cell">
-                <img class="lazy" data-original="__IMG__/index/entry/3.png">
+                <img src="__IMG__/index/entry/3.png">
             </div>
             <div class="col-cell">
                 <h3>学校</h3><br>
@@ -63,7 +63,7 @@
         </a>
         <a class="col-lg-3 col-sm-6 col-xs-12 col-table" href="{:U('Index/trade_union')}">
             <div class="col-cell left-cell">
-                <img class="lazy" data-original="__IMG__/index/entry/4.png">
+                <img src="__IMG__/index/entry/4.png">
             </div>
             <div class="col-cell">
                 <h3>行业联盟</h3><br>
@@ -97,9 +97,9 @@
             <h3>宣传视频</h3>
             <a class="video-thumb">
                 <div class="play-box">
-                    <img class="lazy" data-original="__IMG__/common/play_btn.png">
+                    <img src="__IMG__/common/play_btn.png">
                 </div>
-                <img class="lazy" data-original="{$video.thumb}">
+                <img src="{$video.thumb}">
             </a>
         </div>
         <div class="col-md-4 col-sm-12 summary-box">

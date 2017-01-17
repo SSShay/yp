@@ -33,27 +33,33 @@ class AreaModel extends Model
      */
     public function selectArea($topid = '',$level = 1)
     {
-        if (!$topid) {
-            $where['cityid'] = 0;
-            $where['areaid'] = 0;
-            $key = 'proviceid';
-        } else if ($level == 2) {
-            $where['proviceid'] = $topid;
-            $where['cityid'] = array('neq', 0);
-            $where['areaid'] = 0;
-            $key = 'cityid';
-        } else {
-            $where['cityid'] = $topid;
-            $where['areaid'] = array('neq', 0);
-            $key = 'areaid';
-        }
-        $list = $this->field($key . ',name')->where($where)->select();
-        $arr = array();
-        if(!empty($list)){
-            foreach ($list as $v) {
-                $arr[$v[$key]] = $v['name'];
+        $arr = S('area.' . $level . '_' . $topid);
+        if (!$arr) {
+            if (!$topid) {
+                $where['cityid'] = 0;
+                $where['areaid'] = 0;
+                $key = 'proviceid';
+            } else if ($level == 2) {
+                $where['proviceid'] = $topid;
+                $where['cityid'] = array('neq', 0);
+                $where['areaid'] = 0;
+                $key = 'cityid';
+            } else {
+                $where['cityid'] = $topid;
+                $where['areaid'] = array('neq', 0);
+                $key = 'areaid';
             }
+            $list = $this->field($key . ',name')->where($where)->select();
+            $arr = array();
+            if (!empty($list)) {
+                foreach ($list as $v) {
+                    $arr[$v[$key]] = $v['name'];
+                }
+                S('area.' . $level . '_' . $topid, $arr);
+            }
+
         }
+
 
         return $arr;
     }

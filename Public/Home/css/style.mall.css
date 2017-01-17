@@ -187,6 +187,16 @@
 #c-detail-detail h3{
     margin-bottom: 20px;
 }
+#c-detail-detail table{
+    border-style: dashed;
+    border-color: #aaa;
+    max-width: 800px;
+}
+#c-detail-detail table th,#c-detail-detail table td{
+    border-style: dashed;
+    border-color: #aaa;
+    padding: 10px;
+}
 @media (max-width: 992px){
     #c-detail-info .thumb img{
         width: 55px;

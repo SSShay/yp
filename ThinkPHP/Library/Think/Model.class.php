@@ -9,6 +9,8 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 namespace Think;
+use Think\Cache\Driver\Redis;
+
 /**
  * ThinkPHP Model模型类
  * 实现了ORM和ActiveRecords模式
@@ -1972,6 +1974,22 @@ class Model {
     {
         $res = $this->field('1')->where($where)->find();
         return !!$res;
+    }
+
+    /**
+     * 获取redis对象
+     * @param string $type
+     * @param array $opts
+     * @return Redis
+     */
+    public function redis($type = '', $opts = array())
+    {
+        if (!isset($this->redis)) {
+            $redis = new Redis();
+            $redis->connect($type, $opts);
+            $this->redis = $redis;
+        }
+        return $this->redis;
     }
 
 }

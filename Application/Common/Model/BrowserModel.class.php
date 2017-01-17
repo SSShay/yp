@@ -27,32 +27,11 @@ class BrowserModel extends Model
     //业务逻辑
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const ip_null = 'unknown';
-
-    //获取访问者的ip
-    private function get_client_ip()
-    {
-        $ip = getenv("HTTP_CLIENT_IP");
-        if (!$ip || !strcasecmp($ip, self::ip_null)) {
-            $ip = getenv("HTTP_X_FORWARDED_FOR");
-            if (!$ip || !strcasecmp($ip, self::ip_null)) {
-                $ip = getenv("REMOTE_ADDR");
-                if (!$ip || !strcasecmp($ip, self::ip_null)) {
-                    $ip = $_SERVER['REMOTE_ADDR'];
-                    if (!$ip || !strcasecmp($ip, self::ip_null)) {
-                        $ip = '';
-                    }
-                }
-            }
-        }
-        return $ip;
-    }
-
     //添加浏览记录
-    public function addBrowser()
+    public function addBrowser($ip,$device_type)
     {
-        $ip = $this->get_client_ip();
         $data['ip'] = $ip;
+        $data['device_type'] = $device_type;
         $res = $this->addObj($data);
         if ($res) {
             $browsing_history_obj = new BrowsingHistoryModel();

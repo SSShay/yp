@@ -126,6 +126,7 @@ class MallController extends BaseController
 
     const product_page_key = 'product-page-index';
 
+    //商品列表页面
     public function product(){
         $this->U_check_permissions();
 
@@ -135,6 +136,7 @@ class MallController extends BaseController
         $this->display('product');
     }
 
+    //商品列表页面加载
     public function product_list()
     {
         $this->U_check_permissions('product');
@@ -162,6 +164,9 @@ class MallController extends BaseController
         if($res){
             $re['success'] = $res;
             if(isset($oldimg))unlink($oldimg);
+            if(isset($_POST['sort'])){
+                S(ScProductModel::redis_product_list, null);
+            }
         }else{
             $re['error'] = $sc_product_obj->getError();
             if(!$re['error']) $re['error'] = '未知错误，请重试！';
@@ -351,14 +356,17 @@ class MallController extends BaseController
         $sc_product_obj = new ScProductModel();
         $where['id'] = I('post.id');
         $res = $sc_product_obj->deleteObj($where);
-        if($res){
+        if ($res) {
             $re['success'] = $res;
-        }else{
+            S(ScProductModel::redis_product_top, null);
+            S(ScProductModel::redis_product_list, null);
+        } else {
             $re['error'] = $sc_product_obj->getError();
         }
         echo json_encode($re);
     }
 
+    //商品修改页面
     public function product_mod()
     {
         $this->U_check_permissions('product');
@@ -380,6 +388,7 @@ class MallController extends BaseController
         }
     }
 
+    //商品添加页面
     public function product_add()
     {
         $this->U_check_permissions('product');

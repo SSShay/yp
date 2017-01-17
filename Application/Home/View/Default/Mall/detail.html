@@ -17,7 +17,7 @@
             <h4><strong>{$product.name}</strong></h4>
             <h6>{$product.brief}</h6>
             <div class="info">
-                <p>售价<span class="price key">￥{$product.price}</span></p>
+                <p>售价<span class="price key">￥<eq name="product.price" value="0">--<else/>{$product.price}</eq></span></p>
             </div>
             <div class="form-block">
                 <p class="col-table">
@@ -28,7 +28,7 @@
                         <span class="input-group-addon max"></span>
                     </span>
                 </p>
-                <div class="btn btn-buy btn-lg">立即购买</div>
+                <div class="btn btn-buy btn-lg <eq name='product.price' value='0'>disabled</eq>">立即购买</div>
             </div>
         </div>
     </div>

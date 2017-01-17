@@ -68,9 +68,11 @@ a.btn{
 /*-------------------------------
             RESET STYLE
 -------------------------------*/
-.carousel-inner>.item{
-    position: absolute !important;
-    top: 0 !important;
+.carousel-inner{
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    top: 0;
 }
 .carousel-control {
     background: none !important;
