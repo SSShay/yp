@@ -90,7 +90,7 @@ class IndexController extends BaseController
     public function agent()
     {
         $this->breadcrumb(array('name' => '代理商'));
-        if($this->is_mobile()){
+        if($this->is_mobile() && false){
             $this->redirect('Index/agent_m');
         }else{
             $this->page_nofoot('agent');
