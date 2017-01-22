@@ -46,13 +46,18 @@
         $(".container-info .thumb img").each(function (i) {
             var $t = $(this), timer;
             var preview_img = $t.data('img');
-            $t.hover(function () {
-                timer = setTimeout(setimg, 300);
-            }, function () {
-                clearTimeout(timer);
-            })
-            function setimg() {
-                $(".container-info .preview img").attr('src', preview_img)
+
+            if(is_xs()){
+                $t.click(setimg)
+            }else{
+                $t.hover(function () {
+                    timer = setTimeout(setimg, 300);
+                }, function () {
+                    clearTimeout(timer);
+                })
+                function setimg() {
+                    $(".container-info .preview img").attr('src', preview_img)
+                }
             }
 
             i == 0 && setimg();
