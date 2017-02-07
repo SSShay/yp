@@ -78,7 +78,7 @@
         <div class="col-md-4 col-sm-12 news-preview">
             <h3>新闻中心</h3>
             <volist name="news" id="v">
-                <a class="media" href="{:U('News/article')}/id/{$v.id}">
+                <a class="media" href="{:U('News/article',array('id'=>$v['id']))}">
                     <div class="media-left">
                         <empty name="v.thumb">
                             <img class="lazy" data-original="__IMG__/news/thumb.jpg" alt="{$v.alt}">

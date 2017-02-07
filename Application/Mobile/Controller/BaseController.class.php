@@ -46,7 +46,7 @@ class BaseController extends Controller
     }
 
     //用户session id;
-    private function bid($bid = '')
+    protected function bid($bid = '')
     {
         if ($bid) session('bid', $bid);
         else return session('bid');
@@ -58,7 +58,10 @@ class BaseController extends Controller
         $bid = $this->bid();
         if (!$bid) {
             $browser_obj = new BrowserModel();
-            $bid = $browser_obj->addBrowser();
+            $ip = $this->get_client_ip();
+            $device_type = 1;
+            $origin = isset($_GET['origin']) ? $_GET['origin'] : '';
+            $bid = $browser_obj->addBrowser($ip, $device_type, $origin);
             if ($bid) $this->bid($bid);
         } else {
             $browser_history_obj = new BrowsingHistoryModel();

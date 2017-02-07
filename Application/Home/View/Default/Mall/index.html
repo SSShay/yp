@@ -26,7 +26,7 @@
     <div class="row list-row">
         <volist name="product_list" id="v">
             <div class="col-md-3 col-sm-4 col-xs-6 p-item">
-                <a class="product_item" target="_blank" href="{:U('Mall/detail')}/id/{$v.id}">
+                <a class="product_item" target="_blank" href="{:U('Mall/detail',array('id'=>$v['id']))}">
                     <empty name="v.thumb">
                         <img src="__IMG__/mall/thumb.jpg">
                         <else />
@@ -50,7 +50,7 @@
             </div>
             <volist name="product_top" id="v">
                 <div class="col-lg-4 col-xs-6 p-item">
-                    <a class="<if condition='$i lt 5 AND $i neq 2'>padding</if>" target="_blank" href="{:U('Mall/detail')}/id/{$v.id}">
+                    <a class="<if condition='$i lt 5 AND $i neq 2'>padding</if>" target="_blank" href="{:U('Mall/detail',array('id'=>$v['id']))}">
                         <empty name="v.thumb">
                             <img src="__IMG__/mall/thumb.jpg">
                             <else />

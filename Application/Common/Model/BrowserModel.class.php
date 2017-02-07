@@ -28,10 +28,11 @@ class BrowserModel extends Model
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //添加浏览记录
-    public function addBrowser($ip,$device_type)
+    public function addBrowser($ip,$device_type,$origin = '')
     {
         $data['ip'] = $ip;
         $data['device_type'] = $device_type;
+        $data['origin'] = $origin;
         $res = $this->addObj($data);
         if ($res) {
             $browsing_history_obj = new BrowsingHistoryModel();

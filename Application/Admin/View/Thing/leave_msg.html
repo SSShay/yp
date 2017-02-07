@@ -27,6 +27,10 @@
         width: 5em;
         text-align: center;
     }
+    table #col-origin{
+        width: 5em;
+        text-align: center;
+    }
     table #col-time{
         width: 12em;
     }
@@ -83,6 +87,7 @@
                         <th id="col-mobile">联系方式</th>
                         <th id="col-msg">留言内容</th>
                         <th id="col-device">设备</th>
+                        <th id="col-origin">来源</th>
                         <th id="col-time">留言时间</th>
                         <th id="col-status">状态</th>
                         <th id="col-action">操作</th>
@@ -156,19 +161,26 @@
                                 '<tr>',
                                 '<td><input type="checkbox"> ' + v.id + '</td>',
                                 '<td>' + v.name + '</td>',
-                                '<td>' + v.ip + '</td>',
+                                '<td>' + (v.ip || '') + '</td>',
                                 '<td>' + v.mobile + '</td>',
                                 '<td class="text-center">' + (v.msg ? '<a class="read" href="#' + v.id + '">查看详情</a>' : '（空）') + '</td>',
-                                '<td class="text-center">' + (function(d){
+                                '<td class="text-center">' + (function (d) {
                                     switch (d) {
-                                        case '0':return '电脑';break;
-                                        case '1':return '手机';break;
-                                        default:return '未知';break;
+                                        case '0':
+                                            return '电脑';
+                                            break;
+                                        case '1':
+                                            return '手机';
+                                            break;
+                                        default:
+                                            return '未知';
+                                            break;
                                     }
                                 })(v.device_type) + '</td>',
+                                '<td class="text-center">' + (v.origin || '') + '</td>',
                                 '<td class="time">' + v.ctime + '</td>',
                                 v.status == 0 ? '<td class="text-primary">未读</td>' : '<td class="text-muted">已读</td>',
-                                '<td>'+ (v.status == 0 ?'<a class="setread">标为已读</a>':'') +'<a class="del">删除</a></td>',
+                                '<td>' + (v.status == 0 ? '<a class="setread">标为已读</a>' : '') + '<a class="del">删除</a></td>',
                                 '</tr>'
                             ].join(''));
                             var input = $("input", tr);
@@ -193,7 +205,7 @@
                                 delmsg(v.name, v.id)
                             })
                             $("#tbody").append(tr);
-                            if(index == v.id){
+                            if (index == v.id) {
                                 setinfo(v);
                             }
                         });

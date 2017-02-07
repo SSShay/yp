@@ -7,6 +7,8 @@ return array(
     'TMPL_DETECT_THEME'    => false,// 自动侦测模板主题
     'THEME_LIST'            => '',//模板主题列表
 
+    'URL_HTML_SUFFIX'       =>  '',  // URL伪静态后缀设置
+
     'TMPL_PARSE_STRING'     => array(
         '__JS__'  => __ROOT__.'/Public/'.MODULE_NAME.'/js',
         '__CSS__' => __ROOT__.'/Public/'.MODULE_NAME.'/css',

@@ -17,18 +17,20 @@ class IndexController extends BaseController
     public function leave_msg()
     {
         if (IS_POST) {
-            $leave_msg_obj = new LeavemsgModel();
-            $device_type = 1;
-            $res = $leave_msg_obj->addMsg(I('post.name'), I('post.mobile'), I('post.msg'), $device_type);
-            if ($res) {
-                $re['success'] = true;
-            } else {
-                $re['error'] = $leave_msg_obj->getError();
+            $bid = $this->bid();
+            if($bid){
+                $leave_msg_obj = new LeavemsgModel();
+                $res = $leave_msg_obj->addMsg($bid, I('post.name'), I('post.mobile'), I('post.msg'));
+                if ($res) {
+                    $re['success'] = true;
+                } else {
+                    $re['error'] = $leave_msg_obj->getError();
+                }
+                echo json_encode($re);
             }
-            echo json_encode($re);
         } else {
             $setting_obj = new SettingModel();
-            $this->kefu_mobile = $setting_obj->selectVal('kefu-mobile');;
+            $this->kefu_mobile = $setting_obj->selectVal('kefu-mobile');
 
             $this->page_single('leave_msg');
         }

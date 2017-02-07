@@ -66,11 +66,11 @@
                         if (!res.list) return;
                         $(".news-list-body").html('');
                         $.each(res.list, function (i, v) {
-                            var link = "{:U('News/article')}/id/" + v.id;
+                            var link = "{:U('News/article',array('id' => '__ID__'))}".replace('__ID__', v.id);
                             var media = $([
                                 '<div class="media">',
                                 '<a class="media-left" href="' + link + '">',
-                                '<img src="' + (v.thumb || '__IMG__/news/thumb.jpg') + '" alt="'+ v.alt +'">',
+                                '<img src="' + (v.thumb || '__IMG__/news/thumb.jpg') + '" alt="' + v.alt + '">',
                                 '</a>',
                                 '<div class="media-body">',
                                 '<a class="media-heading" href="' + link + '">' + v.title + '</a>',

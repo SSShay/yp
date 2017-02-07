@@ -85,11 +85,11 @@ class LeavemsgModel extends Model
     }
 
     //添加留言
-    public function addMsg($name,$mobile,$msg,$device_type = 0)
+    public function addMsg($bid,$name,$mobile,$msg)
     {
         $ip = $this->get_client_ip();
         if ($ip != self::ip_null) {
-            $where['ip'] = $ip;
+            $where['bid'] = $bid;
             $where['ctime'] = array('gt', time() - 3600 * 24);   //一天以内留言条数
             $n = $this->where($where)->count();
             if ($n >= 3) {
@@ -104,11 +104,10 @@ class LeavemsgModel extends Model
             }
         }
 
-        $data['ip'] = $ip;
+        $data['bid'] = $bid;
         $data['name'] = $name;
         $data['mobile'] = $mobile;
         $data['msg'] = $msg;
-        $data['device_type'] = $device_type;
 
         if ($this->create($data)) {
             $res = $this->add();
@@ -121,19 +120,26 @@ class LeavemsgModel extends Model
     //查询留言列表
     public function selectList($where = array(),$page_index = 0,$page_size = 10,$order = 'status,ctime desc')
     {
+
+        $leavemsg_t = $this->getTableName();
         $count = $this->where($where)->count();
-        $list = $this->field('id,ip,name,mobile,msg,device_type,ctime,status')->where($where)->order($order)
+        $list = $this->field("id,bid,name,mobile,msg,ctime,status")
+            ->where($where)->order($order)
             ->limit($page_index * $page_size, $page_size)
             ->select();
 
         if ($list) {
+            $browser = new BrowserModel();
             foreach ($list as $k => $v) {
                 $list[$k]['ctime'] = date('Y-m-d H:i:s', $v['ctime']);
+                $res = $browser->findObj(array('id' => $v['bid']), 'ip,device_type,origin');
+                $list[$k]['ip'] = $res['ip'];
+                $list[$k]['device_type'] = $res['device_type'];
+                $list[$k]['origin'] = $res['origin'];
             }
         } else {
             $list = array();
         }
-
         $result = array('list' => $list, 'count' => ceil($count / $page_size));
 
         return $result;
