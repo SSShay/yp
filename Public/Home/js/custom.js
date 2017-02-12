@@ -47,196 +47,131 @@
         return t;
     }
 
-    //贝塞尔曲线动画
-    $.cubic_bezier = function(p1x, p1y, p2x, p2y) {
-        var cx = 3.0 * p1x;
-        var bx = 3.0 * (p2x - p1x) - cx;
-        var ax = 1.0 - cx - bx;
-
-        var cy = 3.0 * p1y;
-        var by = 3.0 * (p2y - p1y) - cy;
-        var ay = 1.0 - cy - by;
-
-
-        function sampleCurveX(t)
-        {
-            // `ax t^3 + bx t^2 + cx t' expanded using Horner's rule.
-            return ((ax * t + bx) * t + cx) * t;
-        }
-
-        function sampleCurveDerivativeX(t)
-        {
-            return (3.0 * ax * t + 2.0 * bx) * t + cx;
-        }
-
-        function solveCurveX(x, epsilon) {
-            if(epsilon == null) epsilon = 1;
-            var t0, t1, t2, x2, d2, i;
-            // First try a few iterations of Newton's method -- normally very fast.
-            for (t2 = x, i = 0; i < 8; i++) {
-                x2 = sampleCurveX(t2) - x;
-                if (Math.abs(x2) < epsilon)
-                    return t2;
-                d2 = sampleCurveDerivativeX(t2);
-                if (Math.abs(d2) < 1e-6)
-                    break;
-                t2 = t2 - x2 / d2;
-            }
-            // Fall back to the bisection method for reliability.
-            t0 = 0.0;
-            t1 = 1.0;
-            t2 = x;
-            if (t2 < t0)
-                return t0;
-            if (t2 > t1)
-                return t1;
-            while (t0 < t1) {
-                x2 = sampleCurveX(t2);
-                if (Math.abs(x2 - x) < epsilon)
-                    return t2;
-                if (x > x2)
-                    t0 = t2;
-                else
-                    t1 = t2;
-                t2 = (t1 - t0) * .5 + t0;
-            }
-            // Failure.
-            return t2;
-        }
-
-        this.solve = function (x, epsilon) {
-            var t = solveCurveX(x, epsilon);
-            return ((ay * t + by) * t + cy ) * t
-        }
-
-        return this;
-    }
-
     $.scrollTop = function(t,callback,b_arr) {
         $.scrollTo(0, t, callback, b_arr)
     }
 
     //页面滚动至
-    $.scrollTo = function(top,t,callback,b_arr) {
-        if (t == null) t = 1000;
-        var _top = $(window).scrollTop();
-        var d = top - _top;
-        var timer;
-        if (!b_arr) b_arr = [0.25, 0.1, 0.25, 1.0];//ease
-        var bse = $.cubic_bezier(b_arr[0], b_arr[1], b_arr[2], b_arr[3]);
-        var st = new Date().getTime(), ti, _topi = _top;
+    $.scrollTo = function(top,t,callback,easing) {
 
-        function to() {
-            ti = new Date().getTime() - st;
-            if (ti < t) {
-                var topi = _top + d * bse.solve(ti / t);
-                if (Math.abs(topi - _topi) > 2) {
-                    $(window).scrollTop(topi);
-                    _topi = topi;
-                }
-                timer = animate(to);
-            } else {
-                cancelAnimate(timer);
-                $(window).scrollTop(top);
-                callback && callback()
-            }
-        }
-
-        to();
-    }
+        $('html,body').stop().animate({
+            scrollTop: top
+        }, t, easing, callback);
+    };
 
     //页面块滚动
     $.scrollBlock = function(opt) {
-        "use strict"
-        opt = $.extend({
-            tolerance: 6,       //块滚动容差,防止滚动不精确造成的问题
-            scrolltime: 700,     //块切换时间
-            scrollcubic: null,  //块切换动画贝塞尔曲线
-            blocklist: [],       //块的坐标集合
-            wheelchange: 300,    //块内滚动每次变化
-            wheeltime: 450,      //块内滚动每次时间
-            wheelcubic: null,   //块内滚动动画贝塞尔曲线
-            callback: function(prev,index) {
+        setTimeout(function () {
+            "use strict"
+            opt = $.extend({
+                tolerance: 10,       //块滚动容差,防止滚动不精确造成的问题
+                scrolltime: 700,     //块切换时间
+                scrollcubic: null,  //块切换动画贝塞尔曲线
+                blocklist: [],       //块的坐标集合
+                wheelchange: 300,    //块内滚动每次变化
+                wheeltime: 450,      //块内滚动每次时间
+                callback: function (prev, index) {
 
-            }
-        }, opt || {});
-        var sb_list, scrolling,prev,index,N,lasth;
-
-        window.scrollDisable(function (e) {
-            var deltaY = e.deltaY || -e.wheelDelta;
-            if (!scrolling) {
-                var top = Math.round($(window).scrollTop());
-                var H = $(window).height();
-                if ((deltaY != 0)) {
-                    var n_top, scroll;
-                    var get_top = deltaY > 0 ? function (i, v) {
-                        if (v > top + opt.tolerance) {
-                            n_top = v;
-                            index = i;
-                            var _v = sb_list[i - 1];
-                            if (_v != null) {
-                                if (H < n_top - sb_list[i - 1] && top + H + opt.tolerance < n_top) {
-                                    var tmp = top + opt.wheelchange;
-                                    scroll = tmp + (opt.wheelchange >> 1) + H < n_top ? tmp : n_top - H;
-                                }
-                            }
-                            return false;
-                        } else if (i == N - 1 && lasth > H) {
-                            scroll = top + opt.wheelchange;
-                            return false;
-                        }
-                    } : function (i, v) {
-                        if (v > top - opt.tolerance) {
-                            index = i - 1;
-                            var _v = sb_list[i - 1];
-                            if (_v != null) {
-                                n_top = _v == top ? sb_list[i - 2] : _v;
-                            }
-                            return false;
-                        } else if (i == N - 1 && lasth > H) {
-                            n_top = sb_list[i - 1] || v;
-                            return false;
-                        }
-                    }
-                    $.each(sb_list, get_top);
-
-                    if (scroll) {
-                        scrolling = true;
-                        $.scrollTo(scroll, opt.wheeltime, enable, opt.wheelcubic);
-                    }
-                    else if (n_top != null && n_top != top) {
-                        if (index != null) {
-                            opt.callback && opt.callback(prev, index);
-                            prev = index;
-                        }
-                        scrolling = true;
-                        $.scrollTo(n_top, opt.scrolltime, enable, opt.scrollcubic);
-                    }
-
-                    index = null;
                 }
+            }, opt || {});
+            var sb_list, scrolling, prev, index, N, lasth;
+
+            window.scrollDisable(function (e) {
+                var deltaY = e.deltaY || -e.wheelDelta;
+                if (!scrolling) {
+                    var top = Math.round($(window).scrollTop());
+                    var H = $(window).height();
+                    if ((deltaY != 0)) {
+                        var n_top, scroll;
+                        var get_top = deltaY > 0 ? function (i, v) {
+                            if (v > top + opt.tolerance) {
+                                n_top = v;
+                                index = i;
+                                var _v = sb_list[i - 1];
+                                if (_v != null) {
+                                    if (H < n_top - sb_list[i - 1] && top + H + opt.tolerance < n_top) {
+                                        var tmp = top + opt.wheelchange;
+                                        scroll = tmp + (opt.wheelchange >> 1) + H < n_top ? tmp : n_top - H;
+                                    }
+                                }
+                                return false;
+                            } else if (i == N - 1 && lasth > H) {
+                                scroll = top + opt.wheelchange;
+                                return false;
+                            }
+                        } : function (i, v) {
+                            if (v > top - opt.tolerance) {
+                                index = i - 1;
+                                var _v = sb_list[i - 1];
+                                if (_v != null) {
+                                    n_top = _v == top ? sb_list[i - 2] : _v;
+                                }
+                                return false;
+                            } else if (i == N - 1 && lasth > H) {
+                                n_top = sb_list[i - 1] || v;
+                                return false;
+                            }
+                        };
+                        $.each(sb_list, get_top);
+
+                        if (scroll) {
+                            scrolling = true;
+                            $.scrollTo(scroll, opt.wheeltime, enable);
+                        }
+                        else if (n_top != null && n_top != top) {
+                            if (index != null) {
+                                opt.callback && opt.callback(prev, index);
+                                prev = index;
+                            }
+                            scrolling = true;
+                            $.scrollTo(n_top, opt.scrolltime, enable);
+                        }
+
+                        index = null;
+                    }
+                }
+            });
+
+            function reget() {
+                sb_list = opt.blocklist;
+                var i = 0;
+                $(".scroll-block").each(function () {
+                    var $t = $(this);
+                    i = $t.data('index') || i;
+                    sb_list[i] = Math.round($t.position().top);
+                    i++;
+                });
+                lasth = $(".scroll-block").eq(-1).outerHeight();
+                N = sb_list.length;
+                var Top = Math.round($(window).scrollTop()), flag;
+                $.each(sb_list, function (i, top) {
+                    if (flag == undefined && top >= Top) {
+                        flag = Top;
+                        opt.callback && opt.callback(-1, i);
+                        scrolling = true;
+                        $.scrollTo(top, opt.scrolltime >> 1, enable);
+                    }
+                })
             }
-        });
 
-        function reget() {
-            sb_list = opt.blocklist;
-            var i = 0;
-            $(".scroll-block").each(function () {
-                var $t = $(this);
-                i = $t.data('i') || i;
-                sb_list[i] = Math.round($t.position().top);
-                i++;
-            })
-            lasth = $(".scroll-block").eq(-1).outerHeight();
-            N = sb_list.length
-        }
+            function enable() {
+                scrolling = false;
+            }
 
-        function enable(){
-            scrolling = false;
-        }
+            $(window).resize(reget)
+            reget()
+        }, 800)
+    };
 
-        $(window).resize(reget)
-        reget()
+    $.fn.anim_show = function(callback) {
+        return this.each(function (i) {
+            var that = $(this).addClass('anim-show');
+            var delay = that.data('delay') || 0;
+            setTimeout(function () {
+                that.addClass('animate');
+                callback && callback.call(that, i, that);
+            }, delay);
+        })
     }
 
 
@@ -446,7 +381,8 @@ $(function() {
     $(".navbar-nav>li", nav_main).each(function () {
         var $t = $(this);
         var list = $t.children('.item-list');
-        if ($t.children('a').text() == panyard.indexnav) $t.addClass('active');
+        var title = $t.children('a');
+        if (title.text() == panyard.indexnav) $t.addClass('active');
         $t.on({
             'mouseenter': function () {
                 if (!is_xs()) {
@@ -467,18 +403,15 @@ $(function() {
                     });
                 }
             }
-        })
+        });
+
         var list_items = list.children();
         if (list_items.length > 0) {
-            var n = list_items.length >> 1;
-            list.show()
-            var item = list_items.eq(n);
-            var l = item.position().left;
-            if ((list_items.length & 1) == 0) l -= 50;
-            else l += item.width() / 2 - 17;
-            list.css({'display': '', 'left': $t.position().left - l});
+            list.show();
+            var left = $t.position().left + title.outerWidth() / 2 - list.outerWidth() / 2;
+            list.css({'display': '', 'left': left});
         }
-    })
+    });
 
     nav_main.on({
         'mouseleave': function () {

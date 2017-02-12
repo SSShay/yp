@@ -1,178 +1,107 @@
 <style>
     .container-1{
-
+        height: 500px;
     }
-    .container-1 .container{
-        position: relative;
-        padding: 150px 0 100px;
+    .container-2 h3{
+        color: #0586ff;
+        margin-top: 100px;
+        margin-bottom: 20px;
     }
-    .container-1 h3,.container-1 h5,.container-1 h4,.container-1 p{
-        color: #fff;
+    .container-2 p{
+        color: #666;
     }
-    .container-1 h3{
-        text-align: center;
-        margin-bottom: 30px;
-        line-height: 1.6;
+    .container-2 .multiple h3{
+        margin-top: 20px;
     }
-    .container-1 h5{
-        text-align: center;
-        max-width: 600px;
-        margin: 0 auto 60px;
-        line-height: 1.6;
+    .container-2 .multiple p{
+        margin-bottom: 35px;
     }
-    .container-1 h4{
-        display: inline-block;
-        border-radius: 5px;
-        padding: 8px 10px;
-        min-width: 135px;
-        text-align: center;
+    .container-2 img{
+        max-width: 100%;
     }
-    .container-1 .bg1{
-        background-color: #26ad60;
+    .container-2{
+        padding: 50px 0;
     }
-    .container-1 .bg2{
-        background-color: #f7b832;
+    .container-2 h3.mtop180{
+        margin-top: 180px;
     }
-    .container-1 .bg3{
-        background-color: #ede449;
-    }
-    .container-1 .bg4{
-        background-color: #495c8a;
-    }
-    .container-1 .bg5{
-        background-color: #2bcfd4;
-    }
-    .container-1 .col-table{
-        margin: 0 auto;
-    }
-    .container-1 .row1{
-        height: 180px;
-    }
-    .container-1 .row2{
-        height: 155px;
-    }
-    .container-1 .row3{
-        margin: 60px auto 0;
-        text-align: center;
-    }
-    .container-1 .col-cell{
-        width: 300px;
-    }
-    .container-1 .center-img{
-        position: relative;
-        width: 400px;
-    }
-    .container-1 img{
-        left: 10%;
-        width: 80%;
-        position: absolute;
-        bottom: 0;
+    .container-2.deep{
+        background-color: #f9f9f9;
     }
 
-    @media screen and (max-width: 991px){
-        .container-1 .row2{
-            height: 120px;
+    @media screen and (max-width: 970px){
+        .container-1{
+            height: 300px;
         }
-        .container-1 img{
-            bottom: 30px;
+        .container-2 h2{
+            font-size: 24px;
         }
     }
-    @media screen and (max-width: 768px){
-        .container-1 .container {
-            padding: 60px 15px 100px;
+
+    @media screen and (max-width: 640px){
+
+        .container-1{
+            height: 200px;
         }
-        .container-1 .col-table{
-            display: block;
-            position: relative;
-            width: 100%;
-        }
-        .container-1 .row1,.container-1 .row2{
-            height: auto;
-        }
-        .container-1 .col-cell{
-            text-align: left;
-            display: block;
-            width: auto;
-            margin-bottom: 20px;
-        }
-        .container-1 .center-img{
-            display: none;
-        }
-        .container-1 .row3{
-            margin: 0;
+    }
+
+    @media screen and (max-width: 480px){
+
+        .container-1{
+            height: 180px;
         }
     }
 </style>
-
-<div class="container-1 lazy bg-cover" data-original="__IMG__/product/axx/bg.jpg">
+<link href="__CSS__/animate.css" rel="stylesheet">
+<div class="container-1 lazy bg-cover" data-original="__IMG__/product/axx/1.jpg"></div>
+<div id="block1" class="container-2 deep scroll-block" data-index="1">
     <div class="container">
-
-        <h3>一个能打电话、能定位的学生证！</h3>
-        <h5>安心星是为智慧安全校园需求而设计的智能电子学生证。<br>
-            亲情双向通话，沟通无限；一键紧急求助，危险及时告知；无障碍出行通知，掌握孩子到校、离校情况；室内外精准定位，实时查找孩子去向；校园一卡通消费管理，了解孩子消费习惯。
-        </h5>
-        <div class="col-table row1">
-            <div class="col-cell text-right">
-                <h4 class="bg1">四重精准定位</h4>
-                <p>北斗/GPS/基站/WI-FI，四重精准定位，一键掌握孩子在哪，更好保障孩子安全</p>
-            </div>
-            <div class="col-cell center-img">
-
-            </div>
-            <div class="col-cell">
-                <h4 class="bg2">亲情通话功能</h4>
-                <p>设置3个亲情键快速拨号，实现双向通话，不管孩子在哪，一个电话就能找到</p>
-            </div>
+        <div class="col-md-6"><img class="anim-item anim-top" data-delay="500" src="__IMG__/product/axx/2_1.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5 multiple">
+            <h3 class="anim-item anim-left" data-delay="1000">精准定位功能</h3>
+            <p class="anim-item anim-left" data-delay="1111">北斗/GPS/基站/WIFI，四重精准定位，一键掌握孩子在哪，更好保障孩子安全</p>
+            <h3 class="anim-item anim-left" data-delay="1333">亲情通话功能</h3>
+            <p class="anim-item anim-left" data-delay="1444">可设置3个亲情号码，实现双向通话，随时与孩子取得沟通联系</p>
+            <h3 class="anim-item anim-left" data-delay="1666">紧急呼救功能</h3>
+            <p class="anim-item anim-left" data-delay="1777">可设置1个SOS紧急呼救号码，孩子遇到危险，一键紧急求救</p>
+            <h3 class="anim-item anim-left" data-delay="1999">无障碍考勤功能</h3>
+            <p class="anim-item anim-left" data-delay="2000">2.4G远距离刷卡考勤，掌握孩子到校、离校情况</p>
         </div>
-        <div class="col-table row2">
-            <div class="col-cell text-right">
-                <h4 class="bg3">紧急呼救功能</h4>
-                <p>设置1个SOS紧急呼叫键，孩子遇到危险，一键紧急求救</p>
-            </div>
-            <div class="col-cell center-img">
-                <img class="lazy" data-original="__IMG__/product/axx/1.png">
-            </div>
-            <div class="col-cell">
-                <h4 class="bg4">无障碍考勤功能</h4>
-                <p>2.4G远距离刷卡考勤，掌握孩子到校、离校情况</p>
-            </div>
+    </div>
+</div>
+<div id="block2" class="container-2 scroll-block">
+    <div class="container">
+        <div class="col-md-6">
+            <h3 class="anim-item anim-right mtop180" data-delay="400">为孩子的安全而生</h3>
+            <p class="anim-item anim-right" data-delay="600">亲情双向通话，沟通无限；一键紧急求助，危险及时告知；无<br>障碍出行通知，掌握孩子到校、离校情况；室内外精准定位，<br>实时查找孩子去向；校园一卡通消费管理，了解孩子消费习惯。</p>
         </div>
-        <div class="col-table row3">
-            <div class="col-cell">
-                <h4 class="bg5">更多功能</h4>
-                <p>一卡通、白名单通话、超长待机、防尘防雨、上课隐身、远程聆听、语音报时、语音播报短信</p>
-            </div>
+        <div class="col-md-6"><img class="anim-item anim-bottom" data-delay="500" src="__IMG__/product/axx/2_2.jpg"/></div>
+    </div>
+</div>
+<div id="block3" class="container-2 deep scroll-block">
+    <div class="container">
+        <div class="col-md-6"><img class="anim-item anim-right" src="__IMG__/product/axx/2_3.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h3 class="anim-item anim-left">更多功能</h3>
+            <p class="anim-item anim-left">一卡通功能、白名单通话功能、超长待机功能、防尘防雨功能、上课隐身功能、<br>远程聆听功能、语音报时功能、语音播报短信功能.</p>
         </div>
     </div>
 </div>
 
-<div class="container-leave-msg scroll-block" data-i="1">
-    <div class="container">
-        <h4>
-            “微家校”利用互联网技术、大数据应用技术，以平台为基础，立足于为教育主管部门、学校提供持续性的专业服务。<br>
-            感谢您在教育事业上的坚持，希望我们一起努力，携手共进，谢谢！<br>
-            <div class="text-right">——微家校 邱万钧</div>
-        </h4>
-        <div class="form-horizontal" role="form">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon">姓名：</div>
-                    <input id="name" class="form-control" type="text" data-name="您的称呼" placeholder="请输入您的姓名">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-addon">电话：</div>
-                    <input id="mobile" class="form-control" type="text" data-name="您的联系方式" placeholder="请输入您的电话">
-                </div>
-                <div class="input-group">
-                    <textarea id="msg" class="form-control" rows="5" placeholder="留言"></textarea>
-                </div>
-            </div>
-        </div>
-        <h6 class="text-danger">我们郑重承诺将尊重您的隐私，并承诺为您保密！</h6>
-        <button class="btn" type="button">提交留言</button>
-    </div>
-</div>
 <script>
     $(".navbar-path").addClass('absolute deep');
-    !is_xs() && $.scrollBlock({blocklist:[0]});
+    $(function() {
+        !is_xs() && $.scrollBlock({
+            'blocklist': [0],
+            'callback': function (p, i) {
+                if (i > 0 && i < 4) {
+                    $("#block" + i + " .anim-item").anim_show(function () {
+                        this.removeClass("anim-item");
+                    });
+                }
+            }
+        });
+    })
 </script>

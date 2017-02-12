@@ -1,163 +1,97 @@
 <style>
-    .banner{
-        background-color: #d5d7d4;
+    .container-1{
+        height: 500px;
     }
-    .scroll-block h2{
-        color: #002f7b;
-        margin-top: 45px;
+    .container-2 h2{
+        color: #0586ff;
+        margin-top: 100px;
         margin-bottom: 30px;
     }
-    .scroll-block p{
-        font-size: 16px;
-        line-height: 1.5;
+    .container-2 p{
+        color: #666;
     }
-    .scroll-block img{
+    .container-2 img{
         max-width: 100%;
-        pointer-events: none;
     }
-    .scroll-block .col-sm-table{
-        min-height: 100vh;
-    }
-    .right h1,.right h2,.right h3,.right h4,.right h5,.right h6,.right p,.right a{
-        margin-left: -40px;
-    }
-    .left h1,.left h2,.left h3,.left h4,.left h5,.left h6,.left p,.left a{
-        margin-right: -40px;
-    }
-    .block-jump{
-        font-size: 20px;
-        font-weight: bold;
-        margin: 30px 0;
+    .container-2{
+        padding: 50px 0;
     }
 
-    .block-jump.offset-l{
-        margin-left: 38%;
+    .container-2 h2.mtop40{
+        margin-top: 40px;
+    }
+    .container-2.deep{
+        background-color: #f9f9f9;
     }
 
-    .container-1{
-        background-color: #fdf7f1;
-    }
-    .container-1 span{
-        display: inline-block;
-    }
-    .container-3{
-        background-color: #e0ebf8;
-    }
-    .container-4{
-        padding-top: 30px;
-        background-color: #000;
-        color: #fff;
-    }
-    .container-4 h2{
-        color: #fff;
-    }
-    .container-4 .container{
-        position: relative;
-    }
-    .container-4 .underline{
-        margin-bottom: 200px;
-    }
-    .container-4 img{
-        position: absolute;
-        left: 0;
-        bottom: 0;
+    .read-more{
+        color: #ffa256;
+        cursor: pointer;
+        margin-top: 40px;
+        margin-bottom: 50px;
     }
 
-    @media screen and (max-width: 768px) {
-        .container-4{
-            padding-top: 0;
+    @media screen and (max-width: 970px){
+        .container-1{
+            height: 300px;
         }
-        .scroll-block p{
-            font-size: 14px;
+        .container-2 h2{
+            font-size: 24px;
         }
-        .scroll-block .col-sm-table{
-            min-height: 0;
-            padding: 50px 0 30px;
-        }
-        .block-jump {
-            font-size: 16px;
-        }
-        .half-h{
-            overflow: hidden;
+    }
+
+    @media screen and (max-width: 640px){
+
+        .container-1{
             height: 200px;
-            height: 33vh;
         }
-        .right h1,.right h2,.right h3,.right h4,.right h5,.right h6,.right p,.right a{
-            margin-left: 0;
-        }
-        .left h1,.left h2,.left h3,.left h4,.left h5,.left h6,.left p,.left a{
-            margin-right: 0;
-        }
-        .block-jump.offset-l{
-            margin-left: 0;
+    }
+
+    @media screen and (max-width: 480px){
+
+        .container-1{
+            height: 180px;
         }
     }
 </style>
-<div class="banner text-center lazy bg-cover" data-original="__IMG__/product/wjx/banner.jpg">
+
+<div class="container-1 lazy bg-cover" data-original="__IMG__/product/wjx/1.jpg"></div>
+<div class="container-2 deep">
     <div class="container">
-    </div>
-</div>
-<div class="text-center container-1 scroll-block" data-i="1">
-    <div class="container">
-        <div class="col-sm-table">
-            <div class="col-sm-6 half-h col-sm-cell">
-                <img class="lazy" data-original="__IMG__/product/wjx/1.png">
-            </div>
-            <div class="col-sm-6 right col-cell underline">
-                <h2>家校互通功能</h2>
-                <p>微家校APP内置家校互通功能：<br>
-                    <span class="txt-blue">通讯录 家庭作业 通知公告<br>学生点评 学生成绩 班级课程</span>
-                    <br>家长与老师之间可以实现在线交流互动，对于孩子的情况进行及时的沟通，弥补孩子在生活以及学校中的不足，共同帮助孩子健康成长。
-                </p>
-                <a class="block-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
-            </div>
+        <div class="col-md-6"><img src="__IMG__/product/wjx/2_1.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>家校互通功能</h2>
+            <p>内置“家庭作业”、“通知公告”、“学生成绩”、“学生点评”<br>等功能，实现家长与老师的在线互动交流，帮助孩子健康成长。</p>
         </div>
     </div>
 </div>
-<div class="text-center container-2 scroll-block">
-    <div class="container col-sm-table">
-        <div class="col-sm-cell">
-            <div class="col-xs-12 underline">
-                <h2>学生考勤功能</h2>
-                <p>微家校APP通过定位功能以及考勤系统实现了学生考勤功能。<br>
-                    家长通过学生考勤功能及时知晓孩子是否在校安全上课，老师通过学生<br>考勤功能能够及时知晓学生是否安全到校。</p>
-                <a class="block-jump offset-l" href="{:U('Index/leave_msg')}">进一步了解</a>
-            </div>
-            <div class="col-xs-12">
-                <img class="lazy" data-original="__IMG__/product/wjx/2.png">
-            </div>
+<div class="container-2">
+    <div class="container">
+        <div class="col-md-6">
+            <h2>学生考勤功能</h2>
+            <p>家长通过学生考勤功能够及时了解孩子是否安全到校、离校，<br>让家长放心，老师省心。</p>
+        </div>
+        <div class="col-md-6"><img src="__IMG__/product/wjx/2_2.jpg"/></div>
+    </div>
+</div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/wjx/2_3.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>安全守护功能</h2>
+            <p>家长通过安全守护功能能够实时精准查看孩子的位置，<br>一键掌握孩子在哪，更好保障孩子的安全。</p>
+            <h2 class="mtop40">更多功能</h2>
+            <p>OA审批、学校微观网、学生成绩、作业信息、班级课程、<br>功能视频、家长帮等众多功能。</p>
+            <h1 class="read-more">进一步了解</h1>
         </div>
     </div>
 </div>
 
-<div class="text-center container-3 scroll-block">
-    <div class="container col-sm-table">
-        <div class="col-sm-cell">
-            <div class="col-xs-12">
-                <img class="lazy" data-original="__IMG__/product/wjx/3.png">
-            </div>
-            <div class="col-xs-12 underline">
-                <h2>安全守护功能</h2>
-                <p>微家校通过与电子学生证的联动实现了安全守护的功能。<br>
-                    家长通过安全守护功能能够实时精准查看孩子的位置，<br>
-                    一键掌握孩子在哪，更好保障孩子的安全。</p>
-                <a class="block-jump" href="{:U('Index/leave_msg')}">进一步了解</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="text-center container-4 scroll-block">
-    <div class="container col-sm-table">
-        <div class="col-xs-12 underline">
-            <h2>更多功能</h2>
-            <p>微家校APP还具有<br>OA审批、学校微观网、学生成绩、作业信息、班级课程、功能视频、家长帮<br>等众多功能。</p>
-            <a class="block-jump offset-l" href="{:U('Index/leave_msg')}">进一步了解</a>
-        </div>
-        <img class="lazy" data-original="__IMG__/product/wjx/4.jpg">
-    </div>
-</div>
 <script>
-    $(".navbar-path").addClass('absolute alpha');
-    !is_xs() && $.scrollBlock({blocklist:[0]});
+    $(".navbar-path").addClass('absolute');
+    $(".read-more").click(function(){
+        location.href = "{:U('Index/leave_msg')}";
+    })
 </script>

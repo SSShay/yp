@@ -59,17 +59,19 @@
     padding-top: 6px;
 }
 .navbar-main .item-list{
+    text-align: center;
     display: none;
     list-style: none;
     position: absolute;
     padding: 20px 0;
     right: 0;
     width: 100%;
+    max-width: 500px;
 }
 .navbar-main .item-list>li{
-    float: left;
     padding: 10px;
     margin: 0 25px;
+    display: inline-block;
 }
 .navbar-main .item-list>li>a{
     /*font-family: '宋体', sans-serif;*/

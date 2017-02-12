@@ -1,0 +1,99 @@
+<style>
+    .container-1{
+        height: 500px;
+    }
+    .container-2 h2{
+        color: #0586ff;
+        margin-top: 100px;
+        margin-bottom: 35px;
+    }
+    .container-2 p{
+        color: #666;
+    }
+    .container-2 img{
+        max-width: 100%;
+    }
+    .container-2{
+        padding: 50px 0;
+    }
+    .container-2.deep{
+        background-color: #f9f9f9;
+    }
+
+    @media screen and (max-width: 970px){
+        .container-1{
+            height: 300px;
+        }
+        .container-2 h2{
+            font-size: 24px;
+        }
+    }
+
+    @media screen and (max-width: 640px){
+
+        .container-1{
+            height: 200px;
+        }
+    }
+
+    @media screen and (max-width: 480px){
+
+        .container-1{
+            height: 180px;
+        }
+    }
+</style>
+
+<div class="container-1 lazy bg-cover" data-original="__IMG__/product/video_sys/1.jpg"></div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/video_sys/2_1.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>远程教学应用</h2>
+            <p>课堂直播、课后点播、远程互动，随时随地，想学就学</p>
+        </div>
+    </div>
+</div>
+<div class="container-2">
+    <div class="container">
+        <div class="col-md-6">
+            <h2>教师跟踪识别</h2>
+            <p>自动跟踪拍摄，你在哪里，镜头就在哪里</p>
+        </div>
+        <div class="col-md-6"><img src="__IMG__/product/video_sys/2_2.jpg"/></div>
+    </div>
+</div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/video_sys/2_3.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>学生智能定位</h2>
+            <p>人脸识别技术，捕捉学生发言的精彩画面</p>
+        </div>
+    </div>
+</div>
+<div class="container-2">
+    <div class="container">
+        <div class="col-md-6">
+            <h2>优课共建共享</h2>
+            <p>一师一优课，一课一名师，名师优课资源共享</p>
+        </div>
+        <div class="col-md-6"><img src="__IMG__/product/video_sys/2_4.jpg"/></div>
+    </div>
+</div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/video_sys/2_5.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>教学教研活动</h2>
+            <p>还原教学过程，用技术改变教学</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".navbar-path").addClass('absolute deep');
+</script>

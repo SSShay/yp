@@ -1,0 +1,80 @@
+<style>
+    .container-1{
+        height: 500px;
+    }
+    .container-2 h2{
+        color: #0586ff;
+        margin-top: 100px;
+        margin-bottom: 35px;
+    }
+    .container-2 p{
+        color: #666;
+    }
+    .container-2 img{
+        max-width: 100%;
+    }
+    .container-2{
+        padding: 50px 0;
+    }
+    .container-2.deep{
+        background-color: #f9f9f9;
+    }
+
+    @media screen and (max-width: 970px){
+        .container-1{
+            height: 300px;
+        }
+        .container-2 h2{
+            font-size: 24px;
+        }
+    }
+
+    @media screen and (max-width: 640px){
+
+        .container-1{
+            height: 200px;
+        }
+    }
+
+    @media screen and (max-width: 480px){
+
+        .container-1{
+            height: 180px;
+        }
+    }
+</style>
+
+<div class="container-1 lazy bg-cover" data-original="__IMG__/product/campus_card/1.jpg"></div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/campus_card/2_1.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>校园消费管理系统</h2>
+            <p>在学校还用现金消费？太LOW了！<br>一卡在手，刷遍校园所有消费场所。</p>
+        </div>
+    </div>
+</div>
+<div class="container-2">
+    <div class="container">
+        <div class="col-md-6">
+            <h2>教师跟踪识别</h2>
+            <p>陌生人闯入怎么办？我的地盘我做主！<br>消防联动、智能报警、加密电锁，禁止<br>外来人员闯入，提升安全管理效能。</p>
+        </div>
+        <div class="col-md-6"><img src="__IMG__/product/campus_card/2_2.jpg"/></div>
+    </div>
+</div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/campus_card/2_3.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>校园考勤管理系统</h2>
+            <p>签字？点名？数人头？效率太低了！<br>一卡一身份，智能考勤签到，到校情况，一目了然</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".navbar-path").addClass('absolute deep');
+</script>

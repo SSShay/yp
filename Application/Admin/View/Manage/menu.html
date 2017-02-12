@@ -90,12 +90,12 @@
             'sort_change': change
         });
 
-        var menu_tmp,iserror,add_tmp;
+        var menu_tmp, iserror, add_tmp;
 
         $("#name").change(function () {
             if (menu_tmp) {
                 $(this).check({
-                    rules: [$.rules.empty, $.rules.length(2, 6)],
+                    rules: [$.rules.empty, $.rules.length(2, 8)],
                     placement: 'top',
                 }, function (res) {
                     if (res !== false) {
@@ -107,7 +107,7 @@
         })
 
         $("#link").change(function () {
-            if(menu_tmp) {
+            if (menu_tmp) {
                 menu_tmp.data('url', $(this).val());
                 change()
             }
@@ -131,9 +131,9 @@
         }
 
         $(".save-mod").submit("{:U('Manage/menu_mod')}", function () {
-            return {'change':menu_edit.get_change()};
-        }, function (res,data) {
-            if(res.error) return;
+            return {'change': menu_edit.get_change()};
+        }, function (res, data) {
+            if (res.error) return;
             if (!res.fail) {
                 $("#msg").removeClass('hidden alert-danger').addClass('alert-success')
                         .children('p').html("保存并发布成功，快去<a target='_blank' href='{:U('Home/Index/index')}' class='alert-link'>官网首页</a>查看吧");
@@ -146,24 +146,24 @@
             }
         })
 
-        window.onbeforeunload = function() {
-            if(!$("#change-submit").hasClass('hidden')) {
+        window.onbeforeunload = function () {
+            if (!$("#change-submit").hasClass('hidden')) {
                 return "由于你修改了菜单的标题、链接或者是排序，所以关闭页面之前请点击按钮“保存并发布”";
             }
         }
 
         $("#menu-add").submit("{:U('Manage/menu_add')}", function () {
             var data = $.check([
-                {'target': '#name', 'rules': [$.rules.empty, $.rules.length(2, 6)]},
+                {'target': '#name', 'rules': [$.rules.empty, $.rules.length(2, 8)]},
             ]);
-            if(data) {
+            if (data) {
                 data.link = $("#link").val();
                 data.sort = add_tmp.index() + 1;
                 data.topid = add_tmp.hasClass('menu') ? 0 : add_tmp.parent().parent().data('id');
                 data.sitemap = $(switchery.element).prop('checked') ? 1 : 0;
             }
             return data;
-        }, function (res,data) {
+        }, function (res, data) {
             if (res && res.id) {
                 data.id = res.id;
                 if (data.topid) menu_edit.create_item(data)
@@ -201,20 +201,20 @@
         }
 
         function form_add(t, btn) {
-            if(iserror) {
+            if (iserror) {
                 $("#name,#link").popover('destroy');
                 if (menu_tmp)menu_tmp.wrong('菜单信息验证没有通过！', 'top', 3);
                 iserror = false;
             }
 
-            if($(".form_panel").hasClass('hidden'))$(".form_panel").removeClass('hidden');
-
+            if ($(".form_panel").hasClass('hidden')){
+                $(".form_panel").removeClass('hidden');
+            }
+            switchery.setPosition(false);
             $("#form_title").text("菜单添加 " + t);
             $("#name").val('').focus();
             $("#link").val('');
-            if (obj.data('sitemap') != switchery.isChecked()) {
-                switchery.setPosition(true)
-            }
+
             $("#menu-add").removeClass('hidden');
             $("#menu-del").addClass('hidden');
             setTimeout(function () {

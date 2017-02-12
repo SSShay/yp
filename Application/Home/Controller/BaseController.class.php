@@ -40,6 +40,7 @@ class BaseController extends Controller
     protected function _before_display()
     {
         $this->submit_id = 'pybutton1';
+        $this->cdn_time_flag = '20170212';
 
         //菜单
         $menu_list = session('menu');

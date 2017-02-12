@@ -1,0 +1,99 @@
+<style>
+    .container-1{
+        height: 500px;
+    }
+    .container-2 h2{
+        color: #0586ff;
+        margin-top: 100px;
+        margin-bottom: 35px;
+    }
+    .container-2 p{
+        color: #666;
+    }
+    .container-2 img{
+        max-width: 100%;
+    }
+    .container-2{
+        padding: 50px 0;
+    }
+    .container-2.deep{
+        background-color: #f9f9f9;
+    }
+
+    @media screen and (max-width: 970px){
+        .container-1{
+            height: 300px;
+        }
+        .container-2 h2{
+            font-size: 24px;
+        }
+    }
+
+    @media screen and (max-width: 640px){
+
+        .container-1{
+            height: 200px;
+        }
+    }
+
+    @media screen and (max-width: 480px){
+
+        .container-1{
+            height: 180px;
+        }
+    }
+</style>
+
+<div class="container-1 lazy bg-cover" data-original="__IMG__/product/datika/1.jpg"></div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/datika/2_1.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>智能备课组卷</h2>
+            <p>一千多种教材与配套资源，备课、组卷一键生成</p>
+        </div>
+    </div>
+</div>
+<div class="container-2">
+    <div class="container">
+        <div class="col-md-6">
+            <h2>教学互动答题</h2>
+            <p>趣味抢答、随机抽答、随堂检测，巩固课堂所学知识点</p>
+        </div>
+        <div class="col-md-6"><img src="__IMG__/product/datika/2_2.jpg"/></div>
+    </div>
+</div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/datika/2_3.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>智能学情分析</h2>
+            <p>大数据学情分析，学习情况一目了然</p>
+        </div>
+    </div>
+</div>
+<div class="container-2">
+    <div class="container">
+        <div class="col-md-6">
+            <h2>个性培优提分</h2>
+            <p>自适应学习系统，单科提高5分以上</p>
+        </div>
+        <div class="col-md-6"><img src="__IMG__/product/datika/2_4.jpg"/></div>
+    </div>
+</div>
+<div class="container-2 deep">
+    <div class="container">
+        <div class="col-md-6"><img src="__IMG__/product/datika/2_5.jpg"/></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>教学评估督导</h2>
+            <p>还原教学过程，评估教学效果</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".navbar-path").addClass('absolute deep');
+</script>
