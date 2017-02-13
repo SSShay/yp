@@ -71,5 +71,7 @@
 @media screen and (max-width: 768px){
     .anim-item{
         opacity: 1 !important;
+        -webkit-transform: translateY(100px);
+        transform: translateY(100px);
     }
 }

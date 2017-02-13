@@ -160,7 +160,7 @@
 
             $(window).resize(reget)
             reget()
-        }, 800)
+        }, 300)
     };
 
     $.fn.anim_show = function(callback) {

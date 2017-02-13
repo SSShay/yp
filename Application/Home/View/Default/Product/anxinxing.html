@@ -2,31 +2,41 @@
     .container-1{
         height: 500px;
     }
-    .container-2 h3{
+    .container-2 .container{
+        min-height: 600px;
+        min-height: 100vh;
+        position: relative;
+    }
+    .container-2 .col-cell{
+        padding-bottom: 60px;
+    }
+    .container-2 h2{
         color: #0586ff;
         margin-top: 100px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
     .container-2 p{
-        color: #666;
+        color: #999;
+        font-size: 16px;
+        line-height: 1.5;
     }
-    .container-2 .multiple h3{
-        margin-top: 20px;
+    .container-2 .multiple h2{
+        margin-top: 50px;
     }
     .container-2 .multiple p{
-        margin-bottom: 35px;
+        margin-bottom: 50px;
     }
     .container-2 img{
         max-width: 100%;
     }
-    .container-2{
-        padding: 50px 0;
-    }
-    .container-2 h3.mtop180{
+    .container-2 h2.mtop180{
         margin-top: 180px;
     }
     .container-2.deep{
         background-color: #f9f9f9;
+    }
+    .container-last .col-cell{
+        padding-bottom: 150px;
     }
 
     @media screen and (max-width: 970px){
@@ -38,70 +48,90 @@
         }
     }
 
-    @media screen and (max-width: 640px){
+    @media screen and (max-width: 768px){
+        .container-2 h2.mtop180{
+            margin-top: 10px;
+        }
+        .container-2 .col-cell,.container-2 .col-table{
+            display: block;
+        }
+        .container-last .col-cell{
+            padding-bottom: 300px;
+        }
+    }
 
+    @media screen and (max-width: 640px){
         .container-1{
             height: 200px;
         }
     }
 
     @media screen and (max-width: 480px){
-
         .container-1{
             height: 180px;
         }
     }
 </style>
-<link href="__CSS__/animate.css" rel="stylesheet">
+<link href="__CSS__/animate.css?t={$cdn_time_flag}" rel="stylesheet">
 <div class="container-1 lazy bg-cover" data-original="__IMG__/product/axx/1.jpg"></div>
 <div id="block1" class="container-2 deep scroll-block" data-index="1">
-    <div class="container">
-        <div class="col-md-6"><img class="anim-item anim-top" data-delay="500" src="__IMG__/product/axx/2_1.jpg"/></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-5 multiple">
-            <h3 class="anim-item anim-left" data-delay="1000">精准定位功能</h3>
-            <p class="anim-item anim-left" data-delay="1111">北斗/GPS/基站/WIFI，四重精准定位，一键掌握孩子在哪，更好保障孩子安全</p>
-            <h3 class="anim-item anim-left" data-delay="1333">亲情通话功能</h3>
-            <p class="anim-item anim-left" data-delay="1444">可设置3个亲情号码，实现双向通话，随时与孩子取得沟通联系</p>
-            <h3 class="anim-item anim-left" data-delay="1666">紧急呼救功能</h3>
-            <p class="anim-item anim-left" data-delay="1777">可设置1个SOS紧急呼救号码，孩子遇到危险，一键紧急求救</p>
-            <h3 class="anim-item anim-left" data-delay="1999">无障碍考勤功能</h3>
-            <p class="anim-item anim-left" data-delay="2000">2.4G远距离刷卡考勤，掌握孩子到校、离校情况</p>
+    <div class="container col-table">
+        <div class="row col-cell">
+            <div class="col-md-5"><img class="anim-item anim-top" data-delay="500" src="__IMG__/product/axx/2_1.jpg"/></div>
+            <div class="col-md-7 multiple">
+                <div class="col-md-6">
+                    <h2 class="anim-item anim-left" data-delay="1000">精准定位功能</h2>
+                    <p class="anim-item anim-left" data-delay="1111">北斗/GPS/基站/WIFI，四重精准定位，一键掌握孩子在哪，更好保障孩子安全</p>
+                    <h2 class="anim-item anim-left" data-delay="1333">亲情通话功能</h2>
+                    <p class="anim-item anim-left" data-delay="1444">可设置3个亲情号码，实现双向通话，随时与孩子取得沟通联系</p>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="anim-item anim-left" data-delay="1666">紧急呼救功能</h2>
+                    <p class="anim-item anim-left" data-delay="1777">可设置1个SOS紧急呼救号码，孩子遇到危险，一键紧急求救</p>
+                    <h2 class="anim-item anim-left" data-delay="1999">无障碍考勤功能</h2>
+                    <p class="anim-item anim-left" data-delay="2000">2.4G远距离刷卡考勤，掌握孩子到校、离校情况</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div id="block2" class="container-2 scroll-block">
-    <div class="container">
-        <div class="col-md-6">
-            <h3 class="anim-item anim-right mtop180" data-delay="400">为孩子的安全而生</h3>
-            <p class="anim-item anim-right" data-delay="600">亲情双向通话，沟通无限；一键紧急求助，危险及时告知；无<br>障碍出行通知，掌握孩子到校、离校情况；室内外精准定位，<br>实时查找孩子去向；校园一卡通消费管理，了解孩子消费习惯。</p>
+    <div class="container col-table">
+        <div class="row col-cell">
+            <div class="col-md-6">
+                <h2 class="anim-item anim-right mtop180" data-delay="400">为孩子的安全而生</h2>
+                <p class="anim-item anim-right" data-delay="600">亲情双向通话，沟通无限；一键紧急求助，危险及时告知；无<br>障碍出行通知，掌握孩子到校、离校情况；室内外精准定位，<br>实时查找孩子去向；校园一卡通消费管理，了解孩子消费习惯。</p>
+            </div>
+            <div class="col-md-6"><img class="anim-item anim-bottom" data-delay="500" src="__IMG__/product/axx/2_2.jpg"/></div>
         </div>
-        <div class="col-md-6"><img class="anim-item anim-bottom" data-delay="500" src="__IMG__/product/axx/2_2.jpg"/></div>
     </div>
 </div>
-<div id="block3" class="container-2 deep scroll-block">
-    <div class="container">
-        <div class="col-md-6"><img class="anim-item anim-right" src="__IMG__/product/axx/2_3.jpg"/></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-5">
-            <h3 class="anim-item anim-left">更多功能</h3>
-            <p class="anim-item anim-left">一卡通功能、白名单通话功能、超长待机功能、防尘防雨功能、上课隐身功能、<br>远程聆听功能、语音报时功能、语音播报短信功能.</p>
-        </div>
+<div id="block3" class="container-2 deep scroll-block container-last">
+    <div class="container col-table">
+       <div class="row col-cell">
+           <div class="col-md-6"><img class="anim-item anim-right" src="__IMG__/product/axx/2_3.jpg"/></div>
+           <div class="col-md-1"></div>
+           <div class="col-md-5">
+               <h2 class="anim-item anim-left">更多功能</h2>
+               <p class="anim-item anim-left">一卡通功能、白名单通话功能、超长待机功能、防尘防雨功能、上课隐身功能、<br>远程聆听功能、语音报时功能、语音播报短信功能.</p>
+           </div>
+       </div>
     </div>
 </div>
 
 <script>
     $(".navbar-path").addClass('absolute deep');
-    $(function() {
-        !is_xs() && $.scrollBlock({
-            'blocklist': [0],
-            'callback': function (p, i) {
-                if (i > 0 && i < 4) {
-                    $("#block" + i + " .anim-item").anim_show(function () {
-                        this.removeClass("anim-item");
-                    });
-                }
+    window.onload = function() {
+        window.scrollTo(0, 0);
+    }
+    !is_xs() && $.scrollBlock({
+        'blocklist': [0],
+        'callback': function (p, i) {
+            if (i > 0 && i < 4) {
+                $("#block" + i + " .anim-item").anim_show(function () {
+                    this.removeClass("anim-item");
+                });
             }
-        });
-    })
+        }
+    });
 </script>

@@ -23,6 +23,7 @@ class AnalysisController extends BaseController
         $this->display('index');
     }
 
+    //访问量分析
     public function get_analytic()
     {
         $data = array();
@@ -39,5 +40,12 @@ class AnalysisController extends BaseController
 
         echo json_encode($data);
     }
+
+    //来源分析
+    public function origin(){
+        $this->display('origin');
+    }
+
+
 
 }

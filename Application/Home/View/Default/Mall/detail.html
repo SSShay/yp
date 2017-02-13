@@ -54,13 +54,14 @@
                     timer = setTimeout(setimg, 300);
                 }, function () {
                     clearTimeout(timer);
-                })
-                function setimg() {
-                    $(".container-info .preview img").attr('src', preview_img)
-                }
+                });
             }
 
             i == 0 && setimg();
+
+            function setimg() {
+                $(".container-info .preview img").attr('src', preview_img)
+            }
         })
 
         $(".number-box").numberBox();
